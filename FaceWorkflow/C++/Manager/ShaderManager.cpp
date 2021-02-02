@@ -13,6 +13,11 @@ ShaderManager* ShaderManager::ms_ShaderMager = nullptr;
 ShaderManager::ShaderManager() {
     
 }
+
+ShaderManager::~ShaderManager() {
+    clearAllShader();
+}
+
 ShaderManager::ShaderManager(const ShaderManager & manager) {
     
 }
@@ -29,5 +34,39 @@ ShaderManager *ShaderManager::shared() {
 }
 
 Shader * ShaderManager::loadShader(string filename) {
-    return nullptr;
+    Shader *shader = shaderCache.at(filename);
+    if (shader == nullptr) {
+        shader = new Shader();
+        bool result = shader->compileShader(shaderRootPth, filename);
+        if (result) {
+            shaderCache[filename] = shader;
+        } else {
+            delete shader;
+            shader = nullptr;
+        }
+    }
+    return shader;
+}
+
+void ShaderManager::setShaderRootPth(string pth) {
+    shaderRootPth = pth;
+}
+
+void ShaderManager::removeCachedShader(string key) {
+    Shader *shader = shaderCache[key];
+    if(shader) {
+        delete shader;
+        shader = nullptr;
+        shaderCache.erase(key);
+    }
+}
+
+void ShaderManager::clearAllShader() {
+    map<string, Shader*>::iterator iter;
+    for(iter = shaderCache.begin(); iter != shaderCache.end(); iter++) {
+        Shader *shader = iter->second;
+        delete shader;
+        shader = nullptr;
+    }
+    shaderCache.clear();
 }
