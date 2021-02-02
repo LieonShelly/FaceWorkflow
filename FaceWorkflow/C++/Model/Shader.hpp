@@ -17,17 +17,12 @@ class Shader {
     bgfx::ProgramHandle m_program;
     string shaderFileRootPth;
     string shaderName;
-    string vertextShderPth;
-    string fragmentShaderPth;
     
-    void generateIntactShdaerFilePth();
-    bgfx::ShaderHandle  generateShaderHandle(string shaderFilePath, bool &generateSuccess);
-    bool compileShader();
     bool destoryProgram();
-    void cleanShaderInfo();
     
 public:
     Shader();
+    Shader(string shaderPth, string name);
     ~Shader();
     
     bgfx::ProgramHandle getProgram();
