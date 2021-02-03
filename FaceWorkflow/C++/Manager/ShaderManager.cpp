@@ -33,7 +33,7 @@ ShaderManager *ShaderManager::shared() {
     return ms_ShaderMager;
 }
 
-Shader * ShaderManager::loadShader(string filename) {
+Shader *ShaderManager::loadShader(string filename) {
     Shader *shader = shaderCache.at(filename);
     if (shader == nullptr) {
         shader = new Shader();
