@@ -42,11 +42,14 @@ protected:
     bool m_isNotBasePath = false;
     string m_basicEffectShaderPath = "";
     
+public:
     BaseEffect(const char *eftName = (const char *) "undefine");
 
     BaseEffect(const char *eftName, bool isLayerEffect);
     
     virtual ~BaseEffect();
+    
+    virtual void setIsLayerEffect(bool isLayerEffect);
     
     // 渲染到FBO
     virtual void render();
@@ -87,6 +90,9 @@ protected:
     
     virtual void setLayerOpacity(float opacity);
     
+    void initAllShaderMap(std::string effectName);
+    
+    virtual void setAndSubmitCommonParams();
 protected:
     // 设置顶点数组对象数组
     virtual void setCubeVertice(PosColorVertex vertices[] = s_rectangleVertices);
@@ -101,6 +107,5 @@ protected:
     
     void renderToFBO(const char *shaderName);
     
-    virtual void setAndSubmitCommonParams();
 };
 #endif /* BaseEffect_hpp */

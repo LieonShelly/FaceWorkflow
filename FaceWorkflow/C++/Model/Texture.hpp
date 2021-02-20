@@ -21,7 +21,7 @@ typedef enum{
 
 class Texture_ {
 public:
-    bgfx::TextureHandle m_texure = BGFX_INVALID_HANDLE;
+    bgfx::TextureHandle m_texture = BGFX_INVALID_HANDLE;
     bgfx::FrameBufferHandle m_frameBufferHandle = BGFX_INVALID_HANDLE;
     int m_texureWidth = 0, m_textureHeight = 0;
     bgfx::TextureFormat::Enum m_TextureFromat =  bgfx::TextureFormat::RGBA8;
@@ -37,6 +37,7 @@ public:
 class Texture {
 private:
     std::shared_ptr<Texture_> m_bgfxtTexture = nullptr;
+    void setValueRun(uint64_t state_flag,uint16_t clear_color_flag,int clear_component_idx,const unsigned char r,const unsigned char g,const unsigned char b,const unsigned char a);
 public:
     Texture();
     ~Texture();

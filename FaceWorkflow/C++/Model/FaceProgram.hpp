@@ -22,6 +22,8 @@ public:
     
     void createProgram(string paramName, bgfx::UniformType::Enum type);
     
+    void setParam(std::string paramName, float paramValue[]);
+    
     void setTexture(string paramName, bgfx::TextureHandle texureHandle, int texIndex);
 };
 #endif /* Program_hpp */

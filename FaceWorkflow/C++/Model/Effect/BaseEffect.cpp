@@ -82,6 +82,13 @@ void BaseEffect::setOutputTexture(Texture *texture) {
     m_outputTexture = texture;
 }
 
+void BaseEffect::setIsLayerEffect(bool isLayerEffect) {
+    m_isLayerEft = isLayerEffect;
+}
+
+void BaseEffect::initAllShaderMap(std::string effectName) {
+    
+}
 
 Texture *BaseEffect::getInputTexture() {
     return m_inputTexture;

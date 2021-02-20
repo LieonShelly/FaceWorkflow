@@ -26,6 +26,8 @@ private:
 public:
     static AlgoResManager *shared();
     Shader *loadShader(string filename);
+    int getViewId();
+    void bgfxFrame();
 };
 
 

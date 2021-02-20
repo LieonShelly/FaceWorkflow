@@ -30,3 +30,12 @@ AlgoResManager *AlgoResManager::shared() {
 Shader *AlgoResManager::loadShader(string filename) {
     return shaderManager->loadShader(filename);
 }
+
+int AlgoResManager::getViewId() {
+    return 1;
+}
+
+
+void AlgoResManager::bgfxFrame() {
+    bgfx::frame();
+}

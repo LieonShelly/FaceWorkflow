@@ -18,6 +18,10 @@ void FaceProgram::createProgram(string paramName, bgfx::UniformType::Enum type) 
     
 }
 
+void FaceProgram::setParam(std::string paramName, float paramValue[]) {
+    
+}
+
 void FaceProgram::setTexture(string paramName, bgfx::TextureHandle texureHandle, int texIndex) {
 //    bgfx::setTexture(texIndex, uniformHandleMap[paramName], textureHandle);
 }
