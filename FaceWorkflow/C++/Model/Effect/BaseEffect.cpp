@@ -15,7 +15,7 @@ const static char *PARAM_ORI_TEXTURE = "s_ori_texture";
 BaseEffect::BaseEffect(const char *eftName) {
     m_program = new FaceProgram();
     m_shader = nullptr;
-    m_program->createProgram(PARAM_ORI_TEXTURE, bgfx::UniformType::Sampler);
+    m_program->createParam(PARAM_ORI_TEXTURE, bgfx::UniformType::Sampler);
     m_eftName = eftName;
     ms_decl
         .begin()
@@ -31,7 +31,7 @@ BaseEffect::BaseEffect(const char *eftName, bool isLayerEffect) {
     m_eftName = eftName;
     m_isLayerEft = isLayerEffect;
     m_program = new FaceProgram();
-    m_program->createProgram(PARAM_ORI_TEXTURE, bgfx::UniformType::Sampler);
+    m_program->createParam(PARAM_ORI_TEXTURE, bgfx::UniformType::Sampler);
     ms_decl
         .begin()
         .add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)

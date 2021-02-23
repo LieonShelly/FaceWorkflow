@@ -20,7 +20,7 @@ public:
     
     ~FaceProgram();
     
-    void createProgram(string paramName, bgfx::UniformType::Enum type);
+    void createParam(string paramName, bgfx::UniformType::Enum type);
     
     void setParam(std::string paramName, float paramValue[]);
     

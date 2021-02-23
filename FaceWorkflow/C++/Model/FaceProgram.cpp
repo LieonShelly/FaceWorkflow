@@ -14,7 +14,7 @@ FaceProgram:: ~FaceProgram() {
     
 }
 
-void FaceProgram::createProgram(string paramName, bgfx::UniformType::Enum type) {
+void FaceProgram::createParam(string paramName, bgfx::UniformType::Enum type) {
     
 }
 

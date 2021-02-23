@@ -144,7 +144,7 @@ void Texture::setValueRun(uint64_t state_flag,uint16_t clear_color_flag,int clea
         FaceProgram program;
         auto shadername = string("algo_core/normal/set_value");
         Shader *shader = manager->loadShader(shadername);
-        program.createProgram("idx", bgfx::UniformType::Vec4);
+        program.createParam("idx", bgfx::UniformType::Vec4);
         
         float cleat_component_idx_f32[4] = {
             static_cast<float>(clear_component_idx), 0, 0, 0
@@ -154,7 +154,7 @@ void Texture::setValueRun(uint64_t state_flag,uint16_t clear_color_flag,int clea
         float vec4Arr[4] = { r / 255.f, g / 255.f, b / 255.f, a / 255.f};
         bgfx::UniformHandle unhandle = bgfx::createUniform("value", bgfx::UniformType::Vec4);
         bgfx::setUniform(unhandle, "value");
-        program.createProgram("value", bgfx::UniformType::Vec4);
+        program.createParam("value", bgfx::UniformType::Vec4);
         program.setParam("value", vec4Arr);
         
         bgfx::VertexLayout ms_decl;
@@ -363,13 +363,13 @@ void Texture::update(int dstx, int dsty, Texture &src, int srcx, int srcy, int w
         auto shaderName = string("algo_core/copyTexture/copyTexture");
         Shader *shader = manager->loadShader(shaderName);
         
-        program.createProgram("offsetXYWH", bgfx::UniformType::Vec4);
+        program.createParam("offsetXYWH", bgfx::UniformType::Vec4);
         float offsetXYWH[4] = {
             (float)srcx / srcW, (float)srcy / srcH, (float)width / srcW, (float)height / srcH
         };
         program.setParam("offsetXYWH", offsetXYWH);
         
-        program.createProgram("textureUnit0", bgfx::UniformType::Sampler);
+        program.createParam("textureUnit0", bgfx::UniformType::Sampler);
         program.setTexture("textureUnit0", src.m_bgfxtTexture->m_texture, 0);
         
         bgfx::VertexLayout ms_decl;
@@ -496,7 +496,7 @@ void Texture::trans2gray(Texture &output) {
     auto shaderName = string("algo_core/normal/to_gray");
     Shader *shader = manager->loadShader(shaderName);
     
-    program.createProgram("textureUnit0", bgfx::UniformType::Sampler);
+    program.createParam("textureUnit0", bgfx::UniformType::Sampler);
     program.setTexture("textureUnit0", m_bgfxtTexture->m_texture, 0);
     
     bgfx::VertexLayout mDescVextext0;
@@ -520,11 +520,93 @@ void Texture::trans2gray(Texture &output) {
 
 // 倒置
 void Texture::invert(Texture &output) {
+    AlgoResManager *manager = AlgoResManager::shared();
+    auto viewId = manager->getViewId();
+    output.create(getWidth(),
+                  getHeight(),
+                  getTextureFormat(),
+                  BGFX_SAMPLER_U_CLAMP | BGFX_SAMPLER_V_CLAMP | BGFX_TEXTURE_RT);
+    bgfx::setViewRect(viewId, 0, 0, output.getWidth(), output.getHeight());
+    output.createFrameBuffer();
+    bgfx::setViewFrameBuffer(viewId, output.getFrameBufferHandle());
+    bgfx::setViewClear(viewId, BGFX_CLEAR_NONE, 0);
+    if (channels() == 4) {
+        bgfx::setState(BGFX_STATE_WRITE_RGB | BGFX_STATE_WRITE_A);
+    } else if (channels() == 4) {
+        bgfx::setState(BGFX_STATE_WRITE_R);
+    }
     
+    FaceProgram program;
+    auto shaderName = string("algo_core/normal/Invert");
+    Shader *shader = manager->loadShader(shaderName);
+    
+    program.createParam("channel", bgfx::UniformType::Vec4);
+    float channel[4] = { (float)channels(), 0.0, 0.0, 0.0 };
+    program.setParam("channel", channel);
+    
+    program.createParam("textureUnit0", bgfx::UniformType::Sampler);
+    program.setTexture("textureUnit0", m_bgfxtTexture->m_texture, 0);
+    
+    bgfx::VertexLayout mDescVertext0;
+    mDescVertext0
+    .begin()
+    .add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
+    .add(bgfx::Attrib::TexCoord0, 2, bgfx::AttribType::Float, true)
+    .end();
+    
+    bgfx::VertexBufferHandle m_vbh = bgfx::createVertexBuffer(bgfx::makeRef(simple_vertex_data, sizeof(simple_vertex_data)), mDescVertext0);
+    
+    bgfx::IndexBufferHandle m_ibh = bgfx::createIndexBuffer(bgfx::makeRef(simple_triangle_list, sizeof(simple_triangle_list)));
+    bgfx::setVertexBuffer(0, m_vbh);
+    bgfx::setIndexBuffer(m_ibh);
+    
+    bgfx::submit(viewId, shader->getProgram());
+    bgfx::destroy(m_vbh);
+    bgfx::destroy(m_ibh);
+    
+    releaseFrameBuffer();
 }
 
 void Texture::getSingleChannel(Texture &output, int channelnum) {
+    AlgoResManager *manager = AlgoResManager::shared();
+    auto viewId = manager->getViewId();
     
+    output.create(getWidth(), getHeight(), bgfx::TextureFormat::R8,
+                  BGFX_SAMPLER_U_CLAMP | BGFX_SAMPLER_V_CLAMP | BGFX_TEXTURE_RT);
+    
+    bgfx::setViewRect(viewId, 0, 0, output.getWidth(), output.getHeight());
+    output.createFrameBuffer();
+    bgfx::setViewFrameBuffer(viewId, output.getFrameBufferHandle());
+    bgfx::setViewClear(viewId, BGFX_CLEAR_NONE, 0);
+    bgfx::setState(BGFX_STATE_WRITE_R);
+    
+    FaceProgram program;
+    auto shadername = string("algo_core/normal/GetSingelChannelInvert");
+    Shader *shader = manager->loadShader(shadername);
+    
+    program.createParam("channelNum", bgfx::UniformType::Vec4);
+    float channels[4] = { (float)channelnum, 0.0, 0.0, 0.0 };
+    program.setParam("channelNnum", channels);
+    
+    program.createParam("textureUnit0", bgfx::UniformType::Sampler);
+    program.setTexture("textureUnit0", m_bgfxtTexture->m_texture, 0);
+    
+    bgfx::VertexLayout mDescVerrext0;
+    mDescVerrext0
+    .begin()
+    .add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
+    .add(bgfx::Attrib::TexCoord0, 2, bgfx::AttribType::Float, true)
+    .end();
+    
+    bgfx::VertexBufferHandle m_vbh = bgfx::createVertexBuffer(bgfx::makeRef(simple_vertex_data, sizeof(simple_vertex_data)), mDescVerrext0);
+    bgfx::IndexBufferHandle m_ibh = bgfx::createIndexBuffer(bgfx::makeRef(simple_triangle_list, sizeof(simple_triangle_list)));
+    bgfx::setVertexBuffer(0, m_vbh);
+    bgfx::setIndexBuffer(m_ibh);
+    bgfx::submit(viewId, shader->getProgram());
+    
+    bgfx::destroy(m_vbh);
+    bgfx::destroy(m_ibh);
+    releaseFrameBuffer();
 }
 
 void Texture::gtSingelChannelInvert(Texture &output,int channelnum) {
