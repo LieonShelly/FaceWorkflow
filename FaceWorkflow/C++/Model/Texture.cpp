@@ -175,6 +175,7 @@ void Texture::setValueRun(uint64_t state_flag,uint16_t clear_color_flag,int clea
     } else {
         bgfx::touch(viewId);
     }
+    releaseFrameBuffer();
 }
 
 Texture &Texture::operator = (const unsigned char value) {
@@ -401,7 +402,6 @@ void Texture::update(int dstx, int dsty, Texture &src, int srcx, int srcy, int w
         releaseFrameBuffer();
     }
     
-    
 }
 
 //    void update(unsigned int dstx. unsigned int dsty, PGMat &src);
@@ -417,23 +417,105 @@ void Texture::setTo(int component_idx, const unsigned char value) {
 //
 //    void operator >>(PGMat &m);
 bool Texture::createFrameBuffer() {
-    
+    if (m_bgfxtTexture == nullptr) {
+        return false;
+    }
+    bool flag = false;
+    if (bgfx::isValid(m_bgfxtTexture->m_frameBufferHandle)) {
+        flag = true;
+    } else {
+        if (bgfx::isValid(m_bgfxtTexture->m_texture)) {
+            bgfx::TextureHandle tmpTextures[1];
+            tmpTextures[0] = m_bgfxtTexture->m_texture;
+            m_bgfxtTexture->m_frameBufferHandle = bgfx::createFrameBuffer(BX_COUNTOF(tmpTextures), tmpTextures, false);
+            flag = bgfx::isValid(m_bgfxtTexture->m_frameBufferHandle);
+        } else {
+            m_bgfxtTexture->m_frameBufferHandle = BGFX_INVALID_HANDLE;
+            flag = false;
+        }
+    }
+    return flag;
 }
 
 bool Texture::createFrameBuffer(Texture &depth) {
-    
+    if (m_bgfxtTexture == nullptr) {
+        return false;
+    }
+    bool flag = false;
+    if (bgfx::isValid(m_bgfxtTexture->m_frameBufferHandle)) {
+        flag = true;
+    } else {
+        if (bgfx::isValid(m_bgfxtTexture->m_texture)) {
+            bgfx::TextureHandle tempTextures[2];
+            tempTextures[0] = m_bgfxtTexture->m_texture;
+            tempTextures[1] = depth.getTextureHandle();
+            m_bgfxtTexture->m_frameBufferHandle = bgfx::createFrameBuffer(BX_COUNTOF(tempTextures), tempTextures, false);
+            flag = bgfx::isValid(m_bgfxtTexture->m_frameBufferHandle);
+        } else {
+            m_bgfxtTexture->m_frameBufferHandle = BGFX_INVALID_HANDLE;
+            flag = false;
+        }
+    }
+    return flag;
 }
 
 bool Texture::releaseFrameBuffer() {
-    
+    if (m_bgfxtTexture == nullptr) {
+        return false;
+    }
+    if (bgfx::isValid(m_bgfxtTexture->m_frameBufferHandle)) {
+        bgfx::destroy(m_bgfxtTexture->m_frameBufferHandle);
+        m_bgfxtTexture->m_frameBufferHandle = BGFX_INVALID_HANDLE;
+        return true;
+    }
+    return false;
 }
 
 bgfx::FrameBufferHandle Texture::getFrameBufferHandle() {
-    
+    if (m_bgfxtTexture != nullptr) {
+        return m_bgfxtTexture->m_frameBufferHandle;
+    }
+    return BGFX_INVALID_HANDLE;
 }
 
 void Texture::trans2gray(Texture &output) {
+    if (channels() != 4) {
+        return;
+    }
+    AlgoResManager *manager = AlgoResManager::shared();
+    auto viewId = manager->getViewId();
     
+    output.create(getWidth(), getHeight(), bgfx::TextureFormat::R8, BGFX_SAMPLER_U_CLAMP | BGFX_SAMPLER_V_CLAMP | BGFX_TEXTURE_RT);
+    bgfx::setViewRect(viewId, 0, 0, output.getWidth(), output.getHeight());
+    output.createFrameBuffer();
+    bgfx::setViewFrameBuffer(viewId, output.getFrameBufferHandle());
+    bgfx::setViewClear(viewId, BGFX_CLEAR_NONE, 0);
+    bgfx::setState(BGFX_STATE_WRITE_R);
+    
+    FaceProgram program;
+    auto shaderName = string("algo_core/normal/to_gray");
+    Shader *shader = manager->loadShader(shaderName);
+    
+    program.createProgram("textureUnit0", bgfx::UniformType::Sampler);
+    program.setTexture("textureUnit0", m_bgfxtTexture->m_texture, 0);
+    
+    bgfx::VertexLayout mDescVextext0;
+    mDescVextext0
+    .begin()
+    .add(bgfx::Attrib::Position, 3, bgfx::AttribType::Float)
+    .add(bgfx::Attrib::TexCoord0, 3, bgfx::AttribType::Float, true)
+    .end();
+    
+    bgfx::VertexBufferHandle m_vbh =
+    bgfx::createVertexBuffer(bgfx::makeRef(simple_vertex_data, sizeof(simple_vertex_data)), mDescVextext0);
+    bgfx::IndexBufferHandle m_ibh = bgfx::createIndexBuffer(bgfx::makeRef(simple_triangle_list, sizeof(simple_triangle_list)));
+    bgfx::setVertexBuffer(0, m_vbh);
+    bgfx::setIndexBuffer(m_ibh);
+    
+    bgfx::submit(viewId, shader->getProgram());
+    bgfx::destroy(m_vbh);
+    bgfx::destroy(m_ibh);
+    releaseFrameBuffer();
 }
 
 // 倒置
