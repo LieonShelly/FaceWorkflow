@@ -39,3 +39,7 @@ int AlgoResManager::getViewId() {
 void AlgoResManager::bgfxFrame() {
     bgfx::frame();
 }
+
+map<string, bgfx::UniformHandle> & AlgoResManager::getUniformMap() {
+    return m_uniformMap;
+}

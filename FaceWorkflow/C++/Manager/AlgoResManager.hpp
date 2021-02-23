@@ -10,6 +10,8 @@
 #include <string>
 #include <stdio.h>
 #include "ShaderManager.hpp"
+#include <map>
+#include "bgfx/bgfx.h"
 
 using namespace std;
 
@@ -22,12 +24,14 @@ private:
     AlgoResManager(const AlgoResManager & manager);
     AlgoResManager& operator =(const AlgoResManager &);
     ShaderManager *shaderManager { nullptr };
+    map<string, bgfx::UniformHandle> m_uniformMap;
     
 public:
     static AlgoResManager *shared();
     Shader *loadShader(string filename);
     int getViewId();
     void bgfxFrame();
+    map<string, bgfx::UniformHandle> & getUniformMap();
 };
 
 

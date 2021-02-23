@@ -11,10 +11,13 @@
 #include <map>
 #include <bgfx/bgfx.h>
 #include <stdio.h>
+#include "AlgoResManager.hpp"
 
 using namespace std;
 
 class FaceProgram {
+    map<string, bgfx::UniformHandle> &uniformMap = AlgoResManager::shared()->getUniformMap();
+    
 public:
     FaceProgram();
     
