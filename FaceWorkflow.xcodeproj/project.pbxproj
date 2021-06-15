@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD6AE3B926788F1F00C1F5A7 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6AE3B826788F1F00C1F5A7 /* Metal.framework */; };
+		CD6AE3BB26788F2500C1F5A7 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6AE3BA26788F2400C1F5A7 /* MetalKit.framework */; };
+		CD6AE4BA2678A01500C1F5A7 /* Shaders.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CD6AE3C92678A01300C1F5A7 /* Shaders.bundle */; };
+		CD6AE4BB2678A01500C1F5A7 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = CD6AE3CA2678A01300C1F5A7 /* readme.md */; };
+		CD6AE5082678A01500C1F5A7 /* varying.def in Resources */ = {isa = PBXBuildFile; fileRef = CD6AE45D2678A01400C1F5A7 /* varying.def */; };
+		CD6AE5392678ABB300C1F5A7 /* TEST.png in Resources */ = {isa = PBXBuildFile; fileRef = CD6AE5382678ABB300C1F5A7 /* TEST.png */; };
+		CD6AE53C2678ABE100C1F5A7 /* RenderImageBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD6AE53A2678ABE000C1F5A7 /* RenderImageBridge.mm */; };
+		CD6AE53E2678AC5E00C1F5A7 /* RenderImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD6AE53D2678AC5E00C1F5A7 /* RenderImage.cpp */; };
+		CD6AE5422678B7E800C1F5A7 /* display_fs_cubes.sc in Resources */ = {isa = PBXBuildFile; fileRef = CD6AE5412678B7E800C1F5A7 /* display_fs_cubes.sc */; };
+		CD6AE5442678B82300C1F5A7 /* vs_cubes.sc  in Resources */ = {isa = PBXBuildFile; fileRef = CD6AE5432678B82300C1F5A7 /* vs_cubes.sc  */; };
+		CD6AE5462678B85200C1F5A7 /* fs_cubes.sc in Resources */ = {isa = PBXBuildFile; fileRef = CD6AE5452678B85200C1F5A7 /* fs_cubes.sc */; };
 		CD7DAFD325C80646009C6020 /* EditLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7DAFD125C80646009C6020 /* EditLayer.cpp */; };
 		CD7DB13825C83C8F009C6020 /* ImageEditLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7DB13625C83C8F009C6020 /* ImageEditLayer.cpp */; };
 		CD7DB13C25C84333009C6020 /* LayerStackDefine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7DB13A25C84333009C6020 /* LayerStackDefine.cpp */; };
@@ -62,6 +73,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD6AE3B22678506500C1F5A7 /* RenderImage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RenderImage.hpp; sourceTree = "<group>"; };
+		CD6AE3B426788BED00C1F5A7 /* RenderImageBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RenderImageBridge.h; sourceTree = "<group>"; };
+		CD6AE3B826788F1F00C1F5A7 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		CD6AE3BA26788F2400C1F5A7 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		CD6AE3C02678987E00C1F5A7 /* dbg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dbg.h; sourceTree = "<group>"; };
+		CD6AE3C62678A01300C1F5A7 /* fs_image.sc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fs_image.sc; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
+		CD6AE3C72678A01300C1F5A7 /* fs_blueColor.sc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fs_blueColor.sc; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
+		CD6AE3C82678A01300C1F5A7 /* blueColor.def */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = blueColor.def; sourceTree = "<group>"; };
+		CD6AE3C92678A01300C1F5A7 /* Shaders.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Shaders.bundle; sourceTree = "<group>"; };
+		CD6AE3CA2678A01300C1F5A7 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
+		CD6AE45D2678A01400C1F5A7 /* varying.def */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = varying.def; sourceTree = "<group>"; };
+		CD6AE45E2678A01400C1F5A7 /* vs_blueColor.sc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vs_blueColor.sc; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
+		CD6AE45F2678A01400C1F5A7 /* vc_image.sc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vc_image.sc; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
+		CD6AE5382678ABB300C1F5A7 /* TEST.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TEST.png; sourceTree = "<group>"; };
+		CD6AE53A2678ABE000C1F5A7 /* RenderImageBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RenderImageBridge.mm; path = FaceWorkflow/Middleware/RenderImageBridge.mm; sourceTree = SOURCE_ROOT; };
+		CD6AE53B2678ABE100C1F5A7 /* RenderImageBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderImageBridge.h; path = FaceWorkflow/Middleware/RenderImageBridge.h; sourceTree = SOURCE_ROOT; };
+		CD6AE53D2678AC5E00C1F5A7 /* RenderImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderImage.cpp; sourceTree = "<group>"; };
+		CD6AE5412678B7E800C1F5A7 /* display_fs_cubes.sc */ = {isa = PBXFileReference; lastKnownFileType = text; path = display_fs_cubes.sc; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
+		CD6AE5432678B82300C1F5A7 /* vs_cubes.sc  */ = {isa = PBXFileReference; lastKnownFileType = text; path = "vs_cubes.sc "; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
+		CD6AE5452678B85200C1F5A7 /* fs_cubes.sc */ = {isa = PBXFileReference; lastKnownFileType = text; path = fs_cubes.sc; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		CD7DAFD125C80646009C6020 /* EditLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditLayer.cpp; sourceTree = "<group>"; };
 		CD7DAFD225C80646009C6020 /* EditLayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditLayer.hpp; sourceTree = "<group>"; };
 		CD7DB13625C83C8F009C6020 /* ImageEditLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImageEditLayer.cpp; sourceTree = "<group>"; };
@@ -187,6 +218,8 @@
 			files = (
 				CDA8D81D25C2A50800CB33D4 /* libbimgDebug.a in Frameworks */,
 				CDA8D81E25C2A50800CB33D4 /* libbimg_decodeDebug.a in Frameworks */,
+				CD6AE3B926788F1F00C1F5A7 /* Metal.framework in Frameworks */,
+				CD6AE3BB26788F2500C1F5A7 /* MetalKit.framework in Frameworks */,
 				CDA8D81C25C2A50800CB33D4 /* libbgfxDebug.a in Frameworks */,
 				CDA8D81F25C2A50800CB33D4 /* libbxDebug.a in Frameworks */,
 			);
@@ -195,6 +228,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD6AE3B02678503B00C1F5A7 /* 渲染一张图 */ = {
+			isa = PBXGroup;
+			children = (
+				CD6AE53D2678AC5E00C1F5A7 /* RenderImage.cpp */,
+				CD6AE3B22678506500C1F5A7 /* RenderImage.hpp */,
+				CD6AE53B2678ABE100C1F5A7 /* RenderImageBridge.h */,
+				CD6AE53A2678ABE000C1F5A7 /* RenderImageBridge.mm */,
+				CD6AE5382678ABB300C1F5A7 /* TEST.png */,
+			);
+			path = "渲染一张图";
+			sourceTree = "<group>";
+		};
+		CD6AE3B726788F1F00C1F5A7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CD6AE3BA26788F2400C1F5A7 /* MetalKit.framework */,
+				CD6AE3B826788F1F00C1F5A7 /* Metal.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CD6AE3BC2678987E00C1F5A7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CD6AE3C02678987E00C1F5A7 /* dbg.h */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		CD6AE3C42678A01300C1F5A7 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				CD6AE3C62678A01300C1F5A7 /* fs_image.sc */,
+				CD6AE3C72678A01300C1F5A7 /* fs_blueColor.sc */,
+				CD6AE3C82678A01300C1F5A7 /* blueColor.def */,
+				CD6AE3C92678A01300C1F5A7 /* Shaders.bundle */,
+				CD6AE3CA2678A01300C1F5A7 /* readme.md */,
+				CD6AE45D2678A01400C1F5A7 /* varying.def */,
+				CD6AE45E2678A01400C1F5A7 /* vs_blueColor.sc */,
+				CD6AE45F2678A01400C1F5A7 /* vc_image.sc */,
+				CD6AE5412678B7E800C1F5A7 /* display_fs_cubes.sc */,
+				CD6AE5432678B82300C1F5A7 /* vs_cubes.sc  */,
+				CD6AE5452678B85200C1F5A7 /* fs_cubes.sc */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
 		CD7DAFD025C80582009C6020 /* Layer */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,6 +316,7 @@
 			children = (
 				CDA8D78125C2A4ED00CB33D4 /* FaceWorkflow */,
 				CDA8D78025C2A4ED00CB33D4 /* Products */,
+				CD6AE3B726788F1F00C1F5A7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -250,6 +331,9 @@
 		CDA8D78125C2A4ED00CB33D4 /* FaceWorkflow */ = {
 			isa = PBXGroup;
 			children = (
+				CD6AE3C42678A01300C1F5A7 /* Shaders */,
+				CD6AE3BC2678987E00C1F5A7 /* Utils */,
+				CD6AE3B02678503B00C1F5A7 /* 渲染一张图 */,
 				CDA8D83925C2A62300CB33D4 /* C++ */,
 				CDA8D83825C2A61D00CB33D4 /* Middleware */,
 				CDA8D79725C2A50700CB33D4 /* Lib */,
@@ -406,6 +490,7 @@
 			children = (
 				CDA8D83A25C2A64500CB33D4 /* BridgeHeader.h */,
 				CDA8D84125C2A71C00CB33D4 /* NormalWorkFlow */,
+				CD6AE3B426788BED00C1F5A7 /* RenderImageBridge.h */,
 			);
 			path = Middleware;
 			sourceTree = "<group>";
@@ -536,13 +621,17 @@
 			files = (
 				CDA8D80E25C2A50800CB33D4 /* simd256_avx.inl in Resources */,
 				CDA8D81B25C2A50800CB33D4 /* simd128_langext.inl in Resources */,
+				CD6AE4BA2678A01500C1F5A7 /* Shaders.bundle in Resources */,
+				CD6AE5462678B85200C1F5A7 /* fs_cubes.sc in Resources */,
 				CDA8D80025C2A50800CB33D4 /* float4x4_t.inl in Resources */,
+				CD6AE5422678B7E800C1F5A7 /* display_fs_cubes.sc in Resources */,
 				CDA8D78F25C2A4EF00CB33D4 /* LaunchScreen.storyboard in Resources */,
 				CDA8D80F25C2A50800CB33D4 /* mutex.inl in Resources */,
 				CDA8D78C25C2A4EF00CB33D4 /* Assets.xcassets in Resources */,
 				CDA8D81725C2A50800CB33D4 /* error.inl in Resources */,
 				CDA8D81425C2A50800CB33D4 /* uint32_t.inl in Resources */,
 				CDA8D80825C2A50800CB33D4 /* simd128_swizzle.inl in Resources */,
+				CD6AE4BB2678A01500C1F5A7 /* readme.md in Resources */,
 				CDA8D80D25C2A50800CB33D4 /* pixelformat.inl in Resources */,
 				CDA8D80225C2A50800CB33D4 /* readerwriter.inl in Resources */,
 				CDA8D80925C2A50800CB33D4 /* ringbuffer.inl in Resources */,
@@ -561,8 +650,11 @@
 				CDA8D80B25C2A50800CB33D4 /* cpu.inl in Resources */,
 				CDA8D80C25C2A50800CB33D4 /* hash.inl in Resources */,
 				CDA8D81A25C2A50800CB33D4 /* endian.inl in Resources */,
+				CD6AE5442678B82300C1F5A7 /* vs_cubes.sc  in Resources */,
 				CDA8D80525C2A50800CB33D4 /* simd128_neon.inl in Resources */,
 				CDA8D81025C2A50800CB33D4 /* easing.inl in Resources */,
+				CD6AE5392678ABB300C1F5A7 /* TEST.png in Resources */,
+				CD6AE5082678A01500C1F5A7 /* varying.def in Resources */,
 				CDA8D80425C2A50800CB33D4 /* simd_ni.inl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -581,9 +673,11 @@
 				CDA8D78725C2A4ED00CB33D4 /* ViewController.swift in Sources */,
 				CDA8D85725C2A8F800CB33D4 /* AbsEffect.cpp in Sources */,
 				CDA8D86D25C2C20200CB33D4 /* CommonDefine.cpp in Sources */,
+				CD6AE53C2678ABE100C1F5A7 /* RenderImageBridge.mm in Sources */,
 				CDA8D78325C2A4ED00CB33D4 /* AppDelegate.swift in Sources */,
 				CDA8D83F25C2A70900CB33D4 /* BaseEffect.cpp in Sources */,
 				CD7DB13825C83C8F009C6020 /* ImageEditLayer.cpp in Sources */,
+				CD6AE53E2678AC5E00C1F5A7 /* RenderImage.cpp in Sources */,
 				CD9D42D325C3F380006BE972 /* PgEntry.cpp in Sources */,
 				CDA8D85E25C2B0A000CB33D4 /* Shader.cpp in Sources */,
 				CD9D42D225C3F380006BE972 /* BGFXUtils.cpp in Sources */,

@@ -9,6 +9,6 @@
 #define BridgeHeader_h
 
 #import "NormalWorkFlow.h"
-
+#import "RenderImageBridge.h"
 
 #endif /* BridgeHeader_h */
