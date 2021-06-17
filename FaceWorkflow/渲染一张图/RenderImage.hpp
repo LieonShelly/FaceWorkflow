@@ -28,6 +28,9 @@ struct Param {
     string fsName;
     string fsFullPath;
     string texturePath;
+    string displayFsname;
+    string displayFsFullPth;
+    
 };
 
 class RenderImage {
@@ -42,7 +45,8 @@ class RenderImage {
     bgfx::ProgramHandle m_display_program;
     bgfx::UniformHandle s_display_tex_Handle;
     bgfx::FrameBufferHandle m_fbh = BGFX_INVALID_HANDLE;
-    
+    // Android 渲染顶点缓冲区 Handle
+    bgfx::VertexBufferHandle m_vbh_Android_render;
     bgfx::ProgramHandle m_program;
     bgfx::TextureHandle m_texture;
     bgfx::UniformHandle s_textureHandle;
@@ -91,5 +95,36 @@ static uint16_t s_rectangleOrderList[] =
 };
 
 
+
+static PosColorVertex s_cubeVertices[] =
+{
+    {-1.0f,  1.0f,  0.0f,      0, 0x7fff},
+    { 1.0f,  1.0f,  0.0f, 0x7fff, 0x7fff},
+    {-1.0f, -1.0f,  0.0f,      0,      0},
+    { 1.0f, -1.0f,  0.0f, 0x7fff,      0},
+};
+
+static PosColorVertex s_cubeVertices1[] =
+{
+    {-1.0f,  1.0f,  0.0f,      0,      0},
+    { 1.0f,  1.0f,  0.0f, 0x7fff,      0},
+    {-1.0f, -1.0f,  0.0f,      0, 0x7fff},
+    { 1.0f, -1.0f,  0.0f, 0x7fff, 0x7fff},
+};
+
+static const uint16_t s_cubeTriList[] =
+{
+    0, 2, 1,
+    1, 2, 3,
+};
+
+// Android 平台渲染的坐标和纹理顶点，左上角为纹理原点
+static PosColorVertex s_Android_render_Vertices1[] =
+{
+    {-1.0f,  1.0f,  0.0f,      0,      0},
+    { 1.0f,  1.0f,  0.0f, 0x7fff,      0},
+    {-1.0f, -1.0f,  0.0f,      0, 0x7fff},
+    { 1.0f, -1.0f,  0.0f, 0x7fff, 0x7fff},
+};
 #endif /* RenderImage_hpp */
 

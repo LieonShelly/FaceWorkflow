@@ -42,14 +42,18 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     Param *param = new Param();
-    NSString *vsName = @"vc_image";
-    NSString *fsName = @"fs_image";
+    NSString *vsName = @"vs_cubes";
+    NSString *fsName = @"fs_cubes";
+    NSString *displayFsName = @"display_fs_cubes.sc";
     param->vsName = [vsName UTF8String];
     param->vsFullPath = [[self getShaderPathWithName:vsName] UTF8String];
     param->fsName = [fsName UTF8String];
     param->fsFullPath = [[self getShaderPathWithName:fsName] UTF8String];
     param->texturePath = [[[NSBundle mainBundle]pathForResource:@"TEST.png" ofType:nil] UTF8String];
+    param->displayFsname = [displayFsName UTF8String];
+    param->displayFsFullPth = [[self getShaderPathWithName:displayFsName] UTF8String];
     renderImg->setParam(param);
+    
     renderImg->helloworld();
 }
 
