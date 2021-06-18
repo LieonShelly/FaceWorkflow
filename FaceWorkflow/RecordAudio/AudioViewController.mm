@@ -6,7 +6,7 @@
 //
 
 #import "AudioViewController.h"
-
+#import "PermenantThread.h"
 #include "Test.hpp"
 
 extern "C" {
@@ -21,6 +21,7 @@ extern "C" {
 @interface AudioViewController ()
 @property (nonatomic, assign) BOOL isInterruptionRequested;
 @property (nonatomic, strong) UIButton *btn;
+@property (nonatomic, strong) PermenantThread *thread;
 
 @end
 
@@ -54,6 +55,12 @@ extern "C" {
     
 }
 
+- (PermenantThread *)thread {
+    if (!_thread) {
+        _thread = [PermenantThread new];
+    }
+    return _thread;
+}
 
 void showSpec(AVFormatContext *ctx) {
     AVStream *stream = ctx->streams[0];
@@ -67,8 +74,6 @@ void showSpec(AVFormatContext *ctx) {
     NSLog(@"av_get_bits_per_sample: %d", av_get_bits_per_sample(params->codec_id));
 
 }
-
-
 
 - (void)record {
     NSString *formatName = @"avfoundation";
@@ -114,6 +119,54 @@ void showSpec(AVFormatContext *ctx) {
             NSLog(@"写入文件失败");
         }
     });
+  
+   
+}
+
+- (void)recordWithPermantThread {
+    NSString *formatName = @"avfoundation";
+    NSString *deviceName = @":0";
+    NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
+    AVInputFormat *fmt = av_find_input_format([formatName UTF8String]);
+    if (!fmt) {
+        NSLog(@"获取输入格式对象失败");
+        return;
+    }
+    AVFormatContext *ctx = nullptr;
+    AVDictionary *option = nullptr;
+    int ret = avformat_open_input(&ctx, deviceName.UTF8String, fmt, &option);
+    if (ret < 0) {
+        char errbuf[1024];
+        av_strerror(ret, errbuf, sizeof(errbuf));
+        NSLog(@"打开设备失败:%@", [NSString stringWithUTF8String:errbuf]);
+        return;
+    }
+    [self.thread excuteTask:^{
+        NSString *fileName = [filePath stringByAppendingPathComponent:@"out.pcm"];
+        NSMutableData *pcmData = [NSMutableData new];
+        AVPacket pkt = AVPacket();
+        while (!self.isInterruptionRequested) {
+           int ret = av_read_frame(ctx, &pkt);
+            if (ret == 0) {
+                NSLog(@"---record---: %d", pkt.size);
+                [pcmData appendBytes:pkt.data length:pkt.size];
+            } else if (ret == AVERROR(EAGAIN) ) {
+                
+            } else {
+                char errbuf[1024];
+                av_strerror(ret, errbuf, sizeof(errbuf));
+                NSLog(@"打开设备失败:%@", [NSString stringWithUTF8String:errbuf]);
+            }
+        }
+       BOOL result = [[NSFileManager defaultManager]createFileAtPath:fileName contents:pcmData attributes:nil];
+        if (result) {
+            NSLog(@"写入文件成功：%lu", (unsigned long)pcmData.length);
+        } else {
+            NSLog(@"写入文件失败");
+        }
+    }];
+    
+    
   
    
 }
