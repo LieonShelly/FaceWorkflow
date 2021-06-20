@@ -7,7 +7,7 @@
 
 #import "AudioViewController.h"
 #import "PermenantThread.h"
-#include "Test.hpp"
+#include "AudioBuffer.hpp"
 extern "C" {
 // 设备
 #include <libavdevice/avdevice.h>
@@ -27,6 +27,23 @@ extern "C" {
 @property (nonatomic, copy) NSString *fileName;
 
 @end
+
+
+// 采样率
+#define SAMPLE_RATE 44100
+// 采样格式
+#define SAMPLE_FORMAT AUDIO_S16LSB
+// 采样大小
+#define SAMPLE_SIZE SDL_AUDIO_BITSIZE(SAMPLE_FORMAT)
+// 声道数
+#define CHANNELS 2
+// 音频缓冲区的样本数量
+#define SAMPLES 1024
+// 每个样本占用多少个字节
+#define BYTES_PER_SAMPLE ((SAMPLE_SIZE * CHANNELS) >> 3)
+// 文件缓冲区的大小
+#define BUFFER_SIZE (SAMPLES * BYTES_PER_SAMPLE)
+
 
 @implementation AudioViewController
 
@@ -83,7 +100,8 @@ extern "C" {
     [self.playBtn setSelected:!btn.isSelected];
     if (self.playBtn.isSelected) {
         self.isInterruptionRequested = false;
-        [self playPCM:self.fileName];
+        NSString *inpcm = [[NSBundle mainBundle]pathForResource:@"in.pcm" ofType:nil];
+        [self playPCM:self.fileName == nil ? inpcm : self.fileName];
     } else {
         self.isInterruptionRequested = true;
     }
@@ -113,31 +131,33 @@ void showSpec(AVFormatContext *ctx) {
     NSString *formatName = @"avfoundation";
     NSString *deviceName = @":0";
     NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
-    AVInputFormat *fmt = av_find_input_format([formatName UTF8String]);
-    if (!fmt) {
-        NSLog(@"获取输入格式对象失败");
-        return;
-    }
-    AVFormatContext *ctx = nullptr;
-    AVDictionary *option = nullptr;
-    int ret = avformat_open_input(&ctx, deviceName.UTF8String, fmt, &option);
-    if (ret < 0) {
-        char errbuf[1024];
-        av_strerror(ret, errbuf, sizeof(errbuf));
-        NSLog(@"打开设备失败:%@", [NSString stringWithUTF8String:errbuf]);
-        return;
-    }
-    self.fileName = [filePath stringByAppendingPathComponent:@"out.pcm"];
+    NSTimeInterval time = [[NSDate date]timeIntervalSince1970];
+    self.fileName = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%f_out.pcm", time]];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
+        AVInputFormat *fmt = av_find_input_format([formatName UTF8String]);
+        if (!fmt) {
+            NSLog(@"获取输入格式对象失败");
+            return;
+        }
+        AVFormatContext *ctx = nullptr;
+        AVDictionary *option = nullptr;
+        int ret = avformat_open_input(&ctx, deviceName.UTF8String, fmt, &option);
+        if (ret < 0) {
+            char errbuf[1024];
+            av_strerror(ret, errbuf, sizeof(errbuf));
+            NSLog(@"打开设备失败:%@", [NSString stringWithUTF8String:errbuf]);
+            return;
+        }
         NSString *fileName = self.fileName;
         NSMutableData *pcmData = [NSMutableData new];
-        AVPacket pkt = AVPacket();
+        AVPacket *pkt = av_packet_alloc();
         NSInteger bufferSize = 1024 * 10;
         while (!self.isInterruptionRequested) {
-           int ret = av_read_frame(ctx, &pkt);
+           int ret = av_read_frame(ctx, pkt);
             if (ret == 0) {
                 if (pcmData.length >= bufferSize) {
+                    showSpec(ctx);
                     dispatch_barrier_async(queue, ^{
                         NSFileManager *fileManager = [NSFileManager defaultManager];
                         NSRange writeRange = NSMakeRange(0, pcmData.length);
@@ -158,8 +178,8 @@ void showSpec(AVFormatContext *ctx) {
                         }
                     });
                 }
-                NSLog(@"---record---pkt: %d - pcmData: %lu", pkt.size, (unsigned long)pcmData.length);
-                [pcmData appendBytes:pkt.data length:pkt.size];
+                NSLog(@"---record---pkt: %d - pcmData: %lu", pkt->size, (unsigned long)pcmData.length);
+                [pcmData appendBytes:pkt->data length:pkt->size];
             } else if (ret == AVERROR(EAGAIN) ) {
                 
             } else {
@@ -167,74 +187,33 @@ void showSpec(AVFormatContext *ctx) {
                 av_strerror(ret, errbuf, sizeof(errbuf));
                 NSLog(@"打开设备失败:%@", [NSString stringWithUTF8String:errbuf]);
             }
+            av_packet_unref(pkt);
         }
         NSFileHandle *filehandle = [NSFileHandle fileHandleForWritingAtPath:fileName];
         [filehandle seekToEndOfFile];
         [filehandle writeData:pcmData];
         [filehandle closeFile];
-        NSLog(@"写入文件成功：%lu", (unsigned long)pkt.size);
+        NSLog(@"写入文件成功：%lu", (unsigned long)pkt->size);
         [pcmData resetBytesInRange:NSMakeRange(0, pcmData.length)];
         [pcmData setLength:0];
         pcmData = nil;
+        av_packet_free(&pkt);
+        avformat_close_input(&ctx);
     });
 }
 
-- (void)recordWithPermantThread {
-    NSString *formatName = @"avfoundation";
-    NSString *deviceName = @":0";
-    NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
-    AVInputFormat *fmt = av_find_input_format([formatName UTF8String]);
-    if (!fmt) {
-        NSLog(@"获取输入格式对象失败");
-        return;
-    }
-    AVFormatContext *ctx = nullptr;
-    AVDictionary *option = nullptr;
-    int ret = avformat_open_input(&ctx, deviceName.UTF8String, fmt, &option);
-    if (ret < 0) {
-        NSLog(@"打开设备失败");
-        return;
-    }
-    self.fileName = [filePath stringByAppendingPathComponent:@"out.pcm"];
-    [self.thread excuteTask:^{
-        NSMutableData *pcmData = [NSMutableData new];
-        AVPacket pkt = AVPacket();
-        while (!self.isInterruptionRequested) {
-           int ret = av_read_frame(ctx, &pkt);
-            if (ret == 0) {
-                NSLog(@"---record---: %d", pkt.size);
-                [pcmData appendBytes:pkt.data length:pkt.size];
-            } else if (ret == AVERROR(EAGAIN) ) {
-                
-            } else {
-                char errbuf[1024];
-                av_strerror(ret, errbuf, sizeof(errbuf));
-                NSLog(@"打开设备失败:%@", [NSString stringWithUTF8String:errbuf]);
-            }
-        }
-       BOOL result = [[NSFileManager defaultManager]createFileAtPath:self.fileName contents:pcmData attributes:nil];
-        if (result) {
-            NSLog(@"写入文件成功：%lu", (unsigned long)pcmData.length);
-        } else {
-            NSLog(@"写入文件失败");
-        }
-    }];
-}
-
-
-int bufferLen;
-char *bufferData;
-
 void pulAudioData(void *userData, Uint8 *stream, int len) {
+    AudioBuffer *buffer = (AudioBuffer*)userData;
     SDL_memset(stream, 0, len);
-    if (bufferLen <= 0) {
+    if (buffer->len <= 0) {
         return;
     }
-    int realLen = len > bufferLen ? bufferLen : len;
-    SDL_MixAudio(stream, (UInt8 *)bufferData, realLen, SDL_MIX_MAXVOLUME);
-    bufferData += realLen;
-    bufferLen -= len;
-    
+    buffer->pullLen = len > buffer->len ? buffer->len : len;
+    NSLog(@"before-buffer->len: %d, buffer->pullLen %d, len: %d", buffer->len, buffer->pullLen, len);
+    SDL_MixAudio(stream, (UInt8 *)buffer->data, buffer->pullLen, SDL_MIX_MAXVOLUME);
+    buffer->data += buffer->pullLen;
+    buffer->len -= buffer->pullLen;
+    NSLog(@"buffer->len: %d, buffer->pullLen %d", buffer->len, buffer->pullLen);
 }
 
 - (void)playPCM:(NSString*)filename {
@@ -242,19 +221,14 @@ void pulAudioData(void *userData, Uint8 *stream, int len) {
         NSLog(@"SDL_INIT Error: %s", SDL_GetError());
         return;
     }
-    int SAMPLES = 1024;
-    int CHANNELS = 2;
-    int SAMPLE_FORMAT = AUDIO_S16LSB;
-    int SAMPLE_SIZE = SDL_AUDIO_BITSIZE(SAMPLE_FORMAT);
-    int BYTES_PER_SAMPLE = (SAMPLE_SIZE * CHANNELS) >> 3;
-    int BUFFER_SIZE = SAMPLES * BYTES_PER_SAMPLE;
     SDL_AudioSpec spec;
-    spec.freq = 44100;
-    spec.format = AUDIO_S16LSB;
-    spec.channels = 2;
-    spec.samples = 1024;
-    spec.userdata = (void*)100;
+    spec.freq = SAMPLE_RATE;
+    spec.format = AUDIO_S32LSB;
+    spec.channels = 1;
+    spec.samples = SAMPLES;
     spec.callback = pulAudioData;
+    AudioBuffer *buffer = new AudioBuffer();
+    spec.userdata = buffer;
     if (SDL_OpenAudio(&spec, nullptr)) {
         SDL_Quit();
         NSLog(@"SDL_OpenAudio Error: %s", SDL_GetError());
@@ -262,19 +236,34 @@ void pulAudioData(void *userData, Uint8 *stream, int len) {
     }
     SDL_PauseAudio(0);
     NSFileHandle *filehandle = [NSFileHandle fileHandleForReadingAtPath:filename];
-    [self.thread excuteTask:^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         while (!self.isInterruptionRequested) {
-            if (bufferLen > 0) continue;
+            if (buffer->len > 0) continue;
             NSData *data = [filehandle readDataOfLength:BUFFER_SIZE];
-            bufferLen = data.length;
-            if (bufferLen <= 0) {
+            buffer->len = (int)data.length;
+            if (buffer->len <= 0) {
+                // 剩余样本数量
+                // BYTES_PER_SAMPLE 每个样本的大小 = 采样率 * 通道数 >> 3
+                // 这样做的目的是推迟线程结束的时间，让剩余的音频播放完毕
+                int samples = buffer->pullLen / BYTES_PER_SAMPLE;
+                int ms = samples * 1000 / SAMPLE_RATE;
+                SDL_Delay(ms);
                 break;
             }
-            bufferData =  (char *)[data bytes];
+            buffer->data =  (Uint8 *)[data bytes];
         }
         [filehandle closeFile];
         SDL_CloseAudio();
         SDL_Quit();
-    }];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self playEnd];
+        });
+    });
+    
+}
+
+- (void)playEnd {
+    
+    [self.playBtn setSelected:false];
 }
 @end

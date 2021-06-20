@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD1ED336267F8E0E002C845B /* AudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1ED334267F8E0E002C845B /* AudioBuffer.cpp */; };
+		CD1ED338267F912C002C845B /* in.pcm in Resources */ = {isa = PBXBuildFile; fileRef = CD1ED337267F90C3002C845B /* in.pcm */; };
 		CDA8D78325C2A4ED00CB33D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */; };
 		CDA8D78725C2A4ED00CB33D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA8D78625C2A4ED00CB33D4 /* ViewController.swift */; };
 		CDA8D78C25C2A4EF00CB33D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDA8D78B25C2A4EF00CB33D4 /* Assets.xcassets */; };
@@ -47,6 +49,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD1ED334267F8E0E002C845B /* AudioBuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AudioBuffer.cpp; sourceTree = "<group>"; };
+		CD1ED335267F8E0E002C845B /* AudioBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AudioBuffer.hpp; sourceTree = "<group>"; };
+		CD1ED337267F90C3002C845B /* in.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = in.pcm; sourceTree = "<group>"; };
 		CDA8D77F25C2A4ED00CB33D4 /* FaceWorkflow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceWorkflow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDA8D78625C2A4ED00CB33D4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -592,10 +597,13 @@
 		CDC36C5D267BAF9500C89C9F /* RecordAudio */ = {
 			isa = PBXGroup;
 			children = (
+				CD1ED337267F90C3002C845B /* in.pcm */,
 				CDC36C5E267BAFB900C89C9F /* AudioViewController.h */,
 				CDC36C5F267BAFB900C89C9F /* AudioViewController.mm */,
 				CDC36C77267BB56500C89C9F /* Test.cpp */,
 				CDC36C78267BB56500C89C9F /* Test.hpp */,
+				CD1ED334267F8E0E002C845B /* AudioBuffer.cpp */,
+				CD1ED335267F8E0E002C845B /* AudioBuffer.hpp */,
 			);
 			path = RecordAudio;
 			sourceTree = "<group>";
@@ -840,6 +848,7 @@
 				CDCA56A4267E47B000468FC2 /* sdl2.pc in Resources */,
 				CDA8D78F25C2A4EF00CB33D4 /* LaunchScreen.storyboard in Resources */,
 				CDA8D78C25C2A4EF00CB33D4 /* Assets.xcassets in Resources */,
+				CD1ED338267F912C002C845B /* in.pcm in Resources */,
 				CDCA56A5267E47B000468FC2 /* sdl2-config-version.cmake in Resources */,
 				CDCA56A6267E47B000468FC2 /* sdl2-config.cmake in Resources */,
 			);
@@ -854,6 +863,7 @@
 			files = (
 				CDA8D78725C2A4ED00CB33D4 /* ViewController.swift in Sources */,
 				CDC36C80267C43A900C89C9F /* PermenantThread.m in Sources */,
+				CD1ED336267F8E0E002C845B /* AudioBuffer.cpp in Sources */,
 				CDC36C79267BB56500C89C9F /* Test.cpp in Sources */,
 				CDA8D78325C2A4ED00CB33D4 /* AppDelegate.swift in Sources */,
 				CDC36C60267BAFB900C89C9F /* AudioViewController.mm in Sources */,

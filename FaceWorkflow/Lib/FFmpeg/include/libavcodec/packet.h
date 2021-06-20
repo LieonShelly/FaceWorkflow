@@ -184,7 +184,7 @@ enum AVPacketSideDataType {
 
     /**
      * Data found in BlockAdditional element of matroska container. There is
-     * no end marker for the data, so it is required to rely on the side data
+     * no end marker for the data, so it is required to rely on the si&de data
      * size to recognize the end. 8 byte id (as found in BlockAddId) followed
      * by data.
      */
