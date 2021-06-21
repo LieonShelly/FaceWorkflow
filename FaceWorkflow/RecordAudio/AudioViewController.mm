@@ -30,7 +30,7 @@ extern "C" {
 
 
 // 采样率
-#define SAMPLE_RATE 44100 // // 48000 
+#define SAMPLE_RATE 44100 // // 48000
 // 采样格式
 #define SAMPLE_FORMAT AUDIO_S16LSB
 // 采样大小
