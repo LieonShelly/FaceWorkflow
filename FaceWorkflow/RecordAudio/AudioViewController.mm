@@ -30,13 +30,13 @@ extern "C" {
 
 
 // 采样率
-#define SAMPLE_RATE 44100
+#define SAMPLE_RATE 44100 // // 48000 
 // 采样格式
 #define SAMPLE_FORMAT AUDIO_S16LSB
 // 采样大小
 #define SAMPLE_SIZE SDL_AUDIO_BITSIZE(SAMPLE_FORMAT)
 // 声道数
-#define CHANNELS 2
+#define CHANNELS 2 // 1
 // 音频缓冲区的样本数量
 #define SAMPLES 1024
 // 每个样本占用多少个字节
@@ -223,8 +223,8 @@ void pulAudioData(void *userData, Uint8 *stream, int len) {
     }
     SDL_AudioSpec spec;
     spec.freq = SAMPLE_RATE;
-    spec.format = AUDIO_S32LSB;
-    spec.channels = 1;
+    spec.format = SAMPLE_FORMAT;
+    spec.channels = CHANNELS;
     spec.samples = SAMPLES;
     spec.callback = pulAudioData;
     AudioBuffer *buffer = new AudioBuffer();
