@@ -8,6 +8,7 @@
 #import "AudioViewController.h"
 #import "PermenantThread.h"
 #include "AudioBuffer.hpp"
+#import "FFMpegs.h"
 extern "C" {
 // 设备
 #include <libavdevice/avdevice.h>
@@ -25,7 +26,7 @@ extern "C" {
 @property (nonatomic, strong) UIButton *playBtn;
 @property (nonatomic, strong) PermenantThread *thread;
 @property (nonatomic, copy) NSString *fileName;
-
+@property (nonatomic, strong) UIButton *wavConvertBtn;
 @end
 
 
@@ -47,6 +48,15 @@ extern "C" {
 
 @implementation AudioViewController
 
+- (UIButton *)wavConvertBtn {
+    if (!_wavConvertBtn) {
+        _wavConvertBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        [_wavConvertBtn setTitle:@"开始转换" forState:UIControlStateNormal];
+        [_wavConvertBtn addTarget:self action:@selector(wavConvertBtnTap) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _wavConvertBtn;
+}
+
 - (UIButton *)recordBtn {
     if (!_recordBtn) {
         _recordBtn = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -56,7 +66,6 @@ extern "C" {
     }
     return _recordBtn;
 }
-
 
 - (UIButton *)playBtn {
     if (!_playBtn) {
@@ -78,8 +87,10 @@ extern "C" {
     self.view.backgroundColor = [UIColor whiteColor];
     self.recordBtn.frame = CGRectMake(100, 100, 100, 59);
     self.playBtn.frame = CGRectMake(100, CGRectGetMaxY(self.recordBtn.frame) + 50, 100, 59);
+    self.wavConvertBtn.frame = CGRectMake(100, CGRectGetMaxY(self.playBtn.frame) + 50, 100, 59);
     [self.view addSubview:self.recordBtn];
     [self.view addSubview:self.playBtn];
+    [self.view addSubview:self.wavConvertBtn];
     SDL_version v;
     SDL_VERSION(&v);
     SDL_SetMainReady();
@@ -105,6 +116,17 @@ extern "C" {
     } else {
         self.isInterruptionRequested = true;
     }
+}
+
+- (void)wavConvertBtnTap {
+    WavHeader header = WavHeader();
+    header.sampleRate = SAMPLE_RATE;
+    header.bitPerSample = SDL_AUDIO_BITSIZE(SAMPLE_FORMAT);
+    header.numChannels = CHANNELS;
+    NSString *pcmfile = [[NSBundle mainBundle]pathForResource:@"in.pcm" ofType:nil];
+    NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
+    NSString *wavFile = [filePath stringByAppendingPathComponent:@"in.wav"];
+    [FFMpegs pcm2wav:&header pcmfile:pcmfile wavfile:wavFile];
 }
 
 - (PermenantThread *)thread {
