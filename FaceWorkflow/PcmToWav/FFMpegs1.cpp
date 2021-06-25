@@ -11,7 +11,7 @@
 
 using namespace std;
 
-void FFMpegs::pcm2wav(WavHeader &header, const char *pcmFilename, const char *wavfilename) {
+void FFMpegs1::pcm2wav(WavHeader &header, const char *pcmFilename, const char *wavfilename) {
     // 一个样本的字节数
     header.blockAlign = header.bitPerSample * header.numChannels >> 3;
     // 字节数

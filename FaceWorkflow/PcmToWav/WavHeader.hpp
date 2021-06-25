@@ -24,7 +24,7 @@ struct WavHeader {
     uint8_t fmtChunkID[4] = {'f', 'm', 't', ' '};
     //fmt chunk的大小：存储PCM数据时，是16
     uint32_t fmtChunkDataSize = 16;
-    // 音频编码， 1表示PCM， 3表示Floating Point
+    // 音频编码， 1表示普通型的PCM， 3表示Floating Point，针对采样格式为f32le的PCM
     uint16_t audioFormat = 1;// AUDION_FORMAT_FLOAT;
     // 声道数
     uint16_t numChannels;

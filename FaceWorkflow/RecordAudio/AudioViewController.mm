@@ -9,6 +9,8 @@
 #import "PermenantThread.h"
 #include "AudioBuffer.hpp"
 #import "FFMpegs.h"
+#import <objc/runtime.h>
+
 extern "C" {
 // 设备
 #include <libavdevice/avdevice.h>
@@ -19,6 +21,8 @@ extern "C" {
 #include "SDL.h"
 }
 #include "SDL_main.h"
+
+#include "FFMpegs1.hpp"
 
 @interface AudioViewController ()
 @property (nonatomic, assign) BOOL isInterruptionRequested;
@@ -119,6 +123,8 @@ extern "C" {
 }
 
 - (void)wavConvertBtnTap {
+    NSLog(@"[super superclass] = %@", [super superclass]);
+    NSLog(@"[super class] = %@", [super class]);
     WavHeader header = WavHeader();
     header.sampleRate = SAMPLE_RATE;
     header.bitPerSample = SDL_AUDIO_BITSIZE(SAMPLE_FORMAT);
@@ -144,7 +150,9 @@ void showSpec(AVFormatContext *ctx) {
     NSLog(@"channel_layout: %llu", params->channel_layout);
     NSLog(@"format: %d", params->format);
     NSLog(@"av_get_bytes_per_sample: %d", av_get_bytes_per_sample((AVSampleFormat)params->format));
+    // 通过codec_id也可以知道采样格式
     NSLog(@"codec_id: %d", params->codec_id);
+    // 每个样本的位数 >> 3 得到字节数
     NSLog(@"av_get_bits_per_sample: %d", av_get_bits_per_sample(params->codec_id));
 
 }
@@ -289,3 +297,18 @@ void pulAudioData(void *userData, Uint8 *stream, int len) {
     [self.playBtn setSelected:false];
 }
 @end
+
+
+/**
+ LSB\MSB
+ - LSB（Least Sigificant Bit\Byte）最低有效位/字节 小端 (最低有效字节先被读取到)
+ - MSB (Most Significant Bit\Byte) 最高有效位/字节 大端 （最高有字节先被读取到）
+ AV_CODEC_ID_PCM_S32LE,
+ AV_CODEC_ID_PCM_S32BE,
+ AV_CODEC_ID_PCM_U32LE,
+ 采样格式包含：
+ 1.位深度（样本占多少位）
+ 2.有符号，无符号，浮点数
+ 3.大端(Big-Endian), 小端(Little-Endian)
+ */
+
