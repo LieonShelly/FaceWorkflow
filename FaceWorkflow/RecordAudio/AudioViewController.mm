@@ -22,7 +22,6 @@ extern "C" {
 }
 #include "SDL_main.h"
 
-#include "FFMpegs1.hpp"
 
 @interface AudioViewController ()
 @property (nonatomic, assign) BOOL isInterruptionRequested;
@@ -31,6 +30,8 @@ extern "C" {
 @property (nonatomic, strong) PermenantThread *thread;
 @property (nonatomic, copy) NSString *fileName;
 @property (nonatomic, strong) UIButton *wavConvertBtn;
+@property (nonatomic, strong) dispatch_queue_t moneyQueue;
+
 @end
 
 
@@ -98,6 +99,7 @@ extern "C" {
     SDL_version v;
     SDL_VERSION(&v);
     SDL_SetMainReady();
+    self.moneyQueue = dispatch_queue_create("moneyQueue", DISPATCH_QUEUE_SERIAL);
 }
 
 - (void)recordBtnTap:(UIButton*)btn {
@@ -109,6 +111,38 @@ extern "C" {
         self.isInterruptionRequested = true;
     }
     
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    NSLog(@"执行任务1");
+    dispatch_queue_t queue = dispatch_queue_create("myqueu", DISPATCH_QUEUE_SERIAL);
+    dispatch_sync(queue, ^{ // 1
+        NSLog(@"执行任务3");
+    });
+    NSLog(@"执行任务4");
+    pthread_mutexattr_settype(nil, PTHREAD_MUTEX_RECURSIVE);
+//    dispatch_async(queue, ^{ // 0
+//        NSLog(@"执行任务2");
+//        dispatch_sync(queue, ^{ // 1
+//            NSLog(@"执行任务3");
+//        });
+//        NSLog(@"执行任务4");
+//    });
+//    NSLog(@"执行任务5");
+
+}
+
+
+- (void)__drawMoney {
+   dispatch_sync(self.moneyQueue, ^{
+       NSLog(@"__drawMoney: %@", [NSThread currentThread]);
+   });
+}
+
+- (void)__saveMoney {
+   dispatch_sync(self.moneyQueue, ^{
+       NSLog(@"__saveMoney: %@", [NSThread currentThread]);
+   });
 }
 
 - (void)playBtnTap:(UIButton*)btn {

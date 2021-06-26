@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		CD1E00AF2681C90F002C845B /* WavHeader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1E00AD2681C90E002C845B /* WavHeader.cpp */; };
 		CD1E00B52681D7B2002C845B /* FFMpegs.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD1E00B42681D7B2002C845B /* FFMpegs.mm */; };
-		CD1E00B82681D914002C845B /* FFMpegs1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1E00B62681D914002C845B /* FFMpegs1.cpp */; };
 		CD1ED336267F8E0E002C845B /* AudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1ED334267F8E0E002C845B /* AudioBuffer.cpp */; };
 		CD1ED338267F912C002C845B /* in.pcm in Resources */ = {isa = PBXBuildFile; fileRef = CD1ED337267F90C3002C845B /* in.pcm */; };
+		CD49336226877CC800D1FE3F /* ResampleAudioSpec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD49336026877CC800D1FE3F /* ResampleAudioSpec.cpp */; };
 		CDA8D78325C2A4ED00CB33D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */; };
 		CDA8D78725C2A4ED00CB33D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA8D78625C2A4ED00CB33D4 /* ViewController.swift */; };
 		CDA8D78C25C2A4EF00CB33D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDA8D78B25C2A4EF00CB33D4 /* Assets.xcassets */; };
@@ -220,8 +220,6 @@
 		CD1E00AE2681C90E002C845B /* WavHeader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = WavHeader.hpp; sourceTree = "<group>"; };
 		CD1E00B32681D7B2002C845B /* FFMpegs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFMpegs.h; sourceTree = "<group>"; };
 		CD1E00B42681D7B2002C845B /* FFMpegs.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FFMpegs.mm; sourceTree = "<group>"; };
-		CD1E00B62681D914002C845B /* FFMpegs1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FFMpegs1.cpp; sourceTree = "<group>"; };
-		CD1E00B72681D914002C845B /* FFMpegs1.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FFMpegs1.hpp; sourceTree = "<group>"; };
 		CD1ED334267F8E0E002C845B /* AudioBuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AudioBuffer.cpp; sourceTree = "<group>"; };
 		CD1ED335267F8E0E002C845B /* AudioBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AudioBuffer.hpp; sourceTree = "<group>"; };
 		CD1ED337267F90C3002C845B /* in.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = in.pcm; sourceTree = "<group>"; };
@@ -11597,6 +11595,8 @@
 		CD1EFFFD2680EF73002C845B /* decode_video.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = decode_video.c; sourceTree = "<group>"; };
 		CD1EFFFE2680EF73002C845B /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		CD1EFFFF2680EF73002C845B /* filtering_video.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = filtering_video.c; sourceTree = "<group>"; };
+		CD49336026877CC800D1FE3F /* ResampleAudioSpec.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ResampleAudioSpec.cpp; sourceTree = "<group>"; };
+		CD49336126877CC800D1FE3F /* ResampleAudioSpec.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResampleAudioSpec.hpp; sourceTree = "<group>"; };
 		CDA8D77F25C2A4ED00CB33D4 /* FaceWorkflow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceWorkflow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDA8D78625C2A4ED00CB33D4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -12036,10 +12036,6 @@
 			children = (
 				CD1E00AD2681C90E002C845B /* WavHeader.cpp */,
 				CD1E00AE2681C90E002C845B /* WavHeader.hpp */,
-				CD1E00B62681D914002C845B /* FFMpegs1.cpp */,
-				CD1E00B72681D914002C845B /* FFMpegs1.hpp */,
-				CD1E00B32681D7B2002C845B /* FFMpegs.h */,
-				CD1E00B42681D7B2002C845B /* FFMpegs.mm */,
 			);
 			path = PcmToWav;
 			sourceTree = "<group>";
@@ -24220,6 +24216,15 @@
 			path = examples;
 			sourceTree = "<group>";
 		};
+		CD49335E26877C9A00D1FE3F /* Resample */ = {
+			isa = PBXGroup;
+			children = (
+				CD49336026877CC800D1FE3F /* ResampleAudioSpec.cpp */,
+				CD49336126877CC800D1FE3F /* ResampleAudioSpec.hpp */,
+			);
+			path = Resample;
+			sourceTree = "<group>";
+		};
 		CDA8D77625C2A4ED00CB33D4 = {
 			isa = PBXGroup;
 			children = (
@@ -24240,6 +24245,7 @@
 		CDA8D78125C2A4ED00CB33D4 /* FaceWorkflow */ = {
 			isa = PBXGroup;
 			children = (
+				CD49335E26877C9A00D1FE3F /* Resample */,
 				CD1E00AC268189D4002C845B /* PcmToWav */,
 				CDC36C7D267C437800C89C9F /* Utils */,
 				CDC36C5D267BAF9500C89C9F /* RecordAudio */,
@@ -24524,6 +24530,8 @@
 		CDC36C7D267C437800C89C9F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CD1E00B32681D7B2002C845B /* FFMpegs.h */,
+				CD1E00B42681D7B2002C845B /* FFMpegs.mm */,
 				CDC36C7E267C43A900C89C9F /* PermenantThread.h */,
 				CDC36C7F267C43A900C89C9F /* PermenantThread.m */,
 			);
@@ -24754,8 +24762,8 @@
 				CDC36C79267BB56500C89C9F /* Test.cpp in Sources */,
 				CDA8D78325C2A4ED00CB33D4 /* AppDelegate.swift in Sources */,
 				CD1E00AF2681C90F002C845B /* WavHeader.cpp in Sources */,
+				CD49336226877CC800D1FE3F /* ResampleAudioSpec.cpp in Sources */,
 				CDC36C60267BAFB900C89C9F /* AudioViewController.mm in Sources */,
-				CD1E00B82681D914002C845B /* FFMpegs1.cpp in Sources */,
 				CD1E00B52681D7B2002C845B /* FFMpegs.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
