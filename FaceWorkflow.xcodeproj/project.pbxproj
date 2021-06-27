@@ -12,6 +12,7 @@
 		CD1ED336267F8E0E002C845B /* AudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1ED334267F8E0E002C845B /* AudioBuffer.cpp */; };
 		CD1ED338267F912C002C845B /* in.pcm in Resources */ = {isa = PBXBuildFile; fileRef = CD1ED337267F90C3002C845B /* in.pcm */; };
 		CD49336226877CC800D1FE3F /* ResampleAudioSpec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD49336026877CC800D1FE3F /* ResampleAudioSpec.cpp */; };
+		CD4933662688D2AF00D1FE3F /* WavPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD4933652688D2AF00D1FE3F /* WavPlayer.mm */; };
 		CDA8D78325C2A4ED00CB33D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */; };
 		CDA8D78725C2A4ED00CB33D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA8D78625C2A4ED00CB33D4 /* ViewController.swift */; };
 		CDA8D78C25C2A4EF00CB33D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDA8D78B25C2A4EF00CB33D4 /* Assets.xcassets */; };
@@ -11597,6 +11598,8 @@
 		CD1EFFFF2680EF73002C845B /* filtering_video.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = filtering_video.c; sourceTree = "<group>"; };
 		CD49336026877CC800D1FE3F /* ResampleAudioSpec.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ResampleAudioSpec.cpp; sourceTree = "<group>"; };
 		CD49336126877CC800D1FE3F /* ResampleAudioSpec.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResampleAudioSpec.hpp; sourceTree = "<group>"; };
+		CD4933642688D2AF00D1FE3F /* WavPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WavPlayer.h; sourceTree = "<group>"; };
+		CD4933652688D2AF00D1FE3F /* WavPlayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = WavPlayer.mm; sourceTree = "<group>"; };
 		CDA8D77F25C2A4ED00CB33D4 /* FaceWorkflow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceWorkflow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDA8D78625C2A4ED00CB33D4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24228,6 +24231,8 @@
 		CD4933632688D08E00D1FE3F /* PlayWav */ = {
 			isa = PBXGroup;
 			children = (
+				CD4933642688D2AF00D1FE3F /* WavPlayer.h */,
+				CD4933652688D2AF00D1FE3F /* WavPlayer.mm */,
 			);
 			path = PlayWav;
 			sourceTree = "<group>";
@@ -24767,6 +24772,7 @@
 				CDA8D78725C2A4ED00CB33D4 /* ViewController.swift in Sources */,
 				CDC36C80267C43A900C89C9F /* PermenantThread.m in Sources */,
 				CD1ED336267F8E0E002C845B /* AudioBuffer.cpp in Sources */,
+				CD4933662688D2AF00D1FE3F /* WavPlayer.mm in Sources */,
 				CDC36C79267BB56500C89C9F /* Test.cpp in Sources */,
 				CDA8D78325C2A4ED00CB33D4 /* AppDelegate.swift in Sources */,
 				CD1E00AF2681C90F002C845B /* WavHeader.cpp in Sources */,
