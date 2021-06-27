@@ -36,13 +36,13 @@ extern "C" {
 
 
 // 采样率
-#define SAMPLE_RATE 44100 // // 48000
+#define SAMPLE_RATE 48000 // 44100 //  //
 // 采样格式
 #define SAMPLE_FORMAT AUDIO_S16LSB
 // 采样大小
 #define SAMPLE_SIZE SDL_AUDIO_BITSIZE(SAMPLE_FORMAT)
 // 声道数
-#define CHANNELS 2 // 1
+#define CHANNELS 1 // 2
 // 音频缓冲区的样本数量
 #define SAMPLES 1024
 // 每个样本占用多少个字节
@@ -113,26 +113,6 @@ extern "C" {
     
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    NSLog(@"执行任务1");
-    dispatch_queue_t queue = dispatch_queue_create("myqueu", DISPATCH_QUEUE_SERIAL);
-    dispatch_sync(queue, ^{ // 1
-        NSLog(@"执行任务3");
-    });
-    NSLog(@"执行任务4");
-    pthread_mutexattr_settype(nil, PTHREAD_MUTEX_RECURSIVE);
-//    dispatch_async(queue, ^{ // 0
-//        NSLog(@"执行任务2");
-//        dispatch_sync(queue, ^{ // 1
-//            NSLog(@"执行任务3");
-//        });
-//        NSLog(@"执行任务4");
-//    });
-//    NSLog(@"执行任务5");
-
-}
-
-
 - (void)__drawMoney {
    dispatch_sync(self.moneyQueue, ^{
        NSLog(@"__drawMoney: %@", [NSThread currentThread]);
@@ -159,14 +139,31 @@ extern "C" {
 - (void)wavConvertBtnTap {
     NSLog(@"[super superclass] = %@", [super superclass]);
     NSLog(@"[super class] = %@", [super class]);
-    WavHeader header = WavHeader();
-    header.sampleRate = SAMPLE_RATE;
-    header.bitPerSample = SDL_AUDIO_BITSIZE(SAMPLE_FORMAT);
-    header.numChannels = CHANNELS;
-    NSString *pcmfile = [[NSBundle mainBundle]pathForResource:@"in.pcm" ofType:nil];
+//    WavHeader header = WavHeader();
+//    header.sampleRate = SAMPLE_RATE;
+//    header.bitPerSample = SDL_AUDIO_BITSIZE(SAMPLE_FORMAT);
+//    header.numChannels = CHANNELS;
+//    NSString *pcmfile = [[NSBundle mainBundle]pathForResource:@"in.pcm" ofType:nil];
+//    NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
+//    NSString *wavFile = [filePath stringByAppendingPathComponent:@"in.wav"];
+//    [FFMpegs pcm2wav:&header pcmfile:pcmfile wavfile:wavFile];
+    
+    ResampleAudioSpec input;
+    const char *inputfile =  [self.fileName UTF8String];
+    input.filename = (char *)inputfile;
+    input.sampleRate = SAMPLE_RATE;
+    input.sampleFmt = AV_SAMPLE_FMT_S16;
+    input.chLayout = AV_CH_LAYOUT_MONO;
+    
+    ResampleAudioSpec output;
     NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
-    NSString *wavFile = [filePath stringByAppendingPathComponent:@"in.wav"];
-    [FFMpegs pcm2wav:&header pcmfile:pcmfile wavfile:wavFile];
+    NSString *outFilename = [filePath stringByAppendingPathComponent:@"44100_s32.pcm"];
+    output.filename = [outFilename UTF8String];
+    output.sampleRate = 44100;
+    output.sampleFmt = AV_SAMPLE_FMT_FLT;
+    output.chLayout = AV_CH_LAYOUT_STEREO;
+    
+    [FFMpegs resample:&input outPut:&output];
 }
 
 - (PermenantThread *)thread {
@@ -195,8 +192,7 @@ void showSpec(AVFormatContext *ctx) {
     NSString *formatName = @"avfoundation";
     NSString *deviceName = @":0";
     NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
-    NSTimeInterval time = [[NSDate date]timeIntervalSince1970];
-    self.fileName = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%f_out.pcm", time]];
+    self.fileName = [filePath stringByAppendingPathComponent: @"record_out.pcm"];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
         AVInputFormat *fmt = av_find_input_format([formatName UTF8String]);

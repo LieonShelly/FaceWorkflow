@@ -69,11 +69,19 @@ extern "C" {
  - 打开文件开始重采样
  - 检查输出缓冲区是否还有残余的样本
  - 释放资源
- 
+ ffplay -ar 44100 -ac 2 -f f32le  44100_s32.pcm
  */
-+ (void)resample:(ResampleAudioSpec*)input out:(ResampleAudioSpec*)output {
++ (void)resample:(ResampleAudioSpec*)input outPut:(ResampleAudioSpec*)output {
     NSFileHandle *inputFile = [NSFileHandle fileHandleForReadingAtPath:[NSString stringWithCString:input->filename encoding:NSUTF8StringEncoding]];
-    NSFileHandle *outFile = [NSFileHandle fileHandleForWritingAtPath:[NSString stringWithCString:output->filename encoding:NSUTF8StringEncoding]];
+    NSError *error;
+    NSString *outfileName = [NSString stringWithCString:output->filename encoding:NSUTF8StringEncoding];
+    [[NSFileManager defaultManager]createFileAtPath:outfileName contents:nil attributes:nil];
+    NSFileHandle *outFile = [NSFileHandle fileHandleForWritingToURL:[NSURL fileURLWithPath:outfileName] error:&error];
+    if (error) {
+        NSLog(@"outfile文件创建失败：%@", error.description);
+        [inputFile closeFile];
+        return;
+    }
     // 输入缓冲区
     // 指向缓冲区的指针
     uint8_t **inData = nullptr;
@@ -114,11 +122,17 @@ extern "C" {
     NSLog(@"输出缓冲区 inSampleRate: %d - outSamples: %d", output->sampleRate, outSamples);
     int ret = 0;
     // 创建重采样上下文
+    /**
+     struct SwrContext *swr_alloc_set_opts(struct SwrContext *s,
+                                           int64_t out_ch_layout, enum AVSampleFormat out_sample_fmt, int out_sample_rate,
+                                           int64_t  in_ch_layout, enum AVSampleFormat  in_sample_fmt, int  in_sample_rate,
+                                           int log_offset, void *log_ctx);
+     */
     SwrContext *ctx = swr_alloc_set_opts(nullptr,
-                                         outChs,
+                                         output->chLayout,
                                          output->sampleFmt,
                                          output->sampleRate,
-                                         inChs,
+                                         input->chLayout,
                                          input->sampleFmt,
                                          input->sampleRate,
                                          0,
@@ -161,6 +175,7 @@ extern "C" {
         goto end;
     }
     // 读取文件数据
+    [inputFile seekToFileOffset:0];
     infile = [inputFile readDataOfLength:inLineSize];
     inData[0] = (uint8_t*) [infile bytes];
     len = (int)[infile length];
@@ -183,16 +198,17 @@ extern "C" {
         [outFile seekToEndOfFile];
         
         // 继续读下一段输入数据
-        [inputFile seekToFileOffset:inLineSize];
         infile = [inputFile readDataOfLength:inLineSize];
         inData[0] = (uint8_t*) [infile bytes];
         len = (int)[infile length];
+        NSLog(@"---------len: %d -- inLineSize: %d --- ret: %d", len, inLineSize, ret);
     }
     
     // 检查一下输出缓冲区是否还有残留的样本（已经重采样过的，换换过的）
     while ((ret = swr_convert(ctx, outData, outSamples, nullptr, 0)) > 0) {
         [outFile writeData:[NSData dataWithBytes:(char *)outData[0] length:ret * outBytesPerSample]];
     }
+    NSLog(@"-----end----");
 end:
     [inputFile closeFile];
     [outFile closeFile];
@@ -204,7 +220,7 @@ end:
         av_freep(&outData[0]);
     }
     av_freep(&outData);
-    swr_free(ctx);
+    swr_free(&ctx);
 }
 
 @end

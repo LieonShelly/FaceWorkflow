@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // 音频重采样
 + (void)resample:(ResampleAudioSpec*)input
-            out:(ResampleAudioSpec*)output;
+          outPut:(ResampleAudioSpec*)output;
 @end
 
 NS_ASSUME_NONNULL_END

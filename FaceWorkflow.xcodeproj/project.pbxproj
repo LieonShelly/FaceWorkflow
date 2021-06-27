@@ -24225,6 +24225,13 @@
 			path = Resample;
 			sourceTree = "<group>";
 		};
+		CD4933632688D08E00D1FE3F /* PlayWav */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PlayWav;
+			sourceTree = "<group>";
+		};
 		CDA8D77625C2A4ED00CB33D4 = {
 			isa = PBXGroup;
 			children = (
@@ -24245,6 +24252,7 @@
 		CDA8D78125C2A4ED00CB33D4 /* FaceWorkflow */ = {
 			isa = PBXGroup;
 			children = (
+				CD4933632688D08E00D1FE3F /* PlayWav */,
 				CD49335E26877C9A00D1FE3F /* Resample */,
 				CD1E00AC268189D4002C845B /* PcmToWav */,
 				CDC36C7D267C437800C89C9F /* Utils */,
