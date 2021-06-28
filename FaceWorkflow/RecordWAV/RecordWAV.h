@@ -10,7 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RecordWAV : NSObject
-
+- (void)record;
+- (void)stopRecord;
 @end
 
 NS_ASSUME_NONNULL_END

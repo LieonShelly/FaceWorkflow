@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1813ED77E1974AF6036BD8D3 /* Pods_FaceWorkflow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0C6CAA710913C2AB6BBC077 /* Pods_FaceWorkflow.framework */; };
 		CD1E00AF2681C90F002C845B /* WavHeader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1E00AD2681C90E002C845B /* WavHeader.cpp */; };
 		CD1E00B52681D7B2002C845B /* FFMpegs.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD1E00B42681D7B2002C845B /* FFMpegs.mm */; };
 		CD1ED336267F8E0E002C845B /* AudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1ED334267F8E0E002C845B /* AudioBuffer.cpp */; };
@@ -54,6 +55,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		19317AFD51A0FDE184C9A249 /* Pods-FaceWorkflow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceWorkflow.release.xcconfig"; path = "Target Support Files/Pods-FaceWorkflow/Pods-FaceWorkflow.release.xcconfig"; sourceTree = "<group>"; };
+		6DFB1255CA604278BE06F3BB /* Pods-FaceWorkflow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceWorkflow.debug.xcconfig"; path = "Target Support Files/Pods-FaceWorkflow/Pods-FaceWorkflow.debug.xcconfig"; sourceTree = "<group>"; };
 		CD1E00002680EF73002C845B /* avio_reading.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = avio_reading.c; sourceTree = "<group>"; };
 		CD1E00012680EF73002C845B /* encode_video.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = encode_video.c; sourceTree = "<group>"; };
 		CD1E00022680EF73002C845B /* avio_list_dir.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = avio_list_dir.c; sourceTree = "<group>"; };
@@ -11846,6 +11849,7 @@
 		CDCA5718267E4E7000468FC2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CDCA571A267E4FC100468FC2 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		CDCA571C267E51AF00468FC2 /* CoreHaptics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreHaptics.framework; path = System/Library/Frameworks/CoreHaptics.framework; sourceTree = SDKROOT; };
+		E0C6CAA710913C2AB6BBC077 /* Pods_FaceWorkflow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FaceWorkflow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -11880,6 +11884,7 @@
 				CDCA502E267E468700468FC2 /* CoreVideo.framework in Frameworks */,
 				CDCA5715267E4E5500468FC2 /* CoreGraphics.framework in Frameworks */,
 				CDCA570F267E4E3900468FC2 /* CoreMotion.framework in Frameworks */,
+				1813ED77E1974AF6036BD8D3 /* Pods_FaceWorkflow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -24255,6 +24260,7 @@
 				CDA8D78125C2A4ED00CB33D4 /* FaceWorkflow */,
 				CDA8D78025C2A4ED00CB33D4 /* Products */,
 				CDC36C61267BB2B300C89C9F /* Frameworks */,
+				E8EAB80CC7E317037E90FB7C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -24549,6 +24555,7 @@
 				CDC36C6D267BB30C00C89C9F /* libbz2.tbd */,
 				CDC36C6B267BB2EB00C89C9F /* libz.tbd */,
 				CDC36C62267BB2B300C89C9F /* AVFoundation.framework */,
+				E0C6CAA710913C2AB6BBC077 /* Pods_FaceWorkflow.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -24708,6 +24715,16 @@
 			path = SDL2;
 			sourceTree = "<group>";
 		};
+		E8EAB80CC7E317037E90FB7C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6DFB1255CA604278BE06F3BB /* Pods-FaceWorkflow.debug.xcconfig */,
+				19317AFD51A0FDE184C9A249 /* Pods-FaceWorkflow.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -24715,9 +24732,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CDA8D79325C2A4EF00CB33D4 /* Build configuration list for PBXNativeTarget "FaceWorkflow" */;
 			buildPhases = (
+				8627FAAD9AE92AB19F804DB0 /* [CP] Check Pods Manifest.lock */,
 				CDA8D77B25C2A4ED00CB33D4 /* Sources */,
 				CDA8D77C25C2A4ED00CB33D4 /* Frameworks */,
 				CDA8D77D25C2A4ED00CB33D4 /* Resources */,
+				5C5A956F8F132AD722F8DAC9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -24776,6 +24795,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5C5A956F8F132AD722F8DAC9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FaceWorkflow/Pods-FaceWorkflow-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FaceWorkflow/Pods-FaceWorkflow-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FaceWorkflow/Pods-FaceWorkflow-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8627FAAD9AE92AB19F804DB0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FaceWorkflow-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CDA8D77B25C2A4ED00CB33D4 /* Sources */ = {
@@ -24928,6 +24989,7 @@
 		};
 		CDA8D79425C2A4EF00CB33D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6DFB1255CA604278BE06F3BB /* Pods-FaceWorkflow.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -24965,6 +25027,7 @@
 		};
 		CDA8D79525C2A4EF00CB33D4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 19317AFD51A0FDE184C9A249 /* Pods-FaceWorkflow.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

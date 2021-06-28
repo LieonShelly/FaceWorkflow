@@ -42,38 +42,45 @@ extern "C" {
  - 通过codec_id获取 av_get_bits_per_sample(params->codec_id);
  */
 
+
+
++ (void)initialize {
+    avdevice_register_all();
+}
+
 - (void)record {
-    NSString *formatName = @"avfoundation";
-    NSString *deviceName = @":0";
-    AVInputFormat *fmt = av_find_input_format(formatName.UTF8String);
-    if (!fmt) {
-        NSLog(@"获取输入格式对象失败: %@", formatName);
-        return;
-    }
-   __block AVFormatContext *ctx = nullptr;
-    int ret = avformat_open_input(&ctx,
-                                  deviceName.UTF8String,
-                                  fmt, nullptr);
-    if (ret < 0) {
-        char errbuf[1024];
-        av_strerror(ret, errbuf, sizeof (errbuf));
-        NSLog(@"打开设备失败: %s", errbuf);
-        return;
-    }
-    NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
-    NSString *fileName = [filePath stringByAppendingPathComponent: @"record_out.wav"];
-    // 创建一个空文件
-    [[NSFileManager defaultManager]createFileAtPath:fileName contents:[NSData new] attributes:nil];
-    NSFileHandle *writeHandle = [NSFileHandle fileHandleForWritingToURL:[NSURL URLWithString:fileName] error:nil];
-    if (!writeHandle) {
-        NSLog(@"打开文件失败");
-        avformat_close_input(&ctx);
-        return;
-    }
- 
+    self.stop = false;
     // 初始化数据包
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
+        NSString *formatName = @"avfoundation";
+        NSString *deviceName = @":0";
+        AVInputFormat *fmt = av_find_input_format([formatName UTF8String]);
+        if (!fmt) {
+            NSLog(@"获取输入格式对象失败");
+            return;
+        }
+       AVFormatContext *ctx = nullptr;
+        int ret = avformat_open_input(&ctx,
+                                      deviceName.UTF8String,
+                                      fmt, nullptr);
+        if (ret < 0) {
+            char errbuf[1024];
+            av_strerror(ret, errbuf, sizeof (errbuf));
+            NSLog(@"打开设备失败: %s", errbuf);
+            return;
+        }
+        NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
+        NSString *fileName = [filePath stringByAppendingPathComponent: @"record_out.wav"];
+        // 创建一个空文件
+        [[NSFileManager defaultManager]createFileAtPath:fileName contents:[NSData new] attributes:nil];
+        NSFileHandle *writeHandle = [NSFileHandle fileHandleForWritingToURL:[NSURL URLWithString:fileName] error:nil];
+        if (!writeHandle) {
+            NSLog(@"打开文件失败");
+            avformat_close_input(&ctx);
+            return;
+        }
+     
         // 获取输入流
         AVStream *stream = ctx->streams[0];
         // 获取音频参数
@@ -93,7 +100,6 @@ extern "C" {
         [writeHandle writeData:[NSData dataWithBytes:(void *)&header length:sizeof(WavHeader)]];
         [writeHandle seekToEndOfFile];
         AVPacket *pkt = av_packet_alloc();
-        int ret = 0;
         while (!self.stop) {
             ret = av_read_frame(ctx, pkt);
             if (ret == 0) {
@@ -110,13 +116,16 @@ extern "C" {
                 av_strerror(ret, errbuf, sizeof (errbuf));
                 NSLog(@"av_read_frame: %s", errbuf);
             }
+            av_packet_unref(pkt);
         }
         // 写入dataChunkSize
         [writeHandle seekToFileOffset:sizeof(WavHeader) - sizeof(header.dataChunkSize)];
         [writeHandle writeData:[NSData dataWithBytes:(void *)&header.dataChunkSize length:sizeof(header.dataChunkSize)]];
         
         // 写入riffChunkDataSize
-        header.riffChunkSize = uint32_t(writeHandle.availableData.length - sizeof(header.riffChunkId) - sizeof(header.riffChunkSize));
+        [writeHandle seekToEndOfFile];
+        long long totalLen = [writeHandle offsetInFile];
+        header.riffChunkSize = uint32_t(totalLen - sizeof(header.riffChunkId) - sizeof(header.riffChunkSize));
         [writeHandle seekToFileOffset:sizeof(header.riffChunkId)];
         [writeHandle writeData:[NSData dataWithBytes:(void *)&header.riffChunkSize length:sizeof(header.riffChunkSize)]];
         
@@ -126,5 +135,9 @@ extern "C" {
         avformat_close_input(&ctx);
         
     });
+}
+
+- (void)stopRecord {
+    self.stop = true;
 }
 @end

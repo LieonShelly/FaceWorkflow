@@ -9,4 +9,5 @@
 #define BridgeHeader_h
 
 #import "AudioViewController.h"
+#import "RecordWAV.h"
 #endif /* BridgeHeader_h */

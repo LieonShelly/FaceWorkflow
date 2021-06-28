@@ -188,6 +188,10 @@ void showSpec(AVFormatContext *ctx) {
 
 }
 
++ (void)initialize {
+    avdevice_register_all();
+}
+
 - (void)record {
     NSString *formatName = @"avfoundation";
     NSString *deviceName = @":0";
