@@ -10,7 +10,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WavPlayer : NSObject
+
 - (void)playWithFile:(NSString*)wavFile;
+- (void)stop;
 @end
 
 NS_ASSUME_NONNULL_END

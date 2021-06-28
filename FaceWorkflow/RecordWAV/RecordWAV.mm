@@ -48,6 +48,12 @@ extern "C" {
     avdevice_register_all();
 }
 
+- (NSString *)filename {
+    NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
+    NSString *fileName = [filePath stringByAppendingPathComponent: @"record_out.wav"];
+    return fileName;
+}
+
 - (void)record {
     self.stop = false;
     // 初始化数据包

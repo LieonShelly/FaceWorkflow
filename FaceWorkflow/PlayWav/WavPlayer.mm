@@ -32,45 +32,52 @@ void pull_audio_data(void *userdata,
                      // 希望填充的大小(samples * format * channels / 8)
                      int len
                      ) {
+    AudioBuffer *buffer = (AudioBuffer*)userdata;
     SDL_memset(stream, 0, len);
-    AudioBuffer *buffer = (AudioBuffer *) userdata;
-    if (buffer->len <= 0) return;
-    buffer->pullLen = (len > buffer->len) ? buffer->len : len;
-    SDL_MixAudio(stream,
-                 buffer->data,
-                 buffer->pullLen,
-                 SDL_MIX_MAXVOLUME);
+    if (buffer->len <= 0) {
+        return;
+    }
+    buffer->pullLen = len > buffer->len ? buffer->len : len;
+    NSLog(@"before-buffer->len: %d, buffer->pullLen %d, len: %d", buffer->len, buffer->pullLen, len);
+    SDL_MixAudio(stream, (UInt8 *)buffer->data, buffer->pullLen, SDL_MIX_MAXVOLUME);
     buffer->data += buffer->pullLen;
     buffer->len -= buffer->pullLen;
+    NSLog(@"buffer->len: %d, buffer->pullLen %d", buffer->len, buffer->pullLen);
 }
 
++ (void)initialize {
+    SDL_SetMainReady();
+}
 
 - (void)playWithFile:(NSString*)wavFile {
-    if (SDL_Init(SDL_INIT_AUDIO)) {
-        return;
-    }
-    SDL_AudioSpec spec;
-    Uint8 *data = nullptr;
-    UInt32 len = 0;
-    if (SDL_LoadWAV([wavFile UTF8String], &spec, &data, &len)) {
-        SDL_Quit();
-        return;
-    }
-    spec.samples = 1024;
-    spec.callback = pull_audio_data;
-    
-    AudioBuffer buffer;
-    buffer.data = data;
-    buffer.len = len;
-    spec.userdata = &buffer;
-    if (SDL_OpenAudio(&spec, nullptr)) {
-        SDL_Quit();
-        return;
-    } 
-    
-    int sampleSize = SDL_AUDIO_BITSIZE(spec.format);
-    int bytesPerSample = (sampleSize * spec.channels) >> 3;
     dispatch_async(self.queue, ^{
+        if (SDL_Init(SDL_INIT_AUDIO)) {
+            return;
+        }
+        self.interruptionRequested = false;
+        SDL_AudioSpec spec;
+        Uint8 *data = nullptr;
+        UInt32 len = 0;
+        if (!SDL_LoadWAV([wavFile UTF8String], &spec, &data, &len)) {
+            NSLog(@"SDL_LoadWAV Error: %s", SDL_GetError());
+            SDL_Quit();
+            return;
+        }
+        spec.samples = 1024;
+        spec.callback = pull_audio_data;
+        
+        AudioBuffer buffer;
+        buffer.data = data;
+        buffer.len = len;
+        spec.userdata = &buffer;
+        if (SDL_OpenAudio(&spec, nullptr)) {
+            NSLog(@"SDL_OpenAudio Error: %s", SDL_GetError());
+            SDL_Quit();
+            return;
+        }
+        
+        int sampleSize = SDL_AUDIO_BITSIZE(spec.format);
+        int bytesPerSample = (sampleSize * spec.channels) >> 3;
         SDL_PauseAudio(0);
         while (!self.interruptionRequested) {
             if (buffer.len > 0) {
@@ -90,4 +97,7 @@ void pull_audio_data(void *userdata,
     
 }
 
+- (void)stop {
+    self.interruptionRequested = true;
+}
 @end

@@ -36,13 +36,13 @@ extern "C" {
 
 
 // 采样率
-#define SAMPLE_RATE 48000 // 44100 //  //
+#define SAMPLE_RATE 44100// 48000 //  //  //
 // 采样格式
 #define SAMPLE_FORMAT AUDIO_S16LSB
 // 采样大小
 #define SAMPLE_SIZE SDL_AUDIO_BITSIZE(SAMPLE_FORMAT)
 // 声道数
-#define CHANNELS 1 // 2
+#define CHANNELS  2
 // 音频缓冲区的样本数量
 #define SAMPLES 1024
 // 每个样本占用多少个字节
@@ -136,18 +136,7 @@ extern "C" {
     }
 }
 
-- (void)wavConvertBtnTap {
-    NSLog(@"[super superclass] = %@", [super superclass]);
-    NSLog(@"[super class] = %@", [super class]);
-//    WavHeader header = WavHeader();
-//    header.sampleRate = SAMPLE_RATE;
-//    header.bitPerSample = SDL_AUDIO_BITSIZE(SAMPLE_FORMAT);
-//    header.numChannels = CHANNELS;
-//    NSString *pcmfile = [[NSBundle mainBundle]pathForResource:@"in.pcm" ofType:nil];
-//    NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
-//    NSString *wavFile = [filePath stringByAppendingPathComponent:@"in.wav"];
-//    [FFMpegs pcm2wav:&header pcmfile:pcmfile wavfile:wavFile];
-    
+- (void)resample {
     ResampleAudioSpec input;
     const char *inputfile =  [self.fileName UTF8String];
     input.filename = (char *)inputfile;
@@ -164,6 +153,20 @@ extern "C" {
     output.chLayout = AV_CH_LAYOUT_STEREO;
     
     [FFMpegs resample:&input outPut:&output];
+}
+
+- (void)wavConvertBtnTap {
+    NSLog(@"[super superclass] = %@", [super superclass]);
+    NSLog(@"[super class] = %@", [super class]);
+    WavHeader header = WavHeader();
+    header.sampleRate = SAMPLE_RATE;
+    header.bitPerSample = SDL_AUDIO_BITSIZE(SAMPLE_FORMAT);
+    header.numChannels = CHANNELS;
+    NSString *pcmfile = [[NSBundle mainBundle]pathForResource:@"in.pcm" ofType:nil];
+    NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
+    NSString *wavFile = [filePath stringByAppendingPathComponent:@"in.wav"];
+    [FFMpegs pcm2wav:&header pcmfile:pcmfile wavfile:wavFile];
+
 }
 
 - (PermenantThread *)thread {

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,8 @@
 		CD49336226877CC800D1FE3F /* ResampleAudioSpec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD49336026877CC800D1FE3F /* ResampleAudioSpec.cpp */; };
 		CD4933662688D2AF00D1FE3F /* WavPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD4933652688D2AF00D1FE3F /* WavPlayer.mm */; };
 		CD49336A2688DA7400D1FE3F /* RecordWAV.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD4933692688DA7400D1FE3F /* RecordWAV.mm */; };
+		CD49337D268A21AC00D1FE3F /* record_out.wav in Resources */ = {isa = PBXBuildFile; fileRef = CD49337C268A21AC00D1FE3F /* record_out.wav */; };
+		CD49337F268A236100D1FE3F /* in.wav in Resources */ = {isa = PBXBuildFile; fileRef = CD49337E268A236100D1FE3F /* in.wav */; };
 		CDA8D78325C2A4ED00CB33D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */; };
 		CDA8D78725C2A4ED00CB33D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA8D78625C2A4ED00CB33D4 /* ViewController.swift */; };
 		CDA8D78C25C2A4EF00CB33D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDA8D78B25C2A4EF00CB33D4 /* Assets.xcassets */; };
@@ -11606,6 +11608,8 @@
 		CD4933652688D2AF00D1FE3F /* WavPlayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = WavPlayer.mm; sourceTree = "<group>"; };
 		CD4933682688DA7400D1FE3F /* RecordWAV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordWAV.h; sourceTree = "<group>"; };
 		CD4933692688DA7400D1FE3F /* RecordWAV.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RecordWAV.mm; sourceTree = "<group>"; };
+		CD49337C268A21AC00D1FE3F /* record_out.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = record_out.wav; sourceTree = "<group>"; };
+		CD49337E268A236100D1FE3F /* in.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = in.wav; sourceTree = "<group>"; };
 		CDA8D77F25C2A4ED00CB33D4 /* FaceWorkflow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceWorkflow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDA8D78625C2A4ED00CB33D4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24239,6 +24243,8 @@
 		CD4933632688D08E00D1FE3F /* PlayWav */ = {
 			isa = PBXGroup;
 			children = (
+				CD49337E268A236100D1FE3F /* in.wav */,
+				CD49337C268A21AC00D1FE3F /* record_out.wav */,
 				CD4933642688D2AF00D1FE3F /* WavPlayer.h */,
 				CD4933652688D2AF00D1FE3F /* WavPlayer.mm */,
 			);
@@ -24721,7 +24727,6 @@
 				6DFB1255CA604278BE06F3BB /* Pods-FaceWorkflow.debug.xcconfig */,
 				19317AFD51A0FDE184C9A249 /* Pods-FaceWorkflow.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -24786,8 +24791,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDCA56A4267E47B000468FC2 /* sdl2.pc in Resources */,
+				CD49337F268A236100D1FE3F /* in.wav in Resources */,
 				CDA8D78F25C2A4EF00CB33D4 /* LaunchScreen.storyboard in Resources */,
 				CDA8D78C25C2A4EF00CB33D4 /* Assets.xcassets in Resources */,
+				CD49337D268A21AC00D1FE3F /* record_out.wav in Resources */,
 				CD1ED338267F912C002C845B /* in.pcm in Resources */,
 				CDCA56A5267E47B000468FC2 /* sdl2-config-version.cmake in Resources */,
 				CDCA56A6267E47B000468FC2 /* sdl2-config.cmake in Resources */,

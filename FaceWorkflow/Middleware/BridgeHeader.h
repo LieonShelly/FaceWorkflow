@@ -10,4 +10,5 @@
 
 #import "AudioViewController.h"
 #import "RecordWAV.h"
+#import "WavPlayer.h"
 #endif /* BridgeHeader_h */
