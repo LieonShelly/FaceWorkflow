@@ -28,7 +28,7 @@
 #include <stdint.h>
 #if defined(__cplusplus) && !defined(__STDC_CONSTANT_MACROS) && !defined(UINT64_C)
 #error missing -D__STDC_CONSTANT_MACROS / #define __STDC_CONSTANT_MACROS
-#endif // __STDC_CONSTANT_MACROS和__STDC_CONSTANT_MACROS，是为在C++中使用C99定义的一些宏，它们定义在<stdint.h>中。这些宏，如：UINT8_MAX, INT64等。虽然这两个宏不是C++标准的内容，但是被不只一种实现采用。
+#endif
 
 #include <errno.h>
 #include <inttypes.h>

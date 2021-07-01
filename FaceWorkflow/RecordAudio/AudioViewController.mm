@@ -18,7 +18,9 @@ extern "C" {
 #include <libavformat/avformat.h>
 // 工具
 #include <libavutil/avutil.h>
+#include <libavcodec/avcodec.h>
 #include "SDL.h"
+#include <libavformat/avformat.h>
 }
 #include "SDL_main.h"
 
@@ -85,6 +87,7 @@ extern "C" {
 - (void)loadView {
     [super loadView];
     avdevice_register_all();
+    av_register_all();
 }
 
 - (void)viewDidLoad {
@@ -100,6 +103,14 @@ extern "C" {
     SDL_VERSION(&v);
     SDL_SetMainReady();
     self.moneyQueue = dispatch_queue_create("moneyQueue", DISPATCH_QUEUE_SERIAL);
+    NSString *aacname = @"libfdk_aac";
+    AVCodec *codec = avcodec_find_encoder_by_name(aacname.UTF8String);
+    AVCodec *codec1 = avcodec_find_encoder_by_name("aac");
+    
+    if (!codec) {
+        NSLog(@"encoder not found");
+    }
+
 }
 
 - (void)recordBtnTap:(UIButton*)btn {
