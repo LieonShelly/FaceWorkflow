@@ -23,7 +23,7 @@ extern "C" {
 #include <libavformat/avformat.h>
 }
 #include "SDL_main.h"
-
+#import "AccEncode.h"
 
 @interface AudioViewController ()
 @property (nonatomic, assign) BOOL isInterruptionRequested;
@@ -87,7 +87,6 @@ extern "C" {
 - (void)loadView {
     [super loadView];
     avdevice_register_all();
-    av_register_all();
 }
 
 - (void)viewDidLoad {
@@ -166,9 +165,7 @@ extern "C" {
     [FFMpegs resample:&input outPut:&output];
 }
 
-- (void)wavConvertBtnTap {
-    NSLog(@"[super superclass] = %@", [super superclass]);
-    NSLog(@"[super class] = %@", [super class]);
+- (void)wavConvert {
     WavHeader header = WavHeader();
     header.sampleRate = SAMPLE_RATE;
     header.bitPerSample = SDL_AUDIO_BITSIZE(SAMPLE_FORMAT);
@@ -177,6 +174,20 @@ extern "C" {
     NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
     NSString *wavFile = [filePath stringByAppendingPathComponent:@"in.wav"];
     [FFMpegs pcm2wav:&header pcmfile:pcmfile wavfile:wavFile];
+}
+
+- (void)wavConvertBtnTap {
+    NSLog(@"[super superclass] = %@", [super superclass]);
+    NSLog(@"[super class] = %@", [super class]);
+    NSString *pcmfile = [[NSBundle mainBundle]pathForResource:@"in.pcm" ofType:nil];
+    NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
+    NSString *aacFile = [filePath stringByAppendingPathComponent:@"in.aac"];
+    AudioEncodeSpec spec;
+    spec.sampleRate = 44100;
+    spec.sampleFmt = AV_SAMPLE_FMT_S16;
+    spec.chLayout = AV_CH_LAYOUT_STEREO;
+    spec.filename = [pcmfile UTF8String];
+    [AccEncode aacEncodeWithSpec:&spec outfile:aacFile];
 
 }
 
