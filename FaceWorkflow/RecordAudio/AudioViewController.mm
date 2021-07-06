@@ -10,7 +10,7 @@
 #include "AudioBuffer.hpp"
 #import "FFMpegs.h"
 #import <objc/runtime.h>
-
+#import "AACDecode.h"
 extern "C" {
 // 设备
 #include <libavdevice/avdevice.h>
@@ -176,9 +176,7 @@ extern "C" {
     [FFMpegs pcm2wav:&header pcmfile:pcmfile wavfile:wavFile];
 }
 
-- (void)wavConvertBtnTap {
-    NSLog(@"[super superclass] = %@", [super superclass]);
-    NSLog(@"[super class] = %@", [super class]);
+static void aacEncodeTest() {
     NSString *pcmfile = [[NSBundle mainBundle]pathForResource:@"in.pcm" ofType:nil];
     NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
     NSString *aacFile = [filePath stringByAppendingPathComponent:@"in.aac"];
@@ -188,7 +186,18 @@ extern "C" {
     spec.chLayout = AV_CH_LAYOUT_STEREO;
     spec.filename = [pcmfile UTF8String];
     [AccEncode aacEncodeWithSpec:&spec outfile:aacFile];
+}
 
+- (void)wavConvertBtnTap {
+    NSLog(@"[super superclass] = %@", [super superclass]);
+    NSLog(@"[super class] = %@", [super class]);
+
+    NSString *aacFile  = [[NSBundle mainBundle]pathForResource:@"in.aac" ofType:nil];
+    NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
+    NSString *pcmfile = [filePath stringByAppendingPathComponent:@"in.pcm"];
+    AudioDecodeSpec spec;
+    spec.filename = pcmfile.UTF8String;
+    [AACDecode aacDecode:aacFile output:&spec];
 }
 
 - (PermenantThread *)thread {

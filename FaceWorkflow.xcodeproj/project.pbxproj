@@ -56,6 +56,8 @@
 		CDCA5719267E4E7000468FC2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDCA5718267E4E7000468FC2 /* QuartzCore.framework */; };
 		CDCA571B267E4FC100468FC2 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDCA571A267E4FC100468FC2 /* Accelerate.framework */; };
 		CDCA571D267E51AF00468FC2 /* CoreHaptics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDCA571C267E51AF00468FC2 /* CoreHaptics.framework */; };
+		CDD0A0D62693E9F000EE705A /* AACDecode.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDD0A0D52693E9F000EE705A /* AACDecode.mm */; };
+		CDD0A0D82693FBF400EE705A /* in.aac in Resources */ = {isa = PBXBuildFile; fileRef = CDD0A0D72693FAB200EE705A /* in.aac */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -11860,6 +11862,9 @@
 		CDCA5718267E4E7000468FC2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CDCA571A267E4FC100468FC2 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		CDCA571C267E51AF00468FC2 /* CoreHaptics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreHaptics.framework; path = System/Library/Frameworks/CoreHaptics.framework; sourceTree = SDKROOT; };
+		CDD0A0D42693E9F000EE705A /* AACDecode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AACDecode.h; sourceTree = "<group>"; };
+		CDD0A0D52693E9F000EE705A /* AACDecode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AACDecode.mm; sourceTree = "<group>"; };
+		CDD0A0D72693FAB200EE705A /* in.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = in.aac; sourceTree = "<group>"; };
 		E0C6CAA710913C2AB6BBC077 /* Pods_FaceWorkflow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FaceWorkflow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -24299,6 +24304,7 @@
 			isa = PBXGroup;
 			children = (
 				CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */,
+				CDD0A0D32693E9AF00EE705A /* AACDecode */,
 				CD6EBD2D268E174F00189ED5 /* AccEncode */,
 				CD4933672688D88500D1FE3F /* RecordWAV */,
 				CD4933632688D08E00D1FE3F /* PlayWav */,
@@ -24750,6 +24756,16 @@
 			path = SDL2;
 			sourceTree = "<group>";
 		};
+		CDD0A0D32693E9AF00EE705A /* AACDecode */ = {
+			isa = PBXGroup;
+			children = (
+				CDD0A0D72693FAB200EE705A /* in.aac */,
+				CDD0A0D42693E9F000EE705A /* AACDecode.h */,
+				CDD0A0D52693E9F000EE705A /* AACDecode.mm */,
+			);
+			path = AACDecode;
+			sourceTree = "<group>";
+		};
 		E8EAB80CC7E317037E90FB7C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -24827,6 +24843,7 @@
 				CD1ED338267F912C002C845B /* in.pcm in Resources */,
 				CDCA56A5267E47B000468FC2 /* sdl2-config-version.cmake in Resources */,
 				CDCA56A6267E47B000468FC2 /* sdl2-config.cmake in Resources */,
+				CDD0A0D82693FBF400EE705A /* in.aac in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -24885,6 +24902,7 @@
 				CD6EBD30268E178800189ED5 /* AccEncode.mm in Sources */,
 				CD1ED336267F8E0E002C845B /* AudioBuffer.cpp in Sources */,
 				CD4933662688D2AF00D1FE3F /* WavPlayer.mm in Sources */,
+				CDD0A0D62693E9F000EE705A /* AACDecode.mm in Sources */,
 				CDC36C79267BB56500C89C9F /* Test.cpp in Sources */,
 				CDA8D78325C2A4ED00CB33D4 /* AppDelegate.swift in Sources */,
 				CD1E00AF2681C90F002C845B /* WavHeader.cpp in Sources */,

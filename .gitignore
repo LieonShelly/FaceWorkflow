@@ -31,3 +31,4 @@
 *.out
 *.app
 *.xcuserstate
+.DS_Store
