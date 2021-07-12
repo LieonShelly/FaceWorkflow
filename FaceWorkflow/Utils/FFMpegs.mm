@@ -18,10 +18,21 @@ extern "C" {
 
 @implementation FFMpegs
 
+/**
+ # PCM转WAV步骤
+ - 计算头部一个样本的字节数
+ - 计算头部字节率 byteRate
+ - 读取PCM数据
+ - 根据读取的PCM数据计算 ``dataChunkSize``， ``riffChunkSize``
+ - 写入头部数据到wav文件
+ - 写入PCM数据到wav文件
+ 
+ */
+
 + (void)pcm2wav:(WavHeader *)header pcmfile:(NSString *)pcmFilename wavfile:(NSString *)wavfilename {
     // 一个样本的字节数
     header->blockAlign = header->bitPerSample * header->numChannels >> 3;
-    // 字节数
+    // 字节率
     header->byteRate = header->sampleRate * header->blockAlign;
     // 打开pcm文件
     NSFileHandle *pcmhandle = [NSFileHandle fileHandleForReadingAtPath:pcmFilename];

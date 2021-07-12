@@ -49,6 +49,21 @@ void pull_audio_data(void *userdata,
     SDL_SetMainReady();
 }
 
+/**
+ # 播放PCM步骤
+ - 初始化SDL ``SDL_Init(SDL_INIT_AUDIO)``
+ - 设置SDL音频参数 ``SDL_AudioSpec``
+ - 直接加载WAV文件 ``SDL_LoadWAV``
+ - 设置拉取回调
+ - SDL打开音频 ``SDL_OpenAudio``
+ - 开始拉取 ``SDL_PauseAudio(0);``
+ - 回调监听
+    - 设置音频流内存大小，播放器的内存数据在这个 ``stream`` 中
+    - 传入PCM数据进行混音
+    - 移动缓存指针，进行下轮的拉取
+- 释放资源
+ */
+
 - (void)playWithFile:(NSString*)wavFile {
     dispatch_async(self.queue, ^{
         if (SDL_Init(SDL_INIT_AUDIO)) {

@@ -226,6 +226,29 @@ void showSpec(AVFormatContext *ctx) {
     avdevice_register_all();
 }
 
+
+/**
+ # 音频录制命令
+ ```
+ ffmpeg -f avfoundation -i :0 out.wav
+ ```
+ 
+ - 播放
+    - 播放PCM需要指定相关参数： ar：采样率 ac：声道数 f：采样格式
+ 
+ ```
+ ffplay -ar 44100 -ac 2 -f s16le out.pcm
+ ```
+ 
+ - 设备
+ # 音频录制步骤
+ - 获取输入格式对象 ``av_find_input_format``
+ - 打开设备 ``avformat_open_input``
+ - 创建输出缓冲区AVPacket ``av_packet_alloc``
+ - 不断地将音频写入输出缓冲区
+    - 将AVPacket的数据写入文件
+ */
+
 - (void)record {
     NSString *formatName = @"avfoundation";
     NSString *deviceName = @":0";
@@ -233,6 +256,7 @@ void showSpec(AVFormatContext *ctx) {
     self.fileName = [filePath stringByAppendingPathComponent: @"record_out.pcm"];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
+        // 获取输入格式对象
         AVInputFormat *fmt = av_find_input_format([formatName UTF8String]);
         if (!fmt) {
             NSLog(@"获取输入格式对象失败");
@@ -240,6 +264,7 @@ void showSpec(AVFormatContext *ctx) {
         }
         AVFormatContext *ctx = nullptr;
         AVDictionary *option = nullptr;
+        // 打开设备
         int ret = avformat_open_input(&ctx, deviceName.UTF8String, fmt, &option);
         if (ret < 0) {
             char errbuf[1024];
@@ -249,13 +274,16 @@ void showSpec(AVFormatContext *ctx) {
         }
         NSString *fileName = self.fileName;
         NSMutableData *pcmData = [NSMutableData new];
+        // 创建输出缓冲区AVPacket
         AVPacket *pkt = av_packet_alloc();
         NSInteger bufferSize = 1024 * 10;
+        // 不断地将音频写入输出缓冲区
         while (!self.isInterruptionRequested) {
            int ret = av_read_frame(ctx, pkt);
             if (ret == 0) {
                 if (pcmData.length >= bufferSize) {
                     showSpec(ctx);
+                    // 将AVPacket的数据写入文件
                     dispatch_barrier_async(queue, ^{
                         NSFileManager *fileManager = [NSFileManager defaultManager];
                         NSRange writeRange = NSMakeRange(0, pcmData.length);
@@ -314,6 +342,19 @@ void pulAudioData(void *userData, Uint8 *stream, int len) {
     NSLog(@"buffer->len: %d, buffer->pullLen %d", buffer->len, buffer->pullLen);
 }
 
+
+/**
+ # 播放PCM步骤
+ - 初始化SDL ``SDL_Init(SDL_INIT_AUDIO)``
+ - 设置SDL音频参数 ``SDL_AudioSpec``
+ - 设置PCM拉取回调
+ - SDL打开音频 ``SDL_OpenAudio``
+ - 开始拉取 ``SDL_PauseAudio(0);``
+ - 回调监听
+    - 设置音频流内存大小，播放器的内存数据在这个 ``stream`` 中
+    - 传入PCM数据进行混音
+    - 移动缓存指针，进行下轮的拉取
+ */
 - (void)playPCM:(NSString*)filename {
     if (SDL_Init(SDL_INIT_AUDIO)) {
         NSLog(@"SDL_INIT Error: %s", SDL_GetError());
