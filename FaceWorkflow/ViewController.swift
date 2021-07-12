@@ -22,17 +22,13 @@ class TestThread: Thread {
 }
 
 class ViewController: UIViewController {
-    fileprivate lazy var testThread: TestThread = {
-        let testThread = TestThread {
-            RunLoop.current.add(Port(), forMode: .common)
-            RunLoop.current.run()
-        }
-        testThread.start()
-        return testThread
+    fileprivate lazy var videoRecord: RecordVideo = {
+        let videoRecord = RecordVideo()
+        return videoRecord
     }()
     fileprivate lazy var wavRecordBtn: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setTitle("录制为wav", for: .normal)
+        btn.setTitle("录制", for: .normal)
         btn.setTitle("停止", for: .selected)
         btn.addTarget(self, action: #selector(wavBtnAction(_:)), for: .touchUpInside)
         return btn
@@ -68,34 +64,15 @@ class ViewController: UIViewController {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(wavRecordBtn.snp.bottom).offset(10)
         }
-        testView.frame = CGRect(x: 110, y: 0, width: 300, height: 400)
-        view.addSubview(testView)
-//        let thread = TestThread(target: self, selector: #selector(wavBtnAction), object: nil)
-//        thread.start()
-//        let thread = PermenantThread()
-//        thread.excuteTask {
-//            debugPrint("PermenantThread-excuteTask")
-//        }
-//
-        
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        perform(#selector(wavBtnAction(_:)), on: testThread, with: wavRecordBtn, waitUntilDone: false)
-      
     }
 
     @objc
     fileprivate func wavBtnAction(_ btn: UIButton) {
-        debugPrint("wavBtnAction-TestThread-start:\(Thread.current)")
-//        RunLoop.current.add(Port(), forMode: .common)
-//        RunLoop.current.run()
-        debugPrint("wavBtnAction-TestThread-end")
-        return
+
         if btn.isSelected {
-            wavRecorder.stopRecord()
+            videoRecord.stop()
         } else {
-            wavRecorder.record()
+            videoRecord.recordVideo()
         }
         btn.isSelected = !btn.isSelected
     }

@@ -17,6 +17,7 @@
 		CD49336A2688DA7400D1FE3F /* RecordWAV.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD4933692688DA7400D1FE3F /* RecordWAV.mm */; };
 		CD49337D268A21AC00D1FE3F /* record_out.wav in Resources */ = {isa = PBXBuildFile; fileRef = CD49337C268A21AC00D1FE3F /* record_out.wav */; };
 		CD49337F268A236100D1FE3F /* in.wav in Resources */ = {isa = PBXBuildFile; fileRef = CD49337E268A236100D1FE3F /* in.wav */; };
+		CD665C9F269C135E00BA37F2 /* RecordVideo.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD665C9E269C135E00BA37F2 /* RecordVideo.mm */; };
 		CD6EBD30268E178800189ED5 /* AccEncode.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD6EBD2F268E178800189ED5 /* AccEncode.mm */; };
 		CDA8D78325C2A4ED00CB33D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */; };
 		CDA8D78725C2A4ED00CB33D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA8D78625C2A4ED00CB33D4 /* ViewController.swift */; };
@@ -11614,6 +11615,8 @@
 		CD4933692688DA7400D1FE3F /* RecordWAV.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RecordWAV.mm; sourceTree = "<group>"; };
 		CD49337C268A21AC00D1FE3F /* record_out.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = record_out.wav; sourceTree = "<group>"; };
 		CD49337E268A236100D1FE3F /* in.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = in.wav; sourceTree = "<group>"; };
+		CD665C9D269C135E00BA37F2 /* RecordVideo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordVideo.h; sourceTree = "<group>"; };
+		CD665C9E269C135E00BA37F2 /* RecordVideo.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RecordVideo.mm; sourceTree = "<group>"; };
 		CD6EBD2E268E178800189ED5 /* AccEncode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccEncode.h; sourceTree = "<group>"; };
 		CD6EBD2F268E178800189ED5 /* AccEncode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AccEncode.mm; sourceTree = "<group>"; };
 		CDA8D77F25C2A4ED00CB33D4 /* FaceWorkflow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceWorkflow.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24273,6 +24276,15 @@
 			path = RecordWAV;
 			sourceTree = "<group>";
 		};
+		CD665C9C269C130200BA37F2 /* RecordVideo */ = {
+			isa = PBXGroup;
+			children = (
+				CD665C9D269C135E00BA37F2 /* RecordVideo.h */,
+				CD665C9E269C135E00BA37F2 /* RecordVideo.mm */,
+			);
+			path = RecordVideo;
+			sourceTree = "<group>";
+		};
 		CD6EBD2D268E174F00189ED5 /* AccEncode */ = {
 			isa = PBXGroup;
 			children = (
@@ -24304,6 +24316,7 @@
 			isa = PBXGroup;
 			children = (
 				CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */,
+				CD665C9C269C130200BA37F2 /* RecordVideo */,
 				CDD0A0D32693E9AF00EE705A /* AACDecode */,
 				CD6EBD2D268E174F00189ED5 /* AccEncode */,
 				CD4933672688D88500D1FE3F /* RecordWAV */,
@@ -24902,6 +24915,7 @@
 				CD6EBD30268E178800189ED5 /* AccEncode.mm in Sources */,
 				CD1ED336267F8E0E002C845B /* AudioBuffer.cpp in Sources */,
 				CD4933662688D2AF00D1FE3F /* WavPlayer.mm in Sources */,
+				CD665C9F269C135E00BA37F2 /* RecordVideo.mm in Sources */,
 				CDD0A0D62693E9F000EE705A /* AACDecode.mm in Sources */,
 				CDC36C79267BB56500C89C9F /* Test.cpp in Sources */,
 				CDA8D78325C2A4ED00CB33D4 /* AppDelegate.swift in Sources */,

@@ -12,4 +12,5 @@
 #import "RecordWAV.h"
 #import "WavPlayer.h"
 #import "PermenantThread.h"
+#import "RecordVideo.h"
 #endif /* BridgeHeader_h */
