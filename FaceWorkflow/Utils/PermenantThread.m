@@ -23,6 +23,7 @@
             [[NSRunLoop currentRunLoop]addPort:[NSPort new] forMode:NSDefaultRunLoopMode];
             // while里面的代码不会多次执行，因为RunLoop已经让线程休眠了
             while (weakSelf && !weakSelf.isStopped) {
+                NSLog(@"PermenantThreadPermenantThreadPermenantThread");
                 [[NSRunLoop currentRunLoop]runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
             }
         }];

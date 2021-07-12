@@ -170,6 +170,7 @@ static int encode(AVCodecContext *ctx, AVFrame *frame, AVPacket *pkt, NSFileHand
         frame->data[0] = (uint8_t *)inputDataBuffer.bytes;
         offset += frame->linesize[0];
         NSLog(@"inputDataBuffer-length: %ld - frame->linesize[0]: %d - offset: %d", inputDataBuffer.length, frame->linesize[0], offset);
+        [[NSRunLoop currentRunLoop]addPort:[NSPort new] forMode:NSDefaultRunLoopMode];
     }
     encode(ctx, nullptr, pkt, outFile);
 end:

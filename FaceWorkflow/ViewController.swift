@@ -8,7 +8,28 @@
 import UIKit
 import SnapKit
 
+
+class TestThread: Thread {
+    
+    override init() {
+        super.init()
+    
+    }
+    
+    deinit {
+        debugPrint("TestThread - deinit")
+    }
+}
+
 class ViewController: UIViewController {
+    fileprivate lazy var testThread: TestThread = {
+        let testThread = TestThread {
+            RunLoop.current.add(Port(), forMode: .common)
+            RunLoop.current.run()
+        }
+        testThread.start()
+        return testThread
+    }()
     fileprivate lazy var wavRecordBtn: UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("录制为wav", for: .normal)
@@ -31,6 +52,10 @@ class ViewController: UIViewController {
         let player = WavPlayer()
         return player
     }()
+    fileprivate lazy var testView: TestView = {
+        let testView = TestView()
+        return testView
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -43,10 +68,30 @@ class ViewController: UIViewController {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(wavRecordBtn.snp.bottom).offset(10)
         }
+        testView.frame = CGRect(x: 110, y: 0, width: 300, height: 400)
+        view.addSubview(testView)
+//        let thread = TestThread(target: self, selector: #selector(wavBtnAction), object: nil)
+//        thread.start()
+//        let thread = PermenantThread()
+//        thread.excuteTask {
+//            debugPrint("PermenantThread-excuteTask")
+//        }
+//
+        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        perform(#selector(wavBtnAction(_:)), on: testThread, with: wavRecordBtn, waitUntilDone: false)
+      
     }
 
     @objc
     fileprivate func wavBtnAction(_ btn: UIButton) {
+        debugPrint("wavBtnAction-TestThread-start:\(Thread.current)")
+//        RunLoop.current.add(Port(), forMode: .common)
+//        RunLoop.current.run()
+        debugPrint("wavBtnAction-TestThread-end")
+        return
         if btn.isSelected {
             wavRecorder.stopRecord()
         } else {
@@ -65,6 +110,59 @@ class ViewController: UIViewController {
         }
         btn.isSelected = !btn.isSelected
     }
-
 }
 
+class TestView: UIView {
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        debugPrint("TestView-draw:\(rect)")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        debugPrint("layoutSubviews")
+        let origin = Orginator()
+        origin.state = "1"
+        /// 开始备忘
+        let mento = origin.createMemento()
+        let care = Caretaker()
+        care.setMemento(mento)
+        
+        origin.state = "2"
+        origin.restoreMemento(care.mennto!)
+        
+        debugPrint("state:\(origin.state)")
+    }
+}
+
+
+// 备忘录模式
+
+class Orginator {
+    var state: String = ""
+    
+    func createMemento() -> Memento {
+        return Memento(state)
+    }
+    
+    func restoreMemento(_ m: Memento) {
+    }
+}
+
+
+class Memento {
+   private var state: String
+    
+    init(_ state: String) {
+        self.state = state
+    }
+}
+
+class Caretaker {
+   fileprivate(set) var mennto: Memento?
+    
+    func setMemento(_ mento: Memento) {
+        self.mennto = mento
+    }
+    
+}
