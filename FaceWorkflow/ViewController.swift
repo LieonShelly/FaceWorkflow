@@ -8,24 +8,12 @@
 import UIKit
 import SnapKit
 
-
-class TestThread: Thread {
-    
-    override init() {
-        super.init()
-    
-    }
-    
-    deinit {
-        debugPrint("TestThread - deinit")
-    }
-}
-
 class ViewController: UIViewController {
     fileprivate lazy var videoRecord: RecordVideo = {
         let videoRecord = RecordVideo()
         return videoRecord
     }()
+    let shower = ShowYUV()
     fileprivate lazy var wavRecordBtn: UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("录制", for: .normal)
@@ -48,10 +36,7 @@ class ViewController: UIViewController {
         let player = WavPlayer()
         return player
     }()
-    fileprivate lazy var testView: TestView = {
-        let testView = TestView()
-        return testView
-    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -65,10 +50,17 @@ class ViewController: UIViewController {
             $0.top.equalTo(wavRecordBtn.snp.bottom).offset(10)
         }
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        debugPrint("-----")
+        DispatchQueue.main.async {
+            self.shower.show()
+        }
+        
+    }
 
     @objc
     fileprivate func wavBtnAction(_ btn: UIButton) {
-
         if btn.isSelected {
             videoRecord.stop()
         } else {
@@ -87,59 +79,8 @@ class ViewController: UIViewController {
         }
         btn.isSelected = !btn.isSelected
     }
-}
-
-class TestView: UIView {
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        debugPrint("TestView-draw:\(rect)")
-    }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        debugPrint("layoutSubviews")
-        let origin = Orginator()
-        origin.state = "1"
-        /// 开始备忘
-        let mento = origin.createMemento()
-        let care = Caretaker()
-        care.setMemento(mento)
-        
-        origin.state = "2"
-        origin.restoreMemento(care.mennto!)
-        
-        debugPrint("state:\(origin.state)")
+    fileprivate func showBMP() {
+        shower.show()
     }
-}
-
-
-// 备忘录模式
-
-class Orginator {
-    var state: String = ""
-    
-    func createMemento() -> Memento {
-        return Memento(state)
-    }
-    
-    func restoreMemento(_ m: Memento) {
-    }
-}
-
-
-class Memento {
-   private var state: String
-    
-    init(_ state: String) {
-        self.state = state
-    }
-}
-
-class Caretaker {
-   fileprivate(set) var mennto: Memento?
-    
-    func setMemento(_ mento: Memento) {
-        self.mennto = mento
-    }
-    
 }

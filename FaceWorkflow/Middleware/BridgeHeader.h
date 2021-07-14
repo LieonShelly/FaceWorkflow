@@ -13,4 +13,6 @@
 #import "WavPlayer.h"
 #import "PermenantThread.h"
 #import "RecordVideo.h"
+#import "ShowBMP.h"
+#import "ShowYUV.h"
 #endif /* BridgeHeader_h */
