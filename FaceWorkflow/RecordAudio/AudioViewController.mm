@@ -24,6 +24,9 @@ extern "C" {
 }
 #include "SDL_main.h"
 #import "AccEncode.h"
+#import <MetalKit/MTKView.h>
+#import "YUVPlayer.h"
+#import "YuvParam.h"
 
 @interface AudioViewController ()
 @property (nonatomic, assign) BOOL isInterruptionRequested;
@@ -33,6 +36,8 @@ extern "C" {
 @property (nonatomic, copy) NSString *fileName;
 @property (nonatomic, strong) UIButton *wavConvertBtn;
 @property (nonatomic, strong) dispatch_queue_t moneyQueue;
+@property (nonatomic, strong) YUVPlayer *yuvPlayer;
+@property (nonatomic, strong) MTKView *mView;
 
 @end
 
@@ -54,6 +59,13 @@ extern "C" {
 
 
 @implementation AudioViewController
+
+- (MTKView *)mView {
+    if (!_mView) {
+        _mView = [MTKView new];
+    }
+    return _mView;
+}
 
 - (UIButton *)wavConvertBtn {
     if (!_wavConvertBtn) {
@@ -100,16 +112,19 @@ extern "C" {
     [self.view addSubview:self.wavConvertBtn];
     SDL_version v;
     SDL_VERSION(&v);
-    SDL_SetMainReady();
-    self.moneyQueue = dispatch_queue_create("moneyQueue", DISPATCH_QUEUE_SERIAL);
-    NSString *aacname = @"libfdk_aac";
-    AVCodec *codec = avcodec_find_encoder_by_name(aacname.UTF8String);
-    AVCodec *codec1 = avcodec_find_encoder_by_name("aac");
-    
-    if (!codec) {
-        NSLog(@"encoder not found");
-    }
 
+    self.mView.frame = UIScreen.mainScreen.bounds;
+    [self.view insertSubview:self.mView atIndex:0];
+    self.yuvPlayer = [YUVPlayer new];
+    [self.yuvPlayer initialize:(void*)UIApplication.sharedApplication.keyWindow.layer];
+    YuvParam *video = [YuvParam new];
+    video.filename = [[NSBundle mainBundle] pathForResource:@"video.yuv" ofType:nil];
+    video.fps = 24;
+    video.pixelFomat = AV_PIX_FMT_YUV420P;
+    video.width = 512;
+    video.height = 512;
+    [self.yuvPlayer setYUV:video];
+    [self.yuvPlayer play];
 }
 
 - (void)recordBtnTap:(UIButton*)btn {
@@ -123,26 +138,13 @@ extern "C" {
     
 }
 
-- (void)__drawMoney {
-   dispatch_sync(self.moneyQueue, ^{
-       NSLog(@"__drawMoney: %@", [NSThread currentThread]);
-   });
-}
-
-- (void)__saveMoney {
-   dispatch_sync(self.moneyQueue, ^{
-       NSLog(@"__saveMoney: %@", [NSThread currentThread]);
-   });
-}
 
 - (void)playBtnTap:(UIButton*)btn {
     [self.playBtn setSelected:!btn.isSelected];
     if (self.playBtn.isSelected) {
-        self.isInterruptionRequested = false;
-        NSString *inpcm = [[NSBundle mainBundle]pathForResource:@"in.pcm" ofType:nil];
-        [self playPCM:self.fileName == nil ? inpcm : self.fileName];
+        [self.yuvPlayer play];
     } else {
-        self.isInterruptionRequested = true;
+        [self.yuvPlayer pause];
     }
 }
 
@@ -405,6 +407,8 @@ void pulAudioData(void *userData, Uint8 *stream, int len) {
     
     [self.playBtn setSelected:false];
 }
+
+
 @end
 
 

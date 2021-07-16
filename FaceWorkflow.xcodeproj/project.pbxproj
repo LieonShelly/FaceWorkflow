@@ -38,6 +38,9 @@
 		CDC22B97269E8FE60042B77E /* in.yuv in Resources */ = {isa = PBXBuildFile; fileRef = CDC22B96269E8FE60042B77E /* in.yuv */; };
 		CDC22BA2269F455E0042B77E /* YUVPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDC22BA1269F455E0042B77E /* YUVPlayer.mm */; };
 		CDC22BA5269FD4210042B77E /* Yuv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC22BA3269FD4210042B77E /* Yuv.cpp */; };
+		CDC22BAB26A077700042B77E /* video.yuv in Resources */ = {isa = PBXBuildFile; fileRef = CDC22BAA26A0776F0042B77E /* video.yuv */; };
+		CDC22BAE26A07CF80042B77E /* YuvParam.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC22BAD26A07CF80042B77E /* YuvParam.m */; };
+		CDC22BB026A07E690042B77E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC22BAF26A07E690042B77E /* MetalKit.framework */; };
 		CDC36C60267BAFB900C89C9F /* AudioViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDC36C5F267BAFB900C89C9F /* AudioViewController.mm */; };
 		CDC36C63267BB2B300C89C9F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC36C62267BB2B300C89C9F /* AVFoundation.framework */; };
 		CDC36C6C267BB2F700C89C9F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC36C6B267BB2EB00C89C9F /* libz.tbd */; };
@@ -11778,6 +11781,10 @@
 		CDC22BA1269F455E0042B77E /* YUVPlayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = YUVPlayer.mm; sourceTree = "<group>"; };
 		CDC22BA3269FD4210042B77E /* Yuv.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Yuv.cpp; sourceTree = "<group>"; };
 		CDC22BA4269FD4210042B77E /* Yuv.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Yuv.hpp; sourceTree = "<group>"; };
+		CDC22BAA26A0776F0042B77E /* video.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = video.yuv; sourceTree = "<group>"; };
+		CDC22BAC26A07CF80042B77E /* YuvParam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YuvParam.h; sourceTree = "<group>"; };
+		CDC22BAD26A07CF80042B77E /* YuvParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YuvParam.m; sourceTree = "<group>"; };
+		CDC22BAF26A07E690042B77E /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		CDC36C5E267BAFB900C89C9F /* AudioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioViewController.h; sourceTree = "<group>"; };
 		CDC36C5F267BAFB900C89C9F /* AudioViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioViewController.mm; sourceTree = "<group>"; };
 		CDC36C62267BB2B300C89C9F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -11898,6 +11905,7 @@
 				CDCA5713267E4E4B00468FC2 /* UIKit.framework in Frameworks */,
 				CDCA56A8267E47B000468FC2 /* libSDL2main.a in Frameworks */,
 				CDCA570B267E4DFE00468FC2 /* Metal.framework in Frameworks */,
+				CDC22BB026A07E690042B77E /* MetalKit.framework in Frameworks */,
 				CDCA56A9267E47B000468FC2 /* libSDL2.a in Frameworks */,
 				CDC1FA41268C2D6B00FF2998 /* libavutil.a in Frameworks */,
 				CDCA571B267E4FC100468FC2 /* Accelerate.framework in Frameworks */,
@@ -24588,10 +24596,13 @@
 		CDC22B99269F421A0042B77E /* YUVPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				CDC22BAA26A0776F0042B77E /* video.yuv */,
 				CDC22BA0269F455E0042B77E /* YUVPlayer.h */,
 				CDC22BA1269F455E0042B77E /* YUVPlayer.mm */,
 				CDC22BA3269FD4210042B77E /* Yuv.cpp */,
 				CDC22BA4269FD4210042B77E /* Yuv.hpp */,
+				CDC22BAC26A07CF80042B77E /* YuvParam.h */,
+				CDC22BAD26A07CF80042B77E /* YuvParam.m */,
 			);
 			path = YUVPlayer;
 			sourceTree = "<group>";
@@ -24653,6 +24664,7 @@
 		CDC36C61267BB2B300C89C9F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CDC22BAF26A07E690042B77E /* MetalKit.framework */,
 				CDCA571C267E51AF00468FC2 /* CoreHaptics.framework */,
 				CDCA571A267E4FC100468FC2 /* Accelerate.framework */,
 				CDCA5718267E4E7000468FC2 /* QuartzCore.framework */,
@@ -24914,6 +24926,7 @@
 				CDCA56A4267E47B000468FC2 /* sdl2.pc in Resources */,
 				CD49337F268A236100D1FE3F /* in.wav in Resources */,
 				CDC22B8D269D794D0042B77E /* in.bmp in Resources */,
+				CDC22BAB26A077700042B77E /* video.yuv in Resources */,
 				CDC22B97269E8FE60042B77E /* in.yuv in Resources */,
 				CDA8D78F25C2A4EF00CB33D4 /* LaunchScreen.storyboard in Resources */,
 				CDA8D78C25C2A4EF00CB33D4 /* Assets.xcassets in Resources */,
@@ -24992,6 +25005,7 @@
 				CD49336226877CC800D1FE3F /* ResampleAudioSpec.cpp in Sources */,
 				CDC36C60267BAFB900C89C9F /* AudioViewController.mm in Sources */,
 				CDC22B91269D92760042B77E /* PlayYUV.mm in Sources */,
+				CDC22BAE26A07CF80042B77E /* YuvParam.m in Sources */,
 				CD1E00B52681D7B2002C845B /* FFMpegs.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

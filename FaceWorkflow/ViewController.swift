@@ -28,6 +28,8 @@ class ViewController: UIViewController {
         btn.addTarget(self, action: #selector(playBtnAction(_:)), for: .touchUpInside)
         return btn
     }()
+    fileprivate lazy var yuvPlayer: YUVPlayer = YUVPlayer()
+    
     fileprivate lazy var wavRecorder: RecordWAV = {
         let wavRecorder = RecordWAV()
         return wavRecorder
@@ -83,4 +85,6 @@ class ViewController: UIViewController {
     fileprivate func showBMP() {
         shower.show()
     }
+    
+    
 }

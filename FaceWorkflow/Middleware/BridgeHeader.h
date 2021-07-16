@@ -15,4 +15,5 @@
 #import "RecordVideo.h"
 #import "ShowBMP.h"
 #import "ShowYUV.h"
+#import "YUVPlayer.h"
 #endif /* BridgeHeader_h */

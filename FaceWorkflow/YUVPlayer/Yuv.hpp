@@ -9,13 +9,13 @@
 #define Yuv_hpp
 
 #include <stdio.h>
-
 extern "C" {
 #include <libavutil/avutil.h>
 }
 
-struct Yuv {
-    const char *filename;
+class YuvParam {
+public:
+    const char *filename = nullptr;
     int width = 0;
     int height = 0;
     AVPixelFormat pixelFomat;
