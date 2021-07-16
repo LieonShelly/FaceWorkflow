@@ -8,6 +8,8 @@
 #import <Foundation/Foundation.h>
 #include "WavHeader.hpp"
 #include "ResampleAudioSpec.hpp"
+#include "RawVideoFrame.hpp"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FFMpegs : NSObject
@@ -19,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 // 音频重采样
 + (void)resample:(ResampleAudioSpec*)input
           outPut:(ResampleAudioSpec*)output;
+
+/// 图像转码
++ (void) convertRawVideo:(RawVideoFrame*)input
+                  output:(RawVideoFrame*)output;
 @end
 
 NS_ASSUME_NONNULL_END

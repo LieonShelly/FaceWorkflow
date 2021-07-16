@@ -27,6 +27,7 @@ extern "C" {
 #import <MetalKit/MTKView.h>
 #import "YUVPlayer.h"
 #import "YuvParam.h"
+#import "YUVPlayerView.h"
 
 @interface AudioViewController ()
 @property (nonatomic, assign) BOOL isInterruptionRequested;
@@ -38,6 +39,7 @@ extern "C" {
 @property (nonatomic, strong) dispatch_queue_t moneyQueue;
 @property (nonatomic, strong) YUVPlayer *yuvPlayer;
 @property (nonatomic, strong) MTKView *mView;
+@property (nonatomic, strong) YUVPlayerView *playerView;
 
 @end
 
@@ -59,6 +61,13 @@ extern "C" {
 
 
 @implementation AudioViewController
+
+- (YUVPlayerView *)playerView {
+    if (!_playerView) {
+        _playerView = [YUVPlayerView new];
+    }
+    return _playerView;
+}
 
 - (MTKView *)mView {
     if (!_mView) {
@@ -110,21 +119,18 @@ extern "C" {
     [self.view addSubview:self.recordBtn];
     [self.view addSubview:self.playBtn];
     [self.view addSubview:self.wavConvertBtn];
-    SDL_version v;
-    SDL_VERSION(&v);
 
-    self.mView.frame = UIScreen.mainScreen.bounds;
-    [self.view insertSubview:self.mView atIndex:0];
-    self.yuvPlayer = [YUVPlayer new];
-    [self.yuvPlayer initialize:(void*)UIApplication.sharedApplication.keyWindow.layer];
     YuvParam *video = [YuvParam new];
     video.filename = [[NSBundle mainBundle] pathForResource:@"video.yuv" ofType:nil];
     video.fps = 24;
     video.pixelFomat = AV_PIX_FMT_YUV420P;
     video.width = 512;
     video.height = 512;
-    [self.yuvPlayer setYUV:video];
-    [self.yuvPlayer play];
+    self.playerView.frame = UIScreen.mainScreen.bounds;
+    [self.view insertSubview:self.playerView atIndex:0];
+    [self.playerView setYUV:video];
+    
+    [self.playerView play];
 }
 
 - (void)recordBtnTap:(UIButton*)btn {

@@ -9,6 +9,8 @@
 extern "C" {
 #include <libswresample/swresample.h>
 #include <libavutil/avutil.h>
+#include <libswscale/swscale.h>
+#include <libavutil/imgutils.h>
 }
 
 
@@ -16,6 +18,16 @@ extern "C" {
     char errbuf[1024]; \
     av_strerror(ret, errbuf, sizeof (errbuf));
 
+#define ERR_BUF \
+    char errbuf[1024]; \
+    av_strerror(ret, errbuf, sizeof (errbuf));
+
+#define END(func) \
+    if (ret < 0) { \
+        ERR_BUF; \
+        NSLog(@"%s error %s", #func, errbuf);\
+        goto end; \
+    }
 @implementation FFMpegs
 
 /**
@@ -233,5 +245,128 @@ end:
     av_freep(&outData);
     swr_free(&ctx);
 }
+
+
++ (void)convertRawVideo:(RawVideoFrame*)input
+                  output:(RawVideoFrame*)output {
+    // 上下文
+    SwsContext *ctx = nullptr;
+    // 输入，输出缓冲区（指向每一个平面的数据）(Y U V  apha)
+    uint8_t *inData[4], *outData[4];
+    // 每一个平面的一行大小
+    int inStrides[4], ouStrides[4];
+    // 每一帧图片的大小
+    int inFrameSize, outFrameSize;
+    int ret = 0;
+    NSString *filename = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%f.png",[NSDate date].timeIntervalSince1970]];
+    // 创建上下文
+    ctx = sws_getContext(input->width, input->height, input->format,
+                         output->width, output->height, output->format,
+                         SWS_BILINEAR, nullptr, nullptr, nullptr);
+    if(!ctx) {
+        NSLog(@"sws_getContext error");
+        goto end;
+    }
+    // 输入缓冲区
+    ret = av_image_alloc(inData, inStrides,
+                         input->width,
+                         input->height,
+                         input->format, 1);
+    END(av_image_alloc);
+    // 输出缓冲区
+    ret = av_image_alloc(outData, ouStrides,
+                         output->width,
+                         output->height,
+                         output->format, 1);
+    END(av_image_alloc);
+    
+    // 计算每一帧的大小
+    inFrameSize = av_image_get_buffer_size(input->format, input->width, input->height, 1);
+    outFrameSize = av_image_get_buffer_size(output->format, output->width, output->height, 1);
+    
+    // 拷贝输入数据
+    memcpy(inData[0], input->pixels, inFrameSize);
+    
+    // 转换
+    sws_scale(ctx,
+              inData, inStrides, 0, input->height,
+              outData, ouStrides);
+    // 写到输出文件去
+    output->frameSize = outFrameSize;
+    output->pixels = (char*)malloc(outFrameSize);
+    memcpy(output->pixels, outData[0], outFrameSize);
+
+end:
+    NSLog(@"end");
+    av_freep(&inData[0]);
+    av_freep(&outData[0]);
+    sws_freeContext(ctx);
+}
+
+
+/*
+640*480，yuv420p
+
+---- 640个Y -----
+YY............YY |
+YY............YY |
+YY............YY |
+YY............YY
+................ 480行
+YY............YY
+YY............YY |
+YY............YY |
+YY............YY |
+YY............YY |
+
+---- 320个U -----
+UU............UU |
+UU............UU |
+UU............UU |
+UU............UU
+................ 240行
+UU............UU
+UU............UU |
+UU............UU |
+UU............UU |
+UU............UU |
+
+---- 320个V -----
+VV............VV |
+VV............VV |
+VV............VV |
+VV............VV
+................ 240行
+VV............VV
+VV............VV |
+VV............VV |
+VV............VV |
+VV............VV |
+
+600*600，rgb24
+
+-------  600个RGB ------
+RGB RGB .... RGB RGB  |
+RGB RGB .... RGB RGB  |
+RGB RGB .... RGB RGB
+RGB RGB .... RGB RGB 600行
+RGB RGB .... RGB RGB
+RGB RGB .... RGB RGB  |
+RGB RGB .... RGB RGB  |
+RGB RGB .... RGB RGB  |
+
+6 * 4，yuv420p
+
+YYYYYY
+YYYYYY
+YYYYYY
+YYYYYY
+
+UUU
+UUU
+
+VVV
+VVV
+*/
 
 @end

@@ -41,6 +41,11 @@
 		CDC22BAB26A077700042B77E /* video.yuv in Resources */ = {isa = PBXBuildFile; fileRef = CDC22BAA26A0776F0042B77E /* video.yuv */; };
 		CDC22BAE26A07CF80042B77E /* YuvParam.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC22BAD26A07CF80042B77E /* YuvParam.m */; };
 		CDC22BB026A07E690042B77E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC22BAF26A07E690042B77E /* MetalKit.framework */; };
+		CDC22BB326A118F80042B77E /* UIViewController+Test1.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC22BB226A118F80042B77E /* UIViewController+Test1.m */; };
+		CDC22BB626A119050042B77E /* UIViewController+Test2.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC22BB526A119050042B77E /* UIViewController+Test2.m */; };
+		CDC22BBD26A1266D0042B77E /* YUVPlayerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDC22BBC26A1266D0042B77E /* YUVPlayerView.mm */; };
+		CDC22BBF26A128870042B77E /* 111.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC22BBE26A128860042B77E /* 111.png */; };
+		CDC22BC226A131F20042B77E /* RawVideoFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC22BC026A131F20042B77E /* RawVideoFrame.cpp */; };
 		CDC36C60267BAFB900C89C9F /* AudioViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDC36C5F267BAFB900C89C9F /* AudioViewController.mm */; };
 		CDC36C63267BB2B300C89C9F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC36C62267BB2B300C89C9F /* AVFoundation.framework */; };
 		CDC36C6C267BB2F700C89C9F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC36C6B267BB2EB00C89C9F /* libz.tbd */; };
@@ -11785,6 +11790,15 @@
 		CDC22BAC26A07CF80042B77E /* YuvParam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YuvParam.h; sourceTree = "<group>"; };
 		CDC22BAD26A07CF80042B77E /* YuvParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YuvParam.m; sourceTree = "<group>"; };
 		CDC22BAF26A07E690042B77E /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		CDC22BB126A118F80042B77E /* UIViewController+Test1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Test1.h"; sourceTree = "<group>"; };
+		CDC22BB226A118F80042B77E /* UIViewController+Test1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Test1.m"; sourceTree = "<group>"; };
+		CDC22BB426A119050042B77E /* UIViewController+Test2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Test2.h"; sourceTree = "<group>"; };
+		CDC22BB526A119050042B77E /* UIViewController+Test2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Test2.m"; sourceTree = "<group>"; };
+		CDC22BBB26A1266D0042B77E /* YUVPlayerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YUVPlayerView.h; sourceTree = "<group>"; };
+		CDC22BBC26A1266D0042B77E /* YUVPlayerView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = YUVPlayerView.mm; sourceTree = "<group>"; };
+		CDC22BBE26A128860042B77E /* 111.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 111.png; sourceTree = "<group>"; };
+		CDC22BC026A131F20042B77E /* RawVideoFrame.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RawVideoFrame.cpp; sourceTree = "<group>"; };
+		CDC22BC126A131F20042B77E /* RawVideoFrame.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RawVideoFrame.hpp; sourceTree = "<group>"; };
 		CDC36C5E267BAFB900C89C9F /* AudioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioViewController.h; sourceTree = "<group>"; };
 		CDC36C5F267BAFB900C89C9F /* AudioViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioViewController.mm; sourceTree = "<group>"; };
 		CDC36C62267BB2B300C89C9F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -24342,8 +24356,9 @@
 		CDA8D78125C2A4ED00CB33D4 /* FaceWorkflow */ = {
 			isa = PBXGroup;
 			children = (
-				CDC22B99269F421A0042B77E /* YUVPlayer */,
 				CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */,
+				CDC22BB726A125F60042B77E /* YUVPlayer-iOS */,
+				CDC22B99269F421A0042B77E /* YUVPlayer */,
 				CDC22B92269E74BD0042B77E /* ShowYUV */,
 				CDC22B8E269D92070042B77E /* PlayYUV */,
 				CDC22B88269D71AF0042B77E /* ShowBMP */,
@@ -24607,6 +24622,16 @@
 			path = YUVPlayer;
 			sourceTree = "<group>";
 		};
+		CDC22BB726A125F60042B77E /* YUVPlayer-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				CDC22BBE26A128860042B77E /* 111.png */,
+				CDC22BBB26A1266D0042B77E /* YUVPlayerView.h */,
+				CDC22BBC26A1266D0042B77E /* YUVPlayerView.mm */,
+			);
+			path = "YUVPlayer-iOS";
+			sourceTree = "<group>";
+		};
 		CDC36BC2267BAF3A00C89C9F /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -24696,6 +24721,12 @@
 				CD1E00B42681D7B2002C845B /* FFMpegs.mm */,
 				CDC36C7E267C43A900C89C9F /* PermenantThread.h */,
 				CDC36C7F267C43A900C89C9F /* PermenantThread.m */,
+				CDC22BB126A118F80042B77E /* UIViewController+Test1.h */,
+				CDC22BB226A118F80042B77E /* UIViewController+Test1.m */,
+				CDC22BB426A119050042B77E /* UIViewController+Test2.h */,
+				CDC22BB526A119050042B77E /* UIViewController+Test2.m */,
+				CDC22BC026A131F20042B77E /* RawVideoFrame.cpp */,
+				CDC22BC126A131F20042B77E /* RawVideoFrame.hpp */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -24927,6 +24958,7 @@
 				CD49337F268A236100D1FE3F /* in.wav in Resources */,
 				CDC22B8D269D794D0042B77E /* in.bmp in Resources */,
 				CDC22BAB26A077700042B77E /* video.yuv in Resources */,
+				CDC22BBF26A128870042B77E /* 111.png in Resources */,
 				CDC22B97269E8FE60042B77E /* in.yuv in Resources */,
 				CDA8D78F25C2A4EF00CB33D4 /* LaunchScreen.storyboard in Resources */,
 				CDA8D78C25C2A4EF00CB33D4 /* Assets.xcassets in Resources */,
@@ -25001,12 +25033,16 @@
 				CDC22BA2269F455E0042B77E /* YUVPlayer.mm in Sources */,
 				CDA8D78325C2A4ED00CB33D4 /* AppDelegate.swift in Sources */,
 				CD1E00AF2681C90F002C845B /* WavHeader.cpp in Sources */,
+				CDC22BC226A131F20042B77E /* RawVideoFrame.cpp in Sources */,
+				CDC22BBD26A1266D0042B77E /* YUVPlayerView.mm in Sources */,
 				CDC22B95269E74EC0042B77E /* ShowYUV.mm in Sources */,
 				CD49336226877CC800D1FE3F /* ResampleAudioSpec.cpp in Sources */,
 				CDC36C60267BAFB900C89C9F /* AudioViewController.mm in Sources */,
 				CDC22B91269D92760042B77E /* PlayYUV.mm in Sources */,
 				CDC22BAE26A07CF80042B77E /* YuvParam.m in Sources */,
 				CD1E00B52681D7B2002C845B /* FFMpegs.mm in Sources */,
+				CDC22BB626A119050042B77E /* UIViewController+Test2.m in Sources */,
+				CDC22BB326A118F80042B77E /* UIViewController+Test1.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
