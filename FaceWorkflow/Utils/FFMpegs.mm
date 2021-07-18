@@ -245,7 +245,14 @@ end:
     av_freep(&outData);
     swr_free(&ctx);
 }
-
+/**
+ # 图片格式转换
+ - 创建转换上下文
+ - 设置输入输出缓冲区
+ - 计算输出输出帧的大小
+ - 开始转换
+ - 获取转换后的数据
+ */
 
 + (void)convertRawVideo:(RawVideoFrame*)input
                   output:(RawVideoFrame*)output {
@@ -258,7 +265,6 @@ end:
     // 每一帧图片的大小
     int inFrameSize, outFrameSize;
     int ret = 0;
-    NSString *filename = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%f.png",[NSDate date].timeIntervalSince1970]];
     // 创建上下文
     ctx = sws_getContext(input->width, input->height, input->format,
                          output->width, output->height, output->format,

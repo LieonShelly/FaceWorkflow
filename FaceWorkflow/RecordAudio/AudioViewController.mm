@@ -126,7 +126,8 @@ extern "C" {
     video.pixelFomat = AV_PIX_FMT_YUV420P;
     video.width = 512;
     video.height = 512;
-    self.playerView.frame = UIScreen.mainScreen.bounds;
+    self.playerView.backgroundColor = UIColor.blueColor;
+    self.playerView.frame = CGRectMake(0, 200, 200, 500);
     [self.view insertSubview:self.playerView atIndex:0];
     [self.playerView setYUV:video];
     

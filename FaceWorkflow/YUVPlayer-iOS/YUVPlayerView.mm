@@ -52,7 +52,7 @@ extern "C" {
 
 - (void)layoutSublayersOfLayer:(CALayer *)layer {
     [super layoutSublayersOfLayer:layer];
-    self.playLayer.frame = layer.bounds;
+//    self.playLayer.frame = layer.bounds;
 }
 
 - (void)play {
@@ -102,9 +102,41 @@ extern "C" {
             dh = height;
         }
     }
-    dx = (width = dw) * 0.5;
+    dx = (width - dw) * 0.5;
     dy = (height - dh) * 0.5;
     playerRect = CGRectMake(dx, dy, dw, dh);
+}
+
+- (CGImageRef)generateImage:(const RawVideoFrame &)output {
+    int width = output.width;
+    int height = output.height;
+    size_t bufferLength = width * height * 3;
+    char * buffer = output.pixels;
+    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, buffer, bufferLength, NULL);
+    size_t bitsPerComponent = 8;
+    size_t bitsPerPixel = 24;
+    size_t bytesPerRow = 3 * width;
+    
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    if(colorSpaceRef == NULL) {
+        CGDataProviderRelease(provider);
+    }
+    
+    CGBitmapInfo bitmapInfo = kCGImageAlphaNone;
+    CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
+    
+    CGImageRef iref = CGImageCreate(width,
+                                    height,
+                                    bitsPerComponent,
+                                    bitsPerPixel,
+                                    bytesPerRow,
+                                    colorSpaceRef,
+                                    bitmapInfo,
+                                    provider,   // data provider
+                                    NULL,      // decode
+                                    NO,          // should interpolate
+                                    renderingIntent);
+    return iref;
 }
 
 - (void)timerAction {
@@ -118,32 +150,19 @@ extern "C" {
         };
         RawVideoFrame output = {
             nullptr,
-            static_cast<int>(_yuv.width),
-            static_cast<int>(_yuv.height),
+            static_cast<int>(_yuv.width >> 4 << 4),
+            static_cast<int>(_yuv.height >> 4 << 4), // 16的倍数。提高编码效率
             AV_PIX_FMT_RGB24
         };
         [FFMpegs convertRawVideo:&input output:&output];
-        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-        CGContextRef context = CGBitmapContextCreate(output.pixels,
-                                                     _yuv.width,
-                                                     _yuv.height,
-                                                     8,
-                                                     _yuv.width * 3,
-                                                     colorSpace,
-                                                     kCGImageAlphaPremultipliedLast);
-
-        CGImageRef imageRef = CGBitmapContextCreateImage(context);
-        CGContextRelease(context);
-        CGColorSpaceRelease(colorSpace);
-       
-//       UIImage *img = [UIImage imageWithData:[NSData dataWithContentsOfFile: [[NSBundle mainBundle]pathForResource:@"111.png" ofType:nil]]];
-//        self.playLayer.contents = (__bridge id)img.CGImage;
+        CGImageRef iref = [self generateImage:output];
+        self.playLayer.contents = (__bridge id)iref;
+        self.playLayer.frame = playerRect;
     } else {
         [self.timer invalidate];
         self.timer = nil;
     }
     
 }
-
 
 @end
