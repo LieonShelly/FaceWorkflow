@@ -11,7 +11,7 @@ extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavutil/avutil.h>
 #include <libavutil/imgutils.h>
-
+#include <libavutil/opt.h>
 }
 
 #define ERROR_BUF(ret) \
@@ -44,6 +44,7 @@ static int checktPixFmt(const AVCodec *codec, enum AVPixelFormat pixFmt) {
     AVFrame *frame = nullptr;
     AVPacket *pkt = nullptr;
     NSData *inData = nil;
+//    uint8_t *buf = nullptr;
     // 获取编码器
     codec = avcodec_find_encoder_by_name("libx264") ;
     if (!codec) {
@@ -66,6 +67,7 @@ static int checktPixFmt(const AVCodec *codec, enum AVPixelFormat pixFmt) {
     ctx->pix_fmt = (AVPixelFormat)input.pixFmt;
     // 设置帧率
     ctx->time_base = {1, input.fps };
+    // 打开编码器
     ret = avcodec_open2(ctx, codec, nullptr);
     if (ret < 0) {
         ERROR_BUF(ret);
@@ -83,7 +85,20 @@ static int checktPixFmt(const AVCodec *codec, enum AVPixelFormat pixFmt) {
     frame->pts = 0;
     
     // 利用width，height ,format创建缓冲区, 相当于把每一帧内部布局设置好，然后直接填充数据
-    ret = av_image_alloc(frame->data, frame->linesize, input.width, input.height, (AVPixelFormat)input.pixFmt, 1);
+    ret = av_image_alloc(frame->data, frame->linesize,
+                             input.width, input.height,
+                             AV_PIX_FMT_YUV420P, 1);
+    
+//    buf = (uint8_t *) av_malloc(imageSize);
+//    ret = av_image_fill_arrays(frame->data, frame->linesize,
+//                               buf,
+//                               AV_PIX_FMT_YUV420P, input.width, input.height, 1);
+    if (ret < 0) {
+        ERROR_BUF(ret);
+        goto end;
+    }
+    NSLog(@"%s", frame->data[0]);
+    
     if (ret < 0) {
         ERROR_BUF(ret);
         goto end;
@@ -93,24 +108,28 @@ static int checktPixFmt(const AVCodec *codec, enum AVPixelFormat pixFmt) {
     if (!pkt) {
         goto end;
     }
+    // ffmpeg -i in.MP4 -s 512x512 -pixel_format yuv420p in.yuv
     // 打开文件
     inData = [infile readDataOfLength:imageSize];
     while (inData.length > 0) {
         // 进行编码
-        if ([self encode:ctx inputFrame:frame outputPkt:pkt file:outfile]) {
+        frame->data[0] = (uint8_t*)inData.bytes;
+        if ([self encode:ctx inputFrame:frame outputPkt:pkt file:outfile] < 0) {
             goto end;
         }
         // 设置帧序号
         frame->pts++;
+        inData = [infile readDataOfLength:imageSize];
     }
+    
     // 刷新缓冲区
     [self encode:ctx inputFrame:nullptr outputPkt:pkt file:outfile];
 end:
-    NSLog(@"----");
+    NSLog(@"----：%lld", frame->pts);
     [infile closeFile];
     [outfile closeFile];
     if (frame) {
-        av_freep(&frame->data[0]);
+//        av_freep(&frame->data[0]);
         av_frame_free(&frame);
     }
     av_packet_free(&pkt);
@@ -124,6 +143,7 @@ end:
         return ret;
     }
     // 不断从编码器中取出编码后的数据
+    static int total = 0;
     while (true) {
         ret = avcodec_receive_packet(ctx, pkt);
         if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
@@ -132,7 +152,10 @@ end:
             return ret;
         }
         // 将编码后的数据写入文件
+        total += pkt->size;
+        NSLog(@"写入H264文件：%d - %llu - 总长度：%d", pkt->size, file.offsetInFile, total);
         [file writeData:[NSData dataWithBytes:pkt->data length:pkt->size]];
+        [file seekToEndOfFile];
         // 释放pkt内部的资源
         av_packet_unref(pkt);
     }

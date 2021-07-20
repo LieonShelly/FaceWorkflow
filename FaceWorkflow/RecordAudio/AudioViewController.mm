@@ -125,6 +125,7 @@ extern "C" {
     input.pixFmt = AV_PIX_FMT_YUV420P;
     input.width = 512;
     input.height = 512;
+    input.fps = 25;
     
     NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
     NSString *outFilename = [filePath stringByAppendingPathComponent:@"video.h264"];
