@@ -30,6 +30,67 @@ static int checktPixFmt(const AVCodec *codec, enum AVPixelFormat pixFmt) {
     return 0;
 }
 
+/**
+ # H264编码实现步骤
+ - 获取编码器 ``avcodec_find_encoder_by_name``
+ - 检查输入格式
+ - 创建编码器上下文 ``avcodec_alloc_context3``
+ - 设置编码上下文参数 `` width height pix_fmt time_base``
+ - 创建frame
+ - 设置frame参数 ``width height format pts``
+ - 利用frame创建输入缓冲区，相当于是为frme->data 设置其内存布局，设置好之后，直接网data指针数组中填入数据
+ - 创建AVPacket, 作为输出缓冲区
+ - 逐帧读取YUV数据到frame中，将frame数据送入到编码器
+    - 从编码器中获取编码后的数据
+    - 将编码后的书写入文件
+    - 释放packet
+ - 释放资源
+    - frame
+    - context
+    - 编码器
+    - packet
+    - 关闭文件
+ 
+ # 输入缓冲区的内存申请方式
+    - 方式一
+    ```C++
+     // 创建frame
+     frame = av_frame_alloc();
+     frame->width = ctx->width;
+     frame->height = ctx->height;
+     frame->format = ctx->pix_fmt;
+     frame->pts = 0;
+
+     ret = av_image_alloc(frame->data, frame->linesize,
+                              input.width, input.height,
+                              AV_PIX_FMT_YUV420P, 1);
+    ```
+    
+    - 方式二
+    ```C++
+     frame = av_frame_alloc();
+     frame->width = ctx->width;
+     frame->height = ctx->height;
+     frame->format = ctx->pix_fmt;
+     frame->pts = 0;
+     // 一帧图片的大小
+     int imgSize = av_image_get_buffer_size(in.pixFmt, in.width, in.height, 1);
+     buf = (uint8_t *) av_malloc(imgSize);
+     ret = av_image_fill_arrays(frame->data, frame->linesize,
+                                buf,
+                                in.pixFmt, in.width, in.height, 1);
+    ```
+    - 方式三
+    ```C++
+     frame = av_frame_alloc();
+     frame->width = ctx->width;
+     frame->height = ctx->height;
+     frame->format = ctx->pix_fmt;
+     frame->pts = 0;
+     ret = av_frame_get_buffer(frame, 0);
+    ```
+ */
+
 + (void)h264Encode:(VideoEncodeSpec*)input output:(NSString*)output {
     NSFileHandle *infile = [NSFileHandle fileHandleForReadingAtPath:input.filename];
     [[NSFileManager defaultManager]createFileAtPath:output contents:nil attributes:nil];
@@ -44,6 +105,9 @@ static int checktPixFmt(const AVCodec *codec, enum AVPixelFormat pixFmt) {
     AVFrame *frame = nullptr;
     AVPacket *pkt = nullptr;
     NSData *inData = nil;
+    
+      
+    
 //    uint8_t *buf = nullptr;
     // 获取编码器
     codec = avcodec_find_encoder_by_name("libx264") ;
