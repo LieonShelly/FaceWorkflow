@@ -70,7 +70,7 @@ av_strerror(ret, errbuf, sizeof (errbuf));
     NSFileHandle *infile = [NSFileHandle fileHandleForReadingAtPath:infilename];
     [[NSFileManager defaultManager]createFileAtPath:outparam.filename contents:nil attributes:nil];
     NSFileHandle *outfile = [NSFileHandle fileHandleForWritingAtPath:outparam.filename];
-    
+
     // 解码器
     AVCodec *codec = nullptr;
     // 上下文

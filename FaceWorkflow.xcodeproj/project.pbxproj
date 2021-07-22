@@ -14,6 +14,9 @@
 		CD1ED338267F912C002C845B /* in.pcm in Resources */ = {isa = PBXBuildFile; fileRef = CD1ED337267F90C3002C845B /* in.pcm */; };
 		CD47107026A82199004C6BB7 /* H264Decode.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD47106F26A82199004C6BB7 /* H264Decode.mm */; };
 		CD47107226A90968004C6BB7 /* video.h264 in Resources */ = {isa = PBXBuildFile; fileRef = CD47107126A90968004C6BB7 /* video.h264 */; };
+		CD47107626A95210004C6BB7 /* Demux.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD47107526A95210004C6BB7 /* Demux.mm */; };
+		CD47107926A95280004C6BB7 /* AudioDecodeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = CD47107826A95280004C6BB7 /* AudioDecodeSpec.m */; };
+		CD47107C26A95324004C6BB7 /* VideoDecodeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = CD47107B26A95324004C6BB7 /* VideoDecodeSpec.m */; };
 		CD49336226877CC800D1FE3F /* ResampleAudioSpec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD49336026877CC800D1FE3F /* ResampleAudioSpec.cpp */; };
 		CD4933662688D2AF00D1FE3F /* WavPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD4933652688D2AF00D1FE3F /* WavPlayer.mm */; };
 		CD49336A2688DA7400D1FE3F /* RecordWAV.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD4933692688DA7400D1FE3F /* RecordWAV.mm */; };
@@ -11630,6 +11633,12 @@
 		CD47106E26A82199004C6BB7 /* H264Decode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = H264Decode.h; sourceTree = "<group>"; };
 		CD47106F26A82199004C6BB7 /* H264Decode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = H264Decode.mm; sourceTree = "<group>"; };
 		CD47107126A90968004C6BB7 /* video.h264 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.h264; sourceTree = "<group>"; };
+		CD47107426A95210004C6BB7 /* Demux.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Demux.h; sourceTree = "<group>"; };
+		CD47107526A95210004C6BB7 /* Demux.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Demux.mm; sourceTree = "<group>"; };
+		CD47107726A95280004C6BB7 /* AudioDecodeSpec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioDecodeSpec.h; sourceTree = "<group>"; };
+		CD47107826A95280004C6BB7 /* AudioDecodeSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioDecodeSpec.m; sourceTree = "<group>"; };
+		CD47107A26A95324004C6BB7 /* VideoDecodeSpec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoDecodeSpec.h; sourceTree = "<group>"; };
+		CD47107B26A95324004C6BB7 /* VideoDecodeSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoDecodeSpec.m; sourceTree = "<group>"; };
 		CD49336026877CC800D1FE3F /* ResampleAudioSpec.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ResampleAudioSpec.cpp; sourceTree = "<group>"; };
 		CD49336126877CC800D1FE3F /* ResampleAudioSpec.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResampleAudioSpec.hpp; sourceTree = "<group>"; };
 		CD4933642688D2AF00D1FE3F /* WavPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WavPlayer.h; sourceTree = "<group>"; };
@@ -24308,8 +24317,19 @@
 				CD47107126A90968004C6BB7 /* video.h264 */,
 				CD47106E26A82199004C6BB7 /* H264Decode.h */,
 				CD47106F26A82199004C6BB7 /* H264Decode.mm */,
+				CD47107A26A95324004C6BB7 /* VideoDecodeSpec.h */,
+				CD47107B26A95324004C6BB7 /* VideoDecodeSpec.m */,
 			);
 			path = H264Decode;
+			sourceTree = "<group>";
+		};
+		CD47107326A951FD004C6BB7 /* Demux */ = {
+			isa = PBXGroup;
+			children = (
+				CD47107426A95210004C6BB7 /* Demux.h */,
+				CD47107526A95210004C6BB7 /* Demux.mm */,
+			);
+			path = Demux;
 			sourceTree = "<group>";
 		};
 		CD49335E26877C9A00D1FE3F /* Resample */ = {
@@ -24605,6 +24625,7 @@
 			isa = PBXGroup;
 			children = (
 				CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */,
+				CD47107326A951FD004C6BB7 /* Demux */,
 				CD47106D26A82057004C6BB7 /* H264Decode */,
 				CDA3C15F26A5D11E00C12760 /* H264Encode */,
 				CDC22BB726A125F60042B77E /* YUVPlayer-iOS */,
@@ -24918,6 +24939,8 @@
 				CDD0A0D72693FAB200EE705A /* in.aac */,
 				CDD0A0D42693E9F000EE705A /* AACDecode.h */,
 				CDD0A0D52693E9F000EE705A /* AACDecode.mm */,
+				CD47107726A95280004C6BB7 /* AudioDecodeSpec.h */,
+				CD47107826A95280004C6BB7 /* AudioDecodeSpec.m */,
 			);
 			path = AACDecode;
 			sourceTree = "<group>";
@@ -25060,11 +25083,13 @@
 				CDA8D78725C2A4ED00CB33D4 /* ViewController.swift in Sources */,
 				CD49336A2688DA7400D1FE3F /* RecordWAV.mm in Sources */,
 				CDC36C80267C43A900C89C9F /* PermenantThread.m in Sources */,
+				CD47107626A95210004C6BB7 /* Demux.mm in Sources */,
 				CDC22BA5269FD4210042B77E /* Yuv.cpp in Sources */,
 				CD6EBD30268E178800189ED5 /* AccEncode.mm in Sources */,
 				CD1ED336267F8E0E002C845B /* AudioBuffer.cpp in Sources */,
 				CD4933662688D2AF00D1FE3F /* WavPlayer.mm in Sources */,
 				CDA3C16226A5D2A700C12760 /* H264Encode.mm in Sources */,
+				CD47107926A95280004C6BB7 /* AudioDecodeSpec.m in Sources */,
 				CD665C9F269C135E00BA37F2 /* RecordVideo.mm in Sources */,
 				CDD0A0D62693E9F000EE705A /* AACDecode.mm in Sources */,
 				CDC22B8B269D71C50042B77E /* ShowBMP.mm in Sources */,
@@ -25078,6 +25103,7 @@
 				CDC22B95269E74EC0042B77E /* ShowYUV.mm in Sources */,
 				CD49336226877CC800D1FE3F /* ResampleAudioSpec.cpp in Sources */,
 				CDC36C60267BAFB900C89C9F /* AudioViewController.mm in Sources */,
+				CD47107C26A95324004C6BB7 /* VideoDecodeSpec.m in Sources */,
 				CDC22B91269D92760042B77E /* PlayYUV.mm in Sources */,
 				CDC22BAE26A07CF80042B77E /* YuvParam.m in Sources */,
 				CD1E00B52681D7B2002C845B /* FFMpegs.mm in Sources */,
