@@ -22,6 +22,40 @@ av_strerror(ret, errbuf, sizeof (errbuf));
 
 @implementation H264Decode
 
+/**
+ # H264解码步骤
+ - 获取解码器 ``avcodec_find_decoder(AV_CODEC_ID_H264)``
+ - 初始化解析器上下文 ``av_parser_init(codec->id);``
+ - 创建上下文
+ - 创建AVPacket（作为输出缓冲区）
+ - 创建AVFrame (作为输入缓冲区)
+ - 打开编码器
+ - 读取H264文件
+    - 将读取的数据送入到解析器
+    - 将解析器中的pkt送入到解码器进行解码
+        - 发送压缩数据解码器
+        - 获取解码后的数据
+    - 写入解码后的数据到文件 (YUV的采样比例不同，写入的文件长度不同，比如YUV420p，Y的平面的 大小为 width * height, u 和 v 平面的大小为  width * 0.5 * height * 0.5)
+       - 写入Y平面的数据
+       - 写入U平面的数据
+       - 写入V平面的数据
+
+ # 写入YUV文件时应根据YUV的采样比例计算出合适的文件长度
+  - 比如YUV420p时
+   ```C++
+     frame->data[0] 0xd08c400 0x8c400
+     frame->data[1] 0xd0d79c0 0xd79c0
+     frame->data[2] 0xd0ea780 0xea780
+     
+     frame->data[1] - frame->data[0] = 308672 = y平面的大小
+     frame->data[2] - frame->data[1] = 77248 = u平面的大小
+     
+     y平面的大小 640x480*1 = 307200
+     u平面的大小 640x480*0.25 = 76800
+     v平面的大小 640x480*0.25
+   ```
+ */
+
 + (void)h264Decode:(NSString*)infilename ouputParam:(VideoEncodeSpec*)outparam {
     int ret = 0;
     char inDataArray[IN_DATA_SIZE + AV_INPUT_BUFFER_PADDING_SIZE];
@@ -82,7 +116,7 @@ av_strerror(ret, errbuf, sizeof (errbuf));
     // 读取文件
     do {
         inNSData = [infile readDataOfLength:(NSInteger)IN_DATA_SIZE];
-        inLen = inNSData.length;
+        inLen = (int)inNSData.length;
         inEnd = !inLen;
         inData = (char*)inNSData.bytes;
         while (inLen > 0 || inEnd) {
@@ -131,7 +165,7 @@ end:
 }
 
 + (int)decode:(AVCodecContext*)ctx packet:(AVPacket*)pkt frame:(AVFrame*)frame ouufile:(NSFileHandle*)outfile {
-    // 发送压缩数据打破解码器
+    // 发送压缩数据解码器
     int ret = avcodec_send_packet(ctx, pkt);
     if (ret < 0) {
         return ret;
