@@ -12,6 +12,8 @@
 		CD1E00B52681D7B2002C845B /* FFMpegs.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD1E00B42681D7B2002C845B /* FFMpegs.mm */; };
 		CD1ED336267F8E0E002C845B /* AudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1ED334267F8E0E002C845B /* AudioBuffer.cpp */; };
 		CD1ED338267F912C002C845B /* in.pcm in Resources */ = {isa = PBXBuildFile; fileRef = CD1ED337267F90C3002C845B /* in.pcm */; };
+		CD47107026A82199004C6BB7 /* H264Decode.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD47106F26A82199004C6BB7 /* H264Decode.mm */; };
+		CD47107226A90968004C6BB7 /* video.h264 in Resources */ = {isa = PBXBuildFile; fileRef = CD47107126A90968004C6BB7 /* video.h264 */; };
 		CD49336226877CC800D1FE3F /* ResampleAudioSpec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD49336026877CC800D1FE3F /* ResampleAudioSpec.cpp */; };
 		CD4933662688D2AF00D1FE3F /* WavPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD4933652688D2AF00D1FE3F /* WavPlayer.mm */; };
 		CD49336A2688DA7400D1FE3F /* RecordWAV.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD4933692688DA7400D1FE3F /* RecordWAV.mm */; };
@@ -11625,6 +11627,9 @@
 		CD1EFFFD2680EF73002C845B /* decode_video.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = decode_video.c; sourceTree = "<group>"; };
 		CD1EFFFE2680EF73002C845B /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		CD1EFFFF2680EF73002C845B /* filtering_video.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = filtering_video.c; sourceTree = "<group>"; };
+		CD47106E26A82199004C6BB7 /* H264Decode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = H264Decode.h; sourceTree = "<group>"; };
+		CD47106F26A82199004C6BB7 /* H264Decode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = H264Decode.mm; sourceTree = "<group>"; };
+		CD47107126A90968004C6BB7 /* video.h264 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.h264; sourceTree = "<group>"; };
 		CD49336026877CC800D1FE3F /* ResampleAudioSpec.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ResampleAudioSpec.cpp; sourceTree = "<group>"; };
 		CD49336126877CC800D1FE3F /* ResampleAudioSpec.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResampleAudioSpec.hpp; sourceTree = "<group>"; };
 		CD4933642688D2AF00D1FE3F /* WavPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WavPlayer.h; sourceTree = "<group>"; };
@@ -24297,6 +24302,16 @@
 			path = examples;
 			sourceTree = "<group>";
 		};
+		CD47106D26A82057004C6BB7 /* H264Decode */ = {
+			isa = PBXGroup;
+			children = (
+				CD47107126A90968004C6BB7 /* video.h264 */,
+				CD47106E26A82199004C6BB7 /* H264Decode.h */,
+				CD47106F26A82199004C6BB7 /* H264Decode.mm */,
+			);
+			path = H264Decode;
+			sourceTree = "<group>";
+		};
 		CD49335E26877C9A00D1FE3F /* Resample */ = {
 			isa = PBXGroup;
 			children = (
@@ -24590,6 +24605,7 @@
 			isa = PBXGroup;
 			children = (
 				CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */,
+				CD47106D26A82057004C6BB7 /* H264Decode */,
 				CDA3C15F26A5D11E00C12760 /* H264Encode */,
 				CDC22BB726A125F60042B77E /* YUVPlayer-iOS */,
 				CDC22B99269F421A0042B77E /* YUVPlayer */,
@@ -24984,6 +25000,7 @@
 				CDA8D78F25C2A4EF00CB33D4 /* LaunchScreen.storyboard in Resources */,
 				CDA8D78C25C2A4EF00CB33D4 /* Assets.xcassets in Resources */,
 				CD49337D268A21AC00D1FE3F /* record_out.wav in Resources */,
+				CD47107226A90968004C6BB7 /* video.h264 in Resources */,
 				CD1ED338267F912C002C845B /* in.pcm in Resources */,
 				CDCA56A5267E47B000468FC2 /* sdl2-config-version.cmake in Resources */,
 				CDCA56A6267E47B000468FC2 /* sdl2-config.cmake in Resources */,
@@ -25051,6 +25068,7 @@
 				CD665C9F269C135E00BA37F2 /* RecordVideo.mm in Sources */,
 				CDD0A0D62693E9F000EE705A /* AACDecode.mm in Sources */,
 				CDC22B8B269D71C50042B77E /* ShowBMP.mm in Sources */,
+				CD47107026A82199004C6BB7 /* H264Decode.mm in Sources */,
 				CDA3C16526A5D3CA00C12760 /* VideoEncodeSpec.m in Sources */,
 				CDC22BA2269F455E0042B77E /* YUVPlayer.mm in Sources */,
 				CDA8D78325C2A4ED00CB33D4 /* AppDelegate.swift in Sources */,

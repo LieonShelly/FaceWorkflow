@@ -29,6 +29,8 @@ extern "C" {
 #import "YuvParam.h"
 #import "YUVPlayerView.h"
 #import "H264Encode.h"
+#import "H264Decode.h"
+
 @interface AudioViewController ()
 @property (nonatomic, assign) BOOL isInterruptionRequested;
 @property (nonatomic, strong) UIButton *recordBtn;
@@ -120,17 +122,13 @@ extern "C" {
     [self.view addSubview:self.playBtn];
     [self.view addSubview:self.wavConvertBtn];
 
-    VideoEncodeSpec *input = [VideoEncodeSpec new];
-    input.filename = [[NSBundle mainBundle] pathForResource:@"video.yuv" ofType:nil];
-    input.pixFmt = AV_PIX_FMT_YUV420P;
-    input.width = 512;
-    input.height = 512;
-    input.fps = 25;
-    
+    VideoEncodeSpec *output = [VideoEncodeSpec new];
     NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
-    NSString *outFilename = [filePath stringByAppendingPathComponent:@"video.h264"];
+    output.filename = [filePath stringByAppendingPathComponent:@"video.yuv"];
     
-    [H264Encode h264Encode:input output:outFilename];
+    NSString *inFilename = [[NSBundle mainBundle] pathForResource:@"video.h264" ofType:nil];
+   
+    [H264Decode h264Decode:inFilename ouputParam:output];
    
 }
 
