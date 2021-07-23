@@ -43,6 +43,7 @@ return ret; \
     NSFileHandle *aOutFile;
     NSFileHandle *vOutFile;
     int _sampleSize;
+    // 每个音频样本帧的大小（包含左右声道）
     int _sampleFrameSize;
     uint8_t *_imgBuf[4];
     int _imageLinesizes[4];
@@ -53,6 +54,8 @@ return ret; \
 @end
 
 @implementation Demux
+
+// ffmpeg -c:v h264 -c:a libfdk_aac -i in.mp4 cmd_out.yuc -f s16le cmd_out.pcm
 
 - (void)demux:(NSString *)infileName outAudioParam:(AudioDecodeSpec *)aOut outVideooParam:(VideoDecodeSpec *)vOut {
     self.aOut = aOut;
@@ -112,7 +115,7 @@ return ret; \
     // 刷新缓冲区
     {
         [self decode:_aDecodeCtx packet:nullptr func:^{
-            [self writeAudioFrame];
+            [weakSelf writeAudioFrame];
         }];
         [self decode:_vDecodeCtx packet:nullptr func:^{
             [weakSelf writeVideoFrame];
@@ -127,6 +130,7 @@ end:
     avformat_close_input(&_fmtCtx);
     av_frame_free(&_frame);
     av_packet_free(&packet);
+    av_freep(_imgBuf[0]);
 }
 
 // 初始化音频信息
@@ -159,8 +163,8 @@ end:
     _vOut.height = _vDecodeCtx->height;
     _vOut.pixFmt = _vDecodeCtx->pix_fmt;
     // 帧率
-    //    AVRational frameRate = av_guess_frame_rate(_fmtCtx, _fmtCtx->streams[_vStreamIdx], nullptr);
-    _vOut.fps = _vDecodeCtx->framerate.num;
+    AVRational frameRate = av_guess_frame_rate(_fmtCtx, _fmtCtx->streams[_vStreamIdx], nullptr);
+    _vOut.fps = frameRate.num / frameRate.den;
     // 创建用于存放一帧解码图片的缓冲区
     ret = av_image_alloc(_imgBuf, _imageLinesizes, _vOut.width , _vOut.height, (AVPixelFormat)_vOut.pixFmt, 1);
     RET(av_image_alloc);
@@ -170,7 +174,7 @@ end:
 
 // 初始化解码器
 - (int)initDecoder:(AVCodecContext**)decodeCtx streamIdx:(int *)streamIdx mediaType:(AVMediaType)type {
-    // 根军Type寻找最合适的流信息
+    // 根据Type寻找最合适的流信息
     // 返回值是流索引
     int ret = av_find_best_stream(_fmtCtx, type, -1, -1, nullptr, 0);
     RET(av_find_best_stream);
@@ -233,7 +237,15 @@ end:
 - (void)writeAudioFrame {
     // libfdk_aac解码器，解码出来的PCM格式：s16
     // aac解码器，解码出来的PCM格式：ftlp
+    /**
+     - planar的内存布局(左右声道隔离的)
+        - LLLLLLLLLLL RRRRRRRRRRRR
+     - 非planar的内存布局
+        - LR LR LR
+     */
     if (av_sample_fmt_is_planar((AVSampleFormat)_aOut.sampleFmt)) {
+        // planar格式写入文件时，以非planar写入，这样ffplay才能正确播放
+        //  LLLL RRRR DDDD FFFF
         // 外层循环：每一个声道的样本数
         for (int si = 0; si < _frame->nb_samples; si++) {
             // 内层循环：有多少个声道
@@ -244,6 +256,9 @@ end:
         }
     } else {
         [aOutFile writeData:[NSData dataWithBytes:_frame->data[0] length:_frame->nb_samples * _sampleFrameSize]];
+        
+        // _aOutFile.write((char *) _frame->data[0], _frame->linesize[0]);
+        // 不用这句话的原因是：linesize[0]的值是始终固定的，但是在最后几帧的时候，样本数不一定能填满整个frame
     }
 }
 
