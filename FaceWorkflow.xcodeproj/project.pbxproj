@@ -40,6 +40,7 @@
 		CDA8D78725C2A4ED00CB33D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA8D78625C2A4ED00CB33D4 /* ViewController.swift */; };
 		CDA8D78C25C2A4EF00CB33D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDA8D78B25C2A4EF00CB33D4 /* Assets.xcassets */; };
 		CDA8D78F25C2A4EF00CB33D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDA8D78D25C2A4EF00CB33D4 /* LaunchScreen.storyboard */; };
+		CDBBCDFB26AA668E00FE00FF /* demux.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = CDBBCDFA26AA668E00FE00FF /* demux.MP4 */; };
 		CDC22B8B269D71C50042B77E /* ShowBMP.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDC22B8A269D71C50042B77E /* ShowBMP.mm */; };
 		CDC22B8D269D794D0042B77E /* in.bmp in Resources */ = {isa = PBXBuildFile; fileRef = CDC22B8C269D794C0042B77E /* in.bmp */; };
 		CDC22B91269D92760042B77E /* PlayYUV.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDC22B90269D92760042B77E /* PlayYUV.mm */; };
@@ -11797,6 +11798,7 @@
 		CDA8D78E25C2A4EF00CB33D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDA8D79025C2A4EF00CB33D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDA8D83A25C2A64500CB33D4 /* BridgeHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgeHeader.h; sourceTree = "<group>"; };
+		CDBBCDFA26AA668E00FE00FF /* demux.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demux.MP4; sourceTree = "<group>"; };
 		CDC22B89269D71C50042B77E /* ShowBMP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowBMP.h; sourceTree = "<group>"; };
 		CDC22B8A269D71C50042B77E /* ShowBMP.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ShowBMP.mm; sourceTree = "<group>"; };
 		CDC22B8C269D794C0042B77E /* in.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = in.bmp; sourceTree = "<group>"; };
@@ -24326,6 +24328,7 @@
 		CD47107326A951FD004C6BB7 /* Demux */ = {
 			isa = PBXGroup;
 			children = (
+				CDBBCDFA26AA668E00FE00FF /* demux.MP4 */,
 				CD47107426A95210004C6BB7 /* Demux.h */,
 				CD47107526A95210004C6BB7 /* Demux.mm */,
 			);
@@ -25018,6 +25021,7 @@
 				CD49337F268A236100D1FE3F /* in.wav in Resources */,
 				CDC22B8D269D794D0042B77E /* in.bmp in Resources */,
 				CDC22BAB26A077700042B77E /* video.yuv in Resources */,
+				CDBBCDFB26AA668E00FE00FF /* demux.MP4 in Resources */,
 				CDC22BBF26A128870042B77E /* 111.png in Resources */,
 				CDC22B97269E8FE60042B77E /* in.yuv in Resources */,
 				CDA8D78F25C2A4EF00CB33D4 /* LaunchScreen.storyboard in Resources */,

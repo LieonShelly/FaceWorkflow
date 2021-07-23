@@ -10,7 +10,7 @@
 #include "AudioBuffer.hpp"
 #import "FFMpegs.h"
 #import <objc/runtime.h>
-#import "AACDecode.h"
+//#import "AACDecode.h"
 extern "C" {
 // 设备
 #include <libavdevice/avdevice.h>
@@ -30,6 +30,9 @@ extern "C" {
 #import "YUVPlayerView.h"
 #import "H264Encode.h"
 #import "H264Decode.h"
+
+#import "Demux.h"
+
 
 @interface AudioViewController ()
 @property (nonatomic, assign) BOOL isInterruptionRequested;
@@ -114,21 +117,17 @@ extern "C" {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.recordBtn.frame = CGRectMake(100, 100, 100, 59);
-    self.playBtn.frame = CGRectMake(100, CGRectGetMaxY(self.recordBtn.frame) + 50, 100, 59);
-    self.wavConvertBtn.frame = CGRectMake(100, CGRectGetMaxY(self.playBtn.frame) + 50, 100, 59);
-    [self.view addSubview:self.recordBtn];
-    [self.view addSubview:self.playBtn];
-    [self.view addSubview:self.wavConvertBtn];
-
-    VideoEncodeSpec *output = [VideoEncodeSpec new];
     NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
-    output.filename = [filePath stringByAppendingPathComponent:@"video.yuv"];
+    VideoDecodeSpec *vOut = [VideoDecodeSpec new];
+    vOut.filename = [filePath stringByAppendingPathComponent:@"demux.yuv"];
     
-    NSString *inFilename = [[NSBundle mainBundle] pathForResource:@"video.h264" ofType:nil];
-   
-    [H264Decode h264Decode:inFilename ouputParam:output];
+    AudioDecodeSpec *aOut = [AudioDecodeSpec new];
+    aOut.filename = [filePath stringByAppendingPathComponent:@"demux.pcm"];
+    
+    NSString *inFilename = [[NSBundle mainBundle] pathForResource:@"demux.MP4" ofType:nil];
+    Demux *demux = [Demux new];
+    [demux demux:inFilename outAudioParam:aOut outVideooParam:vOut];
+
    
 }
 
@@ -214,12 +213,12 @@ static void aacEncodeTest() {
     NSLog(@"[super superclass] = %@", [super superclass]);
     NSLog(@"[super class] = %@", [super class]);
 
-    NSString *aacFile  = [[NSBundle mainBundle]pathForResource:@"in.aac" ofType:nil];
-    NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
-    NSString *pcmfile = [filePath stringByAppendingPathComponent:@"in.pcm"];
-    AudioDecodeSpec spec;
-    spec.filename = pcmfile.UTF8String;
-    [AACDecode aacDecode:aacFile output:&spec];
+//    NSString *aacFile  = [[NSBundle mainBundle]pathForResource:@"in.aac" ofType:nil];
+//    NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
+//    NSString *pcmfile = [filePath stringByAppendingPathComponent:@"in.pcm"];
+//    AudioDecodeSpec spec;
+//    spec.filename = pcmfile.UTF8String;
+//    [AACDecode aacDecode:aacFile output:&spec];
 }
 
 - (PermenantThread *)thread {

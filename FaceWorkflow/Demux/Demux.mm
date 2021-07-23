@@ -147,11 +147,11 @@ end:
 
 // 初始化视频信息
 - (int)initVideoInfo {
-    int ret = [self initDecoder:&_aDecodeCtx streamIdx:&_aStreamIdx mediaType:AVMEDIA_TYPE_VIDEO];
+    int ret = [self initDecoder:&_vDecodeCtx streamIdx:&_vStreamIdx mediaType:AVMEDIA_TYPE_VIDEO];
     RET(initDecoder);
     [[NSFileManager defaultManager]createFileAtPath:self.vOut.filename contents:nil attributes:nil];
     vOutFile = [NSFileHandle fileHandleForWritingAtPath:self.vOut.filename];
-    if (vOutFile) {
+    if (!vOutFile) {
         return -1;
     }
     // 保存视频参数
