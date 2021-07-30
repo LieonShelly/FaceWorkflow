@@ -41,6 +41,7 @@
 		CDA8D78C25C2A4EF00CB33D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDA8D78B25C2A4EF00CB33D4 /* Assets.xcassets */; };
 		CDA8D78F25C2A4EF00CB33D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDA8D78D25C2A4EF00CB33D4 /* LaunchScreen.storyboard */; };
 		CDBBCDFB26AA668E00FE00FF /* demux.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = CDBBCDFA26AA668E00FE00FF /* demux.MP4 */; };
+		CDBBCDFF26ADC41D00FE00FF /* MutexCond.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDBBCDFD26ADC41D00FE00FF /* MutexCond.cpp */; };
 		CDC22B8B269D71C50042B77E /* ShowBMP.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDC22B8A269D71C50042B77E /* ShowBMP.mm */; };
 		CDC22B8D269D794D0042B77E /* in.bmp in Resources */ = {isa = PBXBuildFile; fileRef = CDC22B8C269D794C0042B77E /* in.bmp */; };
 		CDC22B91269D92760042B77E /* PlayYUV.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDC22B90269D92760042B77E /* PlayYUV.mm */; };
@@ -11799,6 +11800,8 @@
 		CDA8D79025C2A4EF00CB33D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDA8D83A25C2A64500CB33D4 /* BridgeHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgeHeader.h; sourceTree = "<group>"; };
 		CDBBCDFA26AA668E00FE00FF /* demux.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demux.MP4; sourceTree = "<group>"; };
+		CDBBCDFD26ADC41D00FE00FF /* MutexCond.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MutexCond.cpp; sourceTree = "<group>"; };
+		CDBBCDFE26ADC41D00FE00FF /* MutexCond.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MutexCond.hpp; sourceTree = "<group>"; };
 		CDC22B89269D71C50042B77E /* ShowBMP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowBMP.h; sourceTree = "<group>"; };
 		CDC22B8A269D71C50042B77E /* ShowBMP.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ShowBMP.mm; sourceTree = "<group>"; };
 		CDC22B8C269D794C0042B77E /* in.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = in.bmp; sourceTree = "<group>"; };
@@ -24628,6 +24631,7 @@
 			isa = PBXGroup;
 			children = (
 				CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */,
+				CDBBCDFC26ADC29900FE00FF /* MutexCond */,
 				CD47107326A951FD004C6BB7 /* Demux */,
 				CD47106D26A82057004C6BB7 /* H264Decode */,
 				CDA3C15F26A5D11E00C12760 /* H264Encode */,
@@ -24670,6 +24674,15 @@
 				CDA8D83A25C2A64500CB33D4 /* BridgeHeader.h */,
 			);
 			path = Middleware;
+			sourceTree = "<group>";
+		};
+		CDBBCDFC26ADC29900FE00FF /* MutexCond */ = {
+			isa = PBXGroup;
+			children = (
+				CDBBCDFD26ADC41D00FE00FF /* MutexCond.cpp */,
+				CDBBCDFE26ADC41D00FE00FF /* MutexCond.hpp */,
+			);
+			path = MutexCond;
 			sourceTree = "<group>";
 		};
 		CDC22B88269D71AF0042B77E /* ShowBMP */ = {
@@ -25095,6 +25108,7 @@
 				CDA3C16226A5D2A700C12760 /* H264Encode.mm in Sources */,
 				CD47107926A95280004C6BB7 /* AudioDecodeSpec.m in Sources */,
 				CD665C9F269C135E00BA37F2 /* RecordVideo.mm in Sources */,
+				CDBBCDFF26ADC41D00FE00FF /* MutexCond.cpp in Sources */,
 				CDD0A0D62693E9F000EE705A /* AACDecode.mm in Sources */,
 				CDC22B8B269D71C50042B77E /* ShowBMP.mm in Sources */,
 				CD47107026A82199004C6BB7 /* H264Decode.mm in Sources */,

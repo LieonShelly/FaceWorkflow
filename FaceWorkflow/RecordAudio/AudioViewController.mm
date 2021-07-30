@@ -30,8 +30,8 @@ extern "C" {
 #import "YUVPlayerView.h"
 #import "H264Encode.h"
 #import "H264Decode.h"
-
 #import "Demux.h"
+#include "MutexCond.hpp"
 
 
 @interface AudioViewController ()
@@ -66,7 +66,9 @@ extern "C" {
 
 
 @implementation AudioViewController
-
+{
+    MutexCond *tex;
+}
 - (YUVPlayerView *)playerView {
     if (!_playerView) {
         _playerView = [YUVPlayerView new];
@@ -112,11 +114,18 @@ extern "C" {
 
 - (void)loadView {
     [super loadView];
-    avdevice_register_all();
+//    avdevice_register_all();
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.playBtn.frame = CGRectMake(100, 100, 80, 30);
+    [self.view addSubview:self.playBtn];
+    [self testMutex];
+}
+
+- (void)textDemuxer {
+    
     NSString *filePath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true).firstObject;
     VideoDecodeSpec *vOut = [VideoDecodeSpec new];
     vOut.filename = [filePath stringByAppendingPathComponent:@"demux.yuv"];
@@ -127,8 +136,6 @@ extern "C" {
     NSString *inFilename = [[NSBundle mainBundle] pathForResource:@"demux.MP4" ofType:nil];
     Demux *demux = [Demux new];
     [demux demux:inFilename outAudioParam:aOut outVideooParam:vOut];
-
-   
 }
 
 - (void)playYUV {
@@ -157,8 +164,15 @@ extern "C" {
     
 }
 
+- (void)testMutex {
+    tex = new MutexCond();
+}
+
 
 - (void)playBtnTap:(UIButton*)btn {
+    delete tex;
+    tex = nullptr;
+    return;
     [self.playBtn setSelected:!btn.isSelected];
     if (self.playBtn.isSelected) {
         [self.yuvPlayer play];
@@ -244,7 +258,7 @@ void showSpec(AVFormatContext *ctx) {
 }
 
 + (void)initialize {
-    avdevice_register_all();
+//    avdevice_register_all();
 }
 
 

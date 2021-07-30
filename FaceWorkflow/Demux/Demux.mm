@@ -56,6 +56,27 @@ return ret; \
 @implementation Demux
 
 // ffmpeg -c:v h264 -c:a libfdk_aac -i in.mp4 cmd_out.yuc -f s16le cmd_out.pcm
+/**
+ # 解封装步骤
+ - 创建解封装上下文 ``avformat_open_input``
+ - 检索流信息 ``avformat_find_stream_info``
+ - 初始化音频信息
+ - 初始化视频信息
+ - 初始化frame
+ - 初始化pkt
+ -  从输入文件中读取数据
+    - 解码音频数据
+    - 解码视频数据
+ - 刷新缓冲区
+ - 销毁资源
+ 
+ # 初始化解码器
+ # 初始化音频信息
+ # 初始化视频信息
+ # 解码
+ # 写入音频信息到文件
+ # 写入视频信息到文件
+ */
 
 - (void)demux:(NSString *)infileName outAudioParam:(AudioDecodeSpec *)aOut outVideooParam:(VideoDecodeSpec *)vOut {
     self.aOut = aOut;
