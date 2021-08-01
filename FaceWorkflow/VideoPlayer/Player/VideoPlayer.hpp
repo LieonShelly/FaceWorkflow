@@ -64,7 +64,8 @@ public:
     }VideoSwsSpec;
     
     void setFilename(string name);
-   
+    void play();
+    
 private:
     /**音频相关 */
     typedef struct {

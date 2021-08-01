@@ -51,6 +51,11 @@ int VideoPlayer::initSwr() {
     RET(swr_init);
     // 初始化重采样的输入frame
     aSwrOutFrame = av_frame_alloc();
+    if (!aSwrOutFrame) {
+        cout << "av_frame_alloc error" << endl;
+        return -1;
+    }
+    aSwrInFrame = av_frame_alloc();
     if (!aSwrInFrame) {
         cout << "av_frame_alloc error" << endl;
         return -1;
@@ -68,7 +73,7 @@ int VideoPlayer::initSDL() {
     // 音频参数
     SDL_AudioSpec spec;
     // 采样率
-    spec.freq = aSwrOutSpec.sampleFmt;
+    spec.freq = aSwrOutSpec.sampleRate;
     // 采样格式
     spec.format = AUDIO_S16LSB;
     // 声道数
@@ -131,16 +136,18 @@ void VideoPlayer::sdlAudioCallback(uint8_t *stream, int len) {
         fillLen = min(fillLen, len);
         
         // 获取当期音量
-        
         // 填充SDL缓冲区
         SDL_MixAudio(stream,
                      aSwrOutFrame->data[0] + aSwrOutIdx,
-                     fillLen, 100);
+                     fillLen, SDL_MIX_MAXVOLUME);
         // 移动偏移量
         len -= fillLen;
         stream += fillLen;
         aSwrOutIdx += fillLen;
+        
+        cout << "SDL_MixAudio fillLen:" << fillLen << " aSwrOutIdx: " << aSwrOutIdx << " aSwrOutSiize: " << aSwrOutSiize << " len: " << len << endl;
     }
+    cout << "len <= 0" << endl;
 }
 
 int VideoPlayer::decodeAudio() {
@@ -152,6 +159,7 @@ int VideoPlayer::decodeAudio() {
     }
     AVPacket pkt = aPktList.front();
     aPktList.pop_front();
+    cout << "list cout: " << aPktList.size() << endl;
     aMutex.unlock();
     // 保存音频时钟 =
     
@@ -164,7 +172,7 @@ int VideoPlayer::decodeAudio() {
         return 0;
     } else RET(avcodec_receive_frame);
     
-    int outSamples = av_rescale_rnd(aSwrOutSpec.sampleRate,
+    int outSamples = (int)av_rescale_rnd(aSwrOutSpec.sampleRate,
                                     aSwrInFrame->nb_samples,
                                     aSwrInSpec.sampleRate, AV_ROUND_UP);
     ret = swr_convert(aSwrCtx,

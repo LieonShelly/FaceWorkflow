@@ -7,6 +7,7 @@
 
 #include "VideoPlayer.hpp"
 #include <SDL.h>
+#include <thread>
 
 VideoPlayer::VideoPlayer() {
     SDL_SetMainReady();
@@ -26,6 +27,33 @@ void VideoPlayer::setFilename(string name) {
 }
 
 int VideoPlayer::initDecoder(AVCodecContext **decodecCtx, AVStream**stream, AVMediaType type) {
+    // 根据type寻找到最合适的流信息
+    int ret = av_find_best_stream(fmtCtx, type, -1, -1, nullptr, 0);
+    RET(av_find_best_stream);
+    // 获取流
+    int streamIdx = ret;
+    *stream = fmtCtx->streams[streamIdx];
+    if (!*stream) {
+        cout << "stream is empty" << endl;
+        return -1;
+    }
+    // 为当前流找到合适的解码器
+    AVCodec *decoder = avcodec_find_decoder((*stream)->codecpar->codec_id);
+    if (!decoder) {
+        cout << "avcodec_find_decoder is empty" << endl;
+        return -1;
+    }
+    // 初始化解码器上下文
+    *decodecCtx = avcodec_alloc_context3(decoder);
+    if (!decodecCtx) {
+        cout << "avcodec_alloc_context3 error" << endl;
+    }
+    // 从流中拷贝参数到解码器上下文中
+    ret = avcodec_parameters_to_context(*decodecCtx, (*stream)->codecpar);
+    RET(avcodec_parameters_to_context);
+    // 打开解码器
+    ret = avcodec_open2(*decodecCtx, decoder, nullptr);
+    RET(avcodec_open2);
     return 0;
 }
 
@@ -48,8 +76,10 @@ void VideoPlayer::readFile() {
     // 初始化视频信息
     // 到此为止初始化完毕
     
+    // 音频解码子线程：开始工作
     SDL_PauseAudio(0);
     AVPacket pkt;
+    
     while (true) {
         ret = av_read_frame(fmtCtx, &pkt);
         if (ret == 0) {
@@ -57,7 +87,7 @@ void VideoPlayer::readFile() {
                 addAudioPkt(pkt);
             }
         } else if (ret == AVERROR_EOF) {
-            
+            break;
         } else {
             ERROR_BUF;
             continue;
@@ -71,4 +101,11 @@ void VideoPlayer::free() {
 
 void VideoPlayer::fataError() {
     
+}
+
+
+void VideoPlayer::play() {
+    thread([this]() {
+        readFile();
+    }).detach();
 }

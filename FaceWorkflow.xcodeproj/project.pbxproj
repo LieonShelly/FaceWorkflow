@@ -90,6 +90,7 @@
 		CDD9CE0A26B3EAB80030D340 /* VideoPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE0826B3EAB80030D340 /* VideoPlayer.cpp */; };
 		CDD9CE0C26B3F7810030D340 /* VideoPlayerAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE0B26B3F7810030D340 /* VideoPlayerAudio.cpp */; };
 		CDD9CE0F26B6A07A0030D340 /* test_video.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = CDD9CE0E26B6A07A0030D340 /* test_video.MP4 */; };
+		CDD9CE1326B6A4E50030D340 /* VideoService.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1226B6A4E50030D340 /* VideoService.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -11948,6 +11949,8 @@
 		CDD9CE0926B3EAB80030D340 /* VideoPlayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VideoPlayer.hpp; sourceTree = "<group>"; };
 		CDD9CE0B26B3F7810030D340 /* VideoPlayerAudio.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VideoPlayerAudio.cpp; sourceTree = "<group>"; };
 		CDD9CE0E26B6A07A0030D340 /* test_video.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test_video.MP4; sourceTree = "<group>"; };
+		CDD9CE1126B6A4E50030D340 /* VideoService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoService.h; sourceTree = "<group>"; };
+		CDD9CE1226B6A4E50030D340 /* VideoService.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = VideoService.mm; sourceTree = "<group>"; };
 		E0C6CAA710913C2AB6BBC077 /* Pods_FaceWorkflow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FaceWorkflow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -24979,6 +24982,7 @@
 		CDD9CDFA26B3E1FB0030D340 /* VideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				CDD9CE1026B6A4C70030D340 /* Service */,
 				CDD9CE0D26B6A06B0030D340 /* Video */,
 				CDD9CE0126B3E5730030D340 /* UI */,
 				CDD9CDFD26B3E2470030D340 /* Player */,
@@ -25013,6 +25017,15 @@
 				CDD9CE0E26B6A07A0030D340 /* test_video.MP4 */,
 			);
 			path = Video;
+			sourceTree = "<group>";
+		};
+		CDD9CE1026B6A4C70030D340 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				CDD9CE1126B6A4E50030D340 /* VideoService.h */,
+				CDD9CE1226B6A4E50030D340 /* VideoService.mm */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		E8EAB80CC7E317037E90FB7C /* Pods */ = {
@@ -25154,6 +25167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDD9CE0A26B3EAB80030D340 /* VideoPlayer.cpp in Sources */,
+				CDD9CE1326B6A4E50030D340 /* VideoService.mm in Sources */,
 				CDA8D78725C2A4ED00CB33D4 /* ViewController.swift in Sources */,
 				CD49336A2688DA7400D1FE3F /* RecordWAV.mm in Sources */,
 				CDC36C80267C43A900C89C9F /* PermenantThread.m in Sources */,
