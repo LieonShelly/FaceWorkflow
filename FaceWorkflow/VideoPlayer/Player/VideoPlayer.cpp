@@ -74,17 +74,26 @@ void VideoPlayer::readFile() {
     // 初始化音频信息
     hasAudio = initAudioInfo();
     // 初始化视频信息
+    hasVideo = initVideoInfo();
     // 到此为止初始化完毕
-    
+    cout << "初始化完毕" << endl;
     // 音频解码子线程：开始工作
     SDL_PauseAudio(0);
-    AVPacket pkt;
+    // 视频解码子线程：开始工作
+    thread([this]() {
+        decodeVideo();
+    }).detach();
     
+    AVPacket pkt;
     while (true) {
         ret = av_read_frame(fmtCtx, &pkt);
         if (ret == 0) {
             if (pkt.stream_index == aStream->index) {
                 addAudioPkt(pkt);
+            } else if (pkt.stream_index == vStream->index) {
+                addVideoPkt(pkt);
+            } else {
+                av_packet_unref(&pkt);
             }
         } else if (ret == AVERROR_EOF) {
             break;

@@ -118,6 +118,36 @@ private:
     // 音频解码
     int decodeAudio();
     
+    
+private:
+    /**视频相关*/
+    // 解码上下文
+    AVCodecContext *vDecodeCtx = nullptr;
+    // 视频流
+    AVStream *vStream = nullptr;
+    // 像素格式转换的输入，输出frame
+    AVFrame *vSwsInFrame = nullptr, *vSwsOutframe = nullptr;
+    // 像素格式装换上下文
+    SwsContext *vSwsCtx = nullptr;
+    // 像素格式装换输出的frame参数
+    VideoSwsSpec vSwsOutSpec;
+    // 存放视频包的列表
+    list<AVPacket> vPktList;
+    // 存放视频包的锁
+    CondMutex vMutex;
+    // 是否有视频
+    bool hasVideo = false;
+    // 初始化视频信息
+    int initVideoInfo();
+    // 初始化像素格式转换
+    int initSws();
+    // 添加数据包到视频包列表中
+    void addVideoPkt(AVPacket &pkt);
+    // 清空视频包
+    void clearVideoPktList();
+    // 解码视频
+    void decodeVideo();
+    
 private:
     // 解封装上下文
     AVFormatContext *fmtCtx = nullptr;

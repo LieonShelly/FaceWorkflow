@@ -91,6 +91,7 @@
 		CDD9CE0C26B3F7810030D340 /* VideoPlayerAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE0B26B3F7810030D340 /* VideoPlayerAudio.cpp */; };
 		CDD9CE0F26B6A07A0030D340 /* test_video.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = CDD9CE0E26B6A07A0030D340 /* test_video.MP4 */; };
 		CDD9CE1326B6A4E50030D340 /* VideoService.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1226B6A4E50030D340 /* VideoService.mm */; };
+		CDD9CE1526B6E74C0030D340 /* VideoPlayerVideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1426B6E74C0030D340 /* VideoPlayerVideo.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -11951,6 +11952,7 @@
 		CDD9CE0E26B6A07A0030D340 /* test_video.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test_video.MP4; sourceTree = "<group>"; };
 		CDD9CE1126B6A4E50030D340 /* VideoService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoService.h; sourceTree = "<group>"; };
 		CDD9CE1226B6A4E50030D340 /* VideoService.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = VideoService.mm; sourceTree = "<group>"; };
+		CDD9CE1426B6E74C0030D340 /* VideoPlayerVideo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VideoPlayerVideo.cpp; sourceTree = "<group>"; };
 		E0C6CAA710913C2AB6BBC077 /* Pods_FaceWorkflow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FaceWorkflow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -24998,6 +25000,7 @@
 				CDD9CE0826B3EAB80030D340 /* VideoPlayer.cpp */,
 				CDD9CE0926B3EAB80030D340 /* VideoPlayer.hpp */,
 				CDD9CE0B26B3F7810030D340 /* VideoPlayerAudio.cpp */,
+				CDD9CE1426B6E74C0030D340 /* VideoPlayerVideo.cpp */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -25186,6 +25189,7 @@
 				CD47107026A82199004C6BB7 /* H264Decode.mm in Sources */,
 				CDA3C16526A5D3CA00C12760 /* VideoEncodeSpec.m in Sources */,
 				CDC22BA2269F455E0042B77E /* YUVPlayer.mm in Sources */,
+				CDD9CE1526B6E74C0030D340 /* VideoPlayerVideo.cpp in Sources */,
 				CDD9CE0C26B3F7810030D340 /* VideoPlayerAudio.cpp in Sources */,
 				CDA8D78325C2A4ED00CB33D4 /* AppDelegate.swift in Sources */,
 				CD1E00AF2681C90F002C845B /* WavHeader.cpp in Sources */,
