@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoPlayerVC" customModule="FaceWorkflow" customModuleProvider="target">
+            <connections>
+                <outlet property="playbtn" destination="bwk-yh-47p" id="tqa-89-M30"/>
+                <outlet property="playerVIew" destination="0vb-SU-F4O" id="yyi-o4-foT"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qGz-zg-uAa">
+                    <rect key="frame" x="191.5" y="812" width="31" height="30"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwk-yh-47p">
+                            <rect key="frame" x="0.0" y="0.0" width="31" height="30"/>
+                            <state key="normal" title="播放"/>
+                            <connections>
+                                <action selector="playBtnAction:" destination="-1" eventType="touchUpInside" id="F4l-m5-JmM"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0vb-SU-F4O">
+                    <rect key="frame" x="0.0" y="44" width="414" height="758"/>
+                    <color key="backgroundColor" systemColor="systemYellowColor"/>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="qGz-zg-uAa" firstAttribute="top" secondItem="0vb-SU-F4O" secondAttribute="bottom" constant="10" id="5I8-o9-pGF"/>
+                <constraint firstItem="0vb-SU-F4O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="B9E-cx-7RJ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qGz-zg-uAa" secondAttribute="bottom" constant="20" id="F7t-zg-AcX"/>
+                <constraint firstItem="qGz-zg-uAa" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="RaK-0t-YHa"/>
+                <constraint firstItem="0vb-SU-F4O" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="XHQ-ed-2ry"/>
+                <constraint firstItem="0vb-SU-F4O" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="c2L-to-MMm"/>
+            </constraints>
+            <point key="canvasLocation" x="-13" y="154"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

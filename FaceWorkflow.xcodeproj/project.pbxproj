@@ -84,6 +84,12 @@
 		CDCA571D267E51AF00468FC2 /* CoreHaptics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDCA571C267E51AF00468FC2 /* CoreHaptics.framework */; };
 		CDD0A0D62693E9F000EE705A /* AACDecode.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDD0A0D52693E9F000EE705A /* AACDecode.mm */; };
 		CDD0A0D82693FBF400EE705A /* in.aac in Resources */ = {isa = PBXBuildFile; fileRef = CDD0A0D72693FAB200EE705A /* in.aac */; };
+		CDD9CE0026B3E4070030D340 /* CondMutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CDFE26B3E4070030D340 /* CondMutex.cpp */; };
+		CDD9CE0626B3E6540030D340 /* VideoPlayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE0426B3E6540030D340 /* VideoPlayerVC.swift */; };
+		CDD9CE0726B3E6540030D340 /* VideoPlayerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDD9CE0526B3E6540030D340 /* VideoPlayerVC.xib */; };
+		CDD9CE0A26B3EAB80030D340 /* VideoPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE0826B3EAB80030D340 /* VideoPlayer.cpp */; };
+		CDD9CE0C26B3F7810030D340 /* VideoPlayerAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE0B26B3F7810030D340 /* VideoPlayerAudio.cpp */; };
+		CDD9CE0F26B6A07A0030D340 /* test_video.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = CDD9CE0E26B6A07A0030D340 /* test_video.MP4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -11934,6 +11940,14 @@
 		CDD0A0D42693E9F000EE705A /* AACDecode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AACDecode.h; sourceTree = "<group>"; };
 		CDD0A0D52693E9F000EE705A /* AACDecode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AACDecode.mm; sourceTree = "<group>"; };
 		CDD0A0D72693FAB200EE705A /* in.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = in.aac; sourceTree = "<group>"; };
+		CDD9CDFE26B3E4070030D340 /* CondMutex.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CondMutex.cpp; sourceTree = "<group>"; };
+		CDD9CDFF26B3E4070030D340 /* CondMutex.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CondMutex.hpp; sourceTree = "<group>"; };
+		CDD9CE0426B3E6540030D340 /* VideoPlayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerVC.swift; sourceTree = "<group>"; };
+		CDD9CE0526B3E6540030D340 /* VideoPlayerVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPlayerVC.xib; sourceTree = "<group>"; };
+		CDD9CE0826B3EAB80030D340 /* VideoPlayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VideoPlayer.cpp; sourceTree = "<group>"; };
+		CDD9CE0926B3EAB80030D340 /* VideoPlayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VideoPlayer.hpp; sourceTree = "<group>"; };
+		CDD9CE0B26B3F7810030D340 /* VideoPlayerAudio.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VideoPlayerAudio.cpp; sourceTree = "<group>"; };
+		CDD9CE0E26B6A07A0030D340 /* test_video.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test_video.MP4; sourceTree = "<group>"; };
 		E0C6CAA710913C2AB6BBC077 /* Pods_FaceWorkflow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FaceWorkflow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -24631,6 +24645,7 @@
 			isa = PBXGroup;
 			children = (
 				CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */,
+				CDD9CDFA26B3E1FB0030D340 /* VideoPlayer */,
 				CDBBCDFC26ADC29900FE00FF /* MutexCond */,
 				CD47107326A951FD004C6BB7 /* Demux */,
 				CD47106D26A82057004C6BB7 /* H264Decode */,
@@ -24961,6 +24976,45 @@
 			path = AACDecode;
 			sourceTree = "<group>";
 		};
+		CDD9CDFA26B3E1FB0030D340 /* VideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				CDD9CE0D26B6A06B0030D340 /* Video */,
+				CDD9CE0126B3E5730030D340 /* UI */,
+				CDD9CDFD26B3E2470030D340 /* Player */,
+			);
+			path = VideoPlayer;
+			sourceTree = "<group>";
+		};
+		CDD9CDFD26B3E2470030D340 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				CDD9CDFE26B3E4070030D340 /* CondMutex.cpp */,
+				CDD9CDFF26B3E4070030D340 /* CondMutex.hpp */,
+				CDD9CE0826B3EAB80030D340 /* VideoPlayer.cpp */,
+				CDD9CE0926B3EAB80030D340 /* VideoPlayer.hpp */,
+				CDD9CE0B26B3F7810030D340 /* VideoPlayerAudio.cpp */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		CDD9CE0126B3E5730030D340 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				CDD9CE0426B3E6540030D340 /* VideoPlayerVC.swift */,
+				CDD9CE0526B3E6540030D340 /* VideoPlayerVC.xib */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		CDD9CE0D26B6A06B0030D340 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				CDD9CE0E26B6A07A0030D340 /* test_video.MP4 */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
 		E8EAB80CC7E317037E90FB7C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -25040,11 +25094,13 @@
 				CDA8D78F25C2A4EF00CB33D4 /* LaunchScreen.storyboard in Resources */,
 				CDA8D78C25C2A4EF00CB33D4 /* Assets.xcassets in Resources */,
 				CD49337D268A21AC00D1FE3F /* record_out.wav in Resources */,
+				CDD9CE0F26B6A07A0030D340 /* test_video.MP4 in Resources */,
 				CD47107226A90968004C6BB7 /* video.h264 in Resources */,
 				CD1ED338267F912C002C845B /* in.pcm in Resources */,
 				CDCA56A5267E47B000468FC2 /* sdl2-config-version.cmake in Resources */,
 				CDCA56A6267E47B000468FC2 /* sdl2-config.cmake in Resources */,
 				CDD0A0D82693FBF400EE705A /* in.aac in Resources */,
+				CDD9CE0726B3E6540030D340 /* VideoPlayerVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -25097,6 +25153,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDD9CE0A26B3EAB80030D340 /* VideoPlayer.cpp in Sources */,
 				CDA8D78725C2A4ED00CB33D4 /* ViewController.swift in Sources */,
 				CD49336A2688DA7400D1FE3F /* RecordWAV.mm in Sources */,
 				CDC36C80267C43A900C89C9F /* PermenantThread.m in Sources */,
@@ -25108,15 +25165,18 @@
 				CDA3C16226A5D2A700C12760 /* H264Encode.mm in Sources */,
 				CD47107926A95280004C6BB7 /* AudioDecodeSpec.m in Sources */,
 				CD665C9F269C135E00BA37F2 /* RecordVideo.mm in Sources */,
+				CDD9CE0626B3E6540030D340 /* VideoPlayerVC.swift in Sources */,
 				CDBBCDFF26ADC41D00FE00FF /* MutexCond.cpp in Sources */,
 				CDD0A0D62693E9F000EE705A /* AACDecode.mm in Sources */,
 				CDC22B8B269D71C50042B77E /* ShowBMP.mm in Sources */,
 				CD47107026A82199004C6BB7 /* H264Decode.mm in Sources */,
 				CDA3C16526A5D3CA00C12760 /* VideoEncodeSpec.m in Sources */,
 				CDC22BA2269F455E0042B77E /* YUVPlayer.mm in Sources */,
+				CDD9CE0C26B3F7810030D340 /* VideoPlayerAudio.cpp in Sources */,
 				CDA8D78325C2A4ED00CB33D4 /* AppDelegate.swift in Sources */,
 				CD1E00AF2681C90F002C845B /* WavHeader.cpp in Sources */,
 				CDC22BC226A131F20042B77E /* RawVideoFrame.cpp in Sources */,
+				CDD9CE0026B3E4070030D340 /* CondMutex.cpp in Sources */,
 				CDC22BBD26A1266D0042B77E /* YUVPlayerView.mm in Sources */,
 				CDC22B95269E74EC0042B77E /* ShowYUV.mm in Sources */,
 				CD49336226877CC800D1FE3F /* ResampleAudioSpec.cpp in Sources */,

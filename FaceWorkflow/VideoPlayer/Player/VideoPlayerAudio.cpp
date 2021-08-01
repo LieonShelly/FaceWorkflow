@@ -1,0 +1,177 @@
+//
+//  VideoPlayerAudio.cpp
+//  FaceWorkflow
+//
+//  Created by lieon on 2021/7/30.
+//
+
+#include "VideoPlayer.hpp"
+
+int VideoPlayer::initAudioInfo() {
+    // 初始化解码器
+    int ret = initDecoder(&aDecodeCtx, &aStream, AVMEDIA_TYPE_AUDIO);
+    RET(initDecoder);
+    // 初始化音频重采样
+    ret = initSwr();
+    RET(initSwr);
+    // 初始化SDL
+    ret = initSDL();
+    RET(initSDL);
+    return 0;
+}
+
+int VideoPlayer::initSwr() {
+    // 重采样输入参数
+    aSwrInSpec.sampleFmt = aDecodeCtx->sample_fmt;
+    aSwrInSpec.sampleRate = aDecodeCtx->sample_rate;
+    aSwrInSpec.chLayout = (int)aDecodeCtx->channel_layout;
+    aSwrInSpec.chs = aDecodeCtx->channels;
+    // 重采言输出参数
+    aSwrOutSpec.sampleFmt = AV_SAMPLE_FMT_S16;
+    aSwrOutSpec.sampleRate = 44100;
+    aSwrOutSpec.chLayout = AV_CH_LAYOUT_STEREO;
+    aSwrOutSpec.chs = av_get_channel_layout_nb_channels(aSwrOutSpec.chLayout);
+    aSwrOutSpec.bytesPerSampleFrame = aSwrOutSpec.chs * av_get_bytes_per_sample(aSwrOutSpec.sampleFmt);
+    // 创建重采样上下文
+    aSwrCtx = swr_alloc_set_opts(nullptr,
+                                 // 输出参数
+                                 aSwrOutSpec.chLayout,
+                                 aSwrOutSpec.sampleFmt,
+                                 aSwrOutSpec.sampleRate,
+                                 // 输入参数
+                                 aSwrInSpec.chLayout,
+                                 aSwrInSpec.sampleFmt,
+                                 aSwrInSpec.sampleRate,
+                                 0, nullptr);
+    if (!aSwrCtx) {
+        cout << "swr_alloc_set_opts error" << endl;
+        return -1;
+    }
+    int ret = swr_init(aSwrCtx);
+    RET(swr_init);
+    // 初始化重采样的输入frame
+    aSwrOutFrame = av_frame_alloc();
+    if (!aSwrInFrame) {
+        cout << "av_frame_alloc error" << endl;
+        return -1;
+    }
+    // 分配aSwrOutFrame的data[0]指向的内存空间
+    ret = av_samples_alloc(aSwrOutFrame->data,
+                           aSwrOutFrame->linesize,
+                           aSwrOutSpec.chs,
+                           4096, aSwrOutSpec.sampleFmt, 1);
+    RET(av_samples_alloc)
+    return 0;
+}
+
+int VideoPlayer::initSDL() {
+    // 音频参数
+    SDL_AudioSpec spec;
+    // 采样率
+    spec.freq = aSwrOutSpec.sampleFmt;
+    // 采样格式
+    spec.format = AUDIO_S16LSB;
+    // 声道数
+    spec.channels = aSwrOutSpec.chs;
+    // 音频缓冲区的样本数量
+    spec.samples = 512;
+    // 传递给回调的参数
+    spec.userdata = this;
+    // 回调
+    spec.callback = sdlAudioCallbackFunc;
+    // 打开音频设备
+    if (SDL_OpenAudio(&spec, nullptr)) {
+        cout << "SDL_OpenAudio error" << endl;
+        return -1;
+    }
+    return 0;
+}
+
+void VideoPlayer::addAudioPkt(AVPacket &pkt) {
+    aMutex.lock();
+    aPktList.push_back(pkt);
+    aMutex.signal();
+    aMutex.unlock();
+}
+
+void VideoPlayer::clearAudioPktList() {
+    aMutex.lock();
+    for (AVPacket &pkt: aPktList) {
+        av_packet_unref(&pkt);
+    }
+    aPktList.clear();
+    aMutex.unlock();
+}
+
+void VideoPlayer::sdlAudioCallbackFunc(void *userData, uint8_t *stream, int len) {
+    VideoPlayer *player = (VideoPlayer*)userData;
+    player->sdlAudioCallback(stream, len);
+}
+
+void VideoPlayer::sdlAudioCallback(uint8_t *stream, int len) {
+    SDL_memset(stream, 0, len);
+    while (len > 0) {
+        // 说明当前PCM的数据已经全部拷贝到SDL的音频缓冲区了
+        // 需要解码下一个pkt，获取新的PCM数据
+        if (aSwrOutIdx >= aSwrOutSiize) {
+            // 新的PCM的大小
+            aSwrOutSiize = decodeAudio();
+            // 索引清0
+            aSwrOutIdx = 0;
+            // 没有解码出PCM数据，那就静音处理
+            if (aSwrOutSiize <= 0) {
+                // 假定PCM的大小
+                aSwrOutSiize = 1024;
+                // 给PCM填充0（静音）
+                memset(aSwrOutFrame->data[0], 0, aSwrOutSiize);
+            }
+        }
+        // 本次需要填充到stream中的PCM的数据大小
+        int fillLen = aSwrOutSiize - aSwrOutIdx;
+        fillLen = min(fillLen, len);
+        
+        // 获取当期音量
+        
+        // 填充SDL缓冲区
+        SDL_MixAudio(stream,
+                     aSwrOutFrame->data[0] + aSwrOutIdx,
+                     fillLen, 100);
+        // 移动偏移量
+        len -= fillLen;
+        stream += fillLen;
+        aSwrOutIdx += fillLen;
+    }
+}
+
+int VideoPlayer::decodeAudio() {
+    // 加锁
+    aMutex.lock();
+    if (aPktList.empty()) {
+        aMutex.unlock();
+        return 0;
+    }
+    AVPacket pkt = aPktList.front();
+    aPktList.pop_front();
+    aMutex.unlock();
+    // 保存音频时钟 =
+    
+    // 发送数据到解码器
+    int ret = avcodec_send_packet(aDecodeCtx, &pkt);
+    av_packet_unref(&pkt);
+    RET(avcodec_send_packet);
+    ret = avcodec_receive_frame(aDecodeCtx, aSwrInFrame);
+    if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
+        return 0;
+    } else RET(avcodec_receive_frame);
+    
+    int outSamples = av_rescale_rnd(aSwrOutSpec.sampleRate,
+                                    aSwrInFrame->nb_samples,
+                                    aSwrInSpec.sampleRate, AV_ROUND_UP);
+    ret = swr_convert(aSwrCtx,
+                      aSwrOutFrame->data,
+                      outSamples,
+                      (const uint8_t**)aSwrInFrame->data,
+                      aSwrInFrame->nb_samples);
+    RET(swr_convert)
+    return ret * aSwrOutSpec.bytesPerSampleFrame;
+}
