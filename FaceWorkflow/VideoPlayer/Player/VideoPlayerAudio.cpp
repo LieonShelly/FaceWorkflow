@@ -162,7 +162,22 @@ int VideoPlayer::decodeAudio() {
     aPktList.pop_front();
     cout << "list cout: " << aPktList.size() << endl;
     aMutex.unlock();
-    // 保存音频时钟 =
+    // 保存音频时钟
+    if (pkt.pts != AV_NOPTS_VALUE) {
+        aTime = av_q2d(aStream->time_base) * pkt.pts;
+        // 通知外界：播放时间点发生了改变
+    }
+    // 如果是视频，不能在这个位置判断（不能提前释放pkt，不然会导致B帧。P帧解码失败，画面直接撕裂）
+    // 发现音频的时间是早于seektime的，直接丢弃
+    if (aSeekTime >= 0) {
+        if (aTime < aSeekTime) {
+            // 释放pkt
+            av_packet_unref(&pkt);
+            return 0;
+        } else {
+            aSeekTime = -1;
+        }
+    }
     
     // 发送数据到解码器
     int ret = avcodec_send_packet(aDecodeCtx, &pkt);
@@ -172,10 +187,12 @@ int VideoPlayer::decodeAudio() {
     if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
         return 0;
     } else RET(avcodec_receive_frame);
-    
+    // 重采样输出的样本数
     int outSamples = (int)av_rescale_rnd(aSwrOutSpec.sampleRate,
                                     aSwrInFrame->nb_samples,
                                     aSwrInSpec.sampleRate, AV_ROUND_UP);
+    // 由于解码出来的PCM，跟SDL要求的PCM格式可能不一致
+    // 所以需要需要重采样
     ret = swr_convert(aSwrCtx,
                       aSwrOutFrame->data,
                       outSamples,

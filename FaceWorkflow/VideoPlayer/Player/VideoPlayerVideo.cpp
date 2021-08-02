@@ -71,6 +71,13 @@ void VideoPlayer::clearVideoPktList() {
 void VideoPlayer::decodeVideo() {
     while (true) {
         cout << "decodeVideo....." << endl;
+        if (state == Paused && vSeekTime == -1) {
+            continue;
+        }
+        if (state == Stopped) {
+            vCanFree = true;
+            break;
+        }
         vMutex.lock();
         if (vPktList.empty()) {
             vMutex.unlock();
@@ -80,16 +87,33 @@ void VideoPlayer::decodeVideo() {
         AVPacket pkt = vPktList.front();
         vPktList.pop_front();
         vMutex.unlock();
+        // 视频时钟
+        if (pkt.dts != AV_NOPTS_VALUE) {
+            vTime = av_q2d(vStream->time_base) * pkt.dts;
+        }
+
         // 发送数据到解码器
         int ret = avcodec_send_packet(vDecodeCtx, &pkt);
         // 释放pkt
         av_packet_unref(&pkt);
         CONTINUE(avcodec_send_packet);
+        
         while (true) {
+            // 获取解码后的数据
             ret = avcodec_receive_frame(vDecodeCtx, vSwsInFrame);
             if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
                 break;
             } else BREAK(avcodec_receive_frame);
+            
+            // 一定要在解码成功后，再进行下面的判断
+            // 发现视频的时间早于seektime的，直接丢弃
+            if (vSeekTime >= 0) {
+                if (vTime < vSeekTime) {
+                    continue;
+                } else {
+                    vSeekTime = -1;
+                }
+            }
             
             // 像素格式装换
             sws_scale(vSwsCtx,
@@ -99,6 +123,16 @@ void VideoPlayer::decodeVideo() {
                       vDecodeCtx->height,
                       vSwsOutframe->data,
                       vSwsOutframe->linesize);
+            if (hasAudio) {// 有音频
+                // 如果视频包过早被解码出来，那就需要等待对应的音频时钟到达
+                while (vTime > aTime && state == Playing) {
+                    cout << "如果视频包过早被解码出来，那就需要等待对应的音频时钟到达" << endl;
+                    SDL_Delay(5);
+                }
+            } else {
+                // TODO
+            }
+            
             // 把像素格式转换后的图片数据，拷贝一份出来
             uint8_t *data = (uint8_t*)av_malloc(vSwsOutSpec.size);
             memcpy(data, vSwsOutframe->data[0], vSwsOutSpec.size);

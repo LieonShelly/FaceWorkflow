@@ -9,6 +9,9 @@
 #include <SDL.h>
 #include <thread>
 
+#define AUDIO_MAX_PKT_SIZE 1000
+#define VIDEO_MAX_PKT_SIZE 500
+
 VideoPlayer::VideoPlayer() {
     SDL_SetMainReady();
     if (SDL_Init(SDL_INIT_AUDIO)) {
@@ -77,6 +80,7 @@ void VideoPlayer::readFile() {
     hasVideo = initVideoInfo();
     // 到此为止初始化完毕
     cout << "初始化完毕" << endl;
+    setState(Playing);
     // 音频解码子线程：开始工作
     SDL_PauseAudio(0);
     // 视频解码子线程：开始工作
@@ -86,6 +90,12 @@ void VideoPlayer::readFile() {
     
     AVPacket pkt;
     while (true) {
+        // 处理Seek操作
+        int vSize = (int)vPktList.size();
+        int aSize = (int)aPktList.size();
+        if (vSize >= AUDIO_MAX_PKT_SIZE || aSize >= AUDIO_MAX_PKT_SIZE) {
+            continue;
+        }
         ret = av_read_frame(fmtCtx, &pkt);
         if (ret == 0) {
             if (pkt.stream_index == aStream->index) {
@@ -95,12 +105,22 @@ void VideoPlayer::readFile() {
             } else {
                 av_packet_unref(&pkt);
             }
-        } else if (ret == AVERROR_EOF) {
+        } else if (ret == AVERROR_EOF) { // 读取到了文件的尾部
+            if (vSize == 0 && aSize == 0) {
+                // 说明文件正常播放完毕
+                fmtCtxCanFree = true;
+                break;
+            }
             break;
         } else {
             ERROR_BUF;
             continue;
         }
+    }
+    if (fmtCtxCanFree) {
+        stop();
+    } else {
+        fmtCtxCanFree = true;
     }
 }
 
@@ -114,9 +134,17 @@ void VideoPlayer::fataError() {
 
 
 void VideoPlayer::play() {
-    thread([this]() {
-        readFile();
-    }).detach();
+    if (state == Playing) {
+        return;
+    }
+    if (state == Stopped) {
+        thread([this]() {
+            readFile();
+        }).detach();
+    } else {
+        setState(Playing);
+    }
+  
 }
 
 
