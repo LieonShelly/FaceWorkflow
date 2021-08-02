@@ -71,6 +71,7 @@ void VideoPlayer::clearVideoPktList() {
 void VideoPlayer::decodeVideo() {
     while (true) {
         cout << "decodeVideo....." << endl;
+        // 如果是暂停，并且没有Seek操作
         if (state == Paused && vSeekTime == -1) {
             continue;
         }

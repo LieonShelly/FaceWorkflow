@@ -115,8 +115,17 @@ void VideoPlayer::sdlAudioCallbackFunc(void *userData, uint8_t *stream, int len)
 }
 
 void VideoPlayer::sdlAudioCallback(uint8_t *stream, int len) {
+    // 清零（静音）
     SDL_memset(stream, 0, len);
+    // len: SDL音频缓冲区剩余的大小（还未填充的大小）
     while (len > 0) {
+        if (state == Paused) {
+            break;
+        }
+        if (state == Stopped) {
+            aCanFree = true;
+            break;
+        }
         // 说明当前PCM的数据已经全部拷贝到SDL的音频缓冲区了
         // 需要解码下一个pkt，获取新的PCM数据
         if (aSwrOutIdx >= aSwrOutSiize) {

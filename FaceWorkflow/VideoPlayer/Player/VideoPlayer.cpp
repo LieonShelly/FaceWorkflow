@@ -91,6 +91,32 @@ void VideoPlayer::readFile() {
     AVPacket pkt;
     while (true) {
         // 处理Seek操作
+        if (seekTime >= 0) {
+            int streamIdx;
+            if (hasAudio) { // 优先使用音频流索引
+                streamIdx = aStream->index;
+            } else {
+                streamIdx = vStream->index;
+            }
+            AVRational timeBase = fmtCtx->streams[streamIdx]->time_base;
+            int64_t ts = seekTime / av_q2d(timeBase);
+            ret = av_seek_frame(fmtCtx, streamIdx, ts, AVSEEK_FLAG_BACKWARD);
+            if (ret < 0) { // seek失败
+                seekTime = -1;
+                cout << "Seek 失败" << seekTime << ts << streamIdx << endl;
+            } else {
+                cout << "Seek 成功" << seekTime << ts << streamIdx << endl;
+                vSeekTime = seekTime;
+                aSeekTime = seekTime;
+                seekTime = -1;
+                aTime = 0;
+                vTime = 0;
+                // 清空之前的读取的数据包
+                clearAudioPktList();
+                clearVideoPktList();
+            }
+        }
+        
         int vSize = (int)vPktList.size();
         int aSize = (int)aPktList.size();
         if (vSize >= AUDIO_MAX_PKT_SIZE || aSize >= AUDIO_MAX_PKT_SIZE) {
