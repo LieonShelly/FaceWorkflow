@@ -200,8 +200,14 @@ private:
 private:
     void * userData = nullptr;
     using DidDecodeVideoFrame = void (*)(void * userData, VideoPlayer*player, uint8_t *data, VideoSwsSpec outSpec);
+    using StateChanged = void(*)(void *userData, VideoPlayer *player);
+    using TimeChanged = void(*)(void *userData, VideoPlayer *player);
+    using PlayerFailed = void(*)(void *userData, VideoPlayer *player);
     typedef struct PlayerCallback {
         DidDecodeVideoFrame didDecodeVideoFrame = nullptr;
+        StateChanged stateChanged = nullptr;
+        TimeChanged timeChanged = nullptr;
+        PlayerFailed playerFailed = nullptr;
     } Callback;
     
     Callback callback;
@@ -212,6 +218,8 @@ public:
     void readFile();
     void setUserData(void * userData);
     void setDecodeVideoFrameCallback(DidDecodeVideoFrame callback);
+    void setStateCallback(StateChanged callback);
+    void setTimeChangedCallback(TimeChanged callback);
 };
 
 #endif /* VideoPlayer_hpp */

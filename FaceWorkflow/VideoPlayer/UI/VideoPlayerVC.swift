@@ -40,7 +40,6 @@ extension VideoPlayerVC: PlayerServiceDelegate {
     
     func playerDidDecodeVideoFrame(_ imge: CGImage?, imgSize size: CGSize) {
         DispatchQueue.main.async {
-//            self.service.releasePreFrame()
             let width = self.playerVIew.bounds.width
             let height = self.playerVIew.bounds.height
             
@@ -66,4 +65,13 @@ extension VideoPlayerVC: PlayerServiceDelegate {
             self.contenView.setPlayerContents(imge!)
         }
     }
+    
+    func playerTimeDidChanged(_ time: Double) {
+        print("playerTimeDidChanged:\(time)")
+    }
+    
+    func playerStateDidChanged(_ state: PlayerState) {
+        
+    }
+    
 }

@@ -49,6 +49,32 @@
     }
 }
 
+void didStateChanged(void * userData, VideoPlayer *player) {
+    VideoService *service = (__bridge VideoService*)userData;
+    if ([service.delegate respondsToSelector:@selector(playerStateDidChanged:)]) {
+        PlayerState state = PlayerStateStopped;
+        switch (player->getState()) {
+            case VideoPlayer::Paused:
+                state = PlayerStatePaused;
+                break;
+            case VideoPlayer::Playing:
+                state = PlayerStatePlaying;
+                break;
+            case VideoPlayer::Stopped:
+                state = PlayerStateStopped;
+                break;
+        }
+        [service.delegate playerStateDidChanged:state];
+    }
+}
+
+void didTimeChanged(void * userData, VideoPlayer *player) {
+    VideoService *service = (__bridge VideoService*)userData;
+    if ([service.delegate respondsToSelector:@selector(playerTimeDidChanged:)]) {
+        [service.delegate playerTimeDidChanged:player->getTime()];
+    }
+}
+
 void didDecodeVideoFrame(void * userData, VideoPlayer *player, uint8_t *data, VideoPlayer::VideoSwsSpec spec) {
     VideoService *service = (__bridge VideoService*)userData;
     if ([service.delegate respondsToSelector:@selector(playerDidDecodeVideoFrame:imgSize:)]) {
@@ -63,6 +89,8 @@ void didDecodeVideoFrame(void * userData, VideoPlayer *player, uint8_t *data, Vi
 
 - (void)setPlayerCallback {
     player->setDecodeVideoFrameCallback(didDecodeVideoFrame);
+    player->setTimeChangedCallback(didTimeChanged);
+    player->setStateCallback(didStateChanged);
 }
 
 

@@ -8,11 +8,19 @@
 #import <Foundation/Foundation.h>
 #import <CoreImage/CoreImage.h>
 
+typedef enum : NSUInteger {
+    PlayerStateStopped = 0,
+    PlayerStatePlaying,
+    PlayerStatePaused
+} PlayerState;
+
 @protocol PlayerServiceDelegate <NSObject>
-
+@required
 - (void)playerDidDecodeVideoFrame:(CGImageRef _Nullable )imge imgSize:(CGSize)size;
-
-@end
+@optional
+- (void)playerTimeDidChanged:(double)time;
+- (void)playerStateDidChanged:(PlayerState)state;
+@end;
 
 NS_ASSUME_NONNULL_BEGIN
 

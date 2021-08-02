@@ -145,11 +145,12 @@ void VideoPlayer::sdlAudioCallback(uint8_t *stream, int len) {
         int fillLen = aSwrOutSiize - aSwrOutIdx;
         fillLen = min(fillLen, len);
         
-        // 获取当期音量
+        // 获取当前音量
+        int  volumn = mute ? 0 : ((this->volumn * 1.0 / Max) * SDL_MIX_MAXVOLUME);
         // 填充SDL缓冲区
         SDL_MixAudio(stream,
                      aSwrOutFrame->data[0] + aSwrOutIdx,
-                     fillLen, SDL_MIX_MAXVOLUME);
+                     fillLen, volumn);
         // 移动偏移量
         len -= fillLen;
         stream += fillLen;
@@ -175,6 +176,9 @@ int VideoPlayer::decodeAudio() {
     if (pkt.pts != AV_NOPTS_VALUE) {
         aTime = av_q2d(aStream->time_base) * pkt.pts;
         // 通知外界：播放时间点发生了改变
+        if (callback.timeChanged) {
+            callback.timeChanged(userData, this);
+        }
     }
     // 如果是视频，不能在这个位置判断（不能提前释放pkt，不然会导致B帧。P帧解码失败，画面直接撕裂）
     // 发现音频的时间是早于seektime的，直接丢弃

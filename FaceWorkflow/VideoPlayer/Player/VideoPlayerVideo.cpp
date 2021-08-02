@@ -149,10 +149,6 @@ void VideoPlayer::decodeVideo() {
     }
 }
 
-void VideoPlayer::setDecodeVideoFrameCallback(DidDecodeVideoFrame callback) {
-    this->callback.didDecodeVideoFrame = callback;
-}
-
 void VideoPlayer::freeVideo() {
     clearVideoPktList();
     avcodec_free_context(&vDecodeCtx);

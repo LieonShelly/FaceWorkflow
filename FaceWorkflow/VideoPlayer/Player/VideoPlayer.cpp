@@ -189,7 +189,7 @@ void VideoPlayer::pause() {
     if (state != Playing) {
         return;
     }
-    
+    setState(Paused);
 }
 
 void VideoPlayer::setState(State state) {
@@ -198,6 +198,21 @@ void VideoPlayer::setState(State state) {
     }
     this->state = state;
     // 通知外部状态状态改变了
+    if (callback.stateChanged) {
+        callback.stateChanged(userData, this);
+    }
+}
+
+void VideoPlayer::setDecodeVideoFrameCallback(DidDecodeVideoFrame callback) {
+    this->callback.didDecodeVideoFrame = callback;
+}
+
+void VideoPlayer::setStateCallback(StateChanged callback) {
+    this->callback.stateChanged = callback;
+}
+
+void VideoPlayer::setTimeChangedCallback(TimeChanged callback) {
+    this->callback.timeChanged = callback;
 }
 
 void VideoPlayer::stop() {
@@ -207,6 +222,9 @@ void VideoPlayer::stop() {
     state = Stopped;
     free();
     // 通知外界
+    if (callback.stateChanged) {
+        callback.stateChanged(userData, this);
+    }
 }
 
 bool VideoPlayer::isPlaying()  {
@@ -244,6 +262,7 @@ void VideoPlayer::setMute(bool mute) {
 bool VideoPlayer::isMute() {
     return this->mute;
 }
+
 
 /*
 音视频同步：
