@@ -155,11 +155,22 @@ private:
     
     void fataError();
     
+private:
+    void * userData = nullptr;
+    using DidDecodeVideoFrame = void (*)(void * userData, VideoPlayer*player, uint8_t *data, VideoSwsSpec outSpec);
+    typedef struct PlayerCallback {
+        DidDecodeVideoFrame didDecodeVideoFrame = nullptr;
+    } Callback;
+    
+    Callback callback;
+    
 public:
     // 初始化解码器和解码上下文
     int initDecoder(AVCodecContext **decodecCtx, AVStream**stream, AVMediaType type);
     void readFile();
     void free();
+    void setUserData(void * userData);
+    void setDecodeVideoFrameCallback(DidDecodeVideoFrame callback);
 };
 
 #endif /* VideoPlayer_hpp */

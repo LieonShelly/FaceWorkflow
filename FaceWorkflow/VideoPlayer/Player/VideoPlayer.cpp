@@ -118,3 +118,8 @@ void VideoPlayer::play() {
         readFile();
     }).detach();
 }
+
+
+void VideoPlayer::setUserData(void * userData) {
+    this->userData = userData;
+}

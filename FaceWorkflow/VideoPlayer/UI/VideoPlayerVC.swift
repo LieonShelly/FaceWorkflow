@@ -14,9 +14,17 @@ class VideoPlayerVC: UIViewController {
         let service = VideoService()
         return service
     }()
+    fileprivate lazy var contenView: PlayerView = {
+        let playerView = PlayerView()
+        return playerView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        playerVIew.addSubview(contenView)
+        contenView.snp.makeConstraints {
+            $0.edges.equalTo(0)
+        }
     }
     
     @IBAction func playBtnAction(_ sender: Any) {

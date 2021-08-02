@@ -103,9 +103,13 @@ void VideoPlayer::decodeVideo() {
             memcpy(data, vSwsOutframe->data[0], vSwsOutSpec.size);
             // 回调给外部进行渲染
             cout << "渲染了一帧" << vSwsOutframe->pts << " 剩余包数量：" << vPktList.size() << endl;
-            if (data) {
-                delete data;
+            if (callback.didDecodeVideoFrame) {
+                callback.didDecodeVideoFrame(this->userData, this, data, vSwsOutSpec);
             }
         }
     }
+}
+
+void VideoPlayer::setDecodeVideoFrameCallback(DidDecodeVideoFrame callback) {
+    this->callback.didDecodeVideoFrame = callback;
 }
