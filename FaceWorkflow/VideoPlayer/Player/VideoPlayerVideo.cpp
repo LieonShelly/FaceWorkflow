@@ -15,7 +15,7 @@ int VideoPlayer::initVideoInfo() {
     // 初始化解码器
     int ret = initDecoder(&vDecodeCtx, &vStream, AVMEDIA_TYPE_VIDEO);
     RET(initDecoder);
-
+    
     // 初始化像素格式转换
     ret = initSws();
     RET(initSws)
@@ -151,4 +151,20 @@ void VideoPlayer::decodeVideo() {
 
 void VideoPlayer::setDecodeVideoFrameCallback(DidDecodeVideoFrame callback) {
     this->callback.didDecodeVideoFrame = callback;
+}
+
+void VideoPlayer::freeVideo() {
+    clearVideoPktList();
+    avcodec_free_context(&vDecodeCtx);
+    av_frame_free(&vSwsInFrame);
+    if (vSwsOutframe) {
+        av_freep(&vSwsOutframe->data[0]);
+        av_frame_free(&vSwsOutframe);
+    }
+    sws_freeContext(vSwsCtx);
+    vSwsCtx = nullptr;
+    vStream = nullptr;
+    vTime = 0;
+    vCanFree = false;
+    vSeekTime = -1;
 }

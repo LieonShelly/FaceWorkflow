@@ -210,3 +210,24 @@ int VideoPlayer::decodeAudio() {
     RET(swr_convert)
     return ret * aSwrOutSpec.bytesPerSampleFrame;
 }
+
+void VideoPlayer::freeAudio() {
+    aTime = 0;
+    aSwrOutIdx = 0;
+    aSwrOutSiize = 0;
+    aStream = nullptr;
+    aCanFree = false;
+    aSeekTime = -1;
+    
+    clearAudioPktList();
+    avcodec_free_context(&aDecodeCtx);
+    swr_free(&aSwrCtx);
+    av_frame_free(&aSwrInFrame);
+    if (aSwrOutFrame) {
+        av_freep(&aSwrOutFrame->data[0]);
+        av_frame_free(&aSwrOutFrame);
+    }
+    
+    SDL_PauseAudio(1);
+    SDL_CloseAudio();
+}

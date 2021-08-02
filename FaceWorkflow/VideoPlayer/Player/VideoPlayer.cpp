@@ -88,8 +88,9 @@ void VideoPlayer::readFile() {
         decodeVideo();
     }).detach();
     
+    // 从输入文件中读取数据
     AVPacket pkt;
-    while (true) {
+    while (state != Stopped) {
         // 处理Seek操作
         if (seekTime >= 0) {
             int streamIdx;
@@ -137,7 +138,6 @@ void VideoPlayer::readFile() {
                 fmtCtxCanFree = true;
                 break;
             }
-            break;
         } else {
             ERROR_BUF;
             continue;
@@ -151,7 +151,14 @@ void VideoPlayer::readFile() {
 }
 
 void VideoPlayer::free() {
-    
+    while (hasAudio && !aCanFree);
+    while (hasVideo && !vCanFree);
+    while (!fmtCtxCanFree);
+    avformat_close_input(&fmtCtx);
+    fmtCtxCanFree = false;
+    seekTime = -1;
+    freeAudio();
+    freeVideo();
 }
 
 void VideoPlayer::fataError() {
