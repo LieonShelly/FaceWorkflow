@@ -16,7 +16,7 @@ int VideoPlayer::initVideoInfo() {
     int ret = initDecoder(&vDecodeCtx, &vStream, AVMEDIA_TYPE_VIDEO);
     RET(initDecoder);
 
-    // 初始化像素格式装换
+    // 初始化像素格式转换
     ret = initSws();
     RET(initSws)
     return 0;
@@ -42,7 +42,7 @@ int VideoPlayer::initSws() {
     if (!vSwsCtx) {
         return -1;
     }
-    // 初始化像素格式转换的输出frame
+    // 初始化像素格式转换的输入frame
     vSwsInFrame = av_frame_alloc();
     // 初始化像素格式转换的输出frame
     vSwsOutframe = av_frame_alloc();
@@ -70,6 +70,7 @@ void VideoPlayer::clearVideoPktList() {
 
 void VideoPlayer::decodeVideo() {
     while (true) {
+        cout << "decodeVideo....." << endl;
         vMutex.lock();
         if (vPktList.empty()) {
             vMutex.unlock();

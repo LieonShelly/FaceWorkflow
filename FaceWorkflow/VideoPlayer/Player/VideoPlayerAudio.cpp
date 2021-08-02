@@ -21,12 +21,12 @@ int VideoPlayer::initAudioInfo() {
 }
 
 int VideoPlayer::initSwr() {
-    // 重采样输入参数
+    // 设置重采样输入参数
     aSwrInSpec.sampleFmt = aDecodeCtx->sample_fmt;
     aSwrInSpec.sampleRate = aDecodeCtx->sample_rate;
     aSwrInSpec.chLayout = (int)aDecodeCtx->channel_layout;
     aSwrInSpec.chs = aDecodeCtx->channels;
-    // 重采言输出参数
+    // 设置重采样输出参数
     aSwrOutSpec.sampleFmt = AV_SAMPLE_FMT_S16;
     aSwrOutSpec.sampleRate = 44100;
     aSwrOutSpec.chLayout = AV_CH_LAYOUT_STEREO;
@@ -55,12 +55,13 @@ int VideoPlayer::initSwr() {
         cout << "av_frame_alloc error" << endl;
         return -1;
     }
+    // 初始化重采样的输出frame
     aSwrInFrame = av_frame_alloc();
     if (!aSwrInFrame) {
         cout << "av_frame_alloc error" << endl;
         return -1;
     }
-    // 分配aSwrOutFrame的data[0]指向的内存空间
+    // 为aSwrOutFrame的data[0]分配内存空间
     ret = av_samples_alloc(aSwrOutFrame->data,
                            aSwrOutFrame->linesize,
                            aSwrOutSpec.chs,
