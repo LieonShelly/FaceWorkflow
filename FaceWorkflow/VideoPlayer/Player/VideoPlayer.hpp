@@ -61,10 +61,32 @@ public:
         int height;
         AVPixelFormat pixFmt;
         int size;
-    }VideoSwsSpec;
-    
+    } VideoSwsSpec;
+    // 设置播放文件路径
     void setFilename(string name);
+    // 播放
     void play();
+    // 暂停
+    void pause();
+    // 停止
+    void stop();
+    // 是否在播放中
+    bool isPlaying();
+    // 获取当前播放状态
+    State getState();
+    // 获取总时长（秒）
+    int getDuration();
+    // 当前的播放时刻
+    int getTime();
+    // 设置当前的播放时刻
+    void setTime(int seekTime);
+    // 设置音量
+    void setVolumn(int volumn);
+    int getVolumn();
+    // 设置静音
+    void setMute(bool mute);
+    bool isMute();
+    
     
 private:
     /**音频相关 */
@@ -135,6 +157,12 @@ private:
     list<AVPacket> vPktList;
     // 存放视频包的锁
     CondMutex vMutex;
+    // 视频时钟，当前视频包对应的时间值
+    double vTime = 0;
+    // 视频资源是否可以释放
+    bool vCanFree = false;
+    // 外部设置的当期播放时刻(用于完成seek功能)
+    int vSeekTime = -1;
     // 是否有视频
     bool hasVideo = false;
     // 初始化视频信息
@@ -151,9 +179,23 @@ private:
 private:
     // 解封装上下文
     AVFormatContext *fmtCtx = nullptr;
+    // fmtCtx是否可以释放
+    bool fmtCtxCanFree = false;
+    // 音量
+    int volumn = Max;
+    // 静音
+    bool mute = false;
+    // 播放状态
+    State state = Stopped;
+    // 外面设置的当前播放时刻
+    int seekTime = - 1;
+    // 文件名
     char filename[512];
-    
+    void free();
+    void freeAudio();
+    void freeVideo();
     void fataError();
+    void setState(State state);
     
 private:
     void * userData = nullptr;
@@ -168,7 +210,6 @@ public:
     // 初始化解码器和解码上下文
     int initDecoder(AVCodecContext **decodecCtx, AVStream**stream, AVMediaType type);
     void readFile();
-    void free();
     void setUserData(void * userData);
     void setDecodeVideoFrameCallback(DidDecodeVideoFrame callback);
 };

@@ -123,3 +123,86 @@ void VideoPlayer::play() {
 void VideoPlayer::setUserData(void * userData) {
     this->userData = userData;
 }
+
+void VideoPlayer::pause() {
+    if (state != Playing) {
+        return;
+    }
+    
+}
+
+void VideoPlayer::setState(State state) {
+    if (state == this->state) {
+        return;
+    }
+    this->state = state;
+    // 通知外部状态状态改变了
+}
+
+void VideoPlayer::stop() {
+    if (state == Stopped) {
+        return;
+    }
+    state = Stopped;
+    free();
+    // 通知外界
+}
+
+bool VideoPlayer::isPlaying()  {
+    return state == Playing;
+}
+
+VideoPlayer::State VideoPlayer::getState() {
+    return this->state;
+}
+
+int VideoPlayer::getDuration() {
+    return fmtCtx ?  fmtCtx->duration * av_q2d(AV_TIME_BASE_Q) : 0;
+}
+
+int VideoPlayer::getTime() {
+    return round(aTime);
+}
+
+void VideoPlayer::setTime(int seekTime) {
+    this->seekTime = seekTime;
+}
+
+void VideoPlayer::setVolumn(int volumn) {
+    this->volumn = volumn;
+}
+
+int VideoPlayer::getVolumn() {
+    return volumn;
+}
+
+void VideoPlayer::setMute(bool mute) {
+    this->mute = mute;
+}
+
+bool VideoPlayer::isMute() {
+    return this->mute;
+}
+
+/*
+音视频同步：
+1.视频同步到音频
+
+2.音频同步到视频
+*/
+
+/*
+1.现实时间
+比如一个视频的时长是120秒，其中120秒就是现实时间
+比如一个视频播放到了第58秒，其中第58秒就是现实时间
+
+2.FFmpeg时间
+1> 时间戳（timestamp），类型是int64_t
+2> 时间基（time base\unit），是时间戳的单位，类型是AVRational
+
+3.FFmpeg时间 与 现实时间的转换
+1> 现实时间 = 时间戳 * (时间基的分子 / 时间基的分母)
+2> 现实时间 = 时间戳 * av_q2d(时间基)
+3> 时间戳 = 现实时间 / (时间基的分子 / 时间基的分母)
+4> 时间戳 = 现实时间 / av_q2d(时间基)
+*/
