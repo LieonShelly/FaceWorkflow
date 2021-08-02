@@ -105,6 +105,9 @@ void VideoPlayer::decodeVideo() {
             cout << "渲染了一帧" << vSwsOutframe->pts << " 剩余包数量：" << vPktList.size() << endl;
             if (callback.didDecodeVideoFrame) {
                 callback.didDecodeVideoFrame(this->userData, this, data, vSwsOutSpec);
+            } else {
+                delete data;
+                data = nullptr;
             }
         }
     }

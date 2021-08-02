@@ -11,6 +11,8 @@
 @interface VideoService()
 {
     VideoPlayer *player;
+    uint8_t *preFramedata;
+    CGImageRef preFrame;
 }
 @end
 
@@ -21,6 +23,8 @@
     self = [super init];
     if (self) {
         player = new VideoPlayer();
+        player->setUserData((__bridge void *)self);
+        [self setPlayerCallback];
     }
     return self;
 }
@@ -33,10 +37,27 @@
     player->play();
 }
 
+- (void)releasePreFrame {
+    VideoService * service = self;
+    if (service->preFrame) {
+        delete service->preFramedata;
+        service->preFramedata = nullptr;
+    }
+    if (service->preFrame) {
+        CGImageRelease(service->preFrame);
+        service->preFrame = nil;
+    }
+}
+
 void didDecodeVideoFrame(void * userData, VideoPlayer *player, uint8_t *data, VideoPlayer::VideoSwsSpec spec) {
     VideoService *service = (__bridge VideoService*)userData;
     if ([service.delegate respondsToSelector:@selector(playerDidDecodeVideoFrame:imgSize:)]) {
-        
+        CGImageRef cIImage = [service generateImage:spec data:data];
+        [service releasePreFrame];
+        service->preFrame = cIImage;
+        service->preFramedata = data;
+        [service.delegate playerDidDecodeVideoFrame:cIImage imgSize:CGSizeMake(spec.width, spec.height)];
+   
     }
 }
 

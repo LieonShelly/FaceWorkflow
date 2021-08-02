@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoService : NSObject
 @property (nonatomic, weak) id<PlayerServiceDelegate> delegate;
-
+- (void)releasePreFrame;
 - (void)setFilename:(NSString*)filename;
 - (void)play;
 @end
