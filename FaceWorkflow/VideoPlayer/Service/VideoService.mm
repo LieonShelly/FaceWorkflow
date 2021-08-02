@@ -93,7 +93,6 @@ void didDecodeVideoFrame(void * userData, VideoPlayer *player, uint8_t *data, Vi
     player->setStateCallback(didStateChanged);
 }
 
-
 - (CGImageRef)generateImage:(const VideoPlayer::VideoSwsSpec &)output data:(void*)buffer {
     int width = output.width;
     int height = output.height;
@@ -123,5 +122,70 @@ void didDecodeVideoFrame(void * userData, VideoPlayer *player, uint8_t *data, Vi
                                     NO,          // should interpolate
                                     renderingIntent);
     return iref;
+}
+
+// 暂停
+- (void)pause {
+    player->pause();
+}
+
+// 停止
+- (void)stop {
+    player->stop();
+}
+
+// 是否在播放中
+- (BOOL)isPlaying {
+    return player->isPlaying();
+}
+
+// 获取当前播放状态
+- (PlayerState)getState {
+    PlayerState state = PlayerStateStopped;
+    switch (player->getState()) {
+        case VideoPlayer::Paused:
+            state = PlayerStatePaused;
+            break;
+        case VideoPlayer::Playing:
+            state = PlayerStatePlaying;
+            break;
+        case VideoPlayer::Stopped:
+            state = PlayerStateStopped;
+            break;
+    }
+    return state;
+}
+
+// 获取总时长（秒）
+- (int)getDuration {
+    return player->getDuration();
+}
+
+// 当前的播放时刻
+- (int)getTime {
+    return player->getTime();
+}
+
+// 设置当前的播放时刻
+- (void)setTime:(int)seekTime {
+    player->setTime(seekTime);
+}
+
+// 设置音量
+- (void)setVolumn:(int)volumn {
+    player->setVolumn(volumn);
+}
+
+- (int)getVolumn {
+    return player->getVolumn();
+}
+
+// 设置静音
+- (void)setMute:(bool)mute {
+    player->setMute(mute);
+}
+
+- (bool)isMute {
+    return player->isMute();
 }
 @end

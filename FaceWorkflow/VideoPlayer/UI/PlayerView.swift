@@ -26,7 +26,7 @@ class PlayerView: UIView {
         self.playLayer.frame = rect
     }
     
-    func setPlayerContents(_ contents: CGImage) {
+    func setPlayerContents(_ contents: CGImage?) {
         self.playLayer.contents = contents
     }
 }

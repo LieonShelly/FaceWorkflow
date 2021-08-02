@@ -243,12 +243,13 @@ int VideoPlayer::getTime() {
     return round(aTime);
 }
 
-void VideoPlayer::setTime(int seekTime) {
-    this->seekTime = seekTime;
+void VideoPlayer::setTime(double seekTime) {
+    int duration = getDuration();
+    this->seekTime = round(seekTime * duration * 1.0  / 1.0);
 }
 
-void VideoPlayer::setVolumn(int volumn) {
-    this->volumn = volumn;
+void VideoPlayer::setVolumn(double volumn) {
+    this->volumn = round(volumn * Max);
 }
 
 int VideoPlayer::getVolumn() {

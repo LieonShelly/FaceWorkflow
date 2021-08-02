@@ -78,10 +78,10 @@ public:
     int getDuration();
     // 当前的播放时刻
     int getTime();
-    // 设置当前的播放时刻
-    void setTime(int seekTime);
+    // 设置当前的播放时刻 [0, 1]
+    void setTime(double seekTime);
     // 设置音量
-    void setVolumn(int volumn);
+    void setVolumn(double volumn);
     int getVolumn();
     // 设置静音
     void setMute(bool mute);

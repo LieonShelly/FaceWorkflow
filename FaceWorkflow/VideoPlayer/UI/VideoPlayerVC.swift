@@ -9,6 +9,7 @@ import UIKit
 
 class VideoPlayerVC: UIViewController {
     @IBOutlet weak var playbtn: UIButton!
+    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var playerVIew: UIView!
     fileprivate lazy var service: VideoService = {
         let service = VideoService()
@@ -28,12 +29,34 @@ class VideoPlayerVC: UIViewController {
         service.delegate = self
     }
     
-    @IBAction func playBtnAction(_ sender: Any) {
-        let filename = Bundle.main.path(forResource: "test_video.MP4", ofType: nil)!
-        service.setFilename(filename)
-        service.play()
+    @IBAction func playBtnAction(_ sender: UIButton) {
+        if sender.isSelected {
+            service.pause()
+        } else {
+            let filename = Bundle.main.path(forResource: "test_video.MP4", ofType: nil)!
+            service.setFilename(filename)
+            service.play()
+        }
+        sender.isSelected  = !sender.isSelected
     }
     
+    @IBAction func stopBtnAction(_ sender: Any) {
+        service.stop()
+        contenView.setPlayerContents(nil)
+    }
+    
+    @IBAction func muteBtnAction(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        service.setMute(sender.isSelected)
+    }
+    
+    @IBAction func volumnSliderAction(_ sender: UISlider) {
+        service.setVolumn(Double(sender.value))
+    }
+    
+    @IBAction func progressBtnAction(_ sender: UISlider) {
+        service.setTime(Double(sender.value))
+    }
 }
 
 extension VideoPlayerVC: PlayerServiceDelegate {
@@ -68,10 +91,15 @@ extension VideoPlayerVC: PlayerServiceDelegate {
     
     func playerTimeDidChanged(_ time: Double) {
         print("playerTimeDidChanged:\(time)")
+        let duration = service.getDuration()
+        DispatchQueue.main.async {
+            self.timeLabel.text = "\(time)" + "/" + "\(duration)"
+        }
+       
     }
     
     func playerStateDidChanged(_ state: PlayerState) {
-        
+
     }
     
 }
