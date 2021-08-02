@@ -147,6 +147,7 @@ void VideoPlayer::sdlAudioCallback(uint8_t *stream, int len) {
         
         // 获取当前音量
         int  volumn = mute ? 0 : ((this->volumn * 1.0 / Max) * SDL_MIX_MAXVOLUME);
+        cout << "volumn" << volumn << endl;
         // 填充SDL缓冲区
         SDL_MixAudio(stream,
                      aSwrOutFrame->data[0] + aSwrOutIdx,

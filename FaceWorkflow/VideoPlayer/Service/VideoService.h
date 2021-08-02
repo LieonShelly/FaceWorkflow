@@ -42,9 +42,9 @@ NS_ASSUME_NONNULL_BEGIN
 // 当前的播放时刻
 - (int)getTime;
 // 设置当前的播放时刻
-- (void)setTime:(double)seekTime;
+- (void)setTime:(float)seekTime;
 // 设置音量
-- (void)setVolumn:(double)volumn;
+- (void)setVolumn:(float)volumn;
 - (int)getVolumn;
 // 设置静音
 - (void)setMute:(bool)mute;

@@ -167,12 +167,12 @@ void didDecodeVideoFrame(void * userData, VideoPlayer *player, uint8_t *data, Vi
 }
 
 // 设置当前的播放时刻
-- (void)setTime:(int)seekTime {
+- (void)setTime:(float)seekTime {
     player->setTime(seekTime);
 }
 
 // 设置音量
-- (void)setVolumn:(int)volumn {
+- (void)setVolumn:(float)volumn {
     player->setVolumn(volumn);
 }
 

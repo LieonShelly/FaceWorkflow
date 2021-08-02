@@ -19,7 +19,9 @@ class VideoPlayerVC: UIViewController {
         let playerView = PlayerView()
         return playerView
     }()
+    @IBOutlet weak var progresSlider: UISlider!
     
+    @IBOutlet weak var volumnSlider: UISlider!
     override func viewDidLoad() {
         super.viewDidLoad()
         playerVIew.addSubview(contenView)
@@ -27,6 +29,13 @@ class VideoPlayerVC: UIViewController {
             $0.edges.equalTo(0)
         }
         service.delegate = self
+        volumnSlider.maximumValue = 1
+        volumnSlider.minimumValue = 0
+        volumnSlider.setValue(1, animated: true)
+        
+        progresSlider.maximumValue = 1
+        progresSlider.minimumValue = 0
+        progresSlider.setValue(1, animated: true)
     }
     
     @IBAction func playBtnAction(_ sender: UIButton) {
@@ -51,11 +60,11 @@ class VideoPlayerVC: UIViewController {
     }
     
     @IBAction func volumnSliderAction(_ sender: UISlider) {
-        service.setVolumn(Double(sender.value))
+        service.setVolumn(sender.value)
     }
     
     @IBAction func progressBtnAction(_ sender: UISlider) {
-        service.setTime(Double(sender.value))
+        service.setTime(sender.value)
     }
 }
 
@@ -94,6 +103,8 @@ extension VideoPlayerVC: PlayerServiceDelegate {
         let duration = service.getDuration()
         DispatchQueue.main.async {
             self.timeLabel.text = "\(time)" + "/" + "\(duration)"
+            let progress = time / Double(duration) * 1.0
+            self.progresSlider.setValue(Float(progress), animated: true)
         }
        
     }
