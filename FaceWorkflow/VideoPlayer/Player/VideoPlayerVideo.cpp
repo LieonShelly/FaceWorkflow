@@ -91,7 +91,7 @@ void VideoPlayer::decodeVideo() {
         if (pkt.dts != AV_NOPTS_VALUE) {
             vTime = av_q2d(vStream->time_base) * pkt.dts;
         }
-
+        cout << "vTime: " << vTime << " aTime: " << aTime << endl;
         // 发送数据到解码器
         int ret = avcodec_send_packet(vDecodeCtx, &pkt);
         // 释放pkt

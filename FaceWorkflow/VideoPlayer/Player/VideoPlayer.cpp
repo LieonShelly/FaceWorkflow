@@ -75,9 +75,9 @@ void VideoPlayer::readFile() {
     fflush(stderr);
     
     // 初始化音频信息
-    hasAudio = initAudioInfo();
+    hasAudio = initAudioInfo() >= 0;
     // 初始化视频信息
-    hasVideo = initVideoInfo();
+    hasVideo = initVideoInfo() >= 0;
     // 到此为止初始化完毕
     cout << "初始化完毕" << endl;
     setState(Playing);
