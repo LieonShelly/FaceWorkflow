@@ -93,6 +93,7 @@
 		CDD9CE1326B6A4E50030D340 /* VideoService.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1226B6A4E50030D340 /* VideoService.mm */; };
 		CDD9CE1526B6E74C0030D340 /* VideoPlayerVideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1426B6E74C0030D340 /* VideoPlayerVideo.cpp */; };
 		CDD9CE1726B6FE060030D340 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1626B6FE060030D340 /* PlayerView.swift */; };
+		CDD9CE1E26B92E5C0030D340 /* HashMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1D26B92E5B0030D340 /* HashMap.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -11955,6 +11956,7 @@
 		CDD9CE1226B6A4E50030D340 /* VideoService.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = VideoService.mm; sourceTree = "<group>"; };
 		CDD9CE1426B6E74C0030D340 /* VideoPlayerVideo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VideoPlayerVideo.cpp; sourceTree = "<group>"; };
 		CDD9CE1626B6FE060030D340 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		CDD9CE1D26B92E5B0030D340 /* HashMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashMap.swift; sourceTree = "<group>"; };
 		E0C6CAA710913C2AB6BBC077 /* Pods_FaceWorkflow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FaceWorkflow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -24651,6 +24653,7 @@
 		CDA8D78125C2A4ED00CB33D4 /* FaceWorkflow */ = {
 			isa = PBXGroup;
 			children = (
+				CDD9CE1C26B92E3C0030D340 /* 算法 */,
 				CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */,
 				CDD9CDFA26B3E1FB0030D340 /* VideoPlayer */,
 				CDBBCDFC26ADC29900FE00FF /* MutexCond */,
@@ -25034,6 +25037,22 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		CDD9CE1C26B92E3C0030D340 /* 算法 */ = {
+			isa = PBXGroup;
+			children = (
+				CDD9CE1F26B93BD40030D340 /* New Group */,
+				CDD9CE1D26B92E5B0030D340 /* HashMap.swift */,
+			);
+			path = "算法";
+			sourceTree = "<group>";
+		};
+		CDD9CE1F26B93BD40030D340 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		E8EAB80CC7E317037E90FB7C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -25174,6 +25193,7 @@
 			files = (
 				CDD9CE0A26B3EAB80030D340 /* VideoPlayer.cpp in Sources */,
 				CDD9CE1326B6A4E50030D340 /* VideoService.mm in Sources */,
+				CDD9CE1E26B92E5C0030D340 /* HashMap.swift in Sources */,
 				CDA8D78725C2A4ED00CB33D4 /* ViewController.swift in Sources */,
 				CD49336A2688DA7400D1FE3F /* RecordWAV.mm in Sources */,
 				CDC36C80267C43A900C89C9F /* PermenantThread.m in Sources */,
