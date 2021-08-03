@@ -29,6 +29,55 @@ void VideoPlayer::setFilename(string name) {
     memcpy(this->filename, filename, strlen(filename) + 1);
 }
 
+void VideoPlayer::stop() {
+    if (state == Stopped) {
+        return;
+    }
+    state = Stopped;
+    free();
+    // 通知外界
+    if (callback.stateChanged) {
+        callback.stateChanged(userData, this);
+    }
+}
+
+bool VideoPlayer::isPlaying()  {
+    return state == Playing;
+}
+
+VideoPlayer::State VideoPlayer::getState() {
+    return this->state;
+}
+
+int VideoPlayer::getDuration() {
+    return fmtCtx ?  fmtCtx->duration * av_q2d(AV_TIME_BASE_Q) : 0;
+}
+
+int VideoPlayer::getTime() {
+    return round(aTime);
+}
+
+void VideoPlayer::setTime(double seekTime) {
+    int duration = getDuration();
+    this->seekTime = round(seekTime * duration * 1.0  / 1.0);
+}
+
+void VideoPlayer::setVolumn(double volumn) {
+    this->volumn = round(volumn * Max);
+}
+
+int VideoPlayer::getVolumn() {
+    return volumn;
+}
+
+void VideoPlayer::setMute(bool mute) {
+    this->mute = mute;
+}
+
+bool VideoPlayer::isMute() {
+    return this->mute;
+}
+
 int VideoPlayer::initDecoder(AVCodecContext **decodecCtx, AVStream**stream, AVMediaType type) {
     // 根据type寻找到最合适的流信息
     int ret = av_find_best_stream(fmtCtx, type, -1, -1, nullptr, 0);
@@ -165,7 +214,6 @@ void VideoPlayer::fataError() {
     
 }
 
-
 void VideoPlayer::play() {
     if (state == Playing) {
         return;
@@ -179,7 +227,6 @@ void VideoPlayer::play() {
     }
   
 }
-
 
 void VideoPlayer::setUserData(void * userData) {
     this->userData = userData;
@@ -213,55 +260,6 @@ void VideoPlayer::setStateCallback(StateChanged callback) {
 
 void VideoPlayer::setTimeChangedCallback(TimeChanged callback) {
     this->callback.timeChanged = callback;
-}
-
-void VideoPlayer::stop() {
-    if (state == Stopped) {
-        return;
-    }
-    state = Stopped;
-    free();
-    // 通知外界
-    if (callback.stateChanged) {
-        callback.stateChanged(userData, this);
-    }
-}
-
-bool VideoPlayer::isPlaying()  {
-    return state == Playing;
-}
-
-VideoPlayer::State VideoPlayer::getState() {
-    return this->state;
-}
-
-int VideoPlayer::getDuration() {
-    return fmtCtx ?  fmtCtx->duration * av_q2d(AV_TIME_BASE_Q) : 0;
-}
-
-int VideoPlayer::getTime() {
-    return round(aTime);
-}
-
-void VideoPlayer::setTime(double seekTime) {
-    int duration = getDuration();
-    this->seekTime = round(seekTime * duration * 1.0  / 1.0);
-}
-
-void VideoPlayer::setVolumn(double volumn) {
-    this->volumn = round(volumn * Max);
-}
-
-int VideoPlayer::getVolumn() {
-    return volumn;
-}
-
-void VideoPlayer::setMute(bool mute) {
-    this->mute = mute;
-}
-
-bool VideoPlayer::isMute() {
-    return this->mute;
 }
 
 

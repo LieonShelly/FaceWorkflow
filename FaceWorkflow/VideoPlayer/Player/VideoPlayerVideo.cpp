@@ -126,7 +126,6 @@ void VideoPlayer::decodeVideo() {
             if (hasAudio) {// 有音频
                 // 如果视频包过早被解码出来，那就需要等待对应的音频时钟到达
                 while (vTime > aTime && state == Playing) {
-                    cout << "如果视频包过早被解码出来，那就需要等待对应的音频时钟到达" << endl;
                     SDL_Delay(5);
                 }
             } else {

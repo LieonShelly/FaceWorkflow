@@ -47,6 +47,7 @@ int VideoPlayer::initSwr() {
         cout << "swr_alloc_set_opts error" << endl;
         return -1;
     }
+    // 初始化重采样上下文
     int ret = swr_init(aSwrCtx);
     RET(swr_init);
     // 初始化重采样的输入frame
@@ -197,6 +198,7 @@ int VideoPlayer::decodeAudio() {
     int ret = avcodec_send_packet(aDecodeCtx, &pkt);
     av_packet_unref(&pkt);
     RET(avcodec_send_packet);
+    // 从解码器中获取解码之后的数据到输入frame
     ret = avcodec_receive_frame(aDecodeCtx, aSwrInFrame);
     if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
         return 0;
