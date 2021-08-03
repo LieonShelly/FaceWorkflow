@@ -93,6 +93,7 @@
 		CDD9CE1326B6A4E50030D340 /* VideoService.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1226B6A4E50030D340 /* VideoService.mm */; };
 		CDD9CE1526B6E74C0030D340 /* VideoPlayerVideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1426B6E74C0030D340 /* VideoPlayerVideo.cpp */; };
 		CDD9CE1726B6FE060030D340 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1626B6FE060030D340 /* PlayerView.swift */; };
+		CDD9CE2226B93E120030D340 /* RenderImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE2126B93E120030D340 /* RenderImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -11955,6 +11956,7 @@
 		CDD9CE1226B6A4E50030D340 /* VideoService.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = VideoService.mm; sourceTree = "<group>"; };
 		CDD9CE1426B6E74C0030D340 /* VideoPlayerVideo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VideoPlayerVideo.cpp; sourceTree = "<group>"; };
 		CDD9CE1626B6FE060030D340 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		CDD9CE2126B93E120030D340 /* RenderImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderImage.swift; sourceTree = "<group>"; };
 		E0C6CAA710913C2AB6BBC077 /* Pods_FaceWorkflow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FaceWorkflow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -24651,6 +24653,7 @@
 		CDA8D78125C2A4ED00CB33D4 /* FaceWorkflow */ = {
 			isa = PBXGroup;
 			children = (
+				CDD9CE2026B93DF90030D340 /* OpenGLES */,
 				CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */,
 				CDD9CDFA26B3E1FB0030D340 /* VideoPlayer */,
 				CDBBCDFC26ADC29900FE00FF /* MutexCond */,
@@ -25034,6 +25037,14 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		CDD9CE2026B93DF90030D340 /* OpenGLES */ = {
+			isa = PBXGroup;
+			children = (
+				CDD9CE2126B93E120030D340 /* RenderImage.swift */,
+			);
+			path = OpenGLES;
+			sourceTree = "<group>";
+		};
 		E8EAB80CC7E317037E90FB7C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -25185,6 +25196,7 @@
 				CDA3C16226A5D2A700C12760 /* H264Encode.mm in Sources */,
 				CD47107926A95280004C6BB7 /* AudioDecodeSpec.m in Sources */,
 				CD665C9F269C135E00BA37F2 /* RecordVideo.mm in Sources */,
+				CDD9CE2226B93E120030D340 /* RenderImage.swift in Sources */,
 				CDD9CE0626B3E6540030D340 /* VideoPlayerVC.swift in Sources */,
 				CDBBCDFF26ADC41D00FE00FF /* MutexCond.cpp in Sources */,
 				CDD0A0D62693E9F000EE705A /* AACDecode.mm in Sources */,
