@@ -10,11 +10,13 @@ import Foundation
 class TestTree {
     static func test() {
         let best = BinarySearchTree<Int>()
-        [1, 2, 3, 4, 5, 6, 7, 8, 3].forEach { element in
+        [63, 96, 93, 32, 46, 57, 40, 53, 8, 98].forEach { element in
             best.addElement(element)
         }
-        best.inorderTraserval()
-        
+        best.levelTravseral { element in
+            print(element)
+            return false
+        }
     }
 }
 
@@ -79,40 +81,40 @@ class BinarySearchTree<T: Comparable> {
     }
     
     /// 前序遍历： 根节点，左节点， 右节点
-    func preorderTraserval() {
-        preoOrder(root)
+    func preorderTraserval(_ callback: ((T) -> Void)) {
+        preoOrder(root, callback: callback)
     }
     
-    private func preoOrder(_ node: Node<T>?) {
+    private func preoOrder(_ node: Node<T>?, callback: ((T) -> Void)) {
         guard let node = node else {
             return
         }
-        print(node.element)
-        preoOrder(node.left)
-        preoOrder(node.right)
+        callback(node.element)
+        preoOrder(node.left, callback: callback)
+        preoOrder(node.right, callback: callback)
     }
     
     /// 中序遍历: 左节点，根节点，右节点
-    func inorderTraserval() {
-        inorder(root)
+    func inorderTraserval(_ callback: ((T) -> Void)) {
+        inorder(root, callback: callback)
     }
     
     /// 后序遍历： 左节点，右节点 根节点
-    func postTraversal() {
-        postorder(root)
+    func postTraversal(_ callback: ((T) -> Void)) {
+        postorder(root, callback: callback)
     }
     
-    func postorder(_ node: Node<T>?) {
+    func postorder(_ node: Node<T>?, callback: ((T) -> Void)) {
         guard let node = node else {
             return
         }
-        preoOrder(node.left)
-        preoOrder(node.right)
-        print(node.element)
+        preoOrder(node.left, callback: callback)
+        preoOrder(node.right, callback: callback)
+        callback(node.element)
     }
     
     /// 层序遍历
-    func levelTravseral() {
+    func levelTravseral(_ callback: ((T) -> Bool)) {
         guard let root = root else {
             return
         }
@@ -120,7 +122,10 @@ class BinarySearchTree<T: Comparable> {
         queue.append(root)
         while !queue.isEmpty {
             let head = queue.removeFirst()
-            print(head.element)
+            let stop = callback(head.element)
+            if stop {
+                return
+            }
             if head.left != nil {
                 queue.append(head.left!)
             }
@@ -131,12 +136,12 @@ class BinarySearchTree<T: Comparable> {
     }
     
     
-    fileprivate func inorder(_ node: Node<T>?) {
+    fileprivate func inorder(_ node: Node<T>?, callback: ((T) -> Void)) {
         guard let node = node else {
             return
         }
-        inorder(node.left)
-        print(node.element)
-        inorder(node.right)
+        inorder(node.left, callback: callback)
+        callback(node.element)
+        inorder(node.right, callback: callback)
     }
 }
