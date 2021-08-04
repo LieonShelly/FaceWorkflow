@@ -94,6 +94,7 @@
 		CDD9CE1526B6E74C0030D340 /* VideoPlayerVideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1426B6E74C0030D340 /* VideoPlayerVideo.cpp */; };
 		CDD9CE1726B6FE060030D340 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1626B6FE060030D340 /* PlayerView.swift */; };
 		CDD9CE1E26B92E5C0030D340 /* HashMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1D26B92E5B0030D340 /* HashMap.swift */; };
+		CDD9CE2426B9A0070030D340 /* BinarySearchTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE2326B9A0070030D340 /* BinarySearchTree.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -11957,6 +11958,7 @@
 		CDD9CE1426B6E74C0030D340 /* VideoPlayerVideo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VideoPlayerVideo.cpp; sourceTree = "<group>"; };
 		CDD9CE1626B6FE060030D340 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		CDD9CE1D26B92E5B0030D340 /* HashMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashMap.swift; sourceTree = "<group>"; };
+		CDD9CE2326B9A0070030D340 /* BinarySearchTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarySearchTree.swift; sourceTree = "<group>"; };
 		E0C6CAA710913C2AB6BBC077 /* Pods_FaceWorkflow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FaceWorkflow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -25040,17 +25042,18 @@
 		CDD9CE1C26B92E3C0030D340 /* 算法 */ = {
 			isa = PBXGroup;
 			children = (
-				CDD9CE1F26B93BD40030D340 /* New Group */,
+				CDD9CE1F26B93BD40030D340 /* 二叉搜索树 */,
 				CDD9CE1D26B92E5B0030D340 /* HashMap.swift */,
 			);
 			path = "算法";
 			sourceTree = "<group>";
 		};
-		CDD9CE1F26B93BD40030D340 /* New Group */ = {
+		CDD9CE1F26B93BD40030D340 /* 二叉搜索树 */ = {
 			isa = PBXGroup;
 			children = (
+				CDD9CE2326B9A0070030D340 /* BinarySearchTree.swift */,
 			);
-			path = "New Group";
+			path = "二叉搜索树";
 			sourceTree = "<group>";
 		};
 		E8EAB80CC7E317037E90FB7C /* Pods */ = {
@@ -25196,6 +25199,7 @@
 				CDD9CE1E26B92E5C0030D340 /* HashMap.swift in Sources */,
 				CDA8D78725C2A4ED00CB33D4 /* ViewController.swift in Sources */,
 				CD49336A2688DA7400D1FE3F /* RecordWAV.mm in Sources */,
+				CDD9CE2426B9A0070030D340 /* BinarySearchTree.swift in Sources */,
 				CDC36C80267C43A900C89C9F /* PermenantThread.m in Sources */,
 				CD47107626A95210004C6BB7 /* Demux.mm in Sources */,
 				CDC22BA5269FD4210042B77E /* Yuv.cpp in Sources */,
