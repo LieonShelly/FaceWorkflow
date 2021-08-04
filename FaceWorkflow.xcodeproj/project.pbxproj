@@ -94,6 +94,7 @@
 		CDD9CE1526B6E74C0030D340 /* VideoPlayerVideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1426B6E74C0030D340 /* VideoPlayerVideo.cpp */; };
 		CDD9CE1726B6FE060030D340 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1626B6FE060030D340 /* PlayerView.swift */; };
 		CDD9CE2226B93E120030D340 /* RenderImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE2126B93E120030D340 /* RenderImage.swift */; };
+		CDD9CE2726BA328E0030D340 /* VideoToolboxEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE2626BA328E0030D340 /* VideoToolboxEncoder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -11957,6 +11958,8 @@
 		CDD9CE1426B6E74C0030D340 /* VideoPlayerVideo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VideoPlayerVideo.cpp; sourceTree = "<group>"; };
 		CDD9CE1626B6FE060030D340 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		CDD9CE2126B93E120030D340 /* RenderImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderImage.swift; sourceTree = "<group>"; };
+		CDD9CE2526BA328E0030D340 /* VideoToolboxEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoToolboxEncoder.h; sourceTree = "<group>"; };
+		CDD9CE2626BA328E0030D340 /* VideoToolboxEncoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoToolboxEncoder.m; sourceTree = "<group>"; };
 		E0C6CAA710913C2AB6BBC077 /* Pods_FaceWorkflow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FaceWorkflow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -24415,6 +24418,8 @@
 				CDA3C16126A5D2A700C12760 /* H264Encode.mm */,
 				CDA3C16326A5D3CA00C12760 /* VideoEncodeSpec.h */,
 				CDA3C16426A5D3CA00C12760 /* VideoEncodeSpec.m */,
+				CDD9CE2526BA328E0030D340 /* VideoToolboxEncoder.h */,
+				CDD9CE2626BA328E0030D340 /* VideoToolboxEncoder.m */,
 			);
 			path = H264Encode;
 			sourceTree = "<group>";
@@ -25184,6 +25189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDD9CE0A26B3EAB80030D340 /* VideoPlayer.cpp in Sources */,
+				CDD9CE2726BA328E0030D340 /* VideoToolboxEncoder.m in Sources */,
 				CDD9CE1326B6A4E50030D340 /* VideoService.mm in Sources */,
 				CDA8D78725C2A4ED00CB33D4 /* ViewController.swift in Sources */,
 				CD49336A2688DA7400D1FE3F /* RecordWAV.mm in Sources */,

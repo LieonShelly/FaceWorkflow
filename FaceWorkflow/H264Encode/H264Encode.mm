@@ -6,7 +6,6 @@
 //
 
 #import "H264Encode.h"
-
 extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavutil/avutil.h>
@@ -224,4 +223,5 @@ end:
         av_packet_unref(pkt);
     }
 }
+
 @end
