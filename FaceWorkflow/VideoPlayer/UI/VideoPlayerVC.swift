@@ -24,18 +24,19 @@ class VideoPlayerVC: UIViewController {
     @IBOutlet weak var volumnSlider: UISlider!
     override func viewDidLoad() {
         super.viewDidLoad()
-        playerVIew.addSubview(contenView)
-        contenView.snp.makeConstraints {
-            $0.edges.equalTo(0)
-        }
-        service.delegate = self
-        volumnSlider.maximumValue = 1
-        volumnSlider.minimumValue = 0
-        volumnSlider.setValue(1, animated: true)
-        
-        progresSlider.maximumValue = 1
-        progresSlider.minimumValue = 0
-        progresSlider.setValue(1, animated: true)
+//        playerVIew.addSubview(contenView)
+//        contenView.snp.makeConstraints {
+//            $0.edges.equalTo(0)
+//        }
+//        service.delegate = self
+//        volumnSlider.maximumValue = 1
+//        volumnSlider.minimumValue = 0
+//        volumnSlider.setValue(1, animated: true)
+//        
+//        progresSlider.maximumValue = 1
+//        progresSlider.minimumValue = 0
+//        progresSlider.setValue(1, animated: true)
+        TestTree.test()
     }
     
     @IBAction func playBtnAction(_ sender: UIButton) {

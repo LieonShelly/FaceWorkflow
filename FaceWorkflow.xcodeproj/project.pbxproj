@@ -24655,8 +24655,8 @@
 		CDA8D78125C2A4ED00CB33D4 /* FaceWorkflow */ = {
 			isa = PBXGroup;
 			children = (
-				CDD9CE1C26B92E3C0030D340 /* 算法 */,
 				CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */,
+				CDD9CE1C26B92E3C0030D340 /* 算法 */,
 				CDD9CDFA26B3E1FB0030D340 /* VideoPlayer */,
 				CDBBCDFC26ADC29900FE00FF /* MutexCond */,
 				CD47107326A951FD004C6BB7 /* Demux */,
