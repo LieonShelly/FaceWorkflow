@@ -13,7 +13,7 @@ class TestTree {
         [63, 96, 93, 32, 46, 57, 40, 53, 8, 98].forEach { element in
             best.addElement(element)
         }
-       print(best.toString())
+       print(best.height())
         best.postTraversal(Visitor { element in
 //            print(element)
             return false
@@ -180,6 +180,44 @@ class BinarySearchTree<T: Comparable> {
         toString(node.right, str: str, prefix: "--R--")
     }
     
+    
+    /// 二叉树的高度 递归的方式
+    func height1() -> Int {
+        return height1(root)
+    }
+    
+    fileprivate func height1(_ node: Node<T>?) -> Int {
+        guard let node = node else {
+            return 0
+        }
+        return  1 + max(height1(node.left), height1(node.right))
+    }
+    
+    /// 二叉树的高度：迭代的方式
+    func height() -> Int {
+        guard let root = root else {
+            return 0
+        }
+        var height = 0
+        var levelSize = 1
+        var queue: [Node<T>] = []
+        queue.append(root)
+        while !queue.isEmpty {
+            let head = queue.removeFirst()
+            levelSize -= 1
+            if head.left != nil {
+                queue.append(head.left!)
+            }
+            if head.right != nil {
+                queue.append(head.right!)
+            }
+            if levelSize == 0 { //
+                levelSize = queue.count
+                height += 1
+            }
+        }
+        return height
+    }
     
 }
 
