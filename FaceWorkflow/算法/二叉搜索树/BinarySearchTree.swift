@@ -10,10 +10,10 @@ import Foundation
 class TestTree {
     static func test() {
         let best = BinarySearchTree<Int>()
-        [63, 96, 93, 32, 46, 57, 40, 53, 8, 98].forEach { element in
+        [64, 78, 44, 34, 53, 24, 85, 69, 38, 56, 49, 29, 11].forEach { element in
             best.addElement(element)
         }
-       print(best.height())
+       print(best.isComplete())
         best.postTraversal(Visitor { element in
 //            print(element)
             return false
@@ -31,6 +31,14 @@ class BinarySearchTree<T: Comparable> {
         init(_ element: T, parent: Node? = nil) {
             self.element = element
             self.parent = parent
+        }
+        
+        var isLeaf: Bool {
+            return left != nil && right == nil
+        }
+        
+        var hasTwoChildren: Bool {
+            return left != nil && right != nil
         }
     }
     fileprivate var size: Int = 0
@@ -217,6 +225,42 @@ class BinarySearchTree<T: Comparable> {
             }
         }
         return height
+    }
+    
+    /**
+     判断是否是完全二叉树
+     - 如果树不为空，开始层序遍历二叉树
+      - 如果node.left != null && node.right != null. 将node.left, node.right 按顺序入队
+      - 如果node.left == null && node.right != null, 返回false
+      - node.left != null && node.right != null
+      - node.left != null && nodel.right == null 或者 node.left == null && node.right == null，那么后面遍历的节点都应该为叶子节点，才是完全二叉树，否则返回false
+     */
+    
+    func isComplete() -> Bool {
+        guard let root = root else {
+            return false
+        }
+        var queue: [Node<T>] = []
+        queue.append(root)
+        var leaf = false
+        while !queue.isEmpty {
+            let head = queue.removeFirst()
+            if leaf && !head.isLeaf { // 要求是叶子节点，但是这个节点不是叶子节点
+                return false
+            }
+            if head.left != nil {
+                queue.append(head.left!)
+            } else if head.right != nil {
+                // head.left == nil && head.right != ni
+                return false
+            }
+            if head.right != nil {
+                queue.append(head.right!)
+            } else {
+                leaf = true
+            }
+        }
+        return true
     }
     
 }
