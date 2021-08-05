@@ -13,9 +13,10 @@ class TestTree {
         [63, 96, 93, 32, 46, 57, 40, 53, 8, 98].forEach { element in
             best.addElement(element)
         }
+       print(best.toString())
         best.postTraversal(Visitor { element in
-            print(element)
-            return element == 8
+//            print(element)
+            return false
         })
     }
 }
@@ -161,7 +162,25 @@ class BinarySearchTree<T: Comparable> {
         }
     }
     
-
+    func toString() -> String {
+        toString(root, str: "", prefix: "")
+        return ""
+    }
+    
+    fileprivate  func toString(_ node: Node<T>?, str: String, prefix: String) {
+        guard let node = node else {
+            return
+        }
+        var str = str
+        str.append(prefix)
+        str.append("\(node.element)")
+        str.append("\n")
+        print(str)
+        toString(node.left, str: str, prefix: "--L--")
+        toString(node.right, str: str, prefix: "--R--")
+    }
+    
+    
 }
 
 
@@ -174,6 +193,6 @@ class Visitor<T: Comparable> {
     }
     
     func visitor(_ element: T) -> Bool {
-       return ireatorHandler(element)
+        return ireatorHandler(element)
     }
 }
