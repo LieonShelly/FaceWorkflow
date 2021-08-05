@@ -13,10 +13,10 @@ class TestTree {
         [63, 96, 93, 32, 46, 57, 40, 53, 8, 98].forEach { element in
             best.addElement(element)
         }
-        best.levelTravseral { element in
+        best.postTraversal(Visitor { element in
             print(element)
-            return false
-        }
+            return element == 8
+        })
     }
 }
 
@@ -81,40 +81,65 @@ class BinarySearchTree<T: Comparable> {
     }
     
     /// 前序遍历： 根节点，左节点， 右节点
-    func preorderTraserval(_ callback: ((T) -> Void)) {
-        preoOrder(root, callback: callback)
+    func preorderTraserval(_ visitor: Visitor<T>) {
+        preoOrder(root, visitor: visitor)
     }
     
-    private func preoOrder(_ node: Node<T>?, callback: ((T) -> Void)) {
+    private func preoOrder(_ node: Node<T>?, visitor: Visitor<T>) {
         guard let node = node else {
             return
         }
-        callback(node.element)
-        preoOrder(node.left, callback: callback)
-        preoOrder(node.right, callback: callback)
+        if visitor.stop {
+            return
+        }
+        visitor.stop = visitor.visitor(node.element)
+        preoOrder(node.left, visitor: visitor)
+        preoOrder(node.right, visitor: visitor)
     }
     
     /// 中序遍历: 左节点，根节点，右节点
-    func inorderTraserval(_ callback: ((T) -> Void)) {
-        inorder(root, callback: callback)
+    func inorderTraserval(_ visitor: Visitor<T>) {
+        inorder(root, visitor: visitor)
     }
     
-    /// 后序遍历： 左节点，右节点 根节点
-    func postTraversal(_ callback: ((T) -> Void)) {
-        postorder(root, callback: callback)
-    }
     
-    func postorder(_ node: Node<T>?, callback: ((T) -> Void)) {
+    fileprivate func inorder(_ node: Node<T>?, visitor: Visitor<T>) {
         guard let node = node else {
             return
         }
-        preoOrder(node.left, callback: callback)
-        preoOrder(node.right, callback: callback)
-        callback(node.element)
+        if visitor.stop {
+            return
+        }
+        inorder(node.left, visitor: visitor)
+        if visitor.stop {
+            return
+        }
+        visitor.stop = visitor.visitor(node.element)
+        inorder(node.right, visitor: visitor)
+    }
+    
+    /// 后序遍历： 左节点，右节点 根节点
+    func postTraversal(_ visitor: Visitor<T>) {
+        postorder(root, visitor: visitor)
+    }
+    
+    func postorder(_ node: Node<T>?, visitor: Visitor<T>) {
+        guard let node = node else {
+            return
+        }
+        if visitor.stop {
+            return
+        }
+        postorder(node.left, visitor: visitor)
+        postorder(node.right, visitor: visitor)
+        if visitor.stop {
+            return
+        }
+        visitor.stop = visitor.visitor(node.element)
     }
     
     /// 层序遍历
-    func levelTravseral(_ callback: ((T) -> Bool)) {
+    func levelTravseral(_ visitor: Visitor<T>) {
         guard let root = root else {
             return
         }
@@ -122,7 +147,8 @@ class BinarySearchTree<T: Comparable> {
         queue.append(root)
         while !queue.isEmpty {
             let head = queue.removeFirst()
-            let stop = callback(head.element)
+            visitor.stop = visitor.visitor(head.element)
+            let stop = visitor.stop
             if stop {
                 return
             }
@@ -135,13 +161,19 @@ class BinarySearchTree<T: Comparable> {
         }
     }
     
+
+}
+
+
+class Visitor<T: Comparable> {
+    var stop: Bool = false
+    fileprivate var ireatorHandler: ((T) -> Bool)
     
-    fileprivate func inorder(_ node: Node<T>?, callback: ((T) -> Void)) {
-        guard let node = node else {
-            return
-        }
-        inorder(node.left, callback: callback)
-        callback(node.element)
-        inorder(node.right, callback: callback)
+    init(_ handler: @escaping ((T) -> Bool)) {
+        self.ireatorHandler = handler
+    }
+    
+    func visitor(_ element: T) -> Bool {
+       return ireatorHandler(element)
     }
 }
