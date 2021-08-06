@@ -13,9 +13,13 @@ class TestTree {
         [64, 78, 44, 34, 53, 24, 85, 69, 38, 56, 49, 29, 11].forEach { element in
             best.addElement(element)
         }
-        print(best.isComplete())
         best.postTraversal(Visitor { element in
-            //            print(element)
+            print(element)
+            return false
+        })
+        best.remove(64)
+        best.postTraversal(Visitor { element in
+            print(element)
             return false
         })
     }
@@ -346,8 +350,74 @@ class BinarySearchTree<T: Comparable> {
         root = child
         child.parent = nil
      # 删除节点 - 度为2的节点(即子树数目为2)
+      - 先用前驱或者后继节点的值覆盖原节点的值
+      - 然后删除相应的前驱或者后继节点
+      - 如果一个节点的度为2，那么它的前驱，后继节点的度只可能为1和0
      */
-
+    
+    fileprivate func remove(_ node: Node<T>?) {
+        guard var node = node else {
+            return
+        }
+        size -= 1;
+        if node.hasTwoChildren { // 度为2
+           let preNode = predecessor(node)
+            node.element = preNode!.element
+            node = preNode!
+        }
+        // 删除Node节点（node的度必为1或者0）
+        let replace = node.left != nil ? node.left : node.right
+        
+        if replace != nil { // node是度为1的节点
+            // 更改parent
+            replace?.parent = node.parent
+            // 更改replace的left，right的指向
+            if node.parent == nil { // node是度为1的节点，并且是根节点
+               root = replace
+            } else if node == node.parent?.left {
+                node.parent?.left = replace
+            } else { // if node == node.parent?.right
+                node.parent?.right = replace
+            }
+        } else if node.parent == nil { // node是叶子结点且是根节点
+            root = nil
+        } else { // node是叶子节点，但不是根节点
+            if node == node.parent?.right {
+                node.parent?.right = nil
+            } else { // node == node.parent?.left
+                node.parent?.left = nil
+            }
+        }
+    }
+    
+    func remove(_ element: T) {
+        let node = node(element)
+        remove(node)
+    }
+    
+    fileprivate func node(_ element: T) -> Node<T>? {
+        var node = root
+        while node != nil {
+            let cmp = compare(element, element2: node!.element)
+            if cmp == 0 {
+                return node
+            } else if cmp > 1 {
+                node = node?.right
+            } else {
+                node = node?.left
+            }
+        }
+        return nil
+    }
+    
+    func clear() {
+        size = 0
+        root = nil
+    }
+    
+    func contains(_ element: T) -> Bool {
+       return node(element) != nil
+    }
 }
 
 
