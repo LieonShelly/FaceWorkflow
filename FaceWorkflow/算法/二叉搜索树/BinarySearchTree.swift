@@ -13,16 +13,17 @@ class TestTree {
         [64, 78, 44, 34, 53, 24, 85, 69, 38, 56, 49, 29, 11].forEach { element in
             best.addElement(element)
         }
-       print(best.isComplete())
+        print(best.isComplete())
         best.postTraversal(Visitor { element in
-//            print(element)
+            //            print(element)
             return false
         })
     }
 }
 
 class BinarySearchTree<T: Comparable> {
-    class Node<T: Comparable> {
+    class Node<T: Comparable>: NSObject {
+        
         var element: T
         var left: Node?
         var right: Node?
@@ -110,8 +111,7 @@ class BinarySearchTree<T: Comparable> {
     func inorderTraserval(_ visitor: Visitor<T>) {
         inorder(root, visitor: visitor)
     }
-    
-    
+
     fileprivate func inorder(_ node: Node<T>?, visitor: Visitor<T>) {
         guard let node = node else {
             return
@@ -187,8 +187,7 @@ class BinarySearchTree<T: Comparable> {
         toString(node.left, str: str, prefix: "--L--")
         toString(node.right, str: str, prefix: "--R--")
     }
-    
-    
+
     /// 二叉树的高度 递归的方式
     func height1() -> Int {
         return height1(root)
@@ -230,10 +229,10 @@ class BinarySearchTree<T: Comparable> {
     /**
      判断是否是完全二叉树
      - 如果树不为空，开始层序遍历二叉树
-      - 如果node.left != null && node.right != null. 将node.left, node.right 按顺序入队
-      - 如果node.left == null && node.right != null, 返回false
-      - node.left != null && node.right != null
-      - node.left != null && nodel.right == null 或者 node.left == null && node.right == null，那么后面遍历的节点都应该为叶子节点，才是完全二叉树，否则返回false
+     - 如果node.left != null && node.right != null. 将node.left, node.right 按顺序入队
+     - 如果node.left == null && node.right != null, 返回false
+     - node.left != null && node.right != null
+     - node.left != null && nodel.right == null 或者 node.left == null && node.right == null，那么后面遍历的节点都应该为叶子节点，才是完全二叉树，否则返回false
      */
     
     func isComplete() -> Bool {
@@ -263,6 +262,92 @@ class BinarySearchTree<T: Comparable> {
         return true
     }
     
+    // 翻转二叉树
+    func revert(_ node: Node<T>?) {
+        guard let node = node else {
+            return
+        }
+        let temp = node.left
+        node.left = node.right
+        node.right  = temp
+        
+        revert(node.left)
+        revert(node.right)
+    }
+    
+    /**获取前驱节点: 中序遍历的前一个节点，一定是它的左子树的最大节点
+     - 如果 node.left != nil， 则 predecessor = node.left.right.right,终止条件为 right 为 nil
+     - 如果 node.left == nil && node.parent != nil， 则predecessor = node.parent.parent 终止条件为 node在parent的右子树中
+     - node.left == nil && node.parent == nil, 则没有前驱节点
+     */
+    
+    fileprivate func predecessor(_ node: Node<T>?) -> Node<T>? {
+        guard var node = node else {
+            return nil
+        }
+        if node.left != nil {
+            // node.left != nil， 则 predecessor = node.left.right.right,终止条件为 right 为 nil
+            var p = node.left!
+            while p.right != nil {
+                p = p.right!
+            }
+            return p;
+        }
+        // 从父节点，祖父节点中寻找前驱节点
+        while node.parent != nil, node == node.parent!.left {
+            node = node.parent!
+        }
+        
+        // node.parent == nil
+        // node = node.parent.right
+        
+        return node.parent
+    }
+    
+    /**
+     后继节点：中序遍历的后一个节点, 与前驱节点对称的
+     */
+    fileprivate func successor(_ node: Node<T>?) -> Node<T>? {
+        guard var node = node else {
+            return nil
+        }
+        if node.right != nil {
+            var p = node.right!
+            while p.left != nil {
+                p = p.left!
+            }
+            return p;
+        }
+        // 从父节点，祖父节点中寻找前驱节点
+        while node.parent != nil, node == node.parent!.right {
+            node = node.parent!
+        }
+        
+        return node.parent
+    }
+    
+    /**
+     # 删除节点 - 叶子节点(度为0，即子树数目为0)
+     - 直接删除
+        node = node.parent.left => node.parent.left = nil
+        node == node.parent.right => node.parent.right = nil
+        node.parent == nil -> root = nil
+     # 删除节点 - 度为1的节点(即子树数目为1)
+     - 用子节点替代原节点的位置
+        - child 是 node.left 或者 child 是 node.right
+     - 用child替代node的位置
+        - 如果node是左子节点
+          child.parent = node.parent
+          node.parent.left = child
+        - 如果node是右子节点
+          child.parent = node.parent
+          node.parent.right = child
+     - 如果node是根节点
+        root = child
+        child.parent = nil
+     # 删除节点 - 度为2的节点(即子树数目为2)
+     */
+
 }
 
 
