@@ -23,6 +23,8 @@
 		CD49337D268A21AC00D1FE3F /* record_out.wav in Resources */ = {isa = PBXBuildFile; fileRef = CD49337C268A21AC00D1FE3F /* record_out.wav */; };
 		CD49337F268A236100D1FE3F /* in.wav in Resources */ = {isa = PBXBuildFile; fileRef = CD49337E268A236100D1FE3F /* in.wav */; };
 		CD665C9F269C135E00BA37F2 /* RecordVideo.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD665C9E269C135E00BA37F2 /* RecordVideo.mm */; };
+		CD682B7526BD149300D54F84 /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD682B7426BD149300D54F84 /* BinaryTree.swift */; };
+		CD682B7726BD171400D54F84 /* TestEntrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD682B7626BD171400D54F84 /* TestEntrence.swift */; };
 		CD6EBD30268E178800189ED5 /* AccEncode.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD6EBD2F268E178800189ED5 /* AccEncode.mm */; };
 		CDA3C16226A5D2A700C12760 /* H264Encode.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDA3C16126A5D2A700C12760 /* H264Encode.mm */; };
 		CDA3C16526A5D3CA00C12760 /* VideoEncodeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA3C16426A5D3CA00C12760 /* VideoEncodeSpec.m */; };
@@ -11662,6 +11664,8 @@
 		CD49337E268A236100D1FE3F /* in.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = in.wav; sourceTree = "<group>"; };
 		CD665C9D269C135E00BA37F2 /* RecordVideo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordVideo.h; sourceTree = "<group>"; };
 		CD665C9E269C135E00BA37F2 /* RecordVideo.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RecordVideo.mm; sourceTree = "<group>"; };
+		CD682B7426BD149300D54F84 /* BinaryTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryTree.swift; sourceTree = "<group>"; };
+		CD682B7626BD171400D54F84 /* TestEntrence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEntrence.swift; sourceTree = "<group>"; };
 		CD6EBD2E268E178800189ED5 /* AccEncode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccEncode.h; sourceTree = "<group>"; };
 		CD6EBD2F268E178800189ED5 /* AccEncode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AccEncode.mm; sourceTree = "<group>"; };
 		CDA3C16026A5D2A700C12760 /* H264Encode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = H264Encode.h; sourceTree = "<group>"; };
@@ -24401,6 +24405,14 @@
 			path = RecordVideo;
 			sourceTree = "<group>";
 		};
+		CD682B7326BD148100D54F84 /* 二叉树 */ = {
+			isa = PBXGroup;
+			children = (
+				CD682B7426BD149300D54F84 /* BinaryTree.swift */,
+			);
+			path = "二叉树";
+			sourceTree = "<group>";
+		};
 		CD6EBD2D268E174F00189ED5 /* AccEncode */ = {
 			isa = PBXGroup;
 			children = (
@@ -25042,6 +25054,8 @@
 		CDD9CE1C26B92E3C0030D340 /* 算法 */ = {
 			isa = PBXGroup;
 			children = (
+				CD682B7626BD171400D54F84 /* TestEntrence.swift */,
+				CD682B7326BD148100D54F84 /* 二叉树 */,
 				CDD9CE1F26B93BD40030D340 /* 二叉搜索树 */,
 				CDD9CE1D26B92E5B0030D340 /* HashMap.swift */,
 			);
@@ -25212,6 +25226,7 @@
 				CDD9CE0626B3E6540030D340 /* VideoPlayerVC.swift in Sources */,
 				CDBBCDFF26ADC41D00FE00FF /* MutexCond.cpp in Sources */,
 				CDD0A0D62693E9F000EE705A /* AACDecode.mm in Sources */,
+				CD682B7726BD171400D54F84 /* TestEntrence.swift in Sources */,
 				CDC22B8B269D71C50042B77E /* ShowBMP.mm in Sources */,
 				CD47107026A82199004C6BB7 /* H264Decode.mm in Sources */,
 				CDA3C16526A5D3CA00C12760 /* VideoEncodeSpec.m in Sources */,
@@ -25226,6 +25241,7 @@
 				CDC22BBD26A1266D0042B77E /* YUVPlayerView.mm in Sources */,
 				CDC22B95269E74EC0042B77E /* ShowYUV.mm in Sources */,
 				CD49336226877CC800D1FE3F /* ResampleAudioSpec.cpp in Sources */,
+				CD682B7526BD149300D54F84 /* BinaryTree.swift in Sources */,
 				CDC36C60267BAFB900C89C9F /* AudioViewController.mm in Sources */,
 				CD47107C26A95324004C6BB7 /* VideoDecodeSpec.m in Sources */,
 				CDC22B91269D92760042B77E /* PlayYUV.mm in Sources */,
