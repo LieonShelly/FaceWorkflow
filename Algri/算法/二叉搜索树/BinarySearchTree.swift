@@ -18,11 +18,17 @@ class BinarySearchTree<T: Comparable>: BinaryTree<T> {
        return node(element) != nil
     }
     
+    func afterAdd(_ node: Node<T>?) {
+        
+    }
+    
     func addElement(_ element: T) {
         // 添加第一个节点
         if root == nil {
             root = Node(element, parent: nil)
             size += 1
+            afterAdd(root)
+            return
         }
         // 添加的不是根节点
         //找到父节点
@@ -51,6 +57,10 @@ class BinarySearchTree<T: Comparable>: BinaryTree<T> {
         } else {
             parent.left = newNode
         }
+        
+        size += 1
+        // 新节添加之后的处理
+        afterAdd(newNode)
     }
       /**
      # 删除节点 - 叶子节点(度为0，即子树数目为0)

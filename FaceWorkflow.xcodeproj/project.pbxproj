@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		1813ED77E1974AF6036BD8D3 /* Pods_FaceWorkflow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0C6CAA710913C2AB6BBC077 /* Pods_FaceWorkflow.framework */; };
+		CD11913A26E5CFF1004FA1B3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD11913926E5CFF1004FA1B3 /* main.swift */; };
+		CD11914026E5D17B004FA1B3 /* AVLTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD682B7926BD386100D54F84 /* AVLTree.swift */; };
+		CD11914126E5D17E004FA1B3 /* TestEntrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD682B7626BD171400D54F84 /* TestEntrence.swift */; };
+		CD11914226E5D183004FA1B3 /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD682B7426BD149300D54F84 /* BinaryTree.swift */; };
+		CD11914326E5D188004FA1B3 /* BinarySearchTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE2326B9A0070030D340 /* BinarySearchTree.swift */; };
+		CD11914426E5D18D004FA1B3 /* HashMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1D26B92E5B0030D340 /* HashMap.swift */; };
 		CD1E00AF2681C90F002C845B /* WavHeader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1E00AD2681C90E002C845B /* WavHeader.cpp */; };
 		CD1E00B52681D7B2002C845B /* FFMpegs.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD1E00B42681D7B2002C845B /* FFMpegs.mm */; };
 		CD1ED336267F8E0E002C845B /* AudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1ED334267F8E0E002C845B /* AudioBuffer.cpp */; };
@@ -23,8 +29,6 @@
 		CD49337D268A21AC00D1FE3F /* record_out.wav in Resources */ = {isa = PBXBuildFile; fileRef = CD49337C268A21AC00D1FE3F /* record_out.wav */; };
 		CD49337F268A236100D1FE3F /* in.wav in Resources */ = {isa = PBXBuildFile; fileRef = CD49337E268A236100D1FE3F /* in.wav */; };
 		CD665C9F269C135E00BA37F2 /* RecordVideo.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD665C9E269C135E00BA37F2 /* RecordVideo.mm */; };
-		CD682B7526BD149300D54F84 /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD682B7426BD149300D54F84 /* BinaryTree.swift */; };
-		CD682B7726BD171400D54F84 /* TestEntrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD682B7626BD171400D54F84 /* TestEntrence.swift */; };
 		CD6EBD30268E178800189ED5 /* AccEncode.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD6EBD2F268E178800189ED5 /* AccEncode.mm */; };
 		CDA3C16226A5D2A700C12760 /* H264Encode.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDA3C16126A5D2A700C12760 /* H264Encode.mm */; };
 		CDA3C16526A5D3CA00C12760 /* VideoEncodeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA3C16426A5D3CA00C12760 /* VideoEncodeSpec.m */; };
@@ -95,13 +99,25 @@
 		CDD9CE1326B6A4E50030D340 /* VideoService.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1226B6A4E50030D340 /* VideoService.mm */; };
 		CDD9CE1526B6E74C0030D340 /* VideoPlayerVideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1426B6E74C0030D340 /* VideoPlayerVideo.cpp */; };
 		CDD9CE1726B6FE060030D340 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1626B6FE060030D340 /* PlayerView.swift */; };
-		CDD9CE1E26B92E5C0030D340 /* HashMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1D26B92E5B0030D340 /* HashMap.swift */; };
-		CDD9CE2426B9A0070030D340 /* BinarySearchTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE2326B9A0070030D340 /* BinarySearchTree.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CD11913526E5CFF0004FA1B3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		19317AFD51A0FDE184C9A249 /* Pods-FaceWorkflow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceWorkflow.release.xcconfig"; path = "Target Support Files/Pods-FaceWorkflow/Pods-FaceWorkflow.release.xcconfig"; sourceTree = "<group>"; };
 		6DFB1255CA604278BE06F3BB /* Pods-FaceWorkflow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceWorkflow.debug.xcconfig"; path = "Target Support Files/Pods-FaceWorkflow/Pods-FaceWorkflow.debug.xcconfig"; sourceTree = "<group>"; };
+		CD11913726E5CFF0004FA1B3 /* Algri */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Algri; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD11913926E5CFF1004FA1B3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		CD1E00002680EF73002C845B /* avio_reading.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = avio_reading.c; sourceTree = "<group>"; };
 		CD1E00012680EF73002C845B /* encode_video.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = encode_video.c; sourceTree = "<group>"; };
 		CD1E00022680EF73002C845B /* avio_list_dir.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = avio_list_dir.c; sourceTree = "<group>"; };
@@ -11666,6 +11682,7 @@
 		CD665C9E269C135E00BA37F2 /* RecordVideo.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RecordVideo.mm; sourceTree = "<group>"; };
 		CD682B7426BD149300D54F84 /* BinaryTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryTree.swift; sourceTree = "<group>"; };
 		CD682B7626BD171400D54F84 /* TestEntrence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEntrence.swift; sourceTree = "<group>"; };
+		CD682B7926BD386100D54F84 /* AVLTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVLTree.swift; sourceTree = "<group>"; };
 		CD6EBD2E268E178800189ED5 /* AccEncode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccEncode.h; sourceTree = "<group>"; };
 		CD6EBD2F268E178800189ED5 /* AccEncode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AccEncode.mm; sourceTree = "<group>"; };
 		CDA3C16026A5D2A700C12760 /* H264Encode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = H264Encode.h; sourceTree = "<group>"; };
@@ -11967,6 +11984,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CD11913426E5CFF0004FA1B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CDA8D77C25C2A4ED00CB33D4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -12009,6 +12033,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD11913826E5CFF0004FA1B3 /* Algri */ = {
+			isa = PBXGroup;
+			children = (
+				CDD9CE1C26B92E3C0030D340 /* 算法 */,
+				CD11913926E5CFF1004FA1B3 /* main.swift */,
+			);
+			path = Algri;
+			sourceTree = "<group>";
+		};
 		CD1E00042680EF73002C845B /* pc-uninstalled */ = {
 			isa = PBXGroup;
 			children = (
@@ -24413,6 +24446,14 @@
 			path = "二叉树";
 			sourceTree = "<group>";
 		};
+		CD682B7826BD384C00D54F84 /* AVL树 */ = {
+			isa = PBXGroup;
+			children = (
+				CD682B7926BD386100D54F84 /* AVLTree.swift */,
+			);
+			path = "AVL树";
+			sourceTree = "<group>";
+		};
 		CD6EBD2D268E174F00189ED5 /* AccEncode */ = {
 			isa = PBXGroup;
 			children = (
@@ -24650,6 +24691,7 @@
 			isa = PBXGroup;
 			children = (
 				CDA8D78125C2A4ED00CB33D4 /* FaceWorkflow */,
+				CD11913826E5CFF0004FA1B3 /* Algri */,
 				CDA8D78025C2A4ED00CB33D4 /* Products */,
 				CDC36C61267BB2B300C89C9F /* Frameworks */,
 				E8EAB80CC7E317037E90FB7C /* Pods */,
@@ -24660,6 +24702,7 @@
 			isa = PBXGroup;
 			children = (
 				CDA8D77F25C2A4ED00CB33D4 /* FaceWorkflow.app */,
+				CD11913726E5CFF0004FA1B3 /* Algri */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -24668,7 +24711,6 @@
 			isa = PBXGroup;
 			children = (
 				CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */,
-				CDD9CE1C26B92E3C0030D340 /* 算法 */,
 				CDD9CDFA26B3E1FB0030D340 /* VideoPlayer */,
 				CDBBCDFC26ADC29900FE00FF /* MutexCond */,
 				CD47107326A951FD004C6BB7 /* Demux */,
@@ -25054,6 +25096,7 @@
 		CDD9CE1C26B92E3C0030D340 /* 算法 */ = {
 			isa = PBXGroup;
 			children = (
+				CD682B7826BD384C00D54F84 /* AVL树 */,
 				CD682B7626BD171400D54F84 /* TestEntrence.swift */,
 				CD682B7326BD148100D54F84 /* 二叉树 */,
 				CDD9CE1F26B93BD40030D340 /* 二叉搜索树 */,
@@ -25082,6 +25125,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CD11913626E5CFF0004FA1B3 /* Algri */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD11913D26E5CFF1004FA1B3 /* Build configuration list for PBXNativeTarget "Algri" */;
+			buildPhases = (
+				CD11913326E5CFF0004FA1B3 /* Sources */,
+				CD11913426E5CFF0004FA1B3 /* Frameworks */,
+				CD11913526E5CFF0004FA1B3 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Algri;
+			productName = Algri;
+			productReference = CD11913726E5CFF0004FA1B3 /* Algri */;
+			productType = "com.apple.product-type.tool";
+		};
 		CDA8D77E25C2A4ED00CB33D4 /* FaceWorkflow */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CDA8D79325C2A4EF00CB33D4 /* Build configuration list for PBXNativeTarget "FaceWorkflow" */;
@@ -25107,9 +25167,12 @@
 		CDA8D77725C2A4ED00CB33D4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
+					CD11913626E5CFF0004FA1B3 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
 					CDA8D77E25C2A4ED00CB33D4 = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -25130,6 +25193,7 @@
 			projectRoot = "";
 			targets = (
 				CDA8D77E25C2A4ED00CB33D4 /* FaceWorkflow */,
+				CD11913626E5CFF0004FA1B3 /* Algri */,
 			);
 		};
 /* End PBXProject section */
@@ -25204,16 +25268,27 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CD11913326E5CFF0004FA1B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD11914226E5D183004FA1B3 /* BinaryTree.swift in Sources */,
+				CD11914126E5D17E004FA1B3 /* TestEntrence.swift in Sources */,
+				CD11914426E5D18D004FA1B3 /* HashMap.swift in Sources */,
+				CD11913A26E5CFF1004FA1B3 /* main.swift in Sources */,
+				CD11914026E5D17B004FA1B3 /* AVLTree.swift in Sources */,
+				CD11914326E5D188004FA1B3 /* BinarySearchTree.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CDA8D77B25C2A4ED00CB33D4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				CDD9CE0A26B3EAB80030D340 /* VideoPlayer.cpp in Sources */,
 				CDD9CE1326B6A4E50030D340 /* VideoService.mm in Sources */,
-				CDD9CE1E26B92E5C0030D340 /* HashMap.swift in Sources */,
 				CDA8D78725C2A4ED00CB33D4 /* ViewController.swift in Sources */,
 				CD49336A2688DA7400D1FE3F /* RecordWAV.mm in Sources */,
-				CDD9CE2426B9A0070030D340 /* BinarySearchTree.swift in Sources */,
 				CDC36C80267C43A900C89C9F /* PermenantThread.m in Sources */,
 				CD47107626A95210004C6BB7 /* Demux.mm in Sources */,
 				CDC22BA5269FD4210042B77E /* Yuv.cpp in Sources */,
@@ -25226,7 +25301,6 @@
 				CDD9CE0626B3E6540030D340 /* VideoPlayerVC.swift in Sources */,
 				CDBBCDFF26ADC41D00FE00FF /* MutexCond.cpp in Sources */,
 				CDD0A0D62693E9F000EE705A /* AACDecode.mm in Sources */,
-				CD682B7726BD171400D54F84 /* TestEntrence.swift in Sources */,
 				CDC22B8B269D71C50042B77E /* ShowBMP.mm in Sources */,
 				CD47107026A82199004C6BB7 /* H264Decode.mm in Sources */,
 				CDA3C16526A5D3CA00C12760 /* VideoEncodeSpec.m in Sources */,
@@ -25241,7 +25315,6 @@
 				CDC22BBD26A1266D0042B77E /* YUVPlayerView.mm in Sources */,
 				CDC22B95269E74EC0042B77E /* ShowYUV.mm in Sources */,
 				CD49336226877CC800D1FE3F /* ResampleAudioSpec.cpp in Sources */,
-				CD682B7526BD149300D54F84 /* BinaryTree.swift in Sources */,
 				CDC36C60267BAFB900C89C9F /* AudioViewController.mm in Sources */,
 				CD47107C26A95324004C6BB7 /* VideoDecodeSpec.m in Sources */,
 				CDC22B91269D92760042B77E /* PlayYUV.mm in Sources */,
@@ -25266,6 +25339,28 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		CD11913B26E5CFF1004FA1B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 11.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		CD11913C26E5CFF1004FA1B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 11.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		CDA8D79125C2A4EF00CB33D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -25461,6 +25556,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CD11913D26E5CFF1004FA1B3 /* Build configuration list for PBXNativeTarget "Algri" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD11913B26E5CFF1004FA1B3 /* Debug */,
+				CD11913C26E5CFF1004FA1B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CDA8D77A25C2A4ED00CB33D4 /* Build configuration list for PBXProject "FaceWorkflow" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

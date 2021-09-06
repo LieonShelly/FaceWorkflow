@@ -29,6 +29,13 @@ class BinaryTree<T: Comparable> {
         var hasTwoChildren: Bool {
             return left != nil && right != nil
         }
+        
+        var isLeftChild: Bool {
+            return parent != nil && self == parent?.left
+        }
+        var isRightChild: Bool {
+            return parent != nil && self == parent?.right
+        }
     }
     
     func clear() {
