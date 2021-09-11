@@ -398,9 +398,130 @@ class Solution {
         return true
     }
     
-}
+    func isPalindrome(_ s: String) -> Bool {
+        var left: Int = 0
+        var right: Int = s.count - 1
+        let strArray = s.map { String($0) }
+        for _ in 0 ..< strArray.count - 1 {
+            let leftStr = strArray[left]
+            let rightStr = strArray[right]
+            // 因为题中说了，只考虑字母和数字，所以不是字母和数字的先过滤掉
+            while left < right, !isLetterOrDigest(leftStr) {
+                left += 1
+            }
+            while left < right, !isLetterOrDigest(rightStr) {
+                right -= 1
+            }
+            //后把两个字符变为小写，在判断是否一样，如果不一样，直接返回false
+            if leftStr.lowercased() != rightStr.lowercased() {
+                return false
+            }
+            left += 1
+            right -= 1
+        }
+        return true
+    }
+    
+    func isLetterOrDigest(_ str: String) -> Bool {
+        let reg = "^[a-zA-Z0-9]+$"
+        let pre = NSPredicate(format: "SELF MATCHES %@", reg)
+        if pre.evaluate(with: str) {
+            return true
+        } else{
+            return false
+        }
+    }
+    
+    /**
+     给定一个由 整数 组成的 非空 数组所表示的非负整数，在该数的基础上加一。
+     最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。
+     你可以假设除了整数 0 之外，这个整数不会以零开头。
+     示例 1：
 
-let result = Solution().isAnagram("rat", "car")
+     输入：digits = [1,2,3]
+     输出：[1,2,4]
+     解释：输入数组表示数字 123。
+     示例 2：
+
+     输入：digits = [4,3,2,1]
+     输出：[4,3,2,2]
+     解释：输入数组表示数字 4321。
+     示例 3：
+
+     输入：digits = [0]
+     输出：[1]
+     */
+    func plusOne(_ digits: [Int]) -> [Int] {
+        var newDigits: [Int] = digits
+        for current in 0 ..< digits.count {
+            let index = digits.count - 1 - current
+            // 如果当前遍历位不为9，则直接加1，然后放回
+            if newDigits[index] != 9 {
+                newDigits[index] += 1
+                return newDigits
+            } else {
+                /// 如果当前遍历位为9，则直接置为0, 然后进行下一位的遍历
+                newDigits[index] = 0
+            }
+        }
+        // 来到这里说明数组全为9，那么加1后，数组要插入一，其他为位全为0
+        newDigits.insert(1, at: 0)
+        return newDigits
+    }
+    
+    /**
+     移动零
+     给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+
+     示例:
+
+     输入: [0,1,0,3,12]
+     输出: [1,3,12,0,0]
+     []
+     */
+    func moveZeroes(_ nums: inout [Int]) {
+        var numsArray: [Int] = []
+        var zeronArray: [Int] = []
+        for num in nums {
+            if num == 0 {
+                zeronArray.append(num)
+            } else {
+                numsArray.append(num)
+            }
+        }
+        numsArray.append(contentsOf: zeronArray)
+        nums = numsArray
+        
+     }
+    
+    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+        var map: [Int: Int?] = [:]
+        for (currentIndex, num) in nums.enumerated() {
+            let other = target - num
+            if map[other] != nil {
+                return [map[other]!!, currentIndex]
+            } else {
+                map[num] = currentIndex
+            }
+           
+        }
+        return []
+    }
+        
+    func rotate(_ matrix: inout [[Int]]) {
+        var newMatrix = matrix
+        for (i, rowArray) in matrix.enumerated() {
+            for (j, num) in rowArray.enumerated() {
+                let newJ = rowArray.count - 1 - i
+                let newI = i
+                newMatrix[newI][newJ] = num
+            }
+        }
+        matrix = newMatrix
+    }
+}
+var bew = [0,1,0,3,12]
+let result = Solution().twoSum([0,4,3,0], 0)
 print(result)
 
 
