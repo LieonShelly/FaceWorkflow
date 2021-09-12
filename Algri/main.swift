@@ -519,9 +519,84 @@ class Solution {
         }
         matrix = newMatrix
     }
+    
+    /**
+     给定两个数组，编写一个函数来计算它们的交集。
+
+      
+
+     示例 1：
+
+     输入：nums1 = [1,2,2,1], nums2 = [2,2]
+     输出：[2,2]
+     示例 2:
+
+     输入：nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+     输出：[4,9]
+     */
+    func intersect(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        var map: [Int: Int?] = [:]
+        // 将一个数组的元素存入hashMap表中，key为num，value为num出现的次数
+        for num in nums1 {
+            if map[num] != nil {
+                map[num]!! += 1
+            } else {
+                map[num] = 1
+            }
+        }
+        var result: [Int] = []
+        // 在另一个数组中遍历，如果hashMap表中存在这个key，那么hasMap对应的值减一，同时将这个num放入到新的数组中，如果还存在这个key但是，value已经为0了，则说明之前已经把这个num放入到新的数组中了
+        for num in nums2 {
+            if map[num] != nil, map[num]! != 0 {
+                result.append(num)
+                map[num]!! -= 1
+            }
+        }
+        return result
+    }
+    /**
+     给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+
+     说明：
+
+     你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？
+
+     示例 1:
+
+     输入: [2,2,1]
+     输出: 1
+     示例 2:
+
+     输入: [4,1,2,1,2]
+     输出: 4
+     
+     使用异或实现：相同为0，不同为1
+      a ^ a = 0
+      a ^ 0 = a
+      a ^ b ^ a = a ^ a ^ b = 0 ^ b = b
+     这样就可以把相同的值过滤掉，不重复的值保留下来
+     */
+    func singleNumber(_ nums: [Int]) -> Int {
+        var reduce = 0
+        for num in nums {
+            reduce = reduce ^ num
+        }
+        return reduce
+//        var set: Set<Int> = .init()
+//        for num in nums {
+//            if set.insert(num).0 == false { // 如果集合中存在改元素，则移除这个元素，相当于把重复的元素，从集合中移除，保留不重复的
+//                set.remove(num)
+//            }
+//        }
+//        return set.isEmpty ? 0 : set.first!
+    }
+    
+    func rotate(_ nums: inout [Int], _ k: Int) {
+
+      }
 }
 var bew = [0,1,0,3,12]
-let result = Solution().twoSum([0,4,3,0], 0)
+let result = Solution().singleNumber([2,2,1])
 print(result)
 
 
