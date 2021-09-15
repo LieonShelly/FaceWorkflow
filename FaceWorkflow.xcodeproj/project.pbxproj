@@ -15,6 +15,12 @@
 		CD11914326E5D188004FA1B3 /* BinarySearchTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE2326B9A0070030D340 /* BinarySearchTree.swift */; };
 		CD11914426E5D18D004FA1B3 /* HashMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1D26B92E5B0030D340 /* HashMap.swift */; };
 		CD1AAC1326F059130034B597 /* RBTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1AAC1226F059130034B597 /* RBTree.swift */; };
+		CD1DB77026F1E9D40009EADF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1DB76F26F1E9D40009EADF /* AppDelegate.swift */; };
+		CD1DB77226F1E9D40009EADF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1DB77126F1E9D40009EADF /* SceneDelegate.swift */; };
+		CD1DB77426F1E9D40009EADF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1DB77326F1E9D40009EADF /* ViewController.swift */; };
+		CD1DB77726F1E9D40009EADF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD1DB77526F1E9D40009EADF /* Main.storyboard */; };
+		CD1DB77926F1E9D70009EADF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD1DB77826F1E9D70009EADF /* Assets.xcassets */; };
+		CD1DB77C26F1E9D70009EADF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD1DB77A26F1E9D70009EADF /* LaunchScreen.storyboard */; };
 		CD1E00AF2681C90F002C845B /* WavHeader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1E00AD2681C90E002C845B /* WavHeader.cpp */; };
 		CD1E00B52681D7B2002C845B /* FFMpegs.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD1E00B42681D7B2002C845B /* FFMpegs.mm */; };
 		CD1ED336267F8E0E002C845B /* AudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1ED334267F8E0E002C845B /* AudioBuffer.cpp */; };
@@ -130,6 +136,14 @@
 		CD11913726E5CFF0004FA1B3 /* Algri */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Algri; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD11913926E5CFF1004FA1B3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		CD1AAC1226F059130034B597 /* RBTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RBTree.swift; sourceTree = "<group>"; };
+		CD1DB76D26F1E9D40009EADF /* Simulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Simulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD1DB76F26F1E9D40009EADF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CD1DB77126F1E9D40009EADF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		CD1DB77326F1E9D40009EADF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CD1DB77626F1E9D40009EADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CD1DB77826F1E9D70009EADF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CD1DB77B26F1E9D70009EADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CD1DB77D26F1E9D70009EADF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD1E00002680EF73002C845B /* avio_reading.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = avio_reading.c; sourceTree = "<group>"; };
 		CD1E00012680EF73002C845B /* encode_video.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = encode_video.c; sourceTree = "<group>"; };
 		CD1E00022680EF73002C845B /* avio_list_dir.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = avio_list_dir.c; sourceTree = "<group>"; };
@@ -12005,6 +12019,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CD1DB76A26F1E9D40009EADF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD7A49B326F0FEE600E52CC2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -12069,6 +12090,20 @@
 				CD1AAC1226F059130034B597 /* RBTree.swift */,
 			);
 			path = "红黑树";
+			sourceTree = "<group>";
+		};
+		CD1DB76E26F1E9D40009EADF /* Simulator */ = {
+			isa = PBXGroup;
+			children = (
+				CD1DB76F26F1E9D40009EADF /* AppDelegate.swift */,
+				CD1DB77126F1E9D40009EADF /* SceneDelegate.swift */,
+				CD1DB77326F1E9D40009EADF /* ViewController.swift */,
+				CD1DB77526F1E9D40009EADF /* Main.storyboard */,
+				CD1DB77826F1E9D70009EADF /* Assets.xcassets */,
+				CD1DB77A26F1E9D70009EADF /* LaunchScreen.storyboard */,
+				CD1DB77D26F1E9D70009EADF /* Info.plist */,
+			);
+			path = Simulator;
 			sourceTree = "<group>";
 		};
 		CD1E00042680EF73002C845B /* pc-uninstalled */ = {
@@ -24730,6 +24765,7 @@
 				CDA8D78125C2A4ED00CB33D4 /* FaceWorkflow */,
 				CD11913826E5CFF0004FA1B3 /* Algri */,
 				CD7A49B726F0FEE600E52CC2 /* Cxx */,
+				CD1DB76E26F1E9D40009EADF /* Simulator */,
 				CDA8D78025C2A4ED00CB33D4 /* Products */,
 				CDC36C61267BB2B300C89C9F /* Frameworks */,
 				E8EAB80CC7E317037E90FB7C /* Pods */,
@@ -24742,6 +24778,7 @@
 				CDA8D77F25C2A4ED00CB33D4 /* FaceWorkflow.app */,
 				CD11913726E5CFF0004FA1B3 /* Algri */,
 				CD7A49B626F0FEE600E52CC2 /* Cxx */,
+				CD1DB76D26F1E9D40009EADF /* Simulator.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -25182,6 +25219,23 @@
 			productReference = CD11913726E5CFF0004FA1B3 /* Algri */;
 			productType = "com.apple.product-type.tool";
 		};
+		CD1DB76C26F1E9D40009EADF /* Simulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD1DB78026F1E9D70009EADF /* Build configuration list for PBXNativeTarget "Simulator" */;
+			buildPhases = (
+				CD1DB76926F1E9D40009EADF /* Sources */,
+				CD1DB76A26F1E9D40009EADF /* Frameworks */,
+				CD1DB76B26F1E9D40009EADF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Simulator;
+			productName = Simulator;
+			productReference = CD1DB76D26F1E9D40009EADF /* Simulator.app */;
+			productType = "com.apple.product-type.application";
+		};
 		CD7A49B526F0FEE600E52CC2 /* Cxx */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD7A49BC26F0FEE600E52CC2 /* Build configuration list for PBXNativeTarget "Cxx" */;
@@ -25230,6 +25284,9 @@
 					CD11913626E5CFF0004FA1B3 = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
+					CD1DB76C26F1E9D40009EADF = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
 					CD7A49B526F0FEE600E52CC2 = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
@@ -25255,11 +25312,22 @@
 				CDA8D77E25C2A4ED00CB33D4 /* FaceWorkflow */,
 				CD11913626E5CFF0004FA1B3 /* Algri */,
 				CD7A49B526F0FEE600E52CC2 /* Cxx */,
+				CD1DB76C26F1E9D40009EADF /* Simulator */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CD1DB76B26F1E9D40009EADF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD1DB77C26F1E9D70009EADF /* LaunchScreen.storyboard in Resources */,
+				CD1DB77926F1E9D70009EADF /* Assets.xcassets in Resources */,
+				CD1DB77726F1E9D40009EADF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CDA8D77D25C2A4ED00CB33D4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -25343,6 +25411,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CD1DB76926F1E9D40009EADF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD1DB77426F1E9D40009EADF /* ViewController.swift in Sources */,
+				CD1DB77026F1E9D40009EADF /* AppDelegate.swift in Sources */,
+				CD1DB77226F1E9D40009EADF /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD7A49B226F0FEE600E52CC2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -25398,6 +25476,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		CD1DB77526F1E9D40009EADF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD1DB77626F1E9D40009EADF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CD1DB77A26F1E9D70009EADF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD1DB77B26F1E9D70009EADF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		CDA8D78D25C2A4EF00CB33D4 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -25428,6 +25522,44 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		CD1DB77E26F1E9D70009EADF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Simulator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Simulator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CD1DB77F26F1E9D70009EADF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Simulator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Simulator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -25651,6 +25783,15 @@
 			buildConfigurations = (
 				CD11913B26E5CFF1004FA1B3 /* Debug */,
 				CD11913C26E5CFF1004FA1B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD1DB78026F1E9D70009EADF /* Build configuration list for PBXNativeTarget "Simulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD1DB77E26F1E9D70009EADF /* Debug */,
+				CD1DB77F26F1E9D70009EADF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

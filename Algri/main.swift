@@ -880,7 +880,43 @@ class SolutionSorted {
         }
         return Int(result * sign)
     }
+    
+    /**
+     实现 strStr() 函数。
+
+     给你两个字符串 haystack 和 needle ，请你在 haystack 字符串中找出 needle 字符串出现的第一个位置（下标从 0 开始）。如果不存在，则返回  -1 。
+
+     - 滑动窗口 subStr[left ..< right] == str
+     - 双指针 当两个字符不相等时，i = i - j + 1, j = 0, 重新开始比较
+     
+     */
+    func strStr(_ haystack: String, _ needle: String) -> Int {
+        if needle.isEmpty {
+            return 0
+        }
+        var i = 0
+        var j = 0
+        let haystackArray = Array(haystack)
+        let needleArray = Array(needle)
+        while i < haystack.count, j < needle.count {
+            if haystackArray[i] == needleArray[j] {
+                i += 1;
+                j += 1;
+            } else {
+                i = i - j + 1
+                j = 0
+            }
+        }
+        if j == needle.count {
+            return i - j
+        }
+        return -1
+    }
+    
+    func subStr(_ str: String, range: Range<Int>) -> String {
+        let beginIndex = str.index(str.startIndex, offsetBy: range.lowerBound)
+        let endIndex = str.index(str.startIndex, offsetBy: range.upperBound)
+        return String(str[beginIndex ..< endIndex])
+    }
 }
 
-let result = SolutionSorted().myAtoi("")
-print(result)
