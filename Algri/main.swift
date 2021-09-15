@@ -657,7 +657,7 @@ class SolutionLinkList {
             return lhshashValue == rhshashValue
         }
     }
-   // [1,2,3,4,5]  n = 2
+   // [1,2,3,4,5]  n = 2 删除链表的倒数第n个结点
     func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
         var length = 0
         var node = head
@@ -677,6 +677,7 @@ class SolutionLinkList {
         return head
     }
     
+    // 反转一个链表
     func reverseList(_ head: ListNode?) -> ListNode? {
         var current = head
         var pre: ListNode? = nil
@@ -689,6 +690,7 @@ class SolutionLinkList {
         return pre
     }
     
+    /// 合并两个有序链表
     func mergeTwoLists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         if l1 == nil {
             return l2
@@ -716,6 +718,7 @@ class SolutionLinkList {
         return dummy.next
     }
     
+    // 判断链表是回文链表 == 是否对称
     func isPalindrome(_ head: ListNode?) -> Bool {
         var index = 0
         var map: [Int: ListNode] = [:]
@@ -757,6 +760,27 @@ class SolutionLinkList {
         }
         return true
     }
+    
+    func hasCycle(_ head: ListNode?) -> Bool {
+        guard let head = head else {
+            return false
+        }
+        // 快指针
+        var fast: ListNode? = head
+        // 慢指针
+        var slow: ListNode? = head
+        while fast != nil, fast?.next != nil {
+            // 快指针每次走两步
+            fast = fast?.next?.next
+            // 慢指针每次走一步
+            slow = slow?.next
+            // 如果他们相遇，则有环
+            if fast?.val == slow?.val {
+                return true
+            }
+        }
+        return false
+    }
 }
 
 let head = SolutionLinkList.ListNode(1)
@@ -779,7 +803,84 @@ node21.next = node22
 node22.next = node23
 node23.next = node24
 
-let currentHead = SolutionLinkList().isPalindrome(head)
-print(currentHead)
 
+class SolutionSorted {
+    func merge(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
+        if m == 0, n != 0 {
+            nums1 = nums2
+            return
+        }
+        if m == 0, n == 0 {
+            return
+        }
+        if m != 0, n == 0 {
+            return
+        }
+        var i = m - 1
+        var j = n - 1
+        var end = m + n - 1
+        while j >= 0 {
+            if i >= 0, nums1[i] > nums2[j] {
+                nums1[end] = nums1[i]
+                i -= 1
+            } else {
+                nums1[end] = nums2[j]
+                j -= 1
+            }
+            end -= 1
+           
+        }
+    }
+    /**
+     字符串转数字
+     - 去掉空格
+     - 越界判断
+     - 获取符号位
+     - 获取数字部分
+        - &* 溢出乘法 &+ 溢出加法
+     */
+    func myAtoi(_ s: String) -> Int {
+        let chars = Array(s)
+        // 去掉空格
+        var index = 0
+        let length = s.count
+        while index < length, chars[index] == " " {
+            index += 1
+        }
+        if index >= length {
+            return 0
+        }
+        // 获取符号位
+        var sign: Int32 = 1
+        if chars[index] == "+" || chars[index] == "-" {
+            if chars[index] == "-" {
+                sign = -1
+            }
+            index += 1
+        }
+        // 获取数字部分
+        var result: Int32 = 0
+        var temp: Int32 = 0
+        while index < length {
+            if let num = Int32(String(chars[index])), num <= 9, num >= 0 {
+                temp = result
+                result = result &* 10  &+ num
+                if result / 10 != temp {
+                    if sign > 0 {
+                        return Int(Int32.max)
+                    } else {
+                        return Int(Int32.min)
+                    }
+                }
+                index += 1
+            } else {
+                break
+            }
+           
+        }
+        return Int(result * sign)
+    }
+}
 
+let result = SolutionSorted().myAtoi("")
+print(result)

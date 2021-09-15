@@ -14,6 +14,7 @@
 		CD11914226E5D183004FA1B3 /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD682B7426BD149300D54F84 /* BinaryTree.swift */; };
 		CD11914326E5D188004FA1B3 /* BinarySearchTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE2326B9A0070030D340 /* BinarySearchTree.swift */; };
 		CD11914426E5D18D004FA1B3 /* HashMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1D26B92E5B0030D340 /* HashMap.swift */; };
+		CD1AAC1326F059130034B597 /* RBTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1AAC1226F059130034B597 /* RBTree.swift */; };
 		CD1E00AF2681C90F002C845B /* WavHeader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1E00AD2681C90E002C845B /* WavHeader.cpp */; };
 		CD1E00B52681D7B2002C845B /* FFMpegs.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD1E00B42681D7B2002C845B /* FFMpegs.mm */; };
 		CD1ED336267F8E0E002C845B /* AudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1ED334267F8E0E002C845B /* AudioBuffer.cpp */; };
@@ -30,6 +31,7 @@
 		CD49337F268A236100D1FE3F /* in.wav in Resources */ = {isa = PBXBuildFile; fileRef = CD49337E268A236100D1FE3F /* in.wav */; };
 		CD665C9F269C135E00BA37F2 /* RecordVideo.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD665C9E269C135E00BA37F2 /* RecordVideo.mm */; };
 		CD6EBD30268E178800189ED5 /* AccEncode.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD6EBD2F268E178800189ED5 /* AccEncode.mm */; };
+		CD7A49B926F0FEE600E52CC2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7A49B826F0FEE600E52CC2 /* main.cpp */; };
 		CDA3C16226A5D2A700C12760 /* H264Encode.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDA3C16126A5D2A700C12760 /* H264Encode.mm */; };
 		CDA3C16526A5D3CA00C12760 /* VideoEncodeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA3C16426A5D3CA00C12760 /* VideoEncodeSpec.m */; };
 		CDA3C1F926A6741F00C12760 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA3C16B26A6741E00C12760 /* libavutil.a */; };
@@ -111,6 +113,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		CD7A49B426F0FEE600E52CC2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -118,6 +129,7 @@
 		6DFB1255CA604278BE06F3BB /* Pods-FaceWorkflow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FaceWorkflow.debug.xcconfig"; path = "Target Support Files/Pods-FaceWorkflow/Pods-FaceWorkflow.debug.xcconfig"; sourceTree = "<group>"; };
 		CD11913726E5CFF0004FA1B3 /* Algri */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Algri; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD11913926E5CFF1004FA1B3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		CD1AAC1226F059130034B597 /* RBTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RBTree.swift; sourceTree = "<group>"; };
 		CD1E00002680EF73002C845B /* avio_reading.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = avio_reading.c; sourceTree = "<group>"; };
 		CD1E00012680EF73002C845B /* encode_video.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = encode_video.c; sourceTree = "<group>"; };
 		CD1E00022680EF73002C845B /* avio_list_dir.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = avio_list_dir.c; sourceTree = "<group>"; };
@@ -11685,6 +11697,8 @@
 		CD682B7926BD386100D54F84 /* AVLTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVLTree.swift; sourceTree = "<group>"; };
 		CD6EBD2E268E178800189ED5 /* AccEncode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccEncode.h; sourceTree = "<group>"; };
 		CD6EBD2F268E178800189ED5 /* AccEncode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AccEncode.mm; sourceTree = "<group>"; };
+		CD7A49B626F0FEE600E52CC2 /* Cxx */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Cxx; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD7A49B826F0FEE600E52CC2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CDA3C16026A5D2A700C12760 /* H264Encode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = H264Encode.h; sourceTree = "<group>"; };
 		CDA3C16126A5D2A700C12760 /* H264Encode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = H264Encode.mm; sourceTree = "<group>"; };
 		CDA3C16326A5D3CA00C12760 /* VideoEncodeSpec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoEncodeSpec.h; sourceTree = "<group>"; };
@@ -11991,6 +12005,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CD7A49B326F0FEE600E52CC2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CDA8D77C25C2A4ED00CB33D4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -12040,6 +12061,14 @@
 				CD11913926E5CFF1004FA1B3 /* main.swift */,
 			);
 			path = Algri;
+			sourceTree = "<group>";
+		};
+		CD1AAC1126F059040034B597 /* 红黑树 */ = {
+			isa = PBXGroup;
+			children = (
+				CD1AAC1226F059130034B597 /* RBTree.swift */,
+			);
+			path = "红黑树";
 			sourceTree = "<group>";
 		};
 		CD1E00042680EF73002C845B /* pc-uninstalled */ = {
@@ -24463,6 +24492,14 @@
 			path = AccEncode;
 			sourceTree = "<group>";
 		};
+		CD7A49B726F0FEE600E52CC2 /* Cxx */ = {
+			isa = PBXGroup;
+			children = (
+				CD7A49B826F0FEE600E52CC2 /* main.cpp */,
+			);
+			path = Cxx;
+			sourceTree = "<group>";
+		};
 		CDA3C15F26A5D11E00C12760 /* H264Encode */ = {
 			isa = PBXGroup;
 			children = (
@@ -24692,6 +24729,7 @@
 			children = (
 				CDA8D78125C2A4ED00CB33D4 /* FaceWorkflow */,
 				CD11913826E5CFF0004FA1B3 /* Algri */,
+				CD7A49B726F0FEE600E52CC2 /* Cxx */,
 				CDA8D78025C2A4ED00CB33D4 /* Products */,
 				CDC36C61267BB2B300C89C9F /* Frameworks */,
 				E8EAB80CC7E317037E90FB7C /* Pods */,
@@ -24703,6 +24741,7 @@
 			children = (
 				CDA8D77F25C2A4ED00CB33D4 /* FaceWorkflow.app */,
 				CD11913726E5CFF0004FA1B3 /* Algri */,
+				CD7A49B626F0FEE600E52CC2 /* Cxx */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -25096,6 +25135,7 @@
 		CDD9CE1C26B92E3C0030D340 /* 算法 */ = {
 			isa = PBXGroup;
 			children = (
+				CD1AAC1126F059040034B597 /* 红黑树 */,
 				CD682B7826BD384C00D54F84 /* AVL树 */,
 				CD682B7626BD171400D54F84 /* TestEntrence.swift */,
 				CD682B7326BD148100D54F84 /* 二叉树 */,
@@ -25142,6 +25182,23 @@
 			productReference = CD11913726E5CFF0004FA1B3 /* Algri */;
 			productType = "com.apple.product-type.tool";
 		};
+		CD7A49B526F0FEE600E52CC2 /* Cxx */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD7A49BC26F0FEE600E52CC2 /* Build configuration list for PBXNativeTarget "Cxx" */;
+			buildPhases = (
+				CD7A49B226F0FEE600E52CC2 /* Sources */,
+				CD7A49B326F0FEE600E52CC2 /* Frameworks */,
+				CD7A49B426F0FEE600E52CC2 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Cxx;
+			productName = Cxx;
+			productReference = CD7A49B626F0FEE600E52CC2 /* Cxx */;
+			productType = "com.apple.product-type.tool";
+		};
 		CDA8D77E25C2A4ED00CB33D4 /* FaceWorkflow */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CDA8D79325C2A4EF00CB33D4 /* Build configuration list for PBXNativeTarget "FaceWorkflow" */;
@@ -25173,6 +25230,9 @@
 					CD11913626E5CFF0004FA1B3 = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
+					CD7A49B526F0FEE600E52CC2 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
 					CDA8D77E25C2A4ED00CB33D4 = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -25194,6 +25254,7 @@
 			targets = (
 				CDA8D77E25C2A4ED00CB33D4 /* FaceWorkflow */,
 				CD11913626E5CFF0004FA1B3 /* Algri */,
+				CD7A49B526F0FEE600E52CC2 /* Cxx */,
 			);
 		};
 /* End PBXProject section */
@@ -25275,9 +25336,18 @@
 				CD11914226E5D183004FA1B3 /* BinaryTree.swift in Sources */,
 				CD11914126E5D17E004FA1B3 /* TestEntrence.swift in Sources */,
 				CD11914426E5D18D004FA1B3 /* HashMap.swift in Sources */,
+				CD1AAC1326F059130034B597 /* RBTree.swift in Sources */,
 				CD11913A26E5CFF1004FA1B3 /* main.swift in Sources */,
 				CD11914026E5D17B004FA1B3 /* AVLTree.swift in Sources */,
 				CD11914326E5D188004FA1B3 /* BinarySearchTree.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD7A49B226F0FEE600E52CC2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD7A49B926F0FEE600E52CC2 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -25358,6 +25428,26 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		CD7A49BA26F0FEE600E52CC2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 11.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		CD7A49BB26F0FEE600E52CC2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 11.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -25561,6 +25651,15 @@
 			buildConfigurations = (
 				CD11913B26E5CFF1004FA1B3 /* Debug */,
 				CD11913C26E5CFF1004FA1B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD7A49BC26F0FEE600E52CC2 /* Build configuration list for PBXNativeTarget "Cxx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD7A49BA26F0FEE600E52CC2 /* Debug */,
+				CD7A49BB26F0FEE600E52CC2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
