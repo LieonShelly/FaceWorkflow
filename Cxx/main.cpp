@@ -70,7 +70,7 @@ public:
     void push(int node) {
         stack1.push(node);
     }
-
+    
     int pop() {
         if (stack2.size() == 0) {
             while(stack1.size() != 0) {
@@ -83,7 +83,7 @@ public:
         stack2.pop();
         return  top;
     }
-
+    
 private:
     stack<int> stack1;
     stack<int> stack2;
@@ -91,51 +91,51 @@ private:
 public:
     
     /**
-        *
-        * @param head ListNode类
-        * @param k int整型
-        * @return ListNode类
-        */
-       ListNode* reverseKGroup(ListNode* head, int k) {
-           // write code here
-           ListNode *dummy = new ListNode(0);
-           dummy->next = head;
-           ListNode *pre = dummy;
-           ListNode *end = dummy;
-           while(end != nullptr) {
-               // 每k个反转
-               for(int i = 0; i < k && end != nullptr; i++) {
-                   end = end->next;
-               }
-               if (end == nullptr) {
-                   break;
-               }
-               // 反转开始的节点
-               ListNode *start = pre->next;
-               // next是下一次反转的头结点
-               ListNode *next = end->next;
-               end->next = nullptr;
-               pre->next = reverse(start);
-               start->next = next;
-               pre = start;
-               end = start;
-           }
-           return dummy->next;
-           
-       }
-       
-       
-       ListNode* reverse(ListNode *head) {
-           ListNode *node = head;
-           ListNode *pre = nullptr;
-           while(node != nullptr) {
-               ListNode *temp = node->next;
-               node->next = pre;
-               pre = node;
-               node = temp;
-           }
-           return pre;
-       }
+     *
+     * @param head ListNode类
+     * @param k int整型
+     * @return ListNode类
+     */
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        // write code here
+        ListNode *dummy = new ListNode(0);
+        dummy->next = head;
+        ListNode *pre = dummy;
+        ListNode *end = dummy;
+        while(end != nullptr) {
+            // 每k个反转
+            for(int i = 0; i < k && end != nullptr; i++) {
+                end = end->next;
+            }
+            if (end == nullptr) {
+                break;
+            }
+            // 反转开始的节点
+            ListNode *start = pre->next;
+            // next是下一次反转的头结点
+            ListNode *next = end->next;
+            end->next = nullptr;
+            pre->next = reverse(start);
+            start->next = next;
+            pre = start;
+            end = start;
+        }
+        return dummy->next;
+        
+    }
+    
+    
+    ListNode* reverse(ListNode *head) {
+        ListNode *node = head;
+        ListNode *pre = nullptr;
+        while(node != nullptr) {
+            ListNode *temp = node->next;
+            node->next = pre;
+            pre = node;
+            node = temp;
+        }
+        return pre;
+    }
     
     
 };
@@ -147,7 +147,36 @@ void bubbleSort() {
     
 }
 
+#include <vector>
+
+namespace Niuke {
+
+int search(vector<int>& nums, int target) {
+    // write code here
+    int leftIndex = 0;
+    int rightIndex = nums.size() - 1;
+    int idx = -1;
+    while(leftIndex <= rightIndex) {
+        int midIndex = leftIndex + (rightIndex - leftIndex) / 2;
+        if (target < nums.at(midIndex)) { // 左区间
+            rightIndex = midIndex - 1;
+        } else if (target > nums.at(midIndex)) { // 右区间
+            leftIndex = midIndex + 1;
+        } else { // 有可能存在几个相同的值，所以要找到索引最小的那个
+            idx = midIndex;
+            rightIndex = midIndex - 1;
+        }
+    }
+    return -1;
+}
+}
+
+
 int main(int argc, const char * argv[]) {
+    vector<int> nums = {1,2,2,3,4}; // ,2
+    int index = Niuke::search(nums, 2);
+    cout << index << endl;
+    return 0;
     Solution queue = Solution();
     ListNode *head = new ListNode(1);
     ListNode *node2 = new ListNode(2);

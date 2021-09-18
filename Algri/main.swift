@@ -422,6 +422,65 @@ class Solution {
         return true
     }
     
+    /**
+     NC41 最长无重复子数组
+     描述
+     给定一个数组arr，返回arr的最长无重复元素子数组的长度，无重复指的是所有数字都不相同。
+     子数组是连续的，比如[1,3,5,7,9]的子数组有[1,3]，[3,5,7]等等，但是[1,3,7]不是子数组
+     示例1
+     输入：
+     [2,3,4,5]
+     复制
+     返回值：
+     4
+     复制
+     说明：
+     [2,3,4,5]是最长子数组
+     示例2
+     输入：
+     [2,2,3,4,3]
+     复制
+     返回值：
+     3
+     复制
+     说明：
+     [2,3,4]是最长子数组
+     示例3
+     输入：
+     [9]
+     复制
+     返回值：
+     1
+     复制
+     示例4
+       * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+       *
+       * @param arr int整型一维数组 the array
+       * @return int整型
+       */
+      func maxLength ( _ arr: [Int]) -> Int {
+          // write code here
+          if arr.count < 2 {
+              return arr.count
+          }
+          var setDict: Set<Int> = .init()
+          var res = 0
+          var left = 0
+          var right = 0
+          while(right < arr.count) {
+              let element = arr[right]
+              if !setDict.contains(element) {
+                  setDict.insert(element)
+                  right += 1
+              } else {
+                   _ = setDict.remove(arr[left])
+                  left += 1
+              }
+              res = max(res, setDict.count)
+          }
+          return res
+      }
+    
     func isLetterOrDigest(_ str: String) -> Bool {
         let reg = "^[a-zA-Z0-9]+$"
         let pre = NSPredicate(format: "SELF MATCHES %@", reg)
@@ -954,6 +1013,22 @@ class Sorting {
         }
     }
     
+    func bubbleSort3(_ array: inout [Int]) {
+        var startIndex = 0
+        for end in (startIndex ... array.count - 1).reversed() {
+            var sortedIndex = 1
+            for begin in 1 ... end {
+                if array[begin] < array[begin - 1] {
+                    let temp = array[begin]
+                    array[begin] = array[begin - 1]
+                    array[begin - 1] = temp
+                    sortedIndex = begin
+                }
+            }
+            startIndex = sortedIndex
+        }
+    }
+    
     func search(_ nums: [Int], _ target: Int) -> Int {
         var leftIndex = 0
         var rightIndex = nums.count - 1
@@ -969,8 +1044,37 @@ class Sorting {
         }
         return -1
     }
+    
+    func selectedSort(_ array: inout [Int]) {
+        for end in 1 ... array.count - 1 {
+            var maxIndex = 0
+            for begin in 1 ... end {
+                if array[maxIndex] <= array[begin] {
+                    maxIndex = begin
+                }
+            }
+            let temp = array[maxIndex]
+            array[maxIndex] = array[end]
+            array[end] = temp
+        }
+    }
 }
 
-var array = [11, 12, 13, 14, 33333]
-let index = Sorting().search(array, 3333)
-print(index)
+var array: [CGFloat] = [11.0, 12.0, 13.0, 14.0, 33333.0].map { CGFloat($0)}
+
+
+
+extension Array where Self.Element == CGFloat {
+    /// 获取一个数字数组中的最小区间
+    func findRange(_ num: CGFloat) -> [Int] {
+        guard let maxValue = filter({ $0 >= num }).first else { return [] }
+        guard let minValue = filter({ $0 <= num}).last else { return [] }
+        guard let minIndex = firstIndex(of: minValue) else { return [] }
+        guard let maxIndex = firstIndex(of: maxValue) else { return [] }
+        return [minIndex, maxIndex]
+    }
+}
+
+print(array.findRange(13.4))
+
+
