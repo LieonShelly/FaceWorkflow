@@ -920,3 +920,57 @@ class SolutionSorted {
     }
 }
 
+
+class Sorting {
+    
+    func bubbleSort(_ array: inout [Int]) {
+        let count = array.count
+        for end in (1 ... count - 1).reversed()  {
+            for begin in 1 ... end {
+                if array[begin] < array[begin - 1] {
+                    let temp = array[begin]
+                    array[begin] = array[begin - 1]
+                    array[begin - 1] = temp
+                }
+            }
+        }
+    }
+    
+    func bubbleSort1(_ array: inout [Int]) {
+        let count = array.count
+        for end in (1 ... count - 1).reversed()  {
+            var sorted = false
+            for begin in 1 ... end {
+                if array[begin] < array[begin - 1] {
+                    let temp = array[begin]
+                    array[begin] = array[begin - 1]
+                    array[begin - 1] = temp
+                    sorted = false
+                }
+            }
+            if sorted {
+                break
+            }
+        }
+    }
+    
+    func search(_ nums: [Int], _ target: Int) -> Int {
+        var leftIndex = 0
+        var rightIndex = nums.count - 1
+        while leftIndex <= rightIndex {
+            let midIndex = leftIndex + (rightIndex - leftIndex) / 2
+            if nums[midIndex] > target { // 左区间 [leftIndex, mid - 1]
+                rightIndex = midIndex - 1
+            } else if nums[midIndex] < target { // 右区间
+                leftIndex = midIndex + 1
+            } else {
+                return midIndex
+            }
+        }
+        return -1
+    }
+}
+
+var array = [11, 12, 13, 14, 33333]
+let index = Sorting().search(array, 3333)
+print(index)

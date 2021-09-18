@@ -136,7 +136,16 @@ public:
            }
            return pre;
        }
+    
+    
 };
+
+
+void bubbleSort() {
+    int a[] = {123, 23, 23, 234, 234};
+    
+    
+}
 
 int main(int argc, const char * argv[]) {
     Solution queue = Solution();
