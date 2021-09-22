@@ -38,6 +38,7 @@
 		CD665C9F269C135E00BA37F2 /* RecordVideo.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD665C9E269C135E00BA37F2 /* RecordVideo.mm */; };
 		CD6EBD30268E178800189ED5 /* AccEncode.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD6EBD2F268E178800189ED5 /* AccEncode.mm */; };
 		CD7A49B926F0FEE600E52CC2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7A49B826F0FEE600E52CC2 /* main.cpp */; };
+		CD8DB38F26FA2B6A00445E32 /* Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8DB38E26FA2B6A00445E32 /* Sort.swift */; };
 		CDA3C16226A5D2A700C12760 /* H264Encode.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDA3C16126A5D2A700C12760 /* H264Encode.mm */; };
 		CDA3C16526A5D3CA00C12760 /* VideoEncodeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA3C16426A5D3CA00C12760 /* VideoEncodeSpec.m */; };
 		CDA3C1F926A6741F00C12760 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA3C16B26A6741E00C12760 /* libavutil.a */; };
@@ -11713,6 +11714,7 @@
 		CD6EBD2F268E178800189ED5 /* AccEncode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AccEncode.mm; sourceTree = "<group>"; };
 		CD7A49B626F0FEE600E52CC2 /* Cxx */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Cxx; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7A49B826F0FEE600E52CC2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		CD8DB38E26FA2B6A00445E32 /* Sort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sort.swift; sourceTree = "<group>"; };
 		CDA3C16026A5D2A700C12760 /* H264Encode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = H264Encode.h; sourceTree = "<group>"; };
 		CDA3C16126A5D2A700C12760 /* H264Encode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = H264Encode.mm; sourceTree = "<group>"; };
 		CDA3C16326A5D3CA00C12760 /* VideoEncodeSpec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoEncodeSpec.h; sourceTree = "<group>"; };
@@ -25178,6 +25180,7 @@
 				CD682B7326BD148100D54F84 /* 二叉树 */,
 				CDD9CE1F26B93BD40030D340 /* 二叉搜索树 */,
 				CDD9CE1D26B92E5B0030D340 /* HashMap.swift */,
+				CD8DB38E26FA2B6A00445E32 /* Sort.swift */,
 			);
 			path = "算法";
 			sourceTree = "<group>";
@@ -25406,6 +25409,7 @@
 				CD11914426E5D18D004FA1B3 /* HashMap.swift in Sources */,
 				CD1AAC1326F059130034B597 /* RBTree.swift in Sources */,
 				CD11913A26E5CFF1004FA1B3 /* main.swift in Sources */,
+				CD8DB38F26FA2B6A00445E32 /* Sort.swift in Sources */,
 				CD11914026E5D17B004FA1B3 /* AVLTree.swift in Sources */,
 				CD11914326E5D188004FA1B3 /* BinarySearchTree.swift in Sources */,
 			);

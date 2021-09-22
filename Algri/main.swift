@@ -120,11 +120,11 @@ class Solution3 {
  - 采用层序遍历
  - root先入队， levelSize = 1
  - while 循环 队列不为空
-    - 取出队列的头 head
-    - levelSize -= 1
-    - 如果head的left不为空， head的left入队
-    - 如果head的right不为空，head的right入队
-    - 如果 levelSize = 0， 说明一层遍历完成， height += 1
+ - 取出队列的头 head
+ - levelSize -= 1
+ - 如果head的left不为空， head的left入队
+ - 如果head的right不为空，head的right入队
+ - 如果 levelSize = 0， 说明一层遍历完成， height += 1
  */
 class Solution {
     public class TreeNode {
@@ -167,9 +167,9 @@ class Solution {
     
     /**
      给你一个二叉树的根节点 root ，判断其是否是一个有效的二叉搜索树。
-
+     
      有效 二叉搜索树定义如下：
-
+     
      节点的左子树只包含 小于 当前节点的数。
      节点的右子树只包含 大于 当前节点的数。
      所有左子树和右子树自身必须也是二叉搜索树
@@ -196,10 +196,10 @@ class Solution {
     /**
      给定一个二叉树，检查它是否是镜像对称的。
      - 判断二叉树是否镜像
-        - 左右先入队
-        - 队列每次出队两个left right， 比较大小
-        - left.left, right.right 入队； left.right, right.left入队
-
+     - 左右先入队
+     - 队列每次出队两个left right， 比较大小
+     - left.left, right.right 入队； left.right, right.left入队
+     
      */
     func isSymmetric(_ root: TreeNode?) -> Bool {
         guard let root = root else {
@@ -280,13 +280,13 @@ class Solution {
     // 输入：["h","e","l","l","o"]
     // 输出：["o","l","l","e","h"]
     /*
-    输入：
-    ["A"," ","m","a","n",","," ","a"," ","p","l","a","n",","," ","a"," ","c","a","n","a","l",":"," ","P","a","n","a","m","a"]
-    输出：
-    ["a","m","a","n","a","P"," ",":","l","a","n","a","c"," "," ","a",",","n","a","l","p"," ","a"," ",",","n","a","m"," ","A"]
-    预期结果：
-    ["a","m","a","n","a","P"," ",":","l","a","n","a","c"," ","a"," ",",","n","a","l","p"," ","a"," ",",","n","a","m"," ","A"]
- */
+     输入：
+     ["A"," ","m","a","n",","," ","a"," ","p","l","a","n",","," ","a"," ","c","a","n","a","l",":"," ","P","a","n","a","m","a"]
+     输出：
+     ["a","m","a","n","a","P"," ",":","l","a","n","a","c"," "," ","a",",","n","a","l","p"," ","a"," ",",","n","a","m"," ","A"]
+     预期结果：
+     ["a","m","a","n","a","P"," ",":","l","a","n","a","c"," ","a"," ",",","n","a","l","p"," ","a"," ",",","n","a","m"," ","A"]
+     */
     func reverseString(_ s: inout [Character]) {
         let endIndx = (s.count - 1) / 2
         for index in 0 ... endIndx {
@@ -301,18 +301,18 @@ class Solution {
      输入：x = 123
      输出：321
      示例 2：
-
+     
      输入：x = -123
      输出：-321
      示例 3：
-
+     
      输入：x = 120
      输出：21
      示例 4：
-
+     
      输入：x = 0
      输出：0
-
+     
      */
     func reverse(_ x: Int) -> Int {
         var x = x
@@ -330,10 +330,10 @@ class Solution {
     
     /**
      给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
-
+     
      s = "leetcode"
      返回 0
-
+     
      s = "loveleetcode"
      返回 2
      */
@@ -359,16 +359,16 @@ class Solution {
     /**
      给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
      注意：若 s 和 t 中每个字符出现的次数都相同，则称 s 和 t 互为字母异位词。
-
+     
      示例 1:
-
+     
      输入: s = "anagram", t = "nagaram"
      输出: true
      示例 2:
-
+     
      输入: s = "rat", t = "car"
      输出: false
-
+     
      */
     func isAnagram(_ s: String, _ t: String) -> Bool {
         var mapS: [String : Int] = [:]
@@ -453,33 +453,33 @@ class Solution {
      1
      复制
      示例4
-       * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
-       *
-       * @param arr int整型一维数组 the array
-       * @return int整型
-       */
-      func maxLength ( _ arr: [Int]) -> Int {
-          // write code here
-          if arr.count < 2 {
-              return arr.count
-          }
-          var setDict: Set<Int> = .init()
-          var res = 0
-          var left = 0
-          var right = 0
-          while(right < arr.count) {
-              let element = arr[right]
-              if !setDict.contains(element) {
-                  setDict.insert(element)
-                  right += 1
-              } else {
-                   _ = setDict.remove(arr[left])
-                  left += 1
-              }
-              res = max(res, setDict.count)
-          }
-          return res
-      }
+     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+     *
+     * @param arr int整型一维数组 the array
+     * @return int整型
+     */
+    func maxLength ( _ arr: [Int]) -> Int {
+        // write code here
+        if arr.count < 2 {
+            return arr.count
+        }
+        var setDict: Set<Int> = .init()
+        var res = 0
+        var left = 0
+        var right = 0
+        while(right < arr.count) {
+            let element = arr[right]
+            if !setDict.contains(element) {
+                setDict.insert(element)
+                right += 1
+            } else {
+                _ = setDict.remove(arr[left])
+                left += 1
+            }
+            res = max(res, setDict.count)
+        }
+        return res
+    }
     
     func isLetterOrDigest(_ str: String) -> Bool {
         let reg = "^[a-zA-Z0-9]+$"
@@ -496,17 +496,17 @@ class Solution {
      最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。
      你可以假设除了整数 0 之外，这个整数不会以零开头。
      示例 1：
-
+     
      输入：digits = [1,2,3]
      输出：[1,2,4]
      解释：输入数组表示数字 123。
      示例 2：
-
+     
      输入：digits = [4,3,2,1]
      输出：[4,3,2,2]
      解释：输入数组表示数字 4321。
      示例 3：
-
+     
      输入：digits = [0]
      输出：[1]
      */
@@ -531,9 +531,9 @@ class Solution {
     /**
      移动零
      给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
-
+     
      示例:
-
+     
      输入: [0,1,0,3,12]
      输出: [1,3,12,0,0]
      []
@@ -551,7 +551,7 @@ class Solution {
         numsArray.append(contentsOf: zeronArray)
         nums = numsArray
         
-     }
+    }
     
     func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
         var map: [Int: Int?] = [:]
@@ -562,7 +562,7 @@ class Solution {
             } else {
                 map[num] = currentIndex
             }
-           
+            
         }
         return []
     }
@@ -581,15 +581,15 @@ class Solution {
     
     /**
      给定两个数组，编写一个函数来计算它们的交集。
-
+     
       
-
+     
      示例 1：
-
+     
      输入：nums1 = [1,2,2,1], nums2 = [2,2]
      输出：[2,2]
      示例 2:
-
+     
      输入：nums1 = [4,9,5], nums2 = [9,4,9,8,4]
      输出：[4,9]
      */
@@ -615,24 +615,24 @@ class Solution {
     }
     /**
      给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
-
+     
      说明：
-
+     
      你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？
-
+     
      示例 1:
-
+     
      输入: [2,2,1]
      输出: 1
      示例 2:
-
+     
      输入: [4,1,2,1,2]
      输出: 4
      
      使用异或实现：相同为0，不同为1
-      a ^ a = 0
-      a ^ 0 = a
-      a ^ b ^ a = a ^ a ^ b = 0 ^ b = b
+     a ^ a = 0
+     a ^ 0 = a
+     a ^ b ^ a = a ^ a ^ b = 0 ^ b = b
      这样就可以把相同的值过滤掉，不重复的值保留下来
      */
     func singleNumber(_ nums: [Int]) -> Int {
@@ -641,24 +641,24 @@ class Solution {
             reduce = reduce ^ num
         }
         return reduce
-//        var set: Set<Int> = .init()
-//        for num in nums {
-//            if set.insert(num).0 == false { // 如果集合中存在改元素，则移除这个元素，相当于把重复的元素，从集合中移除，保留不重复的
-//                set.remove(num)
-//            }
-//        }
-//        return set.isEmpty ? 0 : set.first!
+        //        var set: Set<Int> = .init()
+        //        for num in nums {
+        //            if set.insert(num).0 == false { // 如果集合中存在改元素，则移除这个元素，相当于把重复的元素，从集合中移除，保留不重复的
+        //                set.remove(num)
+        //            }
+        //        }
+        //        return set.isEmpty ? 0 : set.first!
     }
     
     /**给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。
      进阶：
-
+     
      尽可能想出更多的解决方案，至少有三种不同的方法可以解决这个问题。
      你可以使用空间复杂度为 O(1) 的 原地 算法解决这个问题吗？
       
-
+     
      示例 1:
-
+     
      输入: nums = [1,2,3,4,5,6,7], k = 3
      输出: [5,6,7,1,2,3,4]
      解释:
@@ -666,13 +666,13 @@ class Solution {
      向右旋转 2 步: [6,7,1,2,3,4,5]
      向右旋转 3 步: [5,6,7,1,2,3,4]
      示例 2:
-
+     
      输入：nums = [-1,-100,3,99], k = 2
      输出：[3,99,-1,-100]
      解释:
      向右旋转 1 步: [99,-1,-100,3]
      向右旋转 2 步: [3,99,-1,-100]
-*/
+     */
     func rotate(_ nums: inout [Int], _ k: Int) {
         let maxIndex = nums.count - 1
         var newnums = nums
@@ -716,7 +716,7 @@ class SolutionLinkList {
             return lhshashValue == rhshashValue
         }
     }
-   // [1,2,3,4,5]  n = 2 删除链表的倒数第n个结点
+    // [1,2,3,4,5]  n = 2 删除链表的倒数第n个结点
     func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
         var length = 0
         var node = head
@@ -887,7 +887,7 @@ class SolutionSorted {
                 j -= 1
             }
             end -= 1
-           
+            
         }
     }
     /**
@@ -896,7 +896,7 @@ class SolutionSorted {
      - 越界判断
      - 获取符号位
      - 获取数字部分
-        - &* 溢出乘法 &+ 溢出加法
+     - &* 溢出乘法 &+ 溢出加法
      */
     func myAtoi(_ s: String) -> Int {
         let chars = Array(s)
@@ -935,16 +935,16 @@ class SolutionSorted {
             } else {
                 break
             }
-           
+            
         }
         return Int(result * sign)
     }
     
     /**
      实现 strStr() 函数。
-
+     
      给你两个字符串 haystack 和 needle ，请你在 haystack 字符串中找出 needle 字符串出现的第一个位置（下标从 0 开始）。如果不存在，则返回  -1 。
-
+     
      - 滑动窗口 subStr[left ..< right] == str
      - 双指针 当两个字符不相等时，i = i - j + 1, j = 0, 重新开始比较
      
@@ -1075,6 +1075,66 @@ extension Array where Self.Element == CGFloat {
     }
 }
 
-print(array.findRange(13.4))
+class SolutionBinaryTree {
+    
+    public class TreeNode {
+        public var val: Int
+        public var left: TreeNode?
+        public var right: TreeNode?
+        public init(_ val: Int=0, _ left: TreeNode?=nil, _ right: TreeNode?=nil) {
+            self.val = val
+            self.left = left
+            self.right = right
+        }
+        
+    }
+    //FIXME: 重点
+    /* 找出二叉树的最近的公共祖先节点
+     - 若root是是p1 和 q1的公共祖先节点，那么满足符合下面特性任意一条
+     - 若 root 不等于 p1, q1,那么p1 ,q1在root的左右
+     - 若root == p1 ==> q1在root的左或者右
+     - 若 root == q1 ==> p1在root的左或者右
+     */
+    func lowestCommonAncestor ( _ root: TreeNode?,  _ o1: Int,  _ o2: Int) -> Int {
+        return compareNodeForeCommonAncestor(root, o1, o2)?.val ?? -1
+    }
+    
+    func compareNodeForeCommonAncestor( _ root: TreeNode?,  _ o1: Int,  _ o2: Int) -> TreeNode? {
+        // 如果root为空，或者root为o1、o2中的一个，则它们的最近公共祖先就为root
+        guard let root1 = root else {
+            return root
+        }
+        if root1.val == o1 || root1.val == o2 {
+            return root1
+        }
+        let leftNode = compareNodeForeCommonAncestor(root1.left, o1, o2) // 递归遍历左子树，只要在左子树中找到了o1或o2，则先找到谁就返回谁
+        let rightNode = compareNodeForeCommonAncestor(root1.right, o1, o2) // 递归遍历右子树，只要在右子树中找到了o1或o2，则先找到谁就返回谁
+        if leftNode == nil { // 如果在左子树中o1和o2都找不到，则o1和o2一定都在右子树中，右子树中先遍历到的那个就是最近公共祖先（一个节点也可以是它自己的祖先）
+            return rightNode
+        } else if rightNode == nil { // 否则，如果left不为空，在左子树中有找到节点（o1或o2），这时候要再判断一下右子树中的情况，
+            // 如果在右子树中，o1和o2都找不到，则 o1和o2一定都在左子树中，左子树中先遍历到的那个就是最近公共祖先（一个节点也可以是它自己的祖先）
+            return leftNode
+        } else {
+            return root1
+        }
+    }
+}
 
 
+let sort = QuickSort()
+sort.array = [123, 123,12,34,45,66,8,9,0,433,1231]
+sort.sort()
+print(sort.array)
+
+let msort = MergerSort()
+msort.array = [123, 123,12,34,45,66,8,9,0,433,1231]
+msort.sort()
+print(msort.array)
+
+
+
+func GetLeastNumbers_Solution ( _ input: [Int],  _ k: Int) -> [Int] {
+       // write code here
+   let array = input.sorted()
+   return Array(array[0 ..< k])
+}
