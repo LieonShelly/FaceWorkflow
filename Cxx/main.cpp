@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string.h>
 #include <stack>
+#include <vector>
 
 using namespace std;
 
@@ -123,8 +124,6 @@ public:
         return dummy->next;
         
     }
-    
-    
     ListNode* reverse(ListNode *head) {
         ListNode *node = head;
         ListNode *pre = nullptr;
@@ -136,7 +135,44 @@ public:
         }
         return pre;
     }
+    int *array = nullptr;
+    int *leftArray = nullptr;
+  
     
+    void mergerSort(int begin, int end) {
+        if (end - begin < 2) {
+            return;
+        }
+        int mid = (end + begin) >> 1;
+        mergerSort(begin, mid);
+        mergerSort(mid, end);
+        mergerSortMerge(begin, mid, end);
+    }
+    
+    void mergerSortMerge(int begin, int mid, int end) {
+        int li = 0;
+        int le = mid - begin;
+        int ri = mid;
+        int re = end;
+        int ai = begin;
+        //拷贝左边数组
+        for (int index = 0; index < le; index++) {
+            leftArray[index] = array[begin + index];
+        }
+        
+        while (li < le) {
+            if (ri < re && array[ri] < leftArray[li]) {
+                array[ai] = array[ri];
+                ai++;
+                ri++;
+            } else {
+                array[ai] = leftArray[li];
+                ai++;
+                li++;
+            }
+            cout << array[ai - 1] << end;
+        }
+    }
     
 };
 
@@ -169,36 +205,58 @@ int search(vector<int>& nums, int target) {
     }
     return -1;
 }
+
+/**
+ NC22 合并两个有序的数组
+ */
+
+// 归并排序 - 归并排序的思想，哪个小，就往temp数组中放
+void merge(int A[], int m, int B[], int n) {
+    int *temp = new int[m + n];
+    int i = 0;
+    int j = 0;
+    int index = 0;
+    while (j < n && i< m) {
+        if (A[i] <= B[j]) {
+            temp[index] = A[i];
+            index++;
+            i++;
+        } else {
+            temp[index] = B[j];
+            index++;
+            j++;
+        }
+    }
+    for (; i < m; ) {
+        temp[index++] = A[i++];
+    }
+    for (; j < n; ) {
+        temp[index++] = B[j++];
+    }
+    for (int k = 0; k < m + n; k++) {
+        A[k] = temp[k];
+    }
+  
+}
 }
 
 
+
 int main(int argc, const char * argv[]) {
-    vector<int> nums = {1,2,2,3,4}; // ,2
-    int index = Niuke::search(nums, 2);
-    cout << index << endl;
-    return 0;
-    Solution queue = Solution();
-    ListNode *head = new ListNode(1);
-    ListNode *node2 = new ListNode(2);
-    ListNode *node3 = new ListNode(3);
-    ListNode *node4 = new ListNode(4);
-    ListNode *node5 = new ListNode(5);
-    ListNode *node6 = new ListNode(6);
-    ListNode *node7 = new ListNode(7);
-    ListNode *node8 = new ListNode(8);
-    ListNode *node9 = new ListNode(9);
-    head->next = node2;
-    node2->next = node3;
-    node3->next = node4;
-    node4->next = node5;
-    node5->next = node6;
-    node6->next = node7;
-    node7->next = node8;
-    node8->next = node9;
-    ListNode *newhead = queue.reverseKGroup(head, 3);
-    while (newhead != nullptr) {
-        cout << newhead->val << endl;
-        newhead = newhead->next;
+    
+    Solution solu = Solution();
+    int *A = new int[6];
+    int *B = new int[3];
+    for (int index = 0; index < 6; index++) {
+        A[index] = 4 + index;
+    }
+    for (int index = 0; index < 3; index++) {
+        B[index] = 1 + index;
+    }
+ 
+    solu.merge(A, 3, B, 3);
+    for (int index = 0; index < 6; index++) {
+        cout << A[index] << endl;
     }
     return 0;
 }

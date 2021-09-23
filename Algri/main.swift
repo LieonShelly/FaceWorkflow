@@ -9,63 +9,15 @@ import Foundation
 
 print("Hello, World!")
 
-/**
- 给定一个整数数组，判断是否存在重复元素。
- 
- 如果存在一值在数组中出现至少两次，函数返回 true 。如果数组中每个元素都不相同，则返回 false 。
- 示例 1:
- 
- 输入: [1,2,3,1]
- 输出: true
- 示例 2:
- 
- 输入: [1,2,3,4]
- 输出: false
- 示例 3:
- 
- 输入: [1,1,1,3,3,4,3,2,4,2]
- 输出: true
- 
- */
-
 
 class Solution0 {
-    /// 哈希表法，根据key的唯一性别
-    //    func containsDuplicate(_ nums: [Int]) -> Bool {
-    //        var dict = [Int: Int]()
-    //        for num in nums {
-    //            if dict.keys.contains(where: { num == $0}) {
-    //                return true
-    //            } else {
-    //                dict[num] = num
-    //            }
-    //        }
-    //        return false
-    //    }
-    
-    /// set法
-    func containsDuplicate(_ nums: [Int]) -> Bool {
-        var set = Set<Int>()
-        for num in nums {
-            set.insert(num)
-        }
-        if set.count == nums.count {
-            return false
-        }
-        return true
-    }
+
 }
-/**
- 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
- 
- 动态规划的是首先对数组进行遍历，当前最大连续子序列和为 sum，结果为 ans
- 如果 sum > 0，则说明 sum 对结果有增益效果，则 sum 保留并加上当前遍历数字
- 如果 sum <= 0，则说明 sum 对结果无增益效果，需要舍弃，则 sum 直接更新为当前遍历数字
- 每次比较 sum 和 ans的大小，将最大值置为ans，遍历结束返回结果
- 时间复杂度：O(n)O(n)
- 
- */
 class Solution2 {
+    /**
+     给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+     
+     */
     func maxSubArray(_ nums: [Int]) -> Int {
         var sum = 0
         var ans = nums[0]
@@ -79,6 +31,8 @@ class Solution2 {
         }
         return ans
     }
+    
+   
 }
 
 
@@ -113,6 +67,20 @@ class Solution3 {
             }
         }
         return leftIndex + 1
+    }
+    
+    /// 给定一个整数数组，判断是否存在重复元素。
+    /// 哈希表法，根据key的唯一性别
+    /// set法
+    func containsDuplicate(_ nums: [Int]) -> Bool {
+        var set = Set<Int>()
+        for num in nums {
+            set.insert(num)
+        }
+        if set.count == nums.count {
+            return false
+        }
+        return true
     }
 }
 // 二叉树的最大深度
@@ -842,26 +810,6 @@ class SolutionLinkList {
     }
 }
 
-let head = SolutionLinkList.ListNode(1)
-let node1 = SolutionLinkList.ListNode(2)
-let node2 = SolutionLinkList.ListNode(2)
-let node3 = SolutionLinkList.ListNode(1)
-let node4 = SolutionLinkList.ListNode(5)
-head.next = node1
-node1.next = node2
-node2.next = node3
-//node3.next = node4
-
-let head2 = SolutionLinkList.ListNode(1)
-let node21 = SolutionLinkList.ListNode(2)
-let node22 = SolutionLinkList.ListNode(3)
-let node23 = SolutionLinkList.ListNode(4)
-let node24 = SolutionLinkList.ListNode(5)
-head2.next = node21
-node21.next = node22
-node22.next = node23
-node23.next = node24
-
 
 class SolutionSorted {
     func merge(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
@@ -1118,23 +1066,54 @@ class SolutionBinaryTree {
             return root1
         }
     }
+    
+    /// 实现二叉
+    func threeOrders ( _ root: TreeNode?) -> [[Int]] {
+        var preResults: [Int] = []
+        preOrder(root) { val in
+            preResults.append(val)
+        }
+        var inOrderResults: [Int] = []
+        inOrder(root) { val in
+            inOrderResults.append(val)
+        }
+        var postOrderResults: [Int] = []
+        postOrder(root) { val in
+            postOrderResults.append(val)
+        }
+        return [preResults, inOrderResults, postOrderResults]
+     }
+    
+    func preOrder(_ root: TreeNode?, callback: ((Int) -> Void)) {
+        guard let root = root else {
+            return
+        }
+        let val = root.val
+        callback(val)
+        preOrder(root.left, callback: callback)
+        preOrder(root.right, callback: callback)
+    }
+    
+    func inOrder(_ root: TreeNode?, callback: ((Int) -> Void)) {
+        guard let root = root else {
+            return
+        }
+        inOrder(root.left, callback: callback)
+        let val = root.val
+        callback(val)
+        inOrder(root.right, callback: callback)
+    }
+    
+    
+    func postOrder(_ root: TreeNode?, callback: ((Int) -> Void)) {
+        guard let root = root else {
+            return
+        }
+        postOrder(root.left, callback: callback)
+        postOrder(root.right, callback: callback)
+        let val = root.val
+        callback(val)
+    }
 }
 
 
-let sort = QuickSort()
-sort.array = [123, 123,12,34,45,66,8,9,0,433,1231]
-sort.sort()
-print(sort.array)
-
-let msort = MergerSort()
-msort.array = [123, 123,12,34,45,66,8,9,0,433,1231]
-msort.sort()
-print(msort.array)
-
-
-
-func GetLeastNumbers_Solution ( _ input: [Int],  _ k: Int) -> [Int] {
-       // write code here
-   let array = input.sorted()
-   return Array(array[0 ..< k])
-}
