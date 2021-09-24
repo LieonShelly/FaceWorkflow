@@ -68,6 +68,9 @@ class MergerSort {
  - 对子序列进行1,2操作, 直到不能再分割
  - 快速排序的本质
  - 逐渐将每一个元素都转换成轴点元素
+ 
+ 时间复杂度最坏为O(n^2), 为了避免这种情况：
+ 采用随机选择轴点元素
  */
 
 class QuickSort {
@@ -90,7 +93,10 @@ class QuickSort {
     
     
     /// 获取轴点元素的索引
+    
     fileprivate func pivotIndex(begin: Int, end: Int) -> Int {
+        // 随机选择一个元素跟begin的位置交换
+        swap(begin, Int.random(in: Range<Int>(uncheckedBounds: (begin, end))))
         var begin = begin
         var end = end;
         end -= 1
@@ -120,6 +126,12 @@ class QuickSort {
         }
         array[begin] = pivot
         return begin
+    }
+    
+    fileprivate func swap(_ currentIndex: Int, _ destIndex: Int) {
+        let temp = array[currentIndex]
+        array[currentIndex] = array[destIndex]
+        array[destIndex] = temp
     }
 }
 

@@ -11,7 +11,7 @@ print("Hello, World!")
 
 
 class Solution0 {
-
+    
 }
 class Solution2 {
     /**
@@ -32,7 +32,7 @@ class Solution2 {
         return ans
     }
     
-   
+    
 }
 
 
@@ -1067,7 +1067,26 @@ class SolutionBinaryTree {
         }
     }
     
-    /// 实现二叉
+    /// 找到最近的公共祖先
+    func commonGrand(_ root: TreeNode?,  _ o1: Int,  _ o2: Int) -> TreeNode? {
+        guard let root = root else {
+            return root
+        }
+        if root.val == o1 || root.val == o2 {
+            return root
+        }
+        let leftNode = commonGrand(root.left, o1, o2) // 从左子树中找到与o1或者o2相等的节点
+        let rightNode = commonGrand(root.right, o1, o2)// 从右子树中找到与o1或者o2相等的节点
+        if leftNode == nil, rightNode != nil { // 如果左子树中不存在与o1或者o2相等的节点，那么必然在右子树中
+            return rightNode
+        } else if rightNode == nil { // leftNode != NIL, 如果右子树为空，那么左子树为公共祖父节点
+            return leftNode
+        } else { /// 否则为root节点
+            return root
+        }
+    }
+    
+    /// 实现二叉树的前中后遍历
     func threeOrders ( _ root: TreeNode?) -> [[Int]] {
         var preResults: [Int] = []
         preOrder(root) { val in
@@ -1082,7 +1101,7 @@ class SolutionBinaryTree {
             postOrderResults.append(val)
         }
         return [preResults, inOrderResults, postOrderResults]
-     }
+    }
     
     func preOrder(_ root: TreeNode?, callback: ((Int) -> Void)) {
         guard let root = root else {
@@ -1116,4 +1135,81 @@ class SolutionBinaryTree {
     }
 }
 
+// NC88 寻找第K大 （ === 找出数组中第 n - K的索引的值，快排）
+class Test {
+    var array: [Int] = []
+    func findKth ( _ a: [Int],  _ n: Int,  _ K: Int) -> Int {
+        // write code here
+        array = a
+        sort()
+        return array[K - 1]
+    }
+    
+    
+    func sort() {
+        sort(0, array.count)
+    }
+    
+    func sort(_ begin: Int, _ end: Int) {
+        if end - begin < 2 {
+            return
+        }
+        let index = pivotIndex(begin, end)
+        sort(begin, index)
+        sort(index + 1, end)
+    }
+    
+    // 获取轴点的索引
+    func pivotIndex(_ begin: Int, _ end: Int) -> Int {
+        // 随机获取一个轴点元素的位置
+        self.swap(begin, Int.random(in: Range<Int>.init(uncheckedBounds: (begin, end))))
+        var begin = begin
+        var end = end - 1
+        let pivot = array[begin]
+        while(begin < end) {
+            // 从右往左扫描, 此时锚点在左边
+            while(begin < end) {
+                if pivot < array[end] {
+                    end -= 1
+                } else {
+                    array[begin] = array[end]
+                    begin += 1
+                    break
+                }
+            }
+            // 从左往右扫描, 此时锚点在右边
+            while(begin < end) {
+                if pivot > array[begin] {
+                    begin += 1
+                } else {
+                    array[end] = array[begin]
+                    end -= 1
+                    break
+                }
+            }
+        }
+        array[begin] = pivot
+        return begin
+    }
+    
+    // 交换
+    
+    func swap(_ index: Int, _ dest: Int) {
+        let temp = array[index]
+        array[index] = array[dest]
+        array[dest] = temp
+    }
+    
+    
+}
 
+
+
+
+
+let sort = Test()
+sort.array =
+    [10,10,9,9,8,7,5,6,4,3,4,2]
+sort.findKth(sort.array, 12, 3)
+
+print(sort.array)
