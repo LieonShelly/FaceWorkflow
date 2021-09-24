@@ -8,3 +8,6 @@
 import Foundation
 
 print("Hello, World!")
+
+let solution = StringAgri()
+print(solution.solve("Hello"))

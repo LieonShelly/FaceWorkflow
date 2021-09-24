@@ -9,8 +9,53 @@ import Foundation
 
 class ArrayAgri {
     
+    //给定一个长度为 n 的数组 arr ，返回其中任意子数组的最大累加和
+    func maxsumofSubarray ( _ arr: [Int]) -> Int {
+        var sum = 0
+        var ans = arr[0]
+        for num in arr {
+            if sum > 0 {
+                sum += num
+            } else {
+                sum = num
+            }
+            ans = max(ans, sum)
+        }
+        return ans
+     }
+    
+    //找出一个数组中的所有K数。（ K 数定义：前面的数都比它小，后面的数都比它大。） 举例：1 3 2 4 7 5 9 其中K数有：1 4 9
+    func finKNum(_ a: [Int]) -> [Int] {
+        var results: [Int] = []
+        for (index, num) in a.enumerated() {
+            // 找到比Num小的数
+            var isFindMin: Bool = true
+            for subIndex in 0 ..< index {
+                if a[subIndex] >= num {
+                    isFindMin = false
+                    break
+                }
+            }
+            //  // 找到比Num大的数
+            var isFindMax: Bool = true
+            if isFindMin {
+                for subIndex in index + 1 ..< a.count {
+                    if a[subIndex] <= num {
+                        isFindMax = false
+                        break
+                    }
+                }
+            }
+            if isFindMax, isFindMin {
+                results.append(num)
+            }
+           
+        }
+        return results
+    }
+    
     var array: [Int] = []
-    // NC88 寻找第K大 （ === 找出数组中第 n - K的索引的值，快排）
+    //FIXME:重点 NC88 寻找第K大 （ === 找出数组中第 n - K的索引的值，快排）
     func findKth ( _ a: [Int],  _ n: Int,  _ K: Int) -> Int {
         // write code here
         array = a

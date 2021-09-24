@@ -9,6 +9,22 @@ import Foundation
 
 
 class StringAgri {
+    // 反转字符串
+    func solve ( _ str: String) -> String {
+          // write code here
+        var strArray = Array(str)
+        var leftIndex = 0
+        var endIndex = str.count - 1
+        while leftIndex < endIndex {
+            let temp = strArray[leftIndex]
+            strArray[leftIndex] = strArray[endIndex]
+            strArray[endIndex] = temp
+            leftIndex += 1
+            endIndex -= 1
+        }
+        return String(strArray)
+      }
+    
     
     func isLetterOrDigest(_ str: String) -> Bool {
         let reg = "^[a-zA-Z0-9]+$"
