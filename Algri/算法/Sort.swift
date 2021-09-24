@@ -135,3 +135,84 @@ class QuickSort {
     }
 }
 
+
+
+class Sorting {
+    
+    func bubbleSort(_ array: inout [Int]) {
+        let count = array.count
+        for end in (1 ... count - 1).reversed()  {
+            for begin in 1 ... end {
+                if array[begin] < array[begin - 1] {
+                    let temp = array[begin]
+                    array[begin] = array[begin - 1]
+                    array[begin - 1] = temp
+                }
+            }
+        }
+    }
+    
+    func bubbleSort1(_ array: inout [Int]) {
+        let count = array.count
+        for end in (1 ... count - 1).reversed()  {
+            var sorted = false
+            for begin in 1 ... end {
+                if array[begin] < array[begin - 1] {
+                    let temp = array[begin]
+                    array[begin] = array[begin - 1]
+                    array[begin - 1] = temp
+                    sorted = false
+                }
+            }
+            if sorted {
+                break
+            }
+        }
+    }
+    
+    func bubbleSort3(_ array: inout [Int]) {
+        var startIndex = 0
+        for end in (startIndex ... array.count - 1).reversed() {
+            var sortedIndex = 1
+            for begin in 1 ... end {
+                if array[begin] < array[begin - 1] {
+                    let temp = array[begin]
+                    array[begin] = array[begin - 1]
+                    array[begin - 1] = temp
+                    sortedIndex = begin
+                }
+            }
+            startIndex = sortedIndex
+        }
+    }
+    
+    func search(_ nums: [Int], _ target: Int) -> Int {
+        var leftIndex = 0
+        var rightIndex = nums.count - 1
+        while leftIndex <= rightIndex {
+            let midIndex = leftIndex + (rightIndex - leftIndex) / 2
+            if nums[midIndex] > target { // 左区间 [leftIndex, mid - 1]
+                rightIndex = midIndex - 1
+            } else if nums[midIndex] < target { // 右区间
+                leftIndex = midIndex + 1
+            } else {
+                return midIndex
+            }
+        }
+        return -1
+    }
+    
+    func selectedSort(_ array: inout [Int]) {
+        for end in 1 ... array.count - 1 {
+            var maxIndex = 0
+            for begin in 1 ... end {
+                if array[maxIndex] <= array[begin] {
+                    maxIndex = begin
+                }
+            }
+            let temp = array[maxIndex]
+            array[maxIndex] = array[end]
+            array[end] = temp
+        }
+    }
+}

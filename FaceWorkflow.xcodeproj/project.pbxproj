@@ -25,6 +25,11 @@
 		CD1E00B52681D7B2002C845B /* FFMpegs.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD1E00B42681D7B2002C845B /* FFMpegs.mm */; };
 		CD1ED336267F8E0E002C845B /* AudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1ED334267F8E0E002C845B /* AudioBuffer.cpp */; };
 		CD1ED338267F912C002C845B /* in.pcm in Resources */ = {isa = PBXBuildFile; fileRef = CD1ED337267F90C3002C845B /* in.pcm */; };
+		CD46FECD26FD60BE0022EF77 /* StringAgri.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD46FECC26FD60BE0022EF77 /* StringAgri.swift */; };
+		CD46FECF26FD611B0022EF77 /* LinkedListAgri.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD46FECE26FD611B0022EF77 /* LinkedListAgri.swift */; };
+		CD46FED126FD65FF0022EF77 /* ArrayAgri.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD46FED026FD65FF0022EF77 /* ArrayAgri.swift */; };
+		CD46FED326FD662C0022EF77 /* BinaryTreeAgri.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD46FED226FD662C0022EF77 /* BinaryTreeAgri.swift */; };
+		CD46FED526FD67CC0022EF77 /* IntegerAgri.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD46FED426FD67CC0022EF77 /* IntegerAgri.swift */; };
 		CD47107026A82199004C6BB7 /* H264Decode.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD47106F26A82199004C6BB7 /* H264Decode.mm */; };
 		CD47107226A90968004C6BB7 /* video.h264 in Resources */ = {isa = PBXBuildFile; fileRef = CD47107126A90968004C6BB7 /* video.h264 */; };
 		CD47107626A95210004C6BB7 /* Demux.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD47107526A95210004C6BB7 /* Demux.mm */; };
@@ -11688,6 +11693,11 @@
 		CD1EFFFD2680EF73002C845B /* decode_video.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = decode_video.c; sourceTree = "<group>"; };
 		CD1EFFFE2680EF73002C845B /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		CD1EFFFF2680EF73002C845B /* filtering_video.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = filtering_video.c; sourceTree = "<group>"; };
+		CD46FECC26FD60BE0022EF77 /* StringAgri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringAgri.swift; sourceTree = "<group>"; };
+		CD46FECE26FD611B0022EF77 /* LinkedListAgri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListAgri.swift; sourceTree = "<group>"; };
+		CD46FED026FD65FF0022EF77 /* ArrayAgri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayAgri.swift; sourceTree = "<group>"; };
+		CD46FED226FD662C0022EF77 /* BinaryTreeAgri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryTreeAgri.swift; sourceTree = "<group>"; };
+		CD46FED426FD67CC0022EF77 /* IntegerAgri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerAgri.swift; sourceTree = "<group>"; };
 		CD47106E26A82199004C6BB7 /* H264Decode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = H264Decode.h; sourceTree = "<group>"; };
 		CD47106F26A82199004C6BB7 /* H264Decode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = H264Decode.mm; sourceTree = "<group>"; };
 		CD47107126A90968004C6BB7 /* video.h264 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.h264; sourceTree = "<group>"; };
@@ -25181,6 +25191,11 @@
 				CDD9CE1F26B93BD40030D340 /* 二叉搜索树 */,
 				CDD9CE1D26B92E5B0030D340 /* HashMap.swift */,
 				CD8DB38E26FA2B6A00445E32 /* Sort.swift */,
+				CD46FECC26FD60BE0022EF77 /* StringAgri.swift */,
+				CD46FECE26FD611B0022EF77 /* LinkedListAgri.swift */,
+				CD46FED026FD65FF0022EF77 /* ArrayAgri.swift */,
+				CD46FED226FD662C0022EF77 /* BinaryTreeAgri.swift */,
+				CD46FED426FD67CC0022EF77 /* IntegerAgri.swift */,
 			);
 			path = "算法";
 			sourceTree = "<group>";
@@ -25405,9 +25420,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD11914226E5D183004FA1B3 /* BinaryTree.swift in Sources */,
+				CD46FECD26FD60BE0022EF77 /* StringAgri.swift in Sources */,
+				CD46FECF26FD611B0022EF77 /* LinkedListAgri.swift in Sources */,
 				CD11914126E5D17E004FA1B3 /* TestEntrence.swift in Sources */,
 				CD11914426E5D18D004FA1B3 /* HashMap.swift in Sources */,
 				CD1AAC1326F059130034B597 /* RBTree.swift in Sources */,
+				CD46FED526FD67CC0022EF77 /* IntegerAgri.swift in Sources */,
+				CD46FED126FD65FF0022EF77 /* ArrayAgri.swift in Sources */,
+				CD46FED326FD662C0022EF77 /* BinaryTreeAgri.swift in Sources */,
 				CD11913A26E5CFF1004FA1B3 /* main.swift in Sources */,
 				CD8DB38F26FA2B6A00445E32 /* Sort.swift in Sources */,
 				CD11914026E5D17B004FA1B3 /* AVLTree.swift in Sources */,
