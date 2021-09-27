@@ -9,6 +9,62 @@ import Foundation
 
 
 class StringAgri {
+    //最长回文子串
+    // “回文串”是一个正读和反读都一样的字符串，比如“level”或者“noon”等等就是回文串。
+    func getLongestPalindrome ( _ A: String,  _ n: Int) -> Int {
+        var index = 0
+        let strArr = Array(A)
+        var len = 1
+        while index < n {
+            var right = index
+            var left = index
+            //过滤掉重复的
+            while right + 1 < n, strArr[right] == strArr[right + 1] {
+                right += 1
+            }
+            index = right + 1
+            // 中心扩散
+            while left > 0, right + 1 < n, strArr[left - 1] == strArr[right + 1]  {
+                left -= 1
+                right += 1
+            }
+            if right - left + 1 > len {
+                len = right - left + 1
+            }
+        }
+        return len
+     }
+    
+    // 最长回文子串暴力法
+    func getLongestPalindrome1 ( _ A: String,  _ n: Int) -> Int {
+        var maxLen = 0
+        for index in 0 ..< n {
+            for j in index ..< n {
+                let subStr = subStr(A, range: .init(uncheckedBounds: (lower: index, upper: j)))
+                if subStr.count > maxLen {
+                    var left: Int = 0
+                    var right: Int = subStr.count - 1
+                    let strArray = subStr.map { String($0) }
+                    var isPair = true
+                    for _ in 0 ..< strArray.count - 1 {
+                        let leftStr = strArray[left]
+                        let rightStr = strArray[right]
+                        if leftStr.lowercased() != rightStr.lowercased() {
+                            isPair = false
+                        }
+                        left += 1
+                        right -= 1
+                    }
+                    if isPair {
+                        maxLen = subStr.count
+                    }
+                }
+            }
+        }
+        return maxLen
+     }
+    
+    
     // 反转字符串
     func solve ( _ str: String) -> String {
           // write code here

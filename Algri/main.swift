@@ -10,4 +10,4 @@ import Foundation
 print("Hello, World!")
 
 let solution = StringAgri()
-print(solution.solve("Hello"))
+print(solution.getLongestPalindrome1("baabccc", "baabccc".count))
