@@ -8,6 +8,36 @@
 import Foundation
 
 class BinaryTreeAgri {
+    // NC8 二叉树根节点到叶子节点和为指定值的路径
+    func pathSum ( _ root: TreeNode?,  _ sum: Int) -> [[Int]] {
+          // write code here
+        var rest: [[Int]] = []
+        let path: [Int] = []
+        prepathSum(root, sum, 0, &rest, path)
+        return rest
+      }
+    
+    
+    func prepathSum( _ root: TreeNode?,  _ sum: Int, _ current: Int, _ res: inout [[Int]], _ path: [Int]) {
+        guard let root = root else {
+            return
+        }
+        var path: [Int] = path
+        var current = current
+        path.append(root.val)
+        current = current + root.val
+        if current == sum, root.left == nil, root.right == nil {
+            res.append(path)
+        }
+        if root.left != nil {
+            prepathSum(root.left!, sum, current, &res, path)
+        }
+        if root.right != nil {
+            prepathSum(root.right!, sum, current, &res, path)
+        }
+       
+    }
+    
     
     // 二叉树的最大深度
     /**

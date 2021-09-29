@@ -9,6 +9,20 @@ import Foundation
 
 
 class StringAgri {
+    
+    //NC137 表达式求值
+    /**
+     输入：
+     "(2*(3-4))*5"
+     返回值：
+
+     */
+    func solve ( _ s: String) -> Int {
+         // write code here
+        return 0
+     }
+    
+    
     //最长回文子串
     // “回文串”是一个正读和反读都一样的字符串，比如“level”或者“noon”等等就是回文串。
     func getLongestPalindrome ( _ A: String,  _ n: Int) -> Int {
