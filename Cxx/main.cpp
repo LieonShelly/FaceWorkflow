@@ -137,7 +137,7 @@ public:
     }
     int *array = nullptr;
     int *leftArray = nullptr;
-  
+    
     
     void mergerSort(int begin, int end) {
         if (end - begin < 2) {
@@ -236,27 +236,128 @@ void merge(int A[], int m, int B[], int n) {
     for (int k = 0; k < m + n; k++) {
         A[k] = temp[k];
     }
-  
-}
+    
 }
 
+ListNode* reverse(ListNode *head, ListNode *endNode) {
+    ListNode *node = head;
+    ListNode *preNode = nullptr;
+    while (node != nullptr && node != endNode) {
+        ListNode *temp = node->next;
+        node->next = preNode;
+        preNode = node;
+        node = temp;
+    }
+    return preNode;
+}
+
+// 链表内指定区间反转
+ListNode* reverseBetween(ListNode* head, int m, int n) {
+    // write code here
+    int preIndex = m - 1 - 1;
+    int startIndex = m - 1;
+    int endIndex = n - 1;
+    int index = 0;
+    if (startIndex < 0) {
+        return head;
+    }
+    ListNode *node = head;
+    ListNode *preNode = nullptr;
+    ListNode *endNode = nullptr;
+    ListNode *endNextNode = nullptr;
+    ListNode *startNode = nullptr;
+    while (node != nullptr) {
+        if (preIndex == index) {
+            preNode = node;
+        }
+        if (startIndex == index) {
+            startNode = node;
+        }
+        if (endIndex == index) {
+            endNode = node;
+            endNextNode = endNode->next;
+        }
+        node = node->next;
+        index += 1;
+    }
+    ListNode *newhead = reverse(startNode, endNode->next);
+    ListNode *temp = startNode;
+    if (preNode != nullptr) {
+        preNode->next = newhead;
+        temp->next = endNextNode;
+        return head;
+    } else {
+        temp->next = endNextNode;
+    }
+    return newhead;
+}
+
+
+}
+
+class Solution1111 {
+public:
+
+    vector<int> arr;
+    
+    vector<int> MySort(vector<int>& arr) {
+        this->arr = {11,222,3,10,52,8,0};
+        int end = (int)this->arr.size();
+        sort(0, end);
+        return this->arr;
+    }
+    
+    void sort(int begin, int end) {
+        if (end - begin < 2) {
+            return;
+        }
+        int mid = pivotIndex(begin, end);
+        sort(begin, mid);
+        sort(mid + 1, end);
+        
+    }
+    
+    int pivotIndex(int begin, int end) {
+        end = end - 1;
+        int randamIndex = begin + (rand() % (end - begin));
+        swap(begin, randamIndex);
+        int pivot = arr[begin];
+        while(begin < end) {
+            while(begin < end) {
+                if (pivot - arr[end] < 0) {
+                    end -= 1;
+                } else {
+                    arr[begin] = arr[end];
+                    begin += 1;
+                    break;
+                }
+            }
+            while(begin < end) {
+                if (pivot - arr[end] > 0) {
+                    begin += 1;
+                } else {
+                    arr[end] = arr[begin];
+                    end -= 1;
+                    break;
+                }
+            }
+        }
+        arr[begin] = pivot;
+        return begin;
+    }
+    
+    void swap(int a, int b) {
+        int temp = arr[b];
+        arr[b] = arr[a];
+        arr[a] = temp;
+    }
+    
+};
 
 
 int main(int argc, const char * argv[]) {
-    
-    Solution solu = Solution();
-    int *A = new int[6];
-    int *B = new int[3];
-    for (int index = 0; index < 6; index++) {
-        A[index] = 4 + index;
-    }
-    for (int index = 0; index < 3; index++) {
-        B[index] = 1 + index;
-    }
- 
-    solu.merge(A, 3, B, 3);
-    for (int index = 0; index < 6; index++) {
-        cout << A[index] << endl;
-    }
+    vector<int> a = {884688278,387052570,77481420,537616843,659978110,215386675,604354651,64838842,830623614,544526209,292446044,570872277,946770900,411203381,445747969,480363996,31693639,303753633,261627544,884642435,978672815,427529125,111935818,109686701,714012242,691252458,230964510,340316511,917959651,544069623,193715454,631219735,219297819,151485185,986263711,805374069,915272981,493886311,970466103,819959858,733048764,393354006,631784130,70309112,513023688,17092337,698504118,937296273,54807658,353487181,82447697,177571868,830140516,536343860,453463919,998857732,280992325,13701823,728999048,764532283,693597252,433183457,157540946,427514727,768122842,782703840,965184299,586696306,256184773,984427390,695760794,738644784,784607555,433518449,440403918,281397572,546931356,995773975,738026287,861262547,119093579,521612397,306242389,84356804,42607214,462370265,294497342,241316335,158982405,970050582,740856884,784337461,885254231,633020080,641532230,421701576,298738196,918973856,472147510,169670404};
+    Solution1111 *s = new Solution1111() ;
+    s->MySort(a);
     return 0;
 }

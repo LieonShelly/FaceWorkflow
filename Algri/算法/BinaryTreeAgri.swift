@@ -280,7 +280,7 @@ class BinaryTreeAgri {
         return all
     }
     
-    // 采用二分查找，中序遍历，递归的方式实现
+    //生成一个搜索二叉树 采用二分查找，中序遍历，递归的方式实现
     func sortedArrayToBST(_ nums: [Int]) -> TreeNode? {
         guard !nums.isEmpty else {
             return nil

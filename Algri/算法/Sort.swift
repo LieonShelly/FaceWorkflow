@@ -77,35 +77,33 @@ class QuickSort {
     var array: [Int] = []
     
     func sort() {
-        sort(begin: 0, end: array.count)
+        sort(0, array.count)
     }
     
     
-    /// 对区间[begin, end)进行快速排序
-    func sort(begin: Int, end: Int) {
-        if end - begin < 2  {
+    func sort(_ start: Int, _ end: Int) {
+        if end - start < 2 {
             return
         }
-        let midIndex = pivotIndex(begin: begin, end: end)
-        sort(begin: begin, end: midIndex)
-        sort(begin: midIndex + 1, end: end)
+        let midIndex = pivotIndex(start,end)
+        sort(start, midIndex)
+        sort(midIndex + 1, end)
     }
     
-    
-    /// 获取轴点元素的索引
-    
-    fileprivate func pivotIndex(begin: Int, end: Int) -> Int {
-        // 随机选择一个元素跟begin的位置交换
-        swap(begin, Int.random(in: Range<Int>(uncheckedBounds: (begin, end))))
+    func pivotIndex(_ begin: Int, _ end: Int) -> Int {
+        
         var begin = begin
-        var end = end;
+        var end = end
         end -= 1
+        let randamIndex = Int.random(in: ClosedRange<Int>.init(uncheckedBounds: (begin, end)))
+        /// 随机选择一个元素跟begin的位置交换
+        swap(begin, randamIndex)
         // 备份轴点元素
         let pivot = array[begin]
         while begin < end {
             // 从右往左扫描
             while begin < end {
-                if pivot - array[end] < 0 {
+                if pivot - array[end] < 0 { // 右边元素大于轴点元素
                     end -= 1
                 } else {
                     array[begin] = array[end]
@@ -115,7 +113,7 @@ class QuickSort {
             }
             // 从左往右扫描
             while begin < end {
-                if pivot - array[begin] > 0 {
+                if pivot - array[begin] > 0 { // 左边元素小于轴点元素
                     begin += 1
                 } else {
                     array[end] = array[begin]
@@ -128,11 +126,66 @@ class QuickSort {
         return begin
     }
     
-    fileprivate func swap(_ currentIndex: Int, _ destIndex: Int) {
-        let temp = array[currentIndex]
-        array[currentIndex] = array[destIndex]
-        array[destIndex] = temp
+    func swap(_ a: Int, _ b: Int) {
+        let temp = array[b]
+        array[b] = array[a]
+        array[a] = temp
     }
+    
+    
+    
+//    /// 对区间[begin, end)进行快速排序
+//    func sort(begin: Int, end: Int) {
+//        if end - begin < 2  {
+//            return
+//        }
+//        let midIndex = pivotIndex(begin: begin, end: end)
+//        sort(begin: begin, end: midIndex)
+//        sort(begin: midIndex + 1, end: end)
+//    }
+//
+//
+//    /// 获取轴点元素的索引
+//
+//    fileprivate func pivotIndex(begin: Int, end: Int) -> Int {
+//        // 随机选择一个元素跟begin的位置交换
+//        swap(begin, Int.random(in: Range<Int>(uncheckedBounds: (begin, end))))
+//        var begin = begin
+//        var end = end;
+//        end -= 1
+//        // 备份轴点元素
+//        let pivot = array[begin]
+//        while begin < end {
+//            // 从右往左扫描
+//            while begin < end {
+//                if pivot - array[end] < 0 {
+//                    end -= 1
+//                } else {
+//                    array[begin] = array[end]
+//                    begin += 1
+//                    break
+//                }
+//            }
+//            // 从左往右扫描
+//            while begin < end {
+//                if pivot - array[begin] > 0 {
+//                    begin += 1
+//                } else {
+//                    array[end] = array[begin]
+//                    end -= 1
+//                    break
+//                }
+//            }
+//        }
+//        array[begin] = pivot
+//        return begin
+//    }
+    
+//    fileprivate func swap(_ currentIndex: Int, _ destIndex: Int) {
+//        let temp = array[currentIndex]
+//        array[currentIndex] = array[destIndex]
+//        array[destIndex] = temp
+//    }
 }
 
 
@@ -213,6 +266,39 @@ class Sorting {
             let temp = array[maxIndex]
             array[maxIndex] = array[end]
             array[end] = temp
+        }
+    }
+}
+
+/// 计数排序
+class CountingSort {
+    var array: [Int]
+    
+    init(_ array: [Int]) {
+        self.array = array
+    }
+    
+    func sort() {
+        var max = array[0]
+        /// 找出最大值
+        for value in array {
+            if value > max {
+                max = value
+            }
+        }
+        // 统计每个整数出现的次数
+        var counts: [Int] = [Int](repeating: 0, count: max + 1)
+        for value in array {
+            counts[value] += 1
+        }
+        // 根据整数出现次数，对整数进行排序
+        var index = 0
+        for countIndex in 0 ..< counts.count {
+            while counts[countIndex] > 0 {
+                array[index] = countIndex
+                index += 1
+                counts[countIndex] -= 1
+            }
         }
     }
 }
