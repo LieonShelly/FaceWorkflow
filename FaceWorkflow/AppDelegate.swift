@@ -136,5 +136,28 @@ class Test {
         let data = Model()
         data.modelFunc()
     }
+    
+    func main() {
+        test()
+        add()
+    }
+    
+    
+    fileprivate func test() {
+        
+    }
 }
 
+extension Test {
+    private func add() { }
+    
+    fileprivate func min() { }
+}
+
+
+class Test3: Test {
+    override func main() {
+        min()
+        add()
+    }
+}
