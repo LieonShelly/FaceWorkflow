@@ -480,4 +480,27 @@ class ArrayAgri {
         }
         return true
     }
+    
+    // 大数相乘
+    func bigNumMulity(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        var result = Array.init(repeating: 0, count: nums1.count + nums2.count)
+        // 先不考虑进位问题，根据竖式的乘法运算，num1额第位与num2中的第j位相乘，结果应该存放在结果的第i+j位上
+        for i in 0 ..< nums1.count {
+            for j in 0 ..< nums2.count {
+                // 因为进位的问题，最终结果放置到第i+j+1位上
+                result[i+j+1] += nums1[i] * nums2[j]
+            }
+        }
+        // 单独处理进位问题
+        var k = result.count - 1
+        while k > 0 {
+            if result[k] > 10 {
+                result[k - 1] += result[k] / 10
+                result[k] %= 10
+            }
+            k -= 1
+        }
+        return result
+    }
+   
 }
