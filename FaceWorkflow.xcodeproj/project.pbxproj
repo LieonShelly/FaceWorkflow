@@ -25,6 +25,7 @@
 		CD1E00B52681D7B2002C845B /* FFMpegs.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD1E00B42681D7B2002C845B /* FFMpegs.mm */; };
 		CD1ED336267F8E0E002C845B /* AudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1ED334267F8E0E002C845B /* AudioBuffer.cpp */; };
 		CD1ED338267F912C002C845B /* in.pcm in Resources */ = {isa = PBXBuildFile; fileRef = CD1ED337267F90C3002C845B /* in.pcm */; };
+		CD4492662728578700EE5A01 /* Others.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD4492642728578700EE5A01 /* Others.cpp */; };
 		CD46FECD26FD60BE0022EF77 /* StringAgri.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD46FECC26FD60BE0022EF77 /* StringAgri.swift */; };
 		CD46FECF26FD611B0022EF77 /* LinkedListAgri.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD46FECE26FD611B0022EF77 /* LinkedListAgri.swift */; };
 		CD46FED126FD65FF0022EF77 /* ArrayAgri.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD46FED026FD65FF0022EF77 /* ArrayAgri.swift */; };
@@ -11693,6 +11694,8 @@
 		CD1EFFFD2680EF73002C845B /* decode_video.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = decode_video.c; sourceTree = "<group>"; };
 		CD1EFFFE2680EF73002C845B /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		CD1EFFFF2680EF73002C845B /* filtering_video.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = filtering_video.c; sourceTree = "<group>"; };
+		CD4492642728578700EE5A01 /* Others.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Others.cpp; sourceTree = "<group>"; };
+		CD4492652728578700EE5A01 /* Others.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Others.hpp; sourceTree = "<group>"; };
 		CD46FECC26FD60BE0022EF77 /* StringAgri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringAgri.swift; sourceTree = "<group>"; };
 		CD46FECE26FD611B0022EF77 /* LinkedListAgri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListAgri.swift; sourceTree = "<group>"; };
 		CD46FED026FD65FF0022EF77 /* ArrayAgri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayAgri.swift; sourceTree = "<group>"; };
@@ -24543,6 +24546,8 @@
 			isa = PBXGroup;
 			children = (
 				CD7A49B826F0FEE600E52CC2 /* main.cpp */,
+				CD4492642728578700EE5A01 /* Others.cpp */,
+				CD4492652728578700EE5A01 /* Others.hpp */,
 			);
 			path = Cxx;
 			sourceTree = "<group>";
@@ -25449,6 +25454,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD4492662728578700EE5A01 /* Others.cpp in Sources */,
 				CD7A49B926F0FEE600E52CC2 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

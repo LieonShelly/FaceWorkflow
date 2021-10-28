@@ -95,6 +95,61 @@ class StringAgri {
         return String(strArray)
       }
     
+    func reverseWords(_ chars: inout [String.Element], left: Int, right: Int) {
+        var left = left
+        var right = right
+        while left < right {
+            let temp = chars[left]
+            chars[left] = chars[right]
+            chars[right] = temp
+            left += 1
+            right -= 1
+        }
+    }
+    
+    // 翻转字符串 hello world => world hello
+    func revertWords(_ str: String) -> String {
+        guard !str.isEmpty else {
+            return str
+        }
+        //消除多余的空格
+        var newStr = Array(str)
+        // 字符串的有效长度
+        var length = 0
+        // 用来存当前字符的位置
+        var cur = 0
+        // 前一个字符是否空格字符
+        var space = true
+        for (_, char) in str.enumerated() {
+            if char != " " { // 非空字符
+                newStr[cur] = char
+                cur += 1
+                space = false
+            } else if space == false { // str[i]为空个字符。 str[i - 1]为非空字符
+                newStr[cur] = " "
+                cur += 1
+                space = true
+            }
+        }
+        length = space ? cur - 1: cur
+        guard length > 0 else { return "" }
+        //先将整个字符串反转
+        var allChars = newStr.map { $0 }
+        reverseWords(&allChars, left: 0, right: length - 1)
+        let allRevertStr = String(allChars)
+        var single = allRevertStr.map { $0 }
+        //再反转每个单词
+        var preIndex = -1
+        for (index, strElement) in allRevertStr.enumerated() {
+            guard String(strElement) == " " else { continue }
+            reverseWords(&single, left: preIndex + 1, right: index - 1)
+            preIndex = index
+        }
+        // 反转最后一个单词
+        reverseWords(&single, left: preIndex + 1, right: length - 1)
+        return String(single[single.startIndex ..< single.index(0, offsetBy: length)])
+    }
+    
     
     func isLetterOrDigest(_ str: String) -> Bool {
         let reg = "^[a-zA-Z0-9]+$"

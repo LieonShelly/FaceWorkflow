@@ -9,5 +9,5 @@ import Foundation
 
 print("Hello, World!")
 
-let solution = ArrayAgri()
-print(solution.bigNumMulity([10,1,1,1,1,1,1], [10, 10, 10]))
+let solution = StringAgri()
+print(solution.revertWords("  ") + "_666")
