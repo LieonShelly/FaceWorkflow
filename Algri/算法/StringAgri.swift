@@ -10,6 +10,27 @@ import Foundation
 
 class StringAgri {
     
+    // 无重复最长子串的长度
+    func lengthOfLongestSubstring(_ str: String) -> Int {
+        var set = Set<String.Element>.init()
+        let str = str.map { $0 }
+        let n = str.count
+        var result = 0
+        var i = 0
+        var j = 0
+        while i < n, j < n {
+            if !set.contains(str[j]) {
+                set.insert(str[j])
+                j += 1
+                result = max(result, j - i)
+            } else {
+                set.remove(str[i])
+                i += 1
+            }
+        }
+        return result
+    }
+    
     //NC137 表达式求值
     /**
      输入：
