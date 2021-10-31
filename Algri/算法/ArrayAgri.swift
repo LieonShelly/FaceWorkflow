@@ -8,6 +8,177 @@
 import Foundation
 
 class ArrayAgri {
+    /**动态规划相关*/
+    // 爬楼梯
+    func climbStairs(_ n: Int) -> Int {
+        var dp: [Int] = Array<Int>.init(repeating: 0, count: n+1)
+        if n <= 2{
+            return n
+        }
+        dp[1] = 1
+        dp[2] = 2
+        for index in 3 ... n {
+            dp[index] = dp[index - 1] + dp[index - 2]
+        }
+        return dp[n]
+        
+    }
+    
+    // 最大连续子序列和
+    func maxSubArray(_ nums: [Int]) -> Int {
+        var result = Int(-1e9)
+        var sum = 0
+        for num in nums {
+            sum = max(sum + num, num)
+            result = max(sum, result)
+        }
+        return result
+    }
+    
+    // 最长上升子序列
+    func lengthOfLIS(_ nums: [Int]) -> Int {
+        var dp: [Int] = Array<Int>.init(repeating: 0, count: nums.count)
+        var result = 1
+        for i in 0 ..< nums.count {
+            dp[i] = 1
+            for j in 0 ..< i {
+                if nums[j] < nums[i] {
+                    dp[i] = max(dp[j] + 1, dp[i])
+                }
+            }
+            result = max(result, dp[i])
+        }
+        return result
+    }
+    
+    // 三角形最小路径和
+    func minimumTotal(_ triangle:[[Int]]) -> Int {
+        guard !triangle.isEmpty else { return 0 }
+        if triangle.count == 1 {
+            return triangle[0][0]
+        }
+        var dp = triangle.map { $0 }
+        var res = Int(1e9)
+        // 控制三角形层数, 从第二层开始
+        for i in 1 ..< dp.count {
+            // 控制每层元素
+            for j in 0 ..< triangle[i].count {
+                //元素为三角形每层最左元素时，上一步只能是其上层最左元素
+                if j == 0 {
+                    dp[i][j] = dp[i - 1][j] + triangle[i][j]
+                    //元素为三角形每层最右元素时，上一步只能是其上层最右元素
+                } else if j == i {
+                    dp[i][j] = dp[i - 1][j - 1] + triangle[i][j]
+                } else { //上一步可以是其上层坐标为j或j-1元素
+                    dp[i][j] = min(dp[i - 1][j - 1], dp[i - 1][j]) + triangle[i][j]
+                }
+                if i == triangle.count - 1 {
+                    res = min(res, dp[i][j])
+                }
+            }
+        }
+        return res
+    }
+    // 最小路径和
+    func minPathSum(_ grid: [[Int]]) -> Int {
+        var dp = grid
+        for i in 0 ..< grid.count {
+            for j in 0 ..< grid[i].count {
+                if i == 0, j == 0 {
+                    continue
+                } else if i == 0 {
+                    dp[i][j] = dp[i][j - 1] + grid[i][j]
+                } else if j == 0 {
+                    dp[i][j] = dp[i - 1][j] + grid[i][j]
+                } else {
+                    dp[i][j] = min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j]
+                }
+            }
+        }
+        let len = dp.count
+        return dp[len - 1][dp[0].count - 1]
+    }
+    
+    // 两数和
+    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+         var map: [Int: Int] = [:]
+         var index = 0
+         for num in nums {
+             map[num] = index
+             index += 1
+         }
+         for num in nums {
+             let key = target - num
+             if map[key] != nil {
+                 guard let num1 = map[num] else { continue }
+                 guard let num2 = map[key] else { continue }
+                 guard num1 != num2 else { continue }
+                 return num1 < num2 ? [num1, num2] : [num2, num1]
+             }
+         }
+         return []
+     }
+    
+    // 数组加1
+    func plusOne(_ digits: [Int]) -> [Int] {
+        var digits = digits
+        var count = digits.count
+        // 末位不为9直接加1
+        if digits.last != 9 {
+            digits[count - 1] += 1
+            return digits
+        }
+        // 判断末位有几个9
+        var index = count - 1
+        var numCount = 0
+        while(index >= 0) {
+            if digits[index] == 9 {
+                numCount += 1
+            } else {
+                break
+            }
+            index -= 1
+        }
+        // 全是9
+        if numCount == count {
+            return [1] + digits.map {_ in  0 }
+        }
+        // 部分为9, 清除9的位为0
+        index = count - 1
+        while (numCount > 0) {
+            digits[index] = 0
+            numCount -= 1
+            index -= 1
+        }
+         digits[index] = digits[index] + 1
+         return digits
+    }
+    
+    // 原地删除
+    func removeElement(_ nums: inout [Int], val: Int) -> Int {
+        var left = 0
+        var right = nums.count
+        while left < right {
+            if nums[left] == val {
+                nums[left] = nums[right - 1]
+                right -= 1
+            } else {
+                left += 1
+            }
+        }
+        return left
+    }
+    
+    // 买卖股票的最佳时机
+    func maxProfit(_ prices: [Int]) -> Int {
+        var minPrice = Int(1e9)
+        var maxProfit = 0
+        for price in prices {
+            maxProfit = max(maxProfit, price - minPrice)
+            minPrice = min(price, minPrice)
+        }
+        return maxProfit
+   }
     
     //给定一个长度为 n 的数组 arr ，返回其中任意子数组的最大累加和
     func maxsumofSubarray ( _ arr: [Int]) -> Int {
@@ -171,7 +342,7 @@ class ArrayAgri {
         
     }
     
-    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+    func twoSum1(_ nums: [Int], _ target: Int) -> [Int] {
         var map: [Int: Int?] = [:]
         for (currentIndex, num) in nums.enumerated() {
             let other = target - num
@@ -180,7 +351,6 @@ class ArrayAgri {
             } else {
                 map[num] = currentIndex
             }
-            
         }
         return []
     }
@@ -291,7 +461,7 @@ class ArrayAgri {
      向右旋转 1 步: [99,-1,-100,3]
      向右旋转 2 步: [3,99,-1,-100]
      */
-    func rotate(_ nums: inout [Int], _ k: Int) {
+    func rotate1(_ nums: inout [Int], _ k: Int) {
         let maxIndex = nums.count - 1
         var newnums = nums
         for (index, num) in nums.enumerated() {
@@ -303,6 +473,24 @@ class ArrayAgri {
             newnums[newIndex] = num
         }
         nums = newnums
+    }
+    
+    func rotate(_ nums: inout [Int], _ k: Int) {
+        reverse(&nums, left: 0, right: nums.count - 1)
+        reverse(&nums, left: 0, right: k % nums.count)
+        reverse(&nums, left: k % nums.count + 1, right: nums.count - 1)
+    }
+    
+    func reverse(_ nums: inout [Int], left: Int, right: Int) {
+        var left = left
+        var right = right
+        while left < right {
+            let temp = nums[left]
+            nums[left] = nums[right]
+            nums[right] = temp
+            left += 1
+            right -= 1
+        }
     }
     
     
@@ -325,7 +513,7 @@ class ArrayAgri {
      输入：digits = [0]
      输出：[1]
      */
-    func plusOne(_ digits: [Int]) -> [Int] {
+    func plusOne1(_ digits: [Int]) -> [Int] {
         var newDigits: [Int] = digits
         for current in 0 ..< digits.count {
             let index = digits.count - 1 - current
@@ -374,7 +562,7 @@ class ArrayAgri {
      
      */
     // 最大和的连续子数组
-    func maxSubArray(_ nums: [Int]) -> Int {
+    func maxSubArray2(_ nums: [Int]) -> Int {
         var sum = 0
         var ans = nums[0]
         for num in nums {
@@ -404,7 +592,7 @@ class ArrayAgri {
     }
     
     /// 最长上升子序列
-    func lengthOfLIS(_ nums: [Int]) -> Int {
+    func lengthOfLIS1(_ nums: [Int]) -> Int {
         if nums.isEmpty { return 0 }
         var dp = Array<Int>.init(repeating: 1, count: nums.count)
         var maxValue = dp[0]
