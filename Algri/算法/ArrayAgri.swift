@@ -7,7 +7,129 @@
 
 import Foundation
 
+// LRU 缓存机制
+class LRUCache {
+    class DLinkedNode {
+        var key: Int
+        var value: Int
+        var prev: DLinkedNode?
+        var next: DLinkedNode?
+        
+        init(key: Int, value: Int) {
+            self.key = key
+            self.value = value
+        }
+    }
+    var head: DLinkedNode?
+    var tail: DLinkedNode?
+    var size: Int = 0
+    var capacity: Int = 0
+    var cache: [Int: DLinkedNode] = [:]
+    
+    init(capacity: Int) {
+        self.capacity = capacity
+        head = DLinkedNode(key: -100, value: -100)
+        tail = DLinkedNode(key: -100, value: -100)
+        head?.next = tail
+        tail?.prev = head
+    }
+    
+    func addToHead(_ node: DLinkedNode?) {
+        node?.prev = head
+        node?.next = head?.next
+        head?.next?.prev = node
+        head?.next  = node
+    }
+    
+    func moveToHead(_ node: DLinkedNode?) {
+        removeNode(node)
+        addToHead(node)
+    }
+    
+    func removeNode(_ node: DLinkedNode?) {
+        node?.prev?.next = node?.next
+        node?.next?.prev = node?.prev
+    }
+    
+    
+    func removeTail() -> DLinkedNode? {
+        let node = tail?.prev
+        removeNode(node)
+        return node
+    }
+    
+    func get(_ key: Int) -> Int? {
+        if !cache.keys.contains(key) {
+            return -1
+        }
+        let node = cache[key]
+        moveToHead(node)
+        return node?.value
+    }
+    
+    func put(key: Int, value: Int) {
+        if !cache.keys.contains(key) {
+            let node = DLinkedNode(key: key, value: value)
+            cache[key] = node
+            addToHead(node)
+            size += 1
+            if size > capacity {
+                var removed = removeTail()
+                if let index = cache.index(forKey: key) {
+                    cache.remove(at: index)
+                }
+                size -= 1
+                removed = nil
+            }
+        } else {
+            let node = cache[key]
+            node?.value = value
+            moveToHead(node)
+        }
+    }
+    
+    
+    
+}
 class ArrayAgri {
+   
+    
+    /**二分查找**/
+    // 第一个错误版本
+    func isBadVersion(_ n: Int) -> Bool { true }
+    
+    func firstBadVersion(_ n: Int) -> Int {
+        var res = -1
+        var left = 0
+        var right = n
+        while left <= right {
+            let mid = left + (right - left) >> 1
+            if isBadVersion(mid) {
+                res = mid
+                right = mid - 1
+            } else {
+                left = mid + 1
+            }
+        }
+        return res
+    }
+    
+    // x的平方根
+    func mySqrt(_ x: Int) -> Int {
+        var l = 0
+        var r = x
+        var ans = -1
+        while l <= r {
+            let mid = l + (r - l) >> 1
+            if mid * mid <= x {
+                ans = mid
+                l = mid + 1
+            } else {
+                r = mid - 1
+            }
+        }
+        return ans
+    }
     /**动态规划相关*/
     // 爬楼梯
     func climbStairs(_ n: Int) -> Int {
