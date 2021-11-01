@@ -8,6 +8,26 @@
 import Foundation
 
 class BinaryTreeAgri {
+    // 二叉树中的最大路径和
+    func maxPathSum(_ node: TreeNode?, _ val: inout Int) -> Int {
+        guard let node = node else {
+            return 0
+        }
+        let left = maxPathSum(node.left, &val)
+        let right = maxPathSum(node.right, &val)
+        let lmr = node.val + max(0, left) + max(0, right)
+        let ret = node.val + max(0, max(left, right))
+        val = max(val, max(lmr, ret))
+        return ret
+
+    }
+    
+    func maxPathSum(_ root: TreeNode?) -> Int {
+        var val = Int(-1e9)
+        maxPathSum(root, &val)
+        return val
+    }
+    
     // NC8 二叉树根节点到叶子节点和为指定值的路径
     func pathSum ( _ root: TreeNode?,  _ sum: Int) -> [[Int]] {
           // write code here

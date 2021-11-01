@@ -87,12 +87,59 @@ class LRUCache {
             moveToHead(node)
         }
     }
-    
-    
-    
 }
+
 class ArrayAgri {
-   
+    //给定数组和k，求数组中k个连续元素和的最大值
+    func maxValueInArray(_ array: [Int], _ k: Int) -> Int {
+        guard !array.isEmpty else { return 0}
+        var arrs: [[Int]] = []
+        var arr: [Int] = []
+        var ans = 0
+        for index in (0 ..< array.count ) {
+            let num = array[index]
+            arr.append(num)
+            if arr.count >= k {
+                arrs.append(arr)
+                ans = max(ans, arr.reduce(0, +))
+                arr.removeAll()
+                arr.append(num)
+            }
+        }
+        arrs.append(arr)
+        ans = max(ans, arr.reduce(0, +))
+        return ans
+    }
+    
+   // 冒泡排序
+    func bubbleSort1(_ array: inout [Int]) {
+        for end in (0 ... array.count - 1).reversed() {
+            for begin in 1 ... end {
+                if array[begin] - array[begin - 1] < 0 {
+                    let temp = array[begin]
+                    array[begin] = array[begin - 1]
+                    array[begin - 1] = temp
+                }
+            }
+        }
+    }
+    
+    // 冒泡排序优化版本
+    func bubbleSort2(_ array: inout [Int]) {
+        var startIndex = 0
+        for end in (startIndex ... array.count - 1).reversed() {
+            var sortedIndex = 1
+            for begin in 1 ... end {
+                if array[begin] - array[begin - 1] < 0 {
+                    let temp = array[begin]
+                    array[begin] = array[begin - 1]
+                    array[begin - 1] = temp
+                    sortedIndex = begin
+                }
+            }
+            startIndex = sortedIndex
+        }
+    }
     
     /**二分查找**/
     // 第一个错误版本
