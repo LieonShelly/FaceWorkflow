@@ -8,7 +8,23 @@
 import Foundation
 
 class BinaryTreeAgri {
+    // 二叉树的倒置
+    func invert(_ node: TreeNode?) {
+        guard let node = node else { return }
+        let temp = node.left
+        node.left = node.right
+        node.right = temp
+        invert(node.left)
+        invert(node.right)
+    }
+    
     // 二叉树中的最大路径和
+    func maxPathSum(_ root: TreeNode?) -> Int {
+        var val = Int(-1e9)
+        maxPathSum(root, &val)
+        return val
+    }
+    
     func maxPathSum(_ node: TreeNode?, _ val: inout Int) -> Int {
         guard let node = node else {
             return 0
@@ -22,13 +38,8 @@ class BinaryTreeAgri {
 
     }
     
-    func maxPathSum(_ root: TreeNode?) -> Int {
-        var val = Int(-1e9)
-        maxPathSum(root, &val)
-        return val
-    }
     
-    // NC8 二叉树根节点到叶子节点和为指定值的路径
+    // 二叉树根节点到叶子节点和为指定值的路径
     func pathSum ( _ root: TreeNode?,  _ sum: Int) -> [[Int]] {
           // write code here
         var rest: [[Int]] = []
@@ -57,19 +68,6 @@ class BinaryTreeAgri {
         }
        
     }
-    
-    
-    // 二叉树的最大深度
-    /**
-     - 采用层序遍历
-     - root先入队， levelSize = 1
-     - while 循环 队列不为空
-     - 取出队列的头 head
-     - levelSize -= 1
-     - 如果head的left不为空， head的left入队
-     - 如果head的right不为空，head的right入队
-     - 如果 levelSize = 0， 说明一层遍历完成， height += 1
-     */
     public class TreeNode {
         public var val: Int
         public var left: TreeNode?
@@ -89,32 +87,19 @@ class BinaryTreeAgri {
      - 若root == p1 ==> q1在root的左或者右
      - 若 root == q1 ==> p1在root的左或者右
      */
-    func lowestCommonAncestor ( _ root: TreeNode?,  _ o1: Int,  _ o2: Int) -> Int {
-        return compareNodeForeCommonAncestor(root, o1, o2)?.val ?? -1
-    }
-    
-    func compareNodeForeCommonAncestor( _ root: TreeNode?,  _ o1: Int,  _ o2: Int) -> TreeNode? {
-        // 如果root为空，或者root为o1、o2中的一个，则它们的最近公共祖先就为root
-        guard let root1 = root else {
+    func lowestCommonAncestor(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
+        if root == nil || root?.val == p?.val || root?.val == q?.val {
             return root
         }
-        if root1.val == o1 || root1.val == o2 {
-            return root1
+        let left = lowestCommonAncestor(root?.left, p, q)
+        let right = lowestCommonAncestor(root?.right, p, q)
+        if left == nil, right == nil {
+            return nil
         }
-        // 递归遍历左子树，只要在左子树中找到了o1或o2，则先找到谁就返回谁
-        let leftNode = compareNodeForeCommonAncestor(root1.left, o1, o2)
-        // 递归遍历右子树，只要在右子树中找到了o1或o2，则先找到谁就返回谁
-        let rightNode = compareNodeForeCommonAncestor(root1.right, o1, o2)
-        // 如果在左子树中o1和o2都找不到，则o1和o2一定都在右子树中，右子树中先遍历到的那个就是最近公共祖先（一个节点也可以是它自己的祖先）
-        if leftNode == nil {
-            return rightNode
-        } else if rightNode == nil { // 否则，如果left不为空，在左子树中有找到节点（o1或o2），这时候要再判断一下右子树中的情况，
-            // 如果在右子树中，o1和o2都找不到，则 o1和o2一定都在左子树中，左子树中先遍历到的那个就是最近公共祖先（一个节点也可以是它自己的祖先）
-            return leftNode
-        } else {
-            return root1
-        }
-    }
+        if left == nil { return right }
+        if right == nil { return left }
+        return root
+      }
     
     /// 找到最近的公共祖先
     func commonGrand(_ root: TreeNode?,  _ o1: Int,  _ o2: Int) -> TreeNode? {
@@ -183,6 +168,7 @@ class BinaryTreeAgri {
         callback(val)
     }
     
+    // 二叉树的最大深度
     func maxDepth(_ root: TreeNode?) -> Int {
         guard let root = root else {
             return 0
@@ -272,6 +258,36 @@ class BinaryTreeAgri {
     }
     
     // 层序遍历
+    func levelOrder1(_ root: TreeNode?) -> [[Int]] {
+        var queue: [TreeNode?] = []
+        guard let root = root else {
+            return []
+        }
+        var res: [[Int]] = []
+        var level: [Int] = []
+        queue.append(root)
+        var levelSize = queue.count
+        while !queue.isEmpty {
+            let node = queue.removeFirst()
+            levelSize = levelSize - 1
+            if node?.left != nil {
+                level.append(node!.left!.val)
+                queue.append(node?.left)
+            }
+            if node?.right != nil {
+                level.append(node!.right!.val)
+                queue.append(node?.right)
+            }
+            if levelSize == 0 {
+                levelSize = queue.count
+                res.append(level)
+                level.removeAll()
+            }
+        }
+        return res
+    }
+    
+    
     func levelOrder(_ root: TreeNode?) -> [[Int]] {
         guard let root = root else {
             return []
