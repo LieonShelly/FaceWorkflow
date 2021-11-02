@@ -10,6 +10,6 @@ import Foundation
 print("Hello, World!")
 
 let solution = ArrayAgri()
-var nums = [1,2,3, 3, 3,4,5,6,7]
-print(solution.maxValueInArray([1,3,2,4,5], 3))
-//print(nums)
+var nums = [1,223,32, 2223, 33,43,53,46,71]
+print(solution.insertSort(&nums))
+print(nums)

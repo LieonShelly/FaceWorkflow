@@ -96,7 +96,7 @@ class QuickSort {
         var end = end
         end -= 1
         let randamIndex = Int.random(in: ClosedRange<Int>.init(uncheckedBounds: (begin, end)))
-        /// 随机选择一个元素跟begin的位置交换
+        /// 随机选择一个元素跟begin的位置交换 - 降低出现最坏时间复杂度的情况
         swap(begin, randamIndex)
         // 备份轴点元素
         let pivot = array[begin]

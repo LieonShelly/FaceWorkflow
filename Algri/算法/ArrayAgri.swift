@@ -90,6 +90,19 @@ class LRUCache {
 }
 
 class ArrayAgri {
+    // 插入排序
+    func insertSort(_ array: inout [Int]) {
+        for begin in 1 ..< array.count {
+            var cur = begin
+            while cur > 0,  array[cur] - (array[cur - 1] - 1) < 0 {
+                let temp = array[cur]
+                array[cur] = array[cur - 1]
+                array[cur - 1] = temp
+                cur -= 1
+            }
+        }
+    }
+    
     //给定数组和k，求数组中k个连续元素和的最大值
     func maxValueInArray(_ array: [Int], _ k: Int) -> Int {
         guard !array.isEmpty else { return 0}
