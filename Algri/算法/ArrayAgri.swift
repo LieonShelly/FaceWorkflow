@@ -90,6 +90,89 @@ class LRUCache {
 }
 
 class ArrayAgri {
+    
+    func sortMerge(_ array: inout [Int]) {
+        mergeSort(&array, 0, array.count - 1)
+    }
+    
+    func mergeSort(_ array: inout [Int], _ begin: Int, _ end: Int) {
+        if end == begin {
+            return
+        }
+        let mid = (end + begin) >> 1
+        mergeSort(&array, begin, mid)
+        mergeSort(&array, mid + 1, end)
+        mergeSortImp(&array, begin, mid, end)
+    }
+    
+    func mergeSortImp(_ array: inout [Int], _ left: Int, _ center: Int, _ right: Int) {
+        let length = right - left + 1
+        var temp = (0 ..< length).map { _ in 0 }
+        var _left = left
+        var _right = center + 1
+        var tempIndex = 0
+        while _left <= center, _right <= right {
+            if array[_left] <= array[_right] {
+                temp[tempIndex] = array[_left]
+                _left += 1
+                tempIndex += 1
+            } else {
+                temp[tempIndex] = array[_right]
+                _right += 1
+                tempIndex += 1
+            }
+        }
+        
+        while _left <= center {
+            temp[tempIndex] = array[_left]
+            _left += 1
+            tempIndex += 1
+        }
+        while _right <= right {
+            temp[tempIndex] = array[_right]
+            _right += 1
+            tempIndex += 1
+        }
+        
+        tempIndex = 0
+        while tempIndex < length {
+            array[tempIndex + left] = temp[tempIndex]
+            tempIndex += 1
+        }
+    }
+    
+    func quickSort(_ array: inout [Int]) {
+        quickSort(&array, 0, array.count - 1)
+    }
+    
+    func quickSort(_ array: inout [Int], _ start: Int, _ end: Int) {
+        // 获取轴点元素
+        if start < end {
+            let key = array[start]
+            var i = start // 轴点元素的索引
+            for j in start + 1 ... end {
+                // 大于轴点元素放在右边，小于轴点元素放左边
+                if key > array[j] {
+                    i += 1 // 轴点元素的右边
+                    swap(&array, j, i)
+                }
+            }
+            // 先挪动
+            array[start] = array[i]
+            // 再办轴点元素放到指定位置
+            array[i] = key
+            // 对轴点元素左边进行排序
+            quickSort(&array, start, i - 1)
+            // 对轴点元素右边进行排序
+            quickSort(&array, i + 1, end)
+        }
+    }
+    
+    func swap(_ array: inout [Int], _ start: Int, _ end: Int) {
+        let temp = array[start]
+        array[start] = array[end]
+        array[end] = temp
+    }
     // 插入排序
     func insertSort(_ array: inout [Int]) {
         for begin in 1 ..< array.count {
@@ -126,8 +209,11 @@ class ArrayAgri {
     
    // 冒泡排序
     func bubbleSort1(_ array: inout [Int]) {
-        for end in (0 ... array.count - 1).reversed() {
-            for begin in 1 ... end {
+        guard array.count > 1 else {
+            return
+        }
+        for end in (1 ... array.count - 1).reversed() {
+            for begin in 1 ... end{
                 if array[begin] - array[begin - 1] < 0 {
                     let temp = array[begin]
                     array[begin] = array[begin - 1]

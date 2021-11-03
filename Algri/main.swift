@@ -10,6 +10,12 @@ import Foundation
 print("Hello, World!")
 
 let solution = ArrayAgri()
-var nums = [1,223,32, 2223, 33,43,53,46,71]
-print(solution.insertSort(&nums))
+var nums = [5,2,3,1]
+let aSort = ArrayAgri()
 print(nums)
+
+let merge = MergerSort()
+merge.array = nums
+merge.sort()
+print(merge.array)
+
