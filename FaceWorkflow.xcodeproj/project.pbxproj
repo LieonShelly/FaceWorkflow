@@ -11874,6 +11874,7 @@
 		CDA8D78E25C2A4EF00CB33D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDA8D79025C2A4EF00CB33D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDA8D83A25C2A64500CB33D4 /* BridgeHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgeHeader.h; sourceTree = "<group>"; };
+		CDB660012732ECB800C85348 /* sd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sd.swift; sourceTree = "<group>"; };
 		CDBBCDFA26AA668E00FE00FF /* demux.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demux.MP4; sourceTree = "<group>"; };
 		CDBBCDFD26ADC41D00FE00FF /* MutexCond.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MutexCond.cpp; sourceTree = "<group>"; };
 		CDBBCDFE26ADC41D00FE00FF /* MutexCond.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MutexCond.hpp; sourceTree = "<group>"; };
@@ -25201,6 +25202,7 @@
 				CD46FED026FD65FF0022EF77 /* ArrayAgri.swift */,
 				CD46FED226FD662C0022EF77 /* BinaryTreeAgri.swift */,
 				CD46FED426FD67CC0022EF77 /* IntegerAgri.swift */,
+				CDB660012732ECB800C85348 /* sd.swift */,
 			);
 			path = "算法";
 			sourceTree = "<group>";

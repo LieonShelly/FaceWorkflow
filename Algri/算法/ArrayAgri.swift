@@ -207,7 +207,7 @@ class ArrayAgri {
         return ans
     }
     
-   // 冒泡排序
+    // 冒泡排序
     func bubbleSort1(_ array: inout [Int]) {
         guard array.count > 1 else {
             return
@@ -369,28 +369,28 @@ class ArrayAgri {
     
     // 两数和
     func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
-         var map: [Int: Int] = [:]
-         var index = 0
-         for num in nums {
-             map[num] = index
-             index += 1
-         }
-         for num in nums {
-             let key = target - num
-             if map[key] != nil {
-                 guard let num1 = map[num] else { continue }
-                 guard let num2 = map[key] else { continue }
-                 guard num1 != num2 else { continue }
-                 return num1 < num2 ? [num1, num2] : [num2, num1]
-             }
-         }
-         return []
-     }
+        var map: [Int: Int] = [:]
+        var index = 0
+        for num in nums {
+            map[num] = index
+            index += 1
+        }
+        for num in nums {
+            let key = target - num
+            if map[key] != nil {
+                guard let num1 = map[num] else { continue }
+                guard let num2 = map[key] else { continue }
+                guard num1 != num2 else { continue }
+                return num1 < num2 ? [num1, num2] : [num2, num1]
+            }
+        }
+        return []
+    }
     
     // 数组加1
     func plusOne(_ digits: [Int]) -> [Int] {
         var digits = digits
-        var count = digits.count
+        let count = digits.count
         // 末位不为9直接加1
         if digits.last != 9 {
             digits[count - 1] += 1
@@ -418,8 +418,8 @@ class ArrayAgri {
             numCount -= 1
             index -= 1
         }
-         digits[index] = digits[index] + 1
-         return digits
+        digits[index] = digits[index] + 1
+        return digits
     }
     
     // 原地删除
@@ -446,7 +446,7 @@ class ArrayAgri {
             minPrice = min(price, minPrice)
         }
         return maxProfit
-   }
+    }
     
     //给定一个长度为 n 的数组 arr ，返回其中任意子数组的最大累加和
     func maxsumofSubarray ( _ arr: [Int]) -> Int {
@@ -461,7 +461,7 @@ class ArrayAgri {
             ans = max(ans, sum)
         }
         return ans
-     }
+    }
     
     //找出一个数组中的所有K数。（ K 数定义：前面的数都比它小，后面的数都比它大。） 举例：1 3 2 4 7 5 9 其中K数有：1 4 9
     func finKNum(_ a: [Int]) -> [Int] {
@@ -488,7 +488,7 @@ class ArrayAgri {
             if isFindMax, isFindMin {
                 results.append(num)
             }
-           
+            
         }
         return results
     }
@@ -894,31 +894,16 @@ class ArrayAgri {
     
     // 数组去重
     static  func removeDuplicates(_ nums: inout [Int]) -> Int {
+        guard nums.count > 1 else { return nums.count }
+        var left = nums[0]
         var leftIndex = 0
-        var rightIndex = 1
-        if leftIndex >= nums.count {
-            return 0
-        }
-        if rightIndex >= nums.count {
-            return 1
-        }
-        var left = nums[leftIndex]
-        var right = nums[rightIndex]
-        
-        let sortedNums = nums
-        for (index, _) in sortedNums.enumerated() {
-            rightIndex = index + 1
-            if rightIndex >= sortedNums.count {
-                break
-            }
-            right = sortedNums[rightIndex]
-            if left != right {
-                // 保存之前left的值
+        for index in (0 ... nums.count - 1) {
+            let num = nums[index]
+            if num != left {
                 nums[leftIndex] = left
-                // 移动left
                 leftIndex += 1
-                left = right
-                nums[leftIndex] = left
+                nums[leftIndex] = num
+                left = num
             }
         }
         return leftIndex + 1
@@ -959,5 +944,5 @@ class ArrayAgri {
         }
         return result
     }
-   
+    
 }

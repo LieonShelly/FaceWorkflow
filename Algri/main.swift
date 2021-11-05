@@ -10,12 +10,7 @@ import Foundation
 print("Hello, World!")
 
 let solution = ArrayAgri()
-var nums = [5,2,3,1]
+var nums = [1,1,2]
 let aSort = ArrayAgri()
-print(nums)
-
-let merge = MergerSort()
-merge.array = nums
-merge.sort()
-print(merge.array)
+print(StringAgri().getLongestPalindrome("levesdfl", "levesdfl".count))
 
