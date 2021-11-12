@@ -113,8 +113,8 @@ static int encode(AVCodecContext *ctx, AVFrame *frame, AVPacket *pkt, NSFileHand
     ctx->sample_fmt = input->sampleFmt;
     ctx->sample_rate = input->sampleRate;
     ctx->channel_layout = input->chLayout;
-    // 比特率
-    ctx->bit_rate = 32000; // av_get_bytes_per_sample(input->sampleFmt) << 3;
+    // 比特率/
+    ctx->bit_rate = av_get_bytes_per_sample(input->sampleFmt) << 3;
     //规格
     ctx->profile = FF_PROFILE_AAC_HE_V2;
     // 打开编码器

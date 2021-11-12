@@ -37,11 +37,11 @@ static int checktPixFmt(const AVCodec *codec, enum AVPixelFormat pixFmt) {
  - 设置编码上下文参数 `` width height pix_fmt time_base``
  - 创建frame
  - 设置frame参数 ``width height format pts``
- - 利用frame创建输入缓冲区，相当于是为frme->data 设置其内存布局，设置好之后，直接网data指针数组中填入数据
- - 创建AVPacket, 作为输出缓冲区
+ - 为输入缓冲区中填充数据
+ - 创建输出缓冲区
  - 逐帧读取YUV数据到frame中，将frame数据送入到编码器
     - 从编码器中获取编码后的数据
-    - 将编码后的书写入文件
+    - 将编码后的数据写入文件
     - 释放packet
  - 释放资源
     - frame

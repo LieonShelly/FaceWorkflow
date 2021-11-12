@@ -12,6 +12,11 @@
 		CD1E00B52681D7B2002C845B /* FFMpegs.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD1E00B42681D7B2002C845B /* FFMpegs.mm */; };
 		CD1ED336267F8E0E002C845B /* AudioBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD1ED334267F8E0E002C845B /* AudioBuffer.cpp */; };
 		CD1ED338267F912C002C845B /* in.pcm in Resources */ = {isa = PBXBuildFile; fileRef = CD1ED337267F90C3002C845B /* in.pcm */; };
+		CD243E922738CF4900EB4D24 /* H264Encoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD243E912738CF4900EB4D24 /* H264Encoder.mm */; };
+		CD243E942738F3D400EB4D24 /* Doc.md in Resources */ = {isa = PBXBuildFile; fileRef = CD243E932738F3B800EB4D24 /* Doc.md */; };
+		CD243EB4273AC94600EB4D24 /* PictureEncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD243EB3273AC94600EB4D24 /* PictureEncoder.mm */; };
+		CD243EB9273B8D2B00EB4D24 /* H264Decoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD243EB8273B8D2B00EB4D24 /* H264Decoder.mm */; };
+		CD243EBE273C214100EB4D24 /* CopyVideoPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD243EBC273C214100EB4D24 /* CopyVideoPlayer.cpp */; };
 		CD47107026A82199004C6BB7 /* H264Decode.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD47106F26A82199004C6BB7 /* H264Decode.mm */; };
 		CD47107226A90968004C6BB7 /* video.h264 in Resources */ = {isa = PBXBuildFile; fileRef = CD47107126A90968004C6BB7 /* video.h264 */; };
 		CD47107626A95210004C6BB7 /* Demux.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD47107526A95210004C6BB7 /* Demux.mm */; };
@@ -11643,6 +11648,15 @@
 		CD1EFFFD2680EF73002C845B /* decode_video.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = decode_video.c; sourceTree = "<group>"; };
 		CD1EFFFE2680EF73002C845B /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		CD1EFFFF2680EF73002C845B /* filtering_video.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = filtering_video.c; sourceTree = "<group>"; };
+		CD243E902738CF4900EB4D24 /* H264Encoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = H264Encoder.h; sourceTree = "<group>"; };
+		CD243E912738CF4900EB4D24 /* H264Encoder.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = H264Encoder.mm; sourceTree = "<group>"; };
+		CD243E932738F3B800EB4D24 /* Doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = Doc.md; path = FaceWorkflow/Doc.md; sourceTree = SOURCE_ROOT; };
+		CD243EB2273AC94600EB4D24 /* PictureEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PictureEncoder.h; sourceTree = "<group>"; };
+		CD243EB3273AC94600EB4D24 /* PictureEncoder.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PictureEncoder.mm; sourceTree = "<group>"; };
+		CD243EB7273B8D2B00EB4D24 /* H264Decoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = H264Decoder.h; sourceTree = "<group>"; };
+		CD243EB8273B8D2B00EB4D24 /* H264Decoder.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = H264Decoder.mm; sourceTree = "<group>"; };
+		CD243EBC273C214100EB4D24 /* CopyVideoPlayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CopyVideoPlayer.cpp; sourceTree = "<group>"; };
+		CD243EBD273C214100EB4D24 /* CopyVideoPlayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CopyVideoPlayer.hpp; sourceTree = "<group>"; };
 		CD47106E26A82199004C6BB7 /* H264Decode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = H264Decode.h; sourceTree = "<group>"; };
 		CD47106F26A82199004C6BB7 /* H264Decode.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = H264Decode.mm; sourceTree = "<group>"; };
 		CD47107126A90968004C6BB7 /* video.h264 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.h264; sourceTree = "<group>"; };
@@ -24342,6 +24356,24 @@
 			path = examples;
 			sourceTree = "<group>";
 		};
+		CD243EAB273AC8CC00EB4D24 /* PictureEncoder */ = {
+			isa = PBXGroup;
+			children = (
+				CD243EB2273AC94600EB4D24 /* PictureEncoder.h */,
+				CD243EB3273AC94600EB4D24 /* PictureEncoder.mm */,
+			);
+			path = PictureEncoder;
+			sourceTree = "<group>";
+		};
+		CD243EBB273C1C1E00EB4D24 /* CopyVideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				CD243EBC273C214100EB4D24 /* CopyVideoPlayer.cpp */,
+				CD243EBD273C214100EB4D24 /* CopyVideoPlayer.hpp */,
+			);
+			path = CopyVideoPlayer;
+			sourceTree = "<group>";
+		};
 		CD47106D26A82057004C6BB7 /* H264Decode */ = {
 			isa = PBXGroup;
 			children = (
@@ -24350,6 +24382,8 @@
 				CD47106F26A82199004C6BB7 /* H264Decode.mm */,
 				CD47107A26A95324004C6BB7 /* VideoDecodeSpec.h */,
 				CD47107B26A95324004C6BB7 /* VideoDecodeSpec.m */,
+				CD243EB7273B8D2B00EB4D24 /* H264Decoder.h */,
+				CD243EB8273B8D2B00EB4D24 /* H264Decoder.mm */,
 			);
 			path = H264Decode;
 			sourceTree = "<group>";
@@ -24420,6 +24454,9 @@
 				CDA3C16426A5D3CA00C12760 /* VideoEncodeSpec.m */,
 				CDD9CE2526BA328E0030D340 /* VideoToolboxEncoder.h */,
 				CDD9CE2626BA328E0030D340 /* VideoToolboxEncoder.m */,
+				CD243E902738CF4900EB4D24 /* H264Encoder.h */,
+				CD243E912738CF4900EB4D24 /* H264Encoder.mm */,
+				CD243E932738F3B800EB4D24 /* Doc.md */,
 			);
 			path = H264Encode;
 			sourceTree = "<group>";
@@ -24658,6 +24695,8 @@
 		CDA8D78125C2A4ED00CB33D4 /* FaceWorkflow */ = {
 			isa = PBXGroup;
 			children = (
+				CD243EBB273C1C1E00EB4D24 /* CopyVideoPlayer */,
+				CD243EAB273AC8CC00EB4D24 /* PictureEncoder */,
 				CDD9CE2026B93DF90030D340 /* OpenGLES */,
 				CDA8D78225C2A4ED00CB33D4 /* AppDelegate.swift */,
 				CDD9CDFA26B3E1FB0030D340 /* VideoPlayer */,
@@ -25126,6 +25165,7 @@
 				CDBBCDFB26AA668E00FE00FF /* demux.MP4 in Resources */,
 				CDC22BBF26A128870042B77E /* 111.png in Resources */,
 				CDC22B97269E8FE60042B77E /* in.yuv in Resources */,
+				CD243E942738F3D400EB4D24 /* Doc.md in Resources */,
 				CDA8D78F25C2A4EF00CB33D4 /* LaunchScreen.storyboard in Resources */,
 				CDA8D78C25C2A4EF00CB33D4 /* Assets.xcassets in Resources */,
 				CD49337D268A21AC00D1FE3F /* record_out.wav in Resources */,
@@ -25192,6 +25232,7 @@
 				CDD9CE2726BA328E0030D340 /* VideoToolboxEncoder.m in Sources */,
 				CDD9CE1326B6A4E50030D340 /* VideoService.mm in Sources */,
 				CDA8D78725C2A4ED00CB33D4 /* ViewController.swift in Sources */,
+				CD243E922738CF4900EB4D24 /* H264Encoder.mm in Sources */,
 				CD49336A2688DA7400D1FE3F /* RecordWAV.mm in Sources */,
 				CDC36C80267C43A900C89C9F /* PermenantThread.m in Sources */,
 				CD47107626A95210004C6BB7 /* Demux.mm in Sources */,
@@ -25200,10 +25241,13 @@
 				CD1ED336267F8E0E002C845B /* AudioBuffer.cpp in Sources */,
 				CD4933662688D2AF00D1FE3F /* WavPlayer.mm in Sources */,
 				CDA3C16226A5D2A700C12760 /* H264Encode.mm in Sources */,
+				CD243EBE273C214100EB4D24 /* CopyVideoPlayer.cpp in Sources */,
+				CD243EB4273AC94600EB4D24 /* PictureEncoder.mm in Sources */,
 				CD47107926A95280004C6BB7 /* AudioDecodeSpec.m in Sources */,
 				CD665C9F269C135E00BA37F2 /* RecordVideo.mm in Sources */,
 				CDD9CE2226B93E120030D340 /* RenderImage.swift in Sources */,
 				CDD9CE0626B3E6540030D340 /* VideoPlayerVC.swift in Sources */,
+				CD243EB9273B8D2B00EB4D24 /* H264Decoder.mm in Sources */,
 				CDBBCDFF26ADC41D00FE00FF /* MutexCond.cpp in Sources */,
 				CDD0A0D62693E9F000EE705A /* AACDecode.mm in Sources */,
 				CDC22B8B269D71C50042B77E /* ShowBMP.mm in Sources */,

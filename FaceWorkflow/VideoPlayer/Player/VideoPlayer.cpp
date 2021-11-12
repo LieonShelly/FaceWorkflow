@@ -273,7 +273,7 @@ void VideoPlayer::setTimeChangedCallback(TimeChanged callback) {
 /*
 1.现实时间
 比如一个视频的时长是120秒，其中120秒就是现实时间
-比如一个视频播放到了第58秒，其中第58秒就是现实时间
+比如一个视频播放到了第58秒，其中第58秒就 是现实时间
 
 2.FFmpeg时间
 1> 时间戳（timestamp），类型是int64_t

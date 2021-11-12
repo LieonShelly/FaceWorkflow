@@ -32,7 +32,7 @@ extern "C" {
 
 /**
  # PCM转WAV步骤
- - 计算头部一个样本的字节数
+ - 计算头部一个样本的字节数 blockAlign
  - 计算头部字节率 byteRate
  - 读取PCM数据
  - 根据读取的PCM数据计算 ``dataChunkSize``， ``riffChunkSize``

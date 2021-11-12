@@ -50,13 +50,13 @@ int VideoPlayer::initSwr() {
     // 初始化重采样上下文
     int ret = swr_init(aSwrCtx);
     RET(swr_init);
-    // 初始化重采样的输入frame
+    // 初始化重采样的输出frame
     aSwrOutFrame = av_frame_alloc();
     if (!aSwrOutFrame) {
         cout << "av_frame_alloc error" << endl;
         return -1;
     }
-    // 初始化重采样的输出frame
+    // 初始化重采样的输入frame
     aSwrInFrame = av_frame_alloc();
     if (!aSwrInFrame) {
         cout << "av_frame_alloc error" << endl;

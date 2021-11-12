@@ -258,7 +258,7 @@ void showSpec(AVFormatContext *ctx) {
 }
 
 + (void)initialize {
-//    avdevice_register_all();
+    avdevice_register_all();
 }
 
 
