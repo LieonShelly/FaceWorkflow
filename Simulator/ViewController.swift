@@ -8,6 +8,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var imageDownloader: MSImageDownloader!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,12 @@ class ViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(parentAction))
         pareView.addGestureRecognizer(tap)
         btn.addTarget(self, action: #selector(btnAction), for: .touchUpInside)
+        
+        let url = URL.init(string: "https://static.runoob.com/images/demo/demo1.jpg")!
+        let imageView = UIImageView()
+        imageView.ms.setImage(url)
+        
+        imageDownloader = MSImageDownloader(url)
     }
     
     @objc
