@@ -10,7 +10,10 @@ import UIKit
 class ViewController: UIViewController {
     
     var imageDownloader: MSImageDownloader!
-
+    var memCache: MemoryCache = .init()
+    var diskCache: DiskCache = .init()
+    let url = URL.init(string: "https://static.runoob.com/images/demo/demo1.jpg")!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let pareView = UIView()
@@ -26,16 +29,21 @@ class ViewController: UIViewController {
         pareView.addGestureRecognizer(tap)
         btn.addTarget(self, action: #selector(btnAction), for: .touchUpInside)
         
-        let url = URL.init(string: "https://static.runoob.com/images/demo/demo1.jpg")!
+        
         let imageView = UIImageView()
         imageView.ms.setImage(url)
         
         imageDownloader = MSImageDownloader(url)
         imageDownloader.start()
-        imageDownloader.resultCallback = {result in
+        imageDownloader.resultCallback = {[weak self]result in
+            guard let weakSelf = self else {
+                return
+            }
             switch result {
             case .success(let image):
-                debugPrint(image.absFilePath)
+                let storeage = StorageData(image.data)
+                weakSelf.memCache.add(image.cacheKey(true), data: storeage)
+                weakSelf.diskCache.add(image.cacheKey(false), data: storeage)
             case .failure(let error):
                 debugPrint(error.message)
             }
@@ -53,7 +61,11 @@ class ViewController: UIViewController {
     fileprivate func btnAction() {
         debugPrint("btnAction")
     }
-
-
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let storage = memCache.getImageData(DownLoaderFileManager.shared.imageName(url.absoluteString))
+        debugPrint(storage?.count)
+    }
+    
 }
 

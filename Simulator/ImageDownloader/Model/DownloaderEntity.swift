@@ -22,6 +22,10 @@ class DownLoaderFileManager {
         return folderName
     }
     
+    var chacheFolderAbsPath: String {
+        return homeDir +  imageFolder
+    }
+    
     func createAbsFilePath(_ url: String) -> String {
         let cacheFolder = homeDir + imageFolder
         if !FileManager.default.fileExists(atPath: cacheFolder) {
@@ -39,19 +43,19 @@ class DownLoaderFileManager {
 }
 
 class DownloadImage {
-    var absFilePath: String {
-        return DownLoaderFileManager.shared.homeDir + relativePath
-    }
-    var relativePath: String {
-        return DownLoaderFileManager.shared.imageFolder + "/" + name
-    }
     var name: String {
         return DownLoaderFileManager.shared.imageName(urlStr)
     }
     var urlStr: String
-  
+    var data: Data
+    
     init(urlStr: String) {
         self.urlStr = urlStr
+        data = Data()
+    }
+    
+    func cacheKey(_ isMemory: Bool) -> String {
+        return isMemory ? name : urlStr
     }
 }
 

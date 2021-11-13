@@ -14,7 +14,6 @@ class MSImageDownloader: NSObject {
     private var dataTask: URLSessionDataTask!
     private(set) var totalLenth: Double = 0.0
     private var currentImage: DownloadImage!
-    private var fileStram: OutputStream!
     
     init(_ url: URL) {
         self.url = url
@@ -24,8 +23,6 @@ class MSImageDownloader: NSObject {
         let seesionQueue = OperationQueue.init()
         let session = URLSession(configuration: config, delegate: self, delegateQueue: seesionQueue)
         dataTask = session.dataTask(with: request)
-        let filepath = DownLoaderFileManager.shared.createAbsFilePath(url.absoluteString)
-        fileStram = OutputStream(toFileAtPath: filepath, append: true)
         currentImage = DownloadImage(urlStr: url.absoluteString)
     }
     
@@ -37,7 +34,6 @@ class MSImageDownloader: NSObject {
 extension MSImageDownloader: URLSessionDataDelegate {
     
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
-        fileStram.open()
         progressCallback?(0)
         totalLenth = Double(response.expectedContentLength)
         debugPrint("MSImageDownloader-totalLenth:\(totalLenth)")
@@ -45,9 +41,7 @@ extension MSImageDownloader: URLSessionDataDelegate {
     }
     
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-        _ = data.withUnsafeBytes { pointer in
-            fileStram.write(pointer, maxLength: data.count)
-        }
+        currentImage.data.append(data)
         let downloadLen = Double(data.count)
         let progress = downloadLen / totalLenth
         progressCallback?(progress)
@@ -55,7 +49,6 @@ extension MSImageDownloader: URLSessionDataDelegate {
     }
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        fileStram.close()
         if error != nil {
             let success = Result<DownloadImage, DownloadError>.failure(.init(message: "下载失败"))
             resultCallback?(success)
