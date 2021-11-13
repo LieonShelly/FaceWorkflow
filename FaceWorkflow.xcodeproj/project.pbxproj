@@ -45,6 +45,7 @@
 		CD4ACE3B273E285700DC06B6 /* MSExtesnsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACE3A273E285700DC06B6 /* MSExtesnsion.swift */; };
 		CD4ACE3E273E2A3400DC06B6 /* MSImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACE3D273E2A3400DC06B6 /* MSImageDownloader.swift */; };
 		CD4ACE44273E3EFE00DC06B6 /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACE43273E3EFE00DC06B6 /* String+MD5.swift */; };
+		CD4ACE59273F84EE00DC06B6 /* DownloaderEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACE58273F84EE00DC06B6 /* DownloaderEntity.swift */; };
 		CD665C9F269C135E00BA37F2 /* RecordVideo.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD665C9E269C135E00BA37F2 /* RecordVideo.mm */; };
 		CD6EBD30268E178800189ED5 /* AccEncode.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD6EBD2F268E178800189ED5 /* AccEncode.mm */; };
 		CD7A49B926F0FEE600E52CC2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD7A49B826F0FEE600E52CC2 /* main.cpp */; };
@@ -11726,6 +11727,7 @@
 		CD4ACE3A273E285700DC06B6 /* MSExtesnsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSExtesnsion.swift; sourceTree = "<group>"; };
 		CD4ACE3D273E2A3400DC06B6 /* MSImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSImageDownloader.swift; sourceTree = "<group>"; };
 		CD4ACE43273E3EFE00DC06B6 /* String+MD5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
+		CD4ACE58273F84EE00DC06B6 /* DownloaderEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderEntity.swift; sourceTree = "<group>"; };
 		CD665C9D269C135E00BA37F2 /* RecordVideo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordVideo.h; sourceTree = "<group>"; };
 		CD665C9E269C135E00BA37F2 /* RecordVideo.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RecordVideo.mm; sourceTree = "<group>"; };
 		CD682B7426BD149300D54F84 /* BinaryTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryTree.swift; sourceTree = "<group>"; };
@@ -24521,6 +24523,7 @@
 		CD4ACE37273E27B500DC06B6 /* ImageDownloader */ = {
 			isa = PBXGroup;
 			children = (
+				CD4ACE57273F84D800DC06B6 /* Model */,
 				CD4ACE42273E3EF500DC06B6 /* Unility */,
 				CD4ACE41273E2A6000DC06B6 /* Controller */,
 				CD4ACE40273E2A4800DC06B6 /* Convert */,
@@ -24567,6 +24570,14 @@
 				CD4ACE43273E3EFE00DC06B6 /* String+MD5.swift */,
 			);
 			path = Unility;
+			sourceTree = "<group>";
+		};
+		CD4ACE57273F84D800DC06B6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CD4ACE58273F84EE00DC06B6 /* DownloaderEntity.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		CD665C9C269C130200BA37F2 /* RecordVideo */ = {
@@ -25511,6 +25522,7 @@
 				CD4ACE44273E3EFE00DC06B6 /* String+MD5.swift in Sources */,
 				CD1DB77026F1E9D40009EADF /* AppDelegate.swift in Sources */,
 				CD4ACE3B273E285700DC06B6 /* MSExtesnsion.swift in Sources */,
+				CD4ACE59273F84EE00DC06B6 /* DownloaderEntity.swift in Sources */,
 				CD1DB77226F1E9D40009EADF /* SceneDelegate.swift in Sources */,
 				CD4ACE39273E27CC00DC06B6 /* Protocol.swift in Sources */,
 			);

@@ -31,6 +31,18 @@ class ViewController: UIViewController {
         imageView.ms.setImage(url)
         
         imageDownloader = MSImageDownloader(url)
+        imageDownloader.start()
+        imageDownloader.resultCallback = {result in
+            switch result {
+            case .success(let image):
+                debugPrint(image.absFilePath)
+            case .failure(let error):
+                debugPrint(error.message)
+            }
+        }
+        imageDownloader.progressCallback = { progress in
+            debugPrint("progressCallback: \(progress)")
+        }
     }
     
     @objc
