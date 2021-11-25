@@ -36,7 +36,6 @@ extension MSImageDownloader: URLSessionDataDelegate {
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         progressCallback?(0)
         totalLenth = Double(response.expectedContentLength)
-        debugPrint("MSImageDownloader-totalLenth:\(totalLenth)")
         completionHandler(.allow)
     }
     
@@ -45,7 +44,6 @@ extension MSImageDownloader: URLSessionDataDelegate {
         let downloadLen = Double(data.count)
         let progress = downloadLen / totalLenth
         progressCallback?(progress)
-        debugPrint("MSImageDownloader-downloading-progress:\(progress)")
     }
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {

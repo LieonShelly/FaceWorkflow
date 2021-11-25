@@ -23,10 +23,27 @@ extension MSPrototol {
     }
 }
 
+private var taskIdentifierKey: String?
 extension MSWrapper where Base == UIImageView {
     
     func setImage(_ url: URL) {
-
+        var strongSelf = self
+        strongSelf.taskIdentifier = UUID().uuidString
     }
+    
+    // MARK: Properties
+    private(set) var taskIdentifier: String? {
+        get {
+            let id = objc_getAssociatedObject(base, &taskIdentifierKey) as? String
+            return id
+        }
+        set {
+            let box = newValue
+            objc_setAssociatedObject(base, &taskIdentifierKey, box, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
 }
+
+
 

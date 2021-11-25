@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class DownLoaderFileManager {
     static let shared: DownLoaderFileManager = .init()
     var homeDir: String {
@@ -26,17 +25,12 @@ class DownLoaderFileManager {
         return homeDir +  imageFolder
     }
     
-    func createAbsFilePath(_ url: String) -> String {
+    func createAbsFilePath(_ key: String) -> String {
         let cacheFolder = homeDir + imageFolder
         if !FileManager.default.fileExists(atPath: cacheFolder) {
             try? FileManager.default.createDirectory(atPath: cacheFolder, withIntermediateDirectories: true, attributes: nil)
         }
-        return cacheFolder + "/" + imageName(url)
-    }
-    
-    func imageName(_ url: String) -> String {
-        let key = url.ms.md5
-        return key
+        return cacheFolder + "/" + key
     }
     
     private init() {}
@@ -44,7 +38,7 @@ class DownLoaderFileManager {
 
 class DownloadImage {
     var name: String {
-        return DownLoaderFileManager.shared.imageName(urlStr)
+        return urlStr.ms.md5
     }
     var urlStr: String
     var data: Data

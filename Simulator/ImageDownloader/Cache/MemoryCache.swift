@@ -9,6 +9,7 @@ import Foundation
 
 // 优化：增加自动内存清理逻辑
 class MemoryCache: ImageCacheProtol {
+    static let `default`: MemoryCache = MemoryCache()
     var cachePool: NSCache<NSString, StorageData> = {
         let cache: NSCache<NSString, StorageData> = .init()
         cache.totalCostLimit = 10 * 1024 * 1024 // 10M
@@ -19,6 +20,7 @@ class MemoryCache: ImageCacheProtol {
         guard let storage = cachePool.object(forKey: key as NSString) else {
             return nil
         }
+        debugPrint("MemoryCache -: \(key)")
         return storage.data
     }
     
@@ -37,4 +39,14 @@ class MemoryCache: ImageCacheProtol {
         return true
     }
     
+    func cached(_ key: String) -> Bool {
+        return cachePool.object(forKey: key as NSString) != nil
+    }
+    
+    func getImageDataAsync(_ key: String, success: @escaping ((Data?) -> Void)) {
+        DispatchQueue.global().async {
+            let data = self.getImageData(key)
+            success(data)
+        }
+    }
 }

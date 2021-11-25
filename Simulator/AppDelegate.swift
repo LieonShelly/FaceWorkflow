@@ -14,6 +14,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        addC(1)(2)
+        let num = 2
+        let fn = (~add)(3)
+        let result = fn(num)
+
+        let result1 = (~add)(3) >>> (~sub)(4)
+        print(result1(num))
+        
         return true
     }
 
