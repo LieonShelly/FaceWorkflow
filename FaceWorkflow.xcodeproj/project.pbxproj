@@ -124,6 +124,7 @@
 		CDD9CE1326B6A4E50030D340 /* VideoService.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1226B6A4E50030D340 /* VideoService.mm */; };
 		CDD9CE1526B6E74C0030D340 /* VideoPlayerVideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1426B6E74C0030D340 /* VideoPlayerVideo.cpp */; };
 		CDD9CE1726B6FE060030D340 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9CE1626B6FE060030D340 /* PlayerView.swift */; };
+		CDE26EED274F792A008C8B3E /* MediaComposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE26EEC274F792A008C8B3E /* MediaComposition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -12044,6 +12045,7 @@
 		CDD9CE1626B6FE060030D340 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		CDD9CE1D26B92E5B0030D340 /* HashMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashMap.swift; sourceTree = "<group>"; };
 		CDD9CE2326B9A0070030D340 /* BinarySearchTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarySearchTree.swift; sourceTree = "<group>"; };
+		CDE26EEC274F792A008C8B3E /* MediaComposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaComposition.swift; sourceTree = "<group>"; };
 		E0C6CAA710913C2AB6BBC077 /* Pods_FaceWorkflow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FaceWorkflow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -12131,6 +12133,7 @@
 		CD1DB76E26F1E9D40009EADF /* Simulator */ = {
 			isa = PBXGroup;
 			children = (
+				CDE26EEB274F78F5008C8B3E /* MediaComposition */,
 				CD4ACE37273E27B500DC06B6 /* ImageDownloader */,
 				CD1DB76F26F1E9D40009EADF /* AppDelegate.swift */,
 				CD1DB77126F1E9D40009EADF /* SceneDelegate.swift */,
@@ -25301,6 +25304,14 @@
 			path = "二叉搜索树";
 			sourceTree = "<group>";
 		};
+		CDE26EEB274F78F5008C8B3E /* MediaComposition */ = {
+			isa = PBXGroup;
+			children = (
+				CDE26EEC274F792A008C8B3E /* MediaComposition.swift */,
+			);
+			path = MediaComposition;
+			sourceTree = "<group>";
+		};
 		E8EAB80CC7E317037E90FB7C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -25535,6 +25546,7 @@
 				CD4ACE5F273F8D7B00DC06B6 /* ImageCache.swift in Sources */,
 				CD4ACE5B273F8D1E00DC06B6 /* MemoryCache.swift in Sources */,
 				CD4ACE3E273E2A3400DC06B6 /* MSImageDownloader.swift in Sources */,
+				CDE26EED274F792A008C8B3E /* MediaComposition.swift in Sources */,
 				CD1DB77426F1E9D40009EADF /* ViewController.swift in Sources */,
 				CD4ACE44273E3EFE00DC06B6 /* String+MD5.swift in Sources */,
 				CD1DB77026F1E9D40009EADF /* AppDelegate.swift in Sources */,
