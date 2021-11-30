@@ -58,6 +58,23 @@ class BasicComposition {
         let exporter = THCompositionExporter(composition)
         exporter.beginExport()
     }
+    
+    func testAudioMix() {
+        let composition = AVMutableComposition()
+        let track = composition.addMutableTrack(withMediaType: .audio, preferredTrackID: .zero)
+        let twoSeoncds = CMTime(value: 2, timescale: 1)
+        let fourSeoncds = CMTime(value: 4, timescale: 1)
+        let sevenSeoncds = CMTime(value: 7, timescale: 1)
+        let parameters = AVMutableAudioMixInputParameters(track: track)
+        parameters.setVolume(0.5, at: .zero)
+        
+        let range = CMTimeRange(start: twoSeoncds, end: sevenSeoncds)
+        parameters.setVolumeRamp(fromStartVolume: 0.6, toEndVolume: 0.8, timeRange: range)
+        parameters.setVolume(0.3, at: sevenSeoncds)
+        
+        let audioMix = AVMutableAudioMix()
+        audioMix.inputParameters = [parameters]
+    }
 }
 
 class THTimeline {
@@ -195,4 +212,8 @@ class THCompositionExporter {
             debugPrint("video could not be exported to the assets libray")
         }
     }
+}
+
+class THAudioMixComposition {
+    
 }
